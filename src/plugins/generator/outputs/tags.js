@@ -39,7 +39,7 @@ export async function tags() {
 	progressBar.increment()
 
 	// Set project types
-	const projectTypes = ['mod', 'modpack']
+	const projectTypes = ['mod', 'modpack', 'plugin', 'resourcepack']
 
 	// Write JSON file
 	await fs.writeFile(
