@@ -22,27 +22,27 @@
 	let checkingDirection = false
 	let element: HTMLDivElement
 	let numSelected: string
-	
+
 	function updateNum() {
-		let cnt = 0;
+		let cnt = 0
 		for (let option of options) {
 			if (option.selected) {
-				cnt++;
+				cnt++
 			}
 		}
-		numSelected = cnt.toString() + " selected";
+		numSelected = cnt.toString() + ' selected'
 	}
-	
+
 	function selectOption(option: Option) {
-		option.selected = !option.selected;
-		updateNum();
-		console.log(JSON.stringify(numSelected));
+		option.selected = !option.selected
+		updateNum()
+		console.log(JSON.stringify(numSelected))
 	}
-	
+
 	function getSelected() {
 		for (let option of options) {
 			if (option.selected) {
-				return option;
+				return option
 			}
 		}
 	}
@@ -121,7 +121,8 @@
 			<svelte:component this={icon} />
 		{/if}
 		<span class="select__input__value" style:min-width="{minWidth}px">
-			{#if numSelected === "1 selected"}{getSelected().label}{:else}{#if numSelected === "0 selected"}{label}{:else}{numSelected}{/if}{/if}
+			{#if numSelected === '1 selected'}{getSelected()
+					.label}{:else if numSelected === '0 selected'}{label}{:else}{numSelected}{/if}
 		</span>
 		<div class="select__input__arrow">
 			<slot name="expandIcon">
@@ -137,7 +138,9 @@
 			{#if icon}
 				<svelte:component this={icon} />
 			{/if}
-			<span>{#if numSelected === "1 selected"}{getSelected().label}{:else}{#if numSelected === "0 selected"}{label}{:else}{numSelected}{/if}{/if}</span>
+			<span
+				>{#if numSelected === '1 selected'}{getSelected()
+						.label}{:else if numSelected === '0 selected'}{label}{:else}{numSelected}{/if}</span>
 			<IconChevronDown class="icon-chevron" />
 		</button>
 		{#each options as option, index (option.value)}

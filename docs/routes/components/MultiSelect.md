@@ -12,12 +12,12 @@
 		{ value: 'fabric', label: 'Fabric', selected: false },
 		{ value: 'forge', label: 'Forge', selected: false },
 		{ value: 'lite', label: 'Liteloader', selected: false },
-		{ value: 'risu', label: 'Risugami\'s Modloader', selected: false },
+		{ value: 'risu', label: "Risugami's Modloader", selected: false },
 		{ value: 'quilt', label: 'Quilt', selected: false },
-		{ value: "rift", label: "Rift", selected: false },
+		{ value: 'rift', label: 'Rift', selected: false },
 	]}
 	bind:value={filter}
-	label="Modloader"/>
+	label="Modloader" />
 ```
 
 ### Icon example
@@ -36,4 +36,3 @@
 	label="Environment"
 	icon={IconCube} />
 ```
-
