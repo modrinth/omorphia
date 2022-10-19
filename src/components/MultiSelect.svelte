@@ -36,7 +36,6 @@
 	function selectOption(option: Option) {
 		option.selected = !option.selected
 		updateNum()
-		console.log(JSON.stringify(numSelected))
 	}
 
 	function getSelected() {
