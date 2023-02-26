@@ -18,6 +18,8 @@ export default {
           { text: 'Icons', link: '/components/icons' },
           { text: 'Button', link: '/components/button' },
           { text: 'Card', link: '/components/card' },
+          { text: 'Animated Logo', link: '/components/animated-logo' },
+          { text: 'Text Logo', link: '/components/text-logo' },
         ]
       }
     ],
