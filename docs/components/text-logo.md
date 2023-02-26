@@ -1,17 +1,17 @@
 # Text Logo
 <DemoContainer> 
-  <TextLogo animate={true} />
+  <TextLogo :animate="true" />
 </DemoContainer>
 
 ```vue
-<TextLogo animate={true} />
+<TextLogo :animate="true" />
 ```
 
 <DemoContainer> 
-  <TextLogo />
+  <TextLogo :animate="false" />
 </DemoContainer>
 
 ```vue
-<TextLogo />
+<TextLogo :animate="false" />
 ```
 
