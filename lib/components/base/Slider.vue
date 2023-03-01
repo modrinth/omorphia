@@ -1,14 +1,10 @@
 <template>
   <div class="root-container">
-    <input
+    <TextInput
       ref="value"
-      v-model="currentValue"
-      type="number"
-      min="0"
-      max="10"
-      class="slider-input"
+      :value="currentValue"
       @input="onTextInput"
-    >
+    />
     <div class="slider-component">
       <div class="slide-container">
           <input
@@ -32,8 +28,10 @@
 </template>
 
 <script>
+import TextInput from "./TextInput.vue";
 export default {
   name: "Slider",
+  components: {TextInput},
   props: {
     value: {
       type: Number,
@@ -102,7 +100,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .root-container {
   display: flex;
   flex-direction: row;
@@ -148,24 +146,5 @@ export default {
   width: 24px;
   height: 24px;
   transition: .2s;
-}
-
-.slider-input {
-  width: 100px;
-  min-height: 40px;
-  font-weight: var(--font-weight-medium);
-  border-radius: 4px;
-  padding: 0 8px;
-  margin-right: 8px;
-  font-size: 14px;
-  color: var(--color-base);
-  background: var(--color-button-bg);
-  outline: none;
-  transition: outline 0.2s ease-in-out;
-}
-
-.slider-input:focus {
-  outline: var(--color-brand) solid 2px;
-  transition: outline 0.2s ease-in-out;
 }
 </style>

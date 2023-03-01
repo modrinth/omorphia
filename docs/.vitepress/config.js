@@ -19,6 +19,7 @@ export default {
           { text: 'Button', link: '/components/button' },
           { text: 'Card', link: '/components/card' },
           { text: 'Slider', link: '/components/slider' },
+          { text: 'Text Input', link: '/components/text-input' },
         ]
       }
     ],

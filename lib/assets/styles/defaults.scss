@@ -15,6 +15,49 @@ body {
   font-weight: var(--font-weight-regular);
   margin: 0;
   padding: 0;
+
+  // Rounding sizes
+  --size-rounded-xs: 0.5rem;
+  --size-rounded-sm: 0.75rem;
+  --size-rounded-md: 1rem;
+  --size-rounded-lg: 1.25rem;
+
+  --size-rounded-max: 999999999px;
+  --size-rounded-card: 1rem;
+  --size-rounded-icon: 1rem;
+  --size-rounded-control: 0.25rem;
+  --size-rounded-tooltip: 0.25rem;
+
+  --size-navbar-height: 3.5rem;
+  --size-mobile-navbar-height: 3.5rem;
+  --size-mobile-navbar-height-expanded: 13.75rem;
+
+  --spacing-card-lg: 1.5rem;
+  --spacing-card-bg: 1rem;
+  --spacing-card-md: 0.75rem;
+  --spacing-card-sm: 0.5rem;
+  --spacing-card-xs: 0.25rem;
+
+  // Font Sizes
+  --font-size-xxs: 0.625rem; //10px
+  --font-size-xs: 0.75rem; //12px
+  --font-size-sm: 0.875rem; //14px
+  --font-size-nm: 1rem; //16px
+  --font-size-md: 1.125rem; //18px
+  --font-size-lg: 1.25rem; //20px
+  --font-size-xl: 1.5rem; //24px
+  --font-size-2xl: 2rem; //32px
+  --font-size-3xl: 3rem; //48px
+
+  // Font Weights
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  --font-weight-text: var(--font-weight-medium);
+  --font-weight-heading: var(--font-weight-extrabold);
+  --font-weight-title: var(--font-weight-extrabold);
 }
 
 a {

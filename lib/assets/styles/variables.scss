@@ -34,6 +34,9 @@ html {
   --color-gray: #595b61;
 
   --color-brand: var(--color-green);
+  --color-brand-highlight: rgba(0, 175, 92, 0.25);
+  --color-brand-shadow: rgba(0, 175, 92, 0.7);
+  --color-brand-inverted: #ffffff;
 }
 
 .dark-mode, .dark {
@@ -53,6 +56,9 @@ html {
   --color-gray: #9fa4b3;
 
   --color-brand: var(--color-green);
+  --color-brand-highlight: rgba(27, 217, 106, 0.25);
+  --color-brand-shadow: rgba(27, 217, 106, 0.7);
+  --color-brand-inverted: #000;
 }
 
 .oled-mode {
