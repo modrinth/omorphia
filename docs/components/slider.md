@@ -1,9 +1,9 @@
 # Slider
 
 <DemoContainer>
-  <Slider min="0" max="10000" step="2"/>
+  <Slider :min="1000" :max="10000" :step="1000"/>
 </DemoContainer>
 
 ```vue
-<Slider min="0" max="10000" step="2"/>
+<Slider :min="1000" :max="10000" :step="1000"/>
 ```

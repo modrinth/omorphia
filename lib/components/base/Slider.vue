@@ -1,8 +1,10 @@
 <template>
   <div class="root-container">
-    <TextInput
+    <input
+      type="text"
       ref="value"
-      :value="currentValue"
+      v-model="currentValue"
+      class="slider-input"
       @input="onTextInput"
     />
     <div class="slider-component">
@@ -28,10 +30,8 @@
 </template>
 
 <script>
-import TextInput from "./TextInput.vue";
 export default {
   name: "Slider",
-  components: {TextInput},
   props: {
     value: {
       type: Number,
@@ -48,16 +48,19 @@ export default {
     step: {
       type: Number,
       default: 10
+    },
+    forceStep: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['input'],
   data() {
     return {
-      dragging: false,
       sliderWidth: 0,
       objectPosition: 0,
       startOffset: 0,
-      currentValue: this.value
+      currentValue: Math.max(this.min, this.value).toString()
     };
   },
   computed: {
@@ -67,26 +70,16 @@ export default {
       },
       set(newValue) {
         if (newValue < this.min) {
-          this.currentValue = this.min
+          this.currentValue = this.min.toString()
         } else if (newValue > this.max) {
-          this.currentValue = this.max
+          this.currentValue = this.max.toString()
         } else if (!newValue) {
-          this.currentValue = this.min
+          this.currentValue = this.min.toString()
         } else {
-          this.currentValue = newValue - (newValue % this.step)
+          this.currentValue = (newValue - (this.forceStep ? newValue % this.step : 0)).toString()
         }
-        this.updateObjectPosition();
       }
     }
-  },
-  watch: {
-    value() {
-      this.updateObjectPosition();
-    }
-  },
-  mounted() {
-    this.sliderWidth = this.$refs.sliderBar.offsetWidth;
-    this.updateObjectPosition();
   },
   methods: {
     onInput() {
@@ -114,12 +107,18 @@ export default {
 .slider-component .slide-container .slider {
   -webkit-appearance: none;
   appearance: none;
-  width: 100%;
-  height: 4px;
   border-radius: 2px;
-  background:  linear-gradient(to right, var(--color-brand) 0%, var(--color-brand) calc((var(--current-value) - var(--min-value)) / (var(--max-value) - var(--min-value)) * 100%), #c2c2c2 calc((var(--current-value) - var(--min-value)) / (var(--max-value) - var(--min-value)) * 100%), #c2c2c2 100%);
+  height: 4px;
+  background:  linear-gradient(
+      to right,
+      var(--color-brand),
+      var(--color-brand) calc((var(--current-value) - var(--min-value)) / (var(--max-value) - var(--min-value)) * 100%),
+      #c2c2c2 calc((var(--current-value) - var(--min-value)) / (var(--max-value) - var(--min-value)) * 100%),
+      #c2c2c2 100%
+  );
   background-size: 100% 100%;
   outline: none;
+  vertical-align: middle;
 }
 
 .slider-component .slide-container .slider::-webkit-slider-thumb {
@@ -146,5 +145,16 @@ export default {
   width: 24px;
   height: 24px;
   transition: .2s;
+}
+
+.slider-component .slide-container .slider:hover::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  transition: .2s;
+}
+
+.slider-input {
+  width: 100px;
+  margin-right: 10px;
 }
 </style>
