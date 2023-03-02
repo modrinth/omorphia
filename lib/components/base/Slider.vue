@@ -1,15 +1,8 @@
 <template>
   <div class="root-container">
-    <input
-      type="text"
-      ref="value"
-      v-model="currentValue"
-      class="slider-input"
-      @input="onTextInput"
-    />
     <div class="slider-component">
       <div class="slide-container">
-          <input
+        <input
             ref="input"
             v-model="currentValue"
             type="range"
@@ -23,9 +16,24 @@
               '--max-value': max
             }"
             @input="onInput"
-          >
+        >
+        <div class="slider-range">
+          <span>
+              {{ min }}
+            </span>
+          <span>
+              {{ max }}
+            </span>
+        </div>
       </div>
     </div>
+    <input
+      type="text"
+      ref="value"
+      v-model="currentValue"
+      class="slider-input"
+      @input="onTextInput"
+    />
   </div>
 </template>
 
@@ -100,6 +108,10 @@ export default {
   align-items: center;
 }
 
+.slide-container .slider {
+  width: 12rem;
+}
+
 .slider-component .slide-container {
   width: 100%;
 }
@@ -124,8 +136,8 @@ export default {
 .slider-component .slide-container .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 12px;
+  height: 12px;
   background: var(--color-brand);
   cursor: pointer;
   border-radius: 50%;
@@ -133,8 +145,8 @@ export default {
 }
 
 .slider-component .slide-container .slider::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
+  width: 12px;
+  height: 12px;
   background: var(--color-brand);
   cursor: pointer;
   border-radius: 50%;
@@ -142,19 +154,27 @@ export default {
 }
 
 .slider-component .slide-container .slider:hover::-webkit-slider-thumb {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   transition: .2s;
 }
 
 .slider-component .slide-container .slider:hover::-moz-range-thumb {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   transition: .2s;
 }
 
 .slider-input {
   width: 100px;
-  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.slider-range {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 12px;
+  margin: 0;
 }
 </style>
