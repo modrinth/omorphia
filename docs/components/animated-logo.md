@@ -1,6 +1,6 @@
 # Animated Logo
 <DemoContainer> 
-  <AnimatedLogo />
+  <AnimatedLogo class="logo" />
 </DemoContainer>
 
 ```vue

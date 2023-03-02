@@ -15,3 +15,9 @@
 <TextLogo :animate="false" />
 ```
 
+<style scoped>
+svg {
+  width: unset;
+  height: unset;
+}
+</style>
