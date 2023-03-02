@@ -69,7 +69,7 @@
       <div v-if="follows" class="stat">
         <HeartIcon aria-hidden="true" />
         <p>
-          <strong>{ formatNumber(follows) }</strong
+          <strong>{{ formatNumber(follows) }}</strong
           ><span class="stat-label">
             follower<span v-if="follows !== '1'">s</span></span
           >
@@ -80,38 +80,35 @@
       </div>
       <div
         v-if="showUpdatedDate"
-        v-tooltip="/*dayjs(updatedAt).format('MMMM D, YYYY [at] h:mm:ss A')*/ 'UpdatedDate'"
+        v-tooltip="updatedDate"
         class="stat date"
       >
         <EditIcon aria-hidden="true" />
         <span class="date-label">Updated </span
-        >{{ /*dayjs(updatedAt).fromNow()*/ 'UpdatedDate' }}
+        > {{ sinceUpdated }}
       </div>
       <div
         v-else
-        v-tooltip="/*dayjs(createdAt).format('MMMM D, YYYY [at] h:mm:ss A')*/ 'CreatedDate'"
+        v-tooltip="createdDate"
         class="stat date"
       >
         <CalendarIcon aria-hidden="true" />
         <span class="date-label">Published </span
-        >{{ /*dayjs(createdAt).fromNow()*/ 'CreatedDate' }}
+        >{{ sinceCreation }}
       </div>
     </div>
   </article>
 </template>
 
 <script>
-
-
 import { formatNumber } from '../utils.js'
-import { dayjs } from "dayjs";
 import Categories from "../search/Categories.vue";
 import EnvironmentIndicator from "./EnvironmentIndicator.vue";
 import Avatar from "./Avatar.vue";
 import Badge from "./Badge.vue";
+import {defineComponent} from "vue";
 
-export default {
-  name: 'ProjectCard',
+export default defineComponent({
   components: { Badge, Avatar, EnvironmentIndicator, Categories },
   props: {
     id: {
@@ -236,12 +233,23 @@ export default {
       const r = (color & 0xff0000) >>> 16
       return 'rgba(' + [r, g, b, 1].join(',') + ')'
     },
+    createdDate() {
+      return this.createdAt; //dayjs(this.createdAt).format('MMMM D, YYYY [at] h:mm:ss A')
+    },
+    sinceCreation() {
+      return ' 2 years ago'; //dayjs(this.createdAt).fromNow()
+    },
+    updatedDate() {
+      return this.updatedAt; //dayjs(this.updatedAt).format('MMMM D, YYYY [at] h:mm:ss A')
+    },
+    sinceUpdated() {
+      return ' a day ago'; //dayjs(this.updatedAt).fromNow()
+    }
   },
   methods: {
-    formatNumber,
-    dayjs
+    formatNumber
   },
-}
+});
 </script>
 
 <style lang="scss" scoped>

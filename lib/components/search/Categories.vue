@@ -2,7 +2,7 @@
   <div class="categories">
     <slot />
     <span
-      v-for="category in categoriesFiltered"
+      v-for="category in categories"
       :key="category.name"
       v-html="category.icon + formatCategory(category.name)"
     />
@@ -10,18 +10,12 @@
 </template>
 
 <script>
-import formatCategory from '../utils.js'
+import { formatCategory } from '../utils.js'
 
 export default {
   name: 'Categories',
   props: {
     categories: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
-    categoriesFiltered: {
       type: Array,
       default() {
         return []

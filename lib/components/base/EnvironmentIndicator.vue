@@ -6,8 +6,7 @@
   <span
     v-else-if="
       !['resourcepack', 'shader'].includes(type) &&
-      !(type === 'plugin' && search) &&
-      !categories.some((x) => $tag.loaderData.dataPackLoaders.includes(x))
+      !(type === 'plugin' && search)
     "
     class="environment"
   >
@@ -52,8 +51,9 @@
   </span>
 </template>
 <script>
-export default {
-  name: 'EnvironmentIndicator',
+import {defineComponent} from "vue";
+
+export default defineComponent({
   props: {
     type: {
       type: String,
@@ -92,7 +92,7 @@ export default {
       },
     },
   },
-}
+});
 </script>
 <style lang="scss" scoped>
 .environment {

@@ -1,10 +1,24 @@
 # Project Card
 
-<DemoContainer>
-  <ProjectCard
-    id="b1LdOZlE"
-    type="mod"
-  />
+<DemoContainer class="standard-body" style="background-color: var(--color-bg)">
+  <div class="display-mode--list">
+    <ProjectCard
+      id="b1LdOZlE"
+      type="mod"
+      name="Spirit"
+      author="CodexAdrian"
+      description="Create your own configurable mob spawner!"
+      iconUrl="https://media.forgecdn.net/avatars/587/930/637957507248741605.png"
+      downloads="2784"
+      follows="20"
+      createdAt="2020-12-27T19:00:00.000Z"
+      updatedAt="2021-01-01T19:00:00.000Z"
+      :categories="[]"
+      :filteredCategories="['magic', 'utility']"
+      projectTypeDisplay="mod"
+      projectTypeUrl="/mod"
+    />
+  </div>
 </DemoContainer>
 
 ```vue
