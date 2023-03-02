@@ -7,7 +7,7 @@
     <router-link
       class="icon"
       tabindex="-1"
-      :to="`/${projectTypeDisplay}/${id}`"
+      :to="`/${projectTypeUrl}/${id}`"
     >
       <Avatar :src="iconUrl" :alt="name" size="md" no-shadow loading="lazy" />
     </router-link>
@@ -15,13 +15,13 @@
       class="gallery"
       :class="{ 'no-image': !featuredImage }"
       tabindex="-1"
-      :to="`/${projectTypeDisplay}/${id}`"
+      :to="`/${projectTypeUrl}/${id}`"
       :style="color ? `background-color: ${toColor};` : ''"
     >
       <img v-if="featuredImage" :src="featuredImage" alt="gallery image" />
     </router-link>
     <div class="title">
-      <router-link :to="`/${projectTypeDisplay}/${id}`">
+      <router-link :to="`/${projectTypeUrl}/${id}`">
         <h2 class="name">
           {{ name }}
         </h2>
@@ -42,11 +42,8 @@
       {{ description }}
     </p>
     <Categories
-      :categories="
-        categories.filter(
-          (x) => !hideLoaders || !$tag.loaders.find((y) => y.name === x)
-        )
-      "
+      :categories="categories"
+      :categories-filtered="filteredCategories"
       :type="type"
       class="tags"
     >
@@ -63,7 +60,7 @@
       <div v-if="downloads" class="stat">
         <DownloadIcon aria-hidden="true" />
         <p>
-          <strong>{{ $formatNumber(downloads) }}</strong
+          <strong>{{ formatNumber(downloads) }}</strong
           ><span class="stat-label">
             download<span v-if="downloads !== '1'">s</span></span
           >
@@ -83,51 +80,39 @@
       </div>
       <div
         v-if="showUpdatedDate"
-        v-tooltip="$dayjs(updatedAt).format('MMMM D, YYYY [at] h:mm:ss A')"
+        v-tooltip="/*dayjs(updatedAt).format('MMMM D, YYYY [at] h:mm:ss A')*/ 'UpdatedDate'"
         class="stat date"
       >
         <EditIcon aria-hidden="true" />
         <span class="date-label">Updated </span
-        >{{ $dayjs(updatedAt).fromNow() }}
+        >{{ /*dayjs(updatedAt).fromNow()*/ 'UpdatedDate' }}
       </div>
       <div
         v-else
-        v-tooltip="$dayjs(createdAt).format('MMMM D, YYYY [at] h:mm:ss A')"
+        v-tooltip="/*dayjs(createdAt).format('MMMM D, YYYY [at] h:mm:ss A')*/ 'CreatedDate'"
         class="stat date"
       >
         <CalendarIcon aria-hidden="true" />
         <span class="date-label">Published </span
-        >{{ $dayjs(createdAt).fromNow() }}
+        >{{ /*dayjs(createdAt).fromNow()*/ 'CreatedDate' }}
       </div>
     </div>
   </article>
 </template>
 
 <script>
-import Categories from '~/components/base/search/Categories'
-import Badge from '~/components/base/Badge'
-import EnvironmentIndicator from '~/components/base/EnvironmentIndicator'
-import Avatar from '~/components/base/Avatar'
 
-import CalendarIcon from '~/assets/icons/calendar.svg?inline'
-import EditIcon from '~/assets/icons/updated.svg?inline'
-import DownloadIcon from '~/assets/icons/download.svg?inline'
-import HeartIcon from '~/assets/icons/heart.svg?inline'
 
-import { formatNumber } from '~/utils'
+import { formatNumber } from '../utils.js'
+import { dayjs } from "dayjs";
+import Categories from "../search/Categories.vue";
+import EnvironmentIndicator from "./EnvironmentIndicator.vue";
+import Avatar from "./Avatar.vue";
+import Badge from "./Badge.vue";
 
 export default {
   name: 'ProjectCard',
-  components: {
-    EnvironmentIndicator,
-    Avatar,
-    Categories,
-    Badge,
-    CalendarIcon,
-    EditIcon,
-    DownloadIcon,
-    HeartIcon,
-  },
+  components: { Badge, Avatar, EnvironmentIndicator, Categories },
   props: {
     id: {
       type: String,
@@ -178,6 +163,20 @@ export default {
         return []
       },
     },
+    filteredCategories: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
+    projectTypeDisplay: {
+      type: String,
+      default: null,
+    },
+    projectTypeUrl: {
+      type: String,
+      default: null,
+    },
     status: {
       type: String,
       default: null,
@@ -225,12 +224,9 @@ export default {
       type: Number,
       required: false,
       default: null,
-    },
+    }
   },
   computed: {
-    projectTypeDisplay() {
-      return this.$getProjectTypeForDisplay(this.type, this.categories)
-    },
     toColor() {
       let color = this.color
 
@@ -240,6 +236,10 @@ export default {
       const r = (color & 0xff0000) >>> 16
       return 'rgba(' + [r, g, b, 1].join(',') + ')'
     },
+  },
+  methods: {
+    formatNumber,
+    dayjs
   },
 }
 </script>

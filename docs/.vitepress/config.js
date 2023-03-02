@@ -23,8 +23,9 @@ export default {
           { text: 'Chips', link: '/components/chips' },
           { text: 'Icons', link: '/components/icons' },
           { text: 'Pagination', link: '/components/pagination' },
-        ],
-      },
+          { text: 'ProjectCard', link: '/components/project-card' },
+        ]
+      }
     ],
     footer: {
       message:

@@ -52,18 +52,8 @@
   </span>
 </template>
 <script>
-import InfoIcon from '~/assets/images/utils/info.svg?inline'
-import ClientIcon from '~/assets/images/utils/client.svg?inline'
-import GlobeIcon from '~/assets/images/utils/globe.svg?inline'
-import ServerIcon from '~/assets/images/utils/server.svg?inline'
 export default {
   name: 'EnvironmentIndicator',
-  components: {
-    InfoIcon,
-    ClientIcon,
-    ServerIcon,
-    GlobeIcon,
-  },
   props: {
     type: {
       type: String,

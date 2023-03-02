@@ -2,20 +2,26 @@
 
 <DemoContainer>
   <ProjectCard
-    title="Project Card"
-    description="Project Card is a component that displays a project's information."
-    image="https://cdn.auth0.com/blog/illustrations/illustration-1.png"
-    link="https://auth0.com"
-    linkText="View Project"
+    id="b1LdOZlE"
+    type="mod"
   />
 </DemoContainer>
 
 ```vue
 <ProjectCard
-  title="Project Card"
-  description="Project Card is a component that displays a project's information."
-  image="https://cdn.auth0.com/blog/illustrations/illustration-1.png"
-  link="https://auth0.com"
-  linkText="View Project"
+  id="b1LdOZlE"
+  type="mod"
+  name="Spirit"
+  author="CodexAdrian"
+  description="Create your own configurable mob spawner!"
+  iconUrl="https://cdn-raw.modrinth.com/data/b1LdOZlE/465598dc5d89f67fb8f8de6def21240fa35e3a54.png"
+  downloads="2784"
+  follows="20"
+  createdAt="2020-12-27T19:00:00.000Z"
+  updatedAt="2021-01-01T19:00:00.000Z"
+  :categories="['magic', 'utility']"
+  :filteredCategories="['magic', 'utility']"
+  projectTypeDisplay="mod"
+  projectTypeUrl="/mod"
 />
 ```
