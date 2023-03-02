@@ -17,7 +17,7 @@
 
 <style scoped>
 svg {
-  width: unset;
-  height: unset;
+  width: 100%;
+  height: auto;
 }
 </style>
