@@ -101,11 +101,11 @@
 </template>
 
 <script>
-import { formatNumber } from '../utils.js'
-import Categories from "../search/Categories.vue";
-import EnvironmentIndicator from "./EnvironmentIndicator.vue";
-import Avatar from "./Avatar.vue";
-import Badge from "./Badge.vue";
+import { formatNumber } from '@/components/utils'
+import Categories from "@/components/search/Categories.vue";
+import EnvironmentIndicator from "@/components/base/EnvironmentIndicator.vue";
+import Avatar from "@/components/base/Avatar.vue";
+import Badge from "@/components/base/Badge.vue";
 import {defineComponent} from "vue";
 
 export default defineComponent({
@@ -436,6 +436,7 @@ export default defineComponent({
   h2,
   p {
     margin: 0;
+    overflow-wrap: anywhere;
   }
 
   svg {
@@ -443,6 +444,19 @@ export default defineComponent({
     color: var(--color-special-orange);
     height: 1.5rem;
     margin-bottom: -0.25rem;
+  }
+
+  .title-link {
+    text-decoration: underline;
+
+    &:focus-visible,
+    &:hover {
+      color: var(--color-heading);
+    }
+
+    &:active {
+      color: var(--color-text-dark);
+    }
   }
 }
 
