@@ -258,6 +258,7 @@ export default defineComponent({
   box-sizing: border-box;
   overflow: hidden;
   margin: 0;
+  line-height: 1;
 }
 
 .display-mode--list .project-card {
@@ -267,8 +268,8 @@ export default defineComponent({
     'icon tags stats';
   grid-template-columns: min-content 1fr auto;
   grid-template-rows: min-content 1fr min-content;
-  column-gap: var(--spacing-card-md);
-  row-gap: var(--spacing-card-sm);
+  column-gap: var(--gap-md);
+  row-gap: var(--gap-sm);
   width: 100%;
 
   @media screen and (max-width: 750px) {
@@ -290,15 +291,20 @@ export default defineComponent({
     grid-template-columns: min-content auto;
     grid-template-rows: min-content 1fr min-content min-content;
   }
+
+  h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
 }
 
 .display-mode--gallery .project-card,
 .display-mode--grid .project-card {
-  padding: 0 0 var(--spacing-card-bg) 0;
+  padding: 0 0 1rem 0;
   grid-template: 'gallery gallery' 'icon title' 'description  description' 'tags tags' 'stats stats';
   grid-template-columns: min-content 1fr;
   grid-template-rows: min-content min-content 1fr min-content min-content;
-  row-gap: var(--spacing-card-sm);
+  row-gap: var(--gap-sm);
 
   .gallery {
     display: inline-block;
@@ -319,21 +325,20 @@ export default defineComponent({
   }
 
   .icon {
-    margin-left: var(--spacing-card-bg);
+    margin-left: var(--gap-lg);
     margin-top: -3rem;
     z-index: 1;
 
-    img,
-    svg {
-      border-radius: var(--size-rounded-lg);
+    img, svg {
+      border-radius: var(--radius-lg);
       border: 4px solid var(--color-raised-bg);
       border-bottom: none;
     }
   }
 
   .title {
-    margin-left: var(--spacing-card-md);
-    margin-right: var(--spacing-card-bg);
+    margin-left: var(--gap-md);
+    margin-right: var(--gap-md);
     flex-direction: column;
 
     .name {
@@ -341,20 +346,20 @@ export default defineComponent({
     }
 
     .status {
-      margin-top: var(--spacing-card-xs);
+      margin-top: var(--gap-xs);
     }
   }
 
   .description {
-    margin-inline: var(--spacing-card-bg);
+    margin-inline: var(--gap-lg);
   }
 
   .tags {
-    margin-inline: var(--spacing-card-bg);
+    margin-inline: var(--gap-lg);
   }
 
   .stats {
-    margin-inline: var(--spacing-card-bg);
+    margin-inline: var(--gap-lg);
     flex-direction: row;
     align-items: center;
 
@@ -364,7 +369,7 @@ export default defineComponent({
 
     .buttons {
       flex-direction: row;
-      gap: var(--spacing-card-sm);
+      gap: var(--gap-sm);
       align-items: center;
 
       > :first-child {
@@ -388,7 +393,7 @@ export default defineComponent({
   }
 
   .icon {
-    margin-top: calc(var(--spacing-card-bg) - var(--spacing-card-sm));
+    margin-top: calc(var(--gap-lg) - var(--gap-sm));
 
     img,
     svg {
@@ -397,7 +402,7 @@ export default defineComponent({
   }
 
   .title {
-    margin-top: calc(var(--spacing-card-bg) - var(--spacing-card-sm));
+    margin-top: calc(var(--gap-lg) - var(--gap-sm));
   }
 }
 
@@ -419,9 +424,14 @@ export default defineComponent({
   flex-direction: row;
   flex-wrap: wrap;
   align-items: baseline;
-  column-gap: var(--spacing-card-sm);
+  column-gap: var(--gap-sm);
   row-gap: 0;
   word-wrap: anywhere;
+
+  h2 {
+    font-weight: bolder;
+    color: white;
+  }
 
   h2,
   p {
@@ -442,14 +452,14 @@ export default defineComponent({
   flex-direction: column;
   flex-wrap: wrap;
   align-items: flex-end;
-  gap: var(--spacing-card-md);
+  gap: var(--gap-md);
 
   .stat {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: fit-content;
-    gap: var(--spacing-card-xs);
+    gap: var(--gap-xs);
     --stat-strong-size: 1.25rem;
 
     strong {
@@ -472,8 +482,8 @@ export default defineComponent({
 
   @media screen and (max-width: 750px) {
     flex-direction: row;
-    column-gap: var(--spacing-card-md);
-    margin-top: var(--spacing-card-xs);
+    column-gap: var(--gap-md);
+    margin-top: var(--gap-xs);
   }
 
   @media screen and (max-width: 600px) {
@@ -503,14 +513,14 @@ export default defineComponent({
   flex-direction: row;
 
   @media screen and (max-width: 550px) {
-    margin-top: var(--spacing-card-xs);
+    margin-top: var(--gap-xs);
   }
 }
 
 .buttons {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-card-sm);
+  gap: var(--gap-sm);
   align-items: flex-end;
   flex-grow: 1;
 }
@@ -526,18 +536,62 @@ export default defineComponent({
     grid-template-rows: min-content 1fr min-content min-content !important;
 
     .tags {
-      margin-top: var(--spacing-card-xs) !important;
+      margin-top: var(--gap-xs) !important;
     }
 
     .stats {
       flex-direction: row;
-      column-gap: var(--spacing-card-md) !important;
-      margin-top: var(--spacing-card-xs) !important;
+      column-gap: var(--gap-md) !important;
+      margin-top: var(--gap-xs) !important;
 
       .stat-label {
         display: none !important;
       }
     }
+  }
+}
+
+.base-card {
+  padding: var(--gap-lg);
+
+  position: relative;
+  min-height: 2rem;
+
+  background-color: var(--color-raised-bg);
+  border-radius: var(--radius-lg);
+
+  outline: 2px solid transparent;
+
+  box-shadow: var(--shadow-card);
+
+  .card__overlay {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    grid-gap: 0.5rem;
+    z-index: 2;
+  }
+
+  &.warning {
+    border-left: 0.5rem solid var(--color-banner-side);
+    padding: 1.5rem;
+    line-height: 1.5;
+    background-color: var(--color-banner-bg);
+    color: var(--color-banner-text);
+    min-height: 0;
+
+    a {
+      /* Uses active color to increase contrast */
+      color: var(--color-link-active);
+      text-decoration: underline;
+    }
+  }
+
+  &.moderation-card {
+    background-color: var(--color-banner-bg);
   }
 }
 </style>
