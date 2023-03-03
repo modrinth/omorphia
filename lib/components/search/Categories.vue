@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { formatCategory } from '../utils.js'
+import { formatCategory } from '@/components/utils'
 
 export default {
   name: 'Categories',
