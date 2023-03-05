@@ -99,17 +99,16 @@
     </div>
   </article>
 </template>
-
-<script>
+<script setup>
+import { Badge, HeartIcon, DownloadIcon, EditIcon, CalendarIcon, Avatar, Categories, EnvironmentIndicator } from '@/components'
 import { formatNumber } from '@/components/utils'
-import Categories from "@/components/search/Categories.vue";
-import EnvironmentIndicator from "@/components/base/EnvironmentIndicator.vue";
-import Avatar from "@/components/base/Avatar.vue";
-import Badge from "@/components/base/Badge.vue";
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
+</script>
+<script>
 import {defineComponent} from "vue";
-
 export default defineComponent({
-  components: { Badge, Avatar, EnvironmentIndicator, Categories },
   props: {
     id: {
       type: String,
@@ -234,16 +233,16 @@ export default defineComponent({
       return 'rgba(' + [r, g, b, 1].join(',') + ')'
     },
     createdDate() {
-      return this.createdAt; //dayjs(this.createdAt).format('MMMM D, YYYY [at] h:mm:ss A')
+      return dayjs(this.createdAt).format('MMMM D, YYYY [at] h:mm:ss A')
     },
     sinceCreation() {
-      return ' 2 years ago'; //dayjs(this.createdAt).fromNow()
+      return dayjs(this.createdAt).fromNow()
     },
     updatedDate() {
-      return this.updatedAt; //dayjs(this.updatedAt).format('MMMM D, YYYY [at] h:mm:ss A')
+      return dayjs(this.updatedAt).format('MMMM D, YYYY [at] h:mm:ss A')
     },
     sinceUpdated() {
-      return ' a day ago'; //dayjs(this.updatedAt).fromNow()
+      return dayjs(this.updatedAt).fromNow()
     }
   },
   methods: {

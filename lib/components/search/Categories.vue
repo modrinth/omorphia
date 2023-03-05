@@ -8,10 +8,10 @@
     />
   </div>
 </template>
-
-<script>
+<script setup>
 import { formatCategory } from '@/components/utils'
-
+</script>
+<script>
 export default {
   name: 'Categories',
   props: {
@@ -37,13 +37,13 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: var(--gap-sm);
 
   span ::v-deep {
     display: flex;
-    align-items: center;
     flex-direction: row;
     color: var(--color-icon);
-    margin-right: var(--spacing-card-md);
+    align-items: center;
 
     svg {
       width: 1rem;

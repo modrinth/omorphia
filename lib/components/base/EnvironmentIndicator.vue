@@ -50,6 +50,9 @@
     </template>
   </span>
 </template>
+<script setup>
+import { GlobeIcon, ClientIcon, ServerIcon, InfoIcon} from "@/components";
+</script>
 <script>
 import {defineComponent} from "vue";
 
@@ -83,14 +86,7 @@ export default defineComponent({
       type: Boolean,
       required: false,
       default: false,
-    },
-    categories: {
-      type: Array,
-      required: false,
-      default() {
-        return []
-      },
-    },
+    }
   },
 });
 </script>

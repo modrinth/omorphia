@@ -85,7 +85,7 @@ export default {
   height: var(--size) !important;
   width: var(--size) !important;
   background-color: var(--color-button-bg);
-  object-fit: contain;
+  object-fit: cover;
   max-width: var(--size) !important;
   max-height: var(--size) !important;
 
