@@ -119,14 +119,14 @@ export default {
 .slider-component .slide-container .slider {
   -webkit-appearance: none;
   appearance: none;
-  border-radius: 2px;
-  height: 4px;
+  border-radius: var(--radius-sm);
+  height: .25rem;
   background:  linear-gradient(
       to right,
       var(--color-brand),
       var(--color-brand) calc((var(--current-value) - var(--min-value)) / (var(--max-value) - var(--min-value)) * 100%),
-      #c2c2c2 calc((var(--current-value) - var(--min-value)) / (var(--max-value) - var(--min-value)) * 100%),
-      #c2c2c2 100%
+      var(--color-base) calc((var(--current-value) - var(--min-value)) / (var(--max-value) - var(--min-value)) * 100%),
+      var(--color-base) 100%
   );
   background-size: 100% 100%;
   outline: none;
@@ -136,8 +136,8 @@ export default {
 .slider-component .slide-container .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 12px;
-  height: 12px;
+  width: .75rem;
+  height: .75rem;
   background: var(--color-brand);
   cursor: pointer;
   border-radius: 50%;
@@ -145,8 +145,8 @@ export default {
 }
 
 .slider-component .slide-container .slider::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
+  width: .75rem;
+  height: .75rem;
   background: var(--color-brand);
   cursor: pointer;
   border-radius: 50%;
@@ -154,27 +154,27 @@ export default {
 }
 
 .slider-component .slide-container .slider:hover::-webkit-slider-thumb {
-  width: 18px;
-  height: 18px;
+  width: 1rem;
+  height: 1rem;
   transition: .2s;
 }
 
 .slider-component .slide-container .slider:hover::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
+  width: 1rem;
+  height: 1rem;
   transition: .2s;
 }
 
 .slider-input {
-  width: 100px;
-  margin-left: 10px;
+  width: 6rem;
+  margin-left: .75rem;
 }
 
 .slider-range {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 0.75rem;
   margin: 0;
 }
 </style>
