@@ -96,6 +96,7 @@ export default defineComponent({
   color: var(--color-text) !important;
   font-weight: bold;
   font-size: 1rem;
+  align-items: center;
   svg {
     margin-right: 0.2rem;
   }

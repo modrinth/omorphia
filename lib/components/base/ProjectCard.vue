@@ -43,7 +43,6 @@
     </p>
     <Categories
       :categories="categories"
-      :categories-filtered="filteredCategories"
       :type="type"
       class="tags"
     >
@@ -53,7 +52,6 @@
         :server-side="serverSide"
         :type="projectTypeDisplay"
         :search="search"
-        :categories="categories"
       />
     </Categories>
     <div class="stats">
