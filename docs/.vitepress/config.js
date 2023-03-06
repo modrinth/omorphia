@@ -29,6 +29,8 @@ export default {
           { text: 'Modal', link: '/components/modal' },
           { text: 'Animated Logo', link: '/components/animated-logo' },
           { text: 'Text Logo', link: '/components/text-logo' },
+          { text: 'Slider', link: '/components/slider' },
+          { text: 'Text Inputs', link: '/components/text-inputs' },
         ],
       },
     ],
