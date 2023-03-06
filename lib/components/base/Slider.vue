@@ -30,9 +30,9 @@
     <input
       type="text"
       ref="value"
-      v-model="currentValue"
+      v-model.lazy="currentValue"
       class="slider-input"
-      @input="onTextInput"
+      @change="onTextInput"
     />
   </div>
 </template>
