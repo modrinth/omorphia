@@ -15,7 +15,7 @@
               '--min-value': min,
               '--max-value': max
             }"
-            @input="onInput"
+            @input="onInput($refs.input.value)"
         >
         <div class="slider-range">
           <span>
@@ -28,11 +28,11 @@
       </div>
     </div>
     <input
-      type="text"
       ref="value"
-      v-model.lazy="currentValue"
+      :value="currentValue"
+      type="text"
       class="slider-input"
-      @change="onTextInput"
+      @change="onInput($refs.value.value)"
     />
   </div>
 </template>
@@ -59,7 +59,7 @@ export default {
     },
     forceStep: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   emits: ['input'],
@@ -74,28 +74,27 @@ export default {
   computed: {
     inputValueValid: {
       get() {
-        return this.currentValue
+        return this.$refs.value.value;
       },
       set(newValue) {
-        if (newValue < this.min) {
+        const parsedValue = parseInt(newValue);
+        if (parsedValue < this.min) {
           this.currentValue = this.min.toString()
-        } else if (newValue > this.max) {
+        } else if (parsedValue > this.max) {
           this.currentValue = this.max.toString()
-        } else if (!newValue) {
+        } else if (!parsedValue) {
           this.currentValue = this.min.toString()
         } else {
-          this.currentValue = (newValue - (this.forceStep ? newValue % this.step : 0)).toString()
+          this.currentValue = (parsedValue - (this.forceStep ? parsedValue % this.step : 0)).toString()
         }
+        this.$refs.value.value = this.currentValue;
+        this.$emit('input', parseInt(this.currentValue));
       }
     }
   },
   methods: {
-    onInput() {
-      // this.currentValue is a string because HTML is weird
-      this.$emit('input', parseInt(this.currentValue));
-    },
-    onTextInput() {
-      this.inputValueValid = parseInt(this.currentValue);
+    onInput(value) {
+      this.inputValueValid = parseInt(value);
     },
   }
 }
