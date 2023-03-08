@@ -85,8 +85,8 @@ export default defineComponent({
   transform: translate(-50%, -50%);
   z-index: 21;
   box-shadow: var(--shadow-raised), var(--shadow-inset);
-  border-radius: var(--size-rounded-lg);
-  max-height: calc(100% - 2 * var(--spacing-card-bg));
+  border-radius: var(--radius-lg);
+  max-height: calc(100% - 2 * var(--gap-lg));
   overflow-y: auto;
   width: 600px;
 
@@ -95,7 +95,7 @@ export default defineComponent({
     justify-content: space-between;
     align-items: center;
     background-color: var(--color-bg);
-    padding: var(--spacing-card-md) var(--spacing-card-lg);
+    padding: var(--gap-md) var(--gap-lg);
 
     h1 {
       font-size: 1.25rem;
@@ -118,7 +118,7 @@ export default defineComponent({
   }
 
   @media screen and (max-width: 650px) {
-    width: calc(100% - 2 * var(--spacing-card-bg));
+    width: calc(100% - 2 * var(--gap-lg));
   }
 }
 </style>

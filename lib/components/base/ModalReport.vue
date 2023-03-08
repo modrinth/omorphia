@@ -22,7 +22,8 @@
           <strong>Reason</strong>
         </span>
       </label>
-      <VueMultiselect
+      <!--
+      <Multiselect
         id="report-type"
         v-model="reportType"
         :options="reportTypes"
@@ -35,6 +36,7 @@
         :show-labels="false"
         placeholder="Choose report type"
       />
+      -->
       <label class="report-label" for="additional-information">
         <strong>Additional information</strong>
         <span>
@@ -53,32 +55,31 @@
         </div>
         <div
           v-else
-          v-highlightjs
           class="preview"
-          v-html="$xss($md.render(body))"
+          v-html="xss(md.render(body))"
         ></div>
       </div>
       <div class="button-group">
-        <button class="iconified-button" @click="cancel">
+        <Button @click="cancel">
           <XIcon />
           Cancel
-        </button>
-        <button class="iconified-button brand-button" @click="submitReport">
+        </Button>
+        <Button @click="submitReport" color="primary">
           <CheckIcon />
           Report
-        </button>
+        </Button>
       </div>
     </div>
   </Modal>
 </template>
 <script setup>
-import {Modal, Chips, XIcon, CheckIcon} from "@/components";
+import {Modal, Chips, XIcon, CheckIcon, Button} from "@/components";
+import xss from "@/components/xss";
+import md from "@/components/md";
 </script>
 <script>
 import {defineComponent} from "vue";
-
 export default defineComponent({
-  name: 'ModalReport',
   props: {
     itemType: {
       type: String,
@@ -104,9 +105,6 @@ export default defineComponent({
       bodyViewType: 'source',
     }
   },
-  mounted() {
-    this.$refs.modal.show()
-  },
   methods: {
     cancel() {
       this.reportType = ''
@@ -121,7 +119,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .modal-report {
-  padding: var(--spacing-card-bg);
+  padding: var(--gap-lg);
   display: flex;
   flex-direction: column;
 
@@ -143,6 +141,9 @@ export default defineComponent({
   .button-group {
     margin-left: auto;
     margin-top: 1.5rem;
+    display: flex;
+    grid-gap: 0.5rem;
+    flex-wrap: wrap;
   }
 
   .textarea-wrapper {
