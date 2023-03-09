@@ -224,15 +224,15 @@ svg {
     border: none;
     cursor: pointer;
     padding-left: .5rem;
-    padding-top: .75rem;
+    padding-top: 10px;
 
     transition: background-color 0.1s ease-in-out;
 
     &:active {
-      filter: brightness(0.85);
+      filter: brightness(1.25);
 
       .multiselect__spinner {
-        filter: brightness(0.85);
+        filter: brightness(1.25);
       }
     }
 
@@ -276,7 +276,8 @@ svg {
     .multiselect__element {
 
       .multiselect__option--highlight {
-        filter: brightness(0.85);
+        background: var(--color-button-bg);
+        filter: brightness(1.25);
         color: var(--color-contrast);
       }
 
@@ -292,7 +293,7 @@ svg {
     background: var(--color-button-bg);
 
     &:active {
-      filter: brightness(0.85);
+      filter: brightness(1.25);
     }
   }
 
