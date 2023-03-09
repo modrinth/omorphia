@@ -21,13 +21,8 @@
     </div>
   </div>
 </template>
-<script setup>
-import { XIcon } from '@/components'
-</script>
 <script>
-import { defineComponent } from 'vue'
-
-export default defineComponent({
+export default {
   props: {
     header: {
       type: String,
@@ -40,7 +35,7 @@ export default defineComponent({
   },
   data() {
     return {
-      shown: true,
+      shown: false,
     }
   },
   methods: {
@@ -51,7 +46,7 @@ export default defineComponent({
       this.shown = false
     },
   },
-});
+};
 
 </script>
 

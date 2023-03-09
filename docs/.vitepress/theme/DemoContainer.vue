@@ -1,5 +1,5 @@
 <template>
-  <div class="demo bg-raised radius-lg padding-md"><slot /></div>
+    <div class="demo bg-raised radius-lg padding-md"><slot /></div>
 </template>
 
 <script>

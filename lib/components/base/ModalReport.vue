@@ -22,7 +22,6 @@
           <strong>Reason</strong>
         </span>
       </label>
-      <!--
       <Multiselect
         id="report-type"
         v-model="reportType"
@@ -30,13 +29,11 @@
         :custom-label="
           (value) => value.charAt(0).toUpperCase() + value.slice(1)
         "
-        :multiple="false"
         :searchable="false"
         :show-no-results="false"
         :show-labels="false"
         placeholder="Choose report type"
       />
-      -->
       <label class="report-label" for="additional-information">
         <strong>Additional information</strong>
         <span>
@@ -56,7 +53,7 @@
         <div
           v-else
           class="preview"
-          v-html="xss(md.render(body))"
+          v-html="this.renderBody"
         ></div>
       </div>
       <div class="button-group">
@@ -73,13 +70,21 @@
   </Modal>
 </template>
 <script setup>
-import {Modal, Chips, XIcon, CheckIcon, Button} from "@/components";
-import xss from "@/components/xss";
-import md from "@/components/md";
+import {Modal, Chips, XIcon, CheckIcon} from "@/components";
+import {ref} from "vue";
+const modal = ref("modal");
+defineExpose({
+  modal: modal,
+})
 </script>
 <script>
-import {defineComponent} from "vue";
-export default defineComponent({
+import xss from "@/components/xss";
+import md from "@/components/markdown";
+import {Multiselect} from "vue-multiselect";
+export default {
+  components: {
+    Multiselect,
+  },
   props: {
     itemType: {
       type: String,
@@ -105,6 +110,11 @@ export default defineComponent({
       bodyViewType: 'source',
     }
   },
+  computed: {
+    renderBody() {
+      return xss(md.render(this.body))
+    }
+  },
   methods: {
     cancel() {
       this.reportType = ''
@@ -113,8 +123,11 @@ export default defineComponent({
 
       this.$refs.modal.hide()
     },
+    show() {
+      this.$refs.modal.show()
+    },
   }
-})
+}
 </script>
 
 <style scoped lang="scss">

@@ -27,7 +27,7 @@
     "dayjs": "^1.11.7",
     "floating-vue": "^2.0.0-beta.20",
     "vue": "^3.2.45",
-    "vue-multiselect": "^2.1.7",
+    "vue-multiselect": "^3.0.0-alpha.2",
     "vue-router": "^4.1.6",
     "xss": "^1.0.14"
   },

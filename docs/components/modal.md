@@ -1,18 +1,12 @@
 # Card
-
+:::raw
 <ClientOnly>
-<DemoContainer class="standard-body" style="background-color: var(--color-bg)">
-  <Button
-    @click="() => modal.show()"
-  >
-    Open Modal
-  </Button>
-  <ModalReport
-    ref="modal"
-    itemType="project"
-  />
+  <DemoContainer>
+    <ModalReport ref="reportModal" :reportTypes="['cringitude', 'rudeness', 'notgamer', 'windowsuser']" />
+    <Button :action="() => this.$refs.reportModal.modal.show()">Show Modal</Button>
 </DemoContainer>
 </ClientOnly>
+:::
 
 ```vue
   <ModalReport
