@@ -21,8 +21,6 @@ jobs:
 
       - name: Install deps
         run: npm run build
-        env:
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
 
       - name: Publish package
         run: npm publish
