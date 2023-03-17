@@ -46,8 +46,7 @@ export default {
       this.shown = false
     },
   },
-};
-
+}
 </script>
 
 <style lang="scss" scoped>

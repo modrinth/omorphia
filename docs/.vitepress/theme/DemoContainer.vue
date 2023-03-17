@@ -1,10 +1,8 @@
 <template>
-    <div class="demo"><slot /></div>
+  <div class="demo">
+    <slot />
+  </div>
 </template>
-
-<script>
-export default {}
-</script>
 
 <style lang="scss" scoped>
 .demo {

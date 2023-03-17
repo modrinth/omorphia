@@ -1,14 +1,11 @@
 <template>
-  <div
-    class="dropdown-overlay"
-    @click="hide"
-  />
+  <div class="dropdown-overlay" @click="hide" />
   <div
     class="custom-dropdown-select"
     :class="{
-        'round-bottom': !dropdownOpen,
-        'flat-bottom': dropdownOpen
-      }"
+      'round-bottom': !dropdownOpen,
+      'flat-bottom': dropdownOpen,
+    }"
     @click="toggleDropdown"
   >
     <label v-if="label">{{ label }}</label>
@@ -16,7 +13,7 @@
       {{ selectedOption }}
     </div>
     <div v-else class="selected-option">
-      {{placeholder}}
+      {{ placeholder }}
     </div>
     <ul v-show="dropdownOpen" class="options">
       <li
@@ -24,7 +21,7 @@
         :key="index"
         class="option"
         :class="{
-          'current': option === selectedOption
+          current: option === selectedOption,
         }"
         @click="selectOption(option)"
       >
@@ -39,42 +36,42 @@ export default {
   props: {
     label: {
       type: String,
-      default: null
+      default: null,
     },
     options: {
       type: Array,
-      required: true
+      required: true,
     },
     value: {
       type: String,
-      default: null
+      default: null,
     },
     placeholder: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
   },
   emits: ['input'],
   data() {
     return {
       dropdownOpen: false,
-      selectedOption: this.value
-    };
+      selectedOption: this.value,
+    }
   },
   methods: {
     toggleDropdown() {
-      this.dropdownOpen = !this.dropdownOpen;
+      this.dropdownOpen = !this.dropdownOpen
     },
     selectOption(option) {
-      this.selectedOption = option;
-      this.dropdownOpen = 'false';
-      this.$emit('input', option);
+      this.selectedOption = option
+      this.dropdownOpen = 'false'
+      this.$emit('input', option)
     },
     hide() {
-      this.dropdownOpen = 'false';
-    }
-  }
-};
+      this.dropdownOpen = 'false'
+    },
+  },
+}
 </script>
 
 <style scoped lang="scss">
@@ -106,7 +103,7 @@ export default {
   cursor: pointer;
   padding: 8px 16px;
   overflow: hidden;
-  box-shadow:  var(--shadow-inset-lg), var(--shadow-raised);
+  box-shadow: var(--shadow-inset-lg), var(--shadow-raised);
 }
 
 .options {
@@ -121,7 +118,7 @@ export default {
   background-color: var(--color-button-bg);
   z-index: 1;
   overflow: hidden;
-  box-shadow:  var(--shadow-inset-lg), var(--shadow-raised);
+  box-shadow: var(--shadow-inset-lg), var(--shadow-raised);
 }
 
 .option {
@@ -130,12 +127,12 @@ export default {
 
   &.current {
     background: var(--color-brand);
-    color: var(--color-accent-contrast)
+    color: var(--color-accent-contrast);
   }
 }
 
 .option:hover:not(.current) {
   background: var(--color-button-bg-active);
-  color: var(--color-contrast)
+  color: var(--color-contrast);
 }
 </style>

@@ -3,18 +3,17 @@
     <div class="modal-report legacy-label-styles">
       <div class="markdown-body">
         <p>
-          Modding should be safe for everyone, so we take abuse and malicious
-          intent seriously at Modrinth. We want to hear about harmful content on
-          the site that violates our
-          <router-link to="/legal/terms">ToS</router-link> and
-          <router-link to="/legal/rules">Rules</router-link>. Rest assured, we’ll
-          keep your identifying information private.
+          Modding should be safe for everyone, so we take abuse and malicious intent seriously at
+          Modrinth. We want to hear about harmful content on the site that violates our
+          <router-link to="/legal/terms">ToS</router-link>
+          and
+          <router-link to="/legal/rules">Rules</router-link>
+          . Rest assured, we’ll keep your identifying information private.
         </p>
         <p v-if="itemType === 'project' || itemType === 'version'">
-          Please <strong>do not</strong> use this to report bugs with the
-          project itself. This form is only for submitting a report to Modrinth
-          staff. If the project has an Issues link or a Discord invite, consider
-          reporting it there.
+          Please <strong>do not</strong> use this to report bugs with the project itself. This form
+          is only for submitting a report to Modrinth staff. If the project has an Issues link or a
+          Discord invite, consider reporting it there.
         </p>
       </div>
       <label class="report-label" for="report-type">
@@ -30,25 +29,14 @@
       />
       <label class="report-label" for="additional-information">
         <strong>Additional information</strong>
-        <span>
-          Include links and images if possible. Markdown formatting is
-          supported.
-        </span>
+        <span> Include links and images if possible. Markdown formatting is supported. </span>
       </label>
       <div class="text-input">
-        <Chips
-          v-model="bodyViewType"
-          class="separator"
-          :items="['source', 'preview']"
-        />
+        <Chips v-model="bodyViewType" class="separator" :items="['source', 'preview']" />
         <div v-if="bodyViewType === 'source'" class="text-input textarea-wrapper">
           <textarea id="body" v-model="body" spellcheck="true" />
         </div>
-        <div
-          v-else
-          class="preview"
-          v-html="renderString(body)"
-        ></div>
+        <div v-else class="preview" v-html="renderString(body)"></div>
       </div>
       <div class="button-group">
         <Button @click="cancel">
@@ -64,10 +52,11 @@
   </Modal>
 </template>
 <script setup>
-import {Modal, Chips, XIcon, CheckIcon, DropdownSelect} from "@/components";
-import {renderString} from "@/components/parse.js";
-import {ref} from "vue";
-const modal = ref("modal");
+import { Modal, Chips, XIcon, CheckIcon, DropdownSelect } from '@/components'
+import { renderString } from '@/components/parse.js'
+import { ref } from 'vue'
+
+const modal = ref('modal')
 defineExpose({
   modal: modal,
 })
@@ -90,7 +79,7 @@ export default {
     submitReport: {
       type: Function,
       default: () => {},
-    }
+    },
   },
   data() {
     return {
@@ -111,7 +100,7 @@ export default {
     show() {
       this.$refs.modal.show()
     },
-  }
+  },
 }
 </script>
 
