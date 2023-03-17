@@ -1,5 +1,5 @@
 <template>
-    <div class="demo bg-raised radius-lg padding-md"><slot /></div>
+    <div class="demo"><slot /></div>
 </template>
 
 <script>
@@ -13,5 +13,8 @@ export default {}
   gap: var(--gap-md);
   align-items: center;
   flex-wrap: wrap;
+  background: var(--color-raised-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--gap-md);
 }
 </style>

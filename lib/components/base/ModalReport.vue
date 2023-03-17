@@ -22,16 +22,10 @@
           <strong>Reason</strong>
         </span>
       </label>
-      <Multiselect
+      <DropdownSelect
         id="report-type"
         v-model="reportType"
         :options="reportTypes"
-        :custom-label="
-          (value) => value.charAt(0).toUpperCase() + value.slice(1)
-        "
-        :searchable="false"
-        :show-no-results="false"
-        :show-labels="false"
         placeholder="Choose report type"
       />
       <label class="report-label" for="additional-information">
@@ -41,19 +35,19 @@
           supported.
         </span>
       </label>
-      <div class="textarea-wrapper">
+      <div class="text-input">
         <Chips
           v-model="bodyViewType"
           class="separator"
           :items="['source', 'preview']"
         />
-        <div v-if="bodyViewType === 'source'" class="textarea-wrapper">
+        <div v-if="bodyViewType === 'source'" class="text-input textarea-wrapper">
           <textarea id="body" v-model="body" spellcheck="true" />
         </div>
         <div
           v-else
           class="preview"
-          v-html="this.renderBody"
+          v-html="renderString(body)"
         ></div>
       </div>
       <div class="button-group">
@@ -70,7 +64,8 @@
   </Modal>
 </template>
 <script setup>
-import {Modal, Chips, XIcon, CheckIcon} from "@/components";
+import {Modal, Chips, XIcon, CheckIcon, DropdownSelect} from "@/components";
+import {renderString} from "@/components/parse.js";
 import {ref} from "vue";
 const modal = ref("modal");
 defineExpose({
@@ -78,13 +73,7 @@ defineExpose({
 })
 </script>
 <script>
-import xss from "@/components/xss";
-import md from "@/components/markdown";
-import {Multiselect} from "vue-multiselect";
 export default {
-  components: {
-    Multiselect,
-  },
   props: {
     itemType: {
       type: String,
@@ -110,12 +99,8 @@ export default {
       bodyViewType: 'source',
     }
   },
-  computed: {
-    renderBody() {
-      return xss(md.render(this.body))
-    }
-  },
   methods: {
+    renderString,
     cancel() {
       this.reportType = ''
       this.body = ''
@@ -159,7 +144,7 @@ export default {
     flex-wrap: wrap;
   }
 
-  .textarea-wrapper {
+  .text-input {
     margin-top: 1rem;
     height: 12rem;
 
