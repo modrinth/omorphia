@@ -55,7 +55,7 @@
           <XIcon />
           Cancel
         </Button>
-        <Button @click="submitReport" color="primary">
+        <Button color="primary" @click="submitReport">
           <CheckIcon />
           Report
         </Button>
