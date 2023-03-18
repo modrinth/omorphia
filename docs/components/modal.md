@@ -1,11 +1,14 @@
 # Card
 :::raw
-<ClientOnly>
-  <DemoContainer>
-    <ModalReport ref="reportModal" :reportTypes="['spam', 'copyright', 'inappropriate', 'malicious']" />
-    <Button :action="() => this.$refs.reportModal.modal.show()">Show Modal</Button>
+
+<DemoContainer>
+  <Button :action="() => this.$refs.reportModal.modal.show()">Show Modal</Button>
+  <ModalReport
+  ref="reportModal"
+  :reportTypes="['cringitude', 'rudeness', 'notgamer', 'windowsuser']"
+  >
+  </ModalReport>
 </DemoContainer>
-</ClientOnly>
 :::
 
 ```vue
