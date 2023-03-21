@@ -83,9 +83,12 @@ export default {
     },
     onFocus() {
       this.focusedOptionIndex = this.options.findIndex((option) => option === this.selectedValue)
+      this.dropdownVisible = true
     },
-    onBlur() {
-      this.dropdownVisible = false;
+    onBlur(event) {
+      if (!this.isChildOfDropdown(event.relatedTarget)) {
+        this.dropdownVisible = false;
+      }
     },
     focusPreviousOption() {
       if (!this.dropdownVisible) {
@@ -102,6 +105,16 @@ export default {
       this.focusedOptionIndex = (this.focusedOptionIndex + 1) % this.options.length
       this.$refs.optionElements[this.focusedOptionIndex].focus()
     },
+    isChildOfDropdown(element) {
+      let currentNode = element;
+      while (currentNode) {
+        if (currentNode === this.$el) {
+          return true;
+        }
+        currentNode = currentNode.parentNode;
+      }
+      return false;
+    }
   },
 }
 </script>
@@ -111,6 +124,10 @@ export default {
   width: 15rem;
   position: relative;
   display: inline-block;
+
+  &:focus {
+    outline: 0;
+  }
 
   .selected {
     display: flex;
@@ -130,6 +147,12 @@ export default {
     &.dropdown-open {
       border-radius: var(--radius-lg) var(--radius-lg) 0 0;
       transition: border-radius 0.1s ease-in-out;
+    }
+
+    &:focus {
+      outline: 0;
+      filter: brightness(1.25);
+      transition: filter 0.1s ease-in-out;
     }
 
     .arrow {
@@ -163,6 +186,12 @@ export default {
       user-select: none;
 
       &:hover {
+        filter: brightness(1.25);
+        transition: filter 0.1s ease-in-out;
+      }
+
+      &:focus {
+        outline: 0;
         filter: brightness(1.25);
         transition: filter 0.1s ease-in-out;
       }
