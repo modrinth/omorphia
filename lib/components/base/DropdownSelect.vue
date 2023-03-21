@@ -85,7 +85,7 @@ export default {
       this.focusedOptionIndex = this.options.findIndex((option) => option === this.selectedValue)
     },
     onBlur() {
-      //this.dropdownVisible = false;
+      this.dropdownVisible = false;
     },
     focusPreviousOption() {
       if (!this.dropdownVisible) {
