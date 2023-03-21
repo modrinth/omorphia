@@ -6,6 +6,7 @@
     class="animated-dropdown"
     @focus="onFocus"
     @blur="onBlur"
+    @mousedown.prevent
     @keydown.enter.prevent="toggleDropdown"
     @keydown.up.prevent="focusPreviousOption"
     @keydown.down.prevent="focusNextOptionOrOpen"
