@@ -1,138 +1,202 @@
 <template>
-  <div class="dropdown-overlay" @click="hide" />
   <div
-    class="custom-dropdown-select"
-    :class="{
-      'round-bottom': !dropdownOpen,
-      'flat-bottom': dropdownOpen,
-    }"
-    @click="toggleDropdown"
+    tabindex="0"
+    role="combobox"
+    :aria-expanded="dropdownVisible"
+    class="animated-dropdown"
+    @focus="onFocus"
+    @blur="onBlur"
+    @keydown.enter.prevent="toggleDropdown"
+    @keydown.up.prevent="focusPreviousOption"
+    @keydown.down.prevent="focusNextOptionOrOpen"
   >
-    <label v-if="label">{{ label }}</label>
-    <div v-if="selectedOption" class="selected-option">
-      {{ selectedOption }}
+    <div class="selected" :class="{ 'dropdown-open': dropdownVisible }" @click="toggleDropdown">
+      <span>{{ selectedOption }}</span>
+      <i class="arrow" :class="{ rotate: dropdownVisible }"></i>
     </div>
-    <div v-else class="selected-option">
-      {{ placeholder }}
-    </div>
-    <ul v-show="dropdownOpen" class="options">
-      <li
-        v-for="(option, index) in options"
-        :key="index"
-        class="option"
-        :class="{
-          current: option === selectedOption,
-        }"
-        @click="selectOption(option)"
-      >
-        {{ option }}
-      </li>
-    </ul>
+    <transition name="slide-fade">
+      <div v-show="dropdownVisible" class="options" role="listbox">
+        <div
+          v-for="(option, index) in options"
+          :key="index"
+          ref="optionElements"
+          tabindex="-1"
+          role="option"
+          :class="{ 'selected-option': selectedValue === option }"
+          :aria-selected="selectedValue === option"
+          class="option"
+          @click="selectOption(option, index)"
+          @keydown.space.prevent="selectOption(option, index)"
+        >
+          <input
+            :id="`${name}-${index}`"
+            v-model="selectedValue"
+            type="radio"
+            :value="option"
+            :name="name"
+          />
+          <label :for="`${name}-${index}`">{{ option }}</label>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    label: {
-      type: String,
-      default: null,
-    },
     options: {
       type: Array,
       required: true,
     },
-    value: {
+    name: {
       type: String,
-      default: null,
+      required: true,
     },
-    placeholder: {
+    defaultValue: {
       type: String,
       default: null,
     },
   },
-  emits: ['input'],
+  emits: ['input', 'change'],
   data() {
     return {
-      dropdownOpen: false,
-      selectedOption: this.value,
+      dropdownVisible: false,
+      selectedValue: this.defaultValue,
+      focusedOptionIndex: null,
     }
+  },
+  computed: {
+    selectedOption() {
+      return this.selectedValue || 'Select an option'
+    },
   },
   methods: {
     toggleDropdown() {
-      this.dropdownOpen = !this.dropdownOpen
+      this.dropdownVisible = !this.dropdownVisible
     },
-    selectOption(option) {
-      this.selectedOption = option
-      this.dropdownOpen = 'false'
-      this.$emit('input', option)
+    selectOption(option, index) {
+      this.selectedValue = option
+      this.$emit('input', this.selectedValue)
+      this.$emit('change', { option, index })
+      this.dropdownVisible = false
     },
-    hide() {
-      this.dropdownOpen = 'false'
+    onFocus() {
+      this.focusedOptionIndex = this.options.findIndex((option) => option === this.selectedValue)
+    },
+    onBlur() {
+      //this.dropdownVisible = false;
+    },
+    focusPreviousOption() {
+      if (!this.dropdownVisible) {
+        this.toggleDropdown()
+      }
+      this.focusedOptionIndex =
+        (this.focusedOptionIndex + this.options.length - 1) % this.options.length
+      this.$refs.optionElements[this.focusedOptionIndex].focus()
+    },
+    focusNextOptionOrOpen() {
+      if (!this.dropdownVisible) {
+        this.toggleDropdown()
+      }
+      this.focusedOptionIndex = (this.focusedOptionIndex + 1) % this.options.length
+      this.$refs.optionElements[this.focusedOptionIndex].focus()
     },
   },
 }
 </script>
 
-<style scoped lang="scss">
-.dropdown-overlay {
-  visibility: hidden;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 19;
-}
-
-.custom-dropdown-select {
+<style lang="scss" scoped>
+.animated-dropdown {
+  width: 15rem;
   position: relative;
   display: inline-block;
-  background: var(--color-button-bg);
-}
 
-.round-bottom {
-  border-radius: var(--radius-lg);
-}
+  .selected {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--gap-md);
+    background-color: var(--color-button-bg);
+    cursor: pointer;
+    user-select: none;
+    border-radius: var(--radius-lg);
 
-.flat-bottom {
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
+    &:hover {
+      filter: brightness(1.25);
+      transition: filter 0.1s ease-in-out;
+    }
 
-.selected-option {
-  cursor: pointer;
-  padding: 8px 16px;
-  overflow: hidden;
-  box-shadow: var(--shadow-inset-lg), var(--shadow-raised);
-}
+    &.dropdown-open {
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      transition: border-radius 0.1s ease-in-out;
+    }
 
-.options {
-  width: 100%;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  left: 0;
-  top: 100%;
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  background-color: var(--color-button-bg);
-  z-index: 1;
-  overflow: hidden;
-  box-shadow: var(--shadow-inset-lg), var(--shadow-raised);
-}
+    .arrow {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: 0.4rem;
+      border-left: 0.4rem solid transparent;
+      border-right: 0.4rem solid transparent;
+      border-top: 0.4rem solid var(--color-base);
+      transition: transform 0.3s ease;
+      &.rotate {
+        transform: rotate(180deg);
+      }
+    }
+  }
 
-.option {
-  padding: 8px 16px;
-  cursor: pointer;
+  .options {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    overflow: hidden;
 
-  &.current {
-    background: var(--color-brand);
-    color: var(--color-accent-contrast);
+    .option {
+      background-color: var(--color-button-bg);
+      display: flex;
+      align-items: center;
+      padding: var(--gap-md);
+      cursor: pointer;
+      user-select: none;
+
+      &:hover {
+        filter: brightness(1.25);
+        transition: filter 0.1s ease-in-out;
+      }
+
+      &.selected-option {
+        background-color: var(--color-brand);
+        color: var(--color-accent-contrast);
+      }
+
+      input {
+        display: none;
+      }
+    }
   }
 }
 
-.option:hover:not(.current) {
-  background: var(--color-button-bg-active);
-  color: var(--color-contrast);
+.slide-fade-enter {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.slide-fade-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.slide-fade-leave,
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
 }
 </style>
