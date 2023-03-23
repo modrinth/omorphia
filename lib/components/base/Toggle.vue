@@ -10,18 +10,18 @@
 
 <script>
 export default {
-  props : {
+  props: {
     id: {
       type: String,
       required: true,
     },
     modelValue: {
-      type: Boolean
+      type: Boolean,
     },
     checked: {
       type: Boolean,
       required: true,
-    }
+    },
   },
   emits: ['update:modelValue'],
   methods: {
@@ -34,6 +34,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
