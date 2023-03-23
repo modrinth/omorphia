@@ -8,10 +8,8 @@
     <template v-else-if="type === 'creator'"><BoxIcon /> Creator</template>
 
     <!-- Project statuses -->
-		<template v-else-if="type === 'approved'">
-      <span
-        v-tooltip="'Your project is visible in search and on your profile.'"
-      >
+    <template v-else-if="type === 'approved'">
+      <span v-tooltip="'Your project is visible in search and on your profile.'">
         <ListIcon /> Listed
       </span>
     </template>
@@ -40,9 +38,7 @@
     </template>
     <template v-else-if="type === 'scheduled'">
       <span
-        v-tooltip="
-          'Your project will be automatically published at your chosen time and date.'
-        "
+        v-tooltip="'Your project will be automatically published at your chosen time and date.'"
       >
         <CalendarIcon /> Scheduled
       </span>
@@ -66,17 +62,12 @@
     </template>
     <template v-else-if="type === 'rejected'">
       <span
-        v-tooltip="
-          'Your project cannot be published. See the moderation message for more details.'
-        "
+        v-tooltip="'Your project cannot be published. See the moderation message for more details.'"
         ><CrossIcon /> Rejected</span
       >
     </template>
     <template v-else-if="type === 'processing'">
-      <span
-        v-tooltip="
-          'A moderator will need to review your project before it is published.'
-        "
+      <span v-tooltip="'A moderator will need to review your project before it is published.'"
         ><ProcessingIcon /> Under review</span
       >
     </template>
