@@ -1,6 +1,6 @@
 <template>
   <Modal ref="modal" :header="`Report ${itemType}`">
-    <div class="modal-report legacy-label-styles">
+    <div class="modal-report">
       <div class="markdown-body">
         <p>
           Modding should be safe for everyone, so we take abuse and malicious intent seriously at
@@ -16,17 +16,20 @@
           Discord invite, consider reporting it there.
         </p>
       </div>
-      <label class="report-label" for="report-type">
-        <span>
-          <strong>Reason</strong>
-        </span>
-      </label>
-      <DropdownSelect
-        id="report-type"
-        v-model="reportType"
-        :options="reportTypes"
-        default-value="Choose report type"
-      />
+      <div>
+        <label class="report-label" for="report-type">
+          <span>
+            <strong>Reason</strong>
+          </span>
+        </label>
+        <DropdownSelect
+          id="report-type"
+          v-model="reportType"
+          :options="reportTypes"
+          default-value="Choose report type"
+          class="multiselect"
+        />
+      </div>
       <label class="report-label" for="additional-information">
         <strong>Additional information</strong>
         <span> Include links and images if possible. Markdown formatting is supported. </span>
@@ -109,13 +112,9 @@ export default {
   padding: var(--gap-lg);
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 
   .markdown-body {
-    margin-bottom: 1rem;
-  }
-
-  .multiselect {
-    max-width: 20rem;
     margin-bottom: 1rem;
   }
 
@@ -123,12 +122,11 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin: 0.5rem 0;
+    margin-bottom: 0.5rem;
   }
 
   .button-group {
     margin-left: auto;
-    margin-top: 1.5rem;
     display: flex;
     grid-gap: 0.5rem;
     flex-wrap: wrap;
