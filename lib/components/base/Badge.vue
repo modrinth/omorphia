@@ -8,15 +8,78 @@
     <template v-else-if="type === 'creator'"><BoxIcon /> Creator</template>
 
     <!-- Project statuses -->
-    <template v-else-if="type === 'approved'"><ListIcon /> Listed</template>
-    <template v-else-if="type === 'unlisted'"><EyeOffIcon /> Unlisted</template>
-    <template v-else-if="type === 'withheld'"><EyeOffIcon /> Withheld</template>
-    <template v-else-if="type === 'private'"><LockIcon /> Private</template>
-    <template v-else-if="type === 'scheduled'"> <CalendarIcon /> Scheduled </template>
-    <template v-else-if="type === 'draft'"><FileTextIcon /> Draft</template>
-    <template v-else-if="type === 'archived'"> <ArchiveIcon /> Archived </template>
-    <template v-else-if="type === 'rejected'"><XIcon /> Rejected</template>
-    <template v-else-if="type === 'processing'"> <UpdatedIcon /> Under review </template>
+		<template v-else-if="type === 'approved'">
+      <span
+        v-tooltip="'Your project is visible in search and on your profile.'"
+      >
+        <ListIcon /> Listed
+      </span>
+    </template>
+    <template v-else-if="type === 'unlisted'">
+      <span
+        v-tooltip="
+          'Your project is published, and can be accessed with a link, but cannot be seen in search or on your profile.'
+        "
+      >
+        <EyeOffIcon /> Unlisted
+      </span>
+    </template>
+    <template v-else-if="type === 'withheld'">
+      <span
+        v-tooltip="
+          'Your project is accessible by link but is not published in search. See the moderation message for more details.'
+        "
+      >
+        <EyeOffIcon /> Withheld
+      </span>
+    </template>
+    <template v-else-if="type === 'private'">
+      <span v-tooltip="'Your project is only visible to members of your team.'">
+        <LockIcon /> Private
+      </span>
+    </template>
+    <template v-else-if="type === 'scheduled'">
+      <span
+        v-tooltip="
+          'Your project will be automatically published at your chosen time and date.'
+        "
+      >
+        <CalendarIcon /> Scheduled
+      </span>
+    </template>
+    <template v-else-if="type === 'draft'">
+      <span
+        v-tooltip="
+          'Your project cannot be found in search or your profile until you submit it for review.'
+        "
+        ><DraftIcon /> Draft
+      </span>
+    </template>
+    <template v-else-if="type === 'archived'">
+      <span
+        v-tooltip="
+          'Your project is visible in search, and will display a archival notice to visitors.'
+        "
+      >
+        <ArchiveIcon /> Archived
+      </span>
+    </template>
+    <template v-else-if="type === 'rejected'">
+      <span
+        v-tooltip="
+          'Your project cannot be published. See the moderation message for more details.'
+        "
+        ><CrossIcon /> Rejected</span
+      >
+    </template>
+    <template v-else-if="type === 'processing'">
+      <span
+        v-tooltip="
+          'A moderator will need to review your project before it is published.'
+        "
+        ><ProcessingIcon /> Under review</span
+      >
+    </template>
 
     <!-- Team members -->
     <template v-else-if="type === 'accepted'"><CheckIcon /> Accepted</template>
@@ -32,8 +95,8 @@ import {
   BoxIcon,
   ListIcon,
   EyeOffIcon,
-  FileTextIcon,
-  XIcon,
+  // FileTextIcon,
+  // XIcon,
   ArchiveIcon,
   UpdatedIcon,
   CheckIcon,
