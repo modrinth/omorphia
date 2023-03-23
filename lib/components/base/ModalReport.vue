@@ -25,7 +25,7 @@
         id="report-type"
         v-model="reportType"
         :options="reportTypes"
-        placeholder="Choose report type"
+        default-value="Choose report type"
       />
       <label class="report-label" for="additional-information">
         <strong>Additional information</strong>
@@ -123,6 +123,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin: 0.5rem 0;
   }
 
   .button-group {

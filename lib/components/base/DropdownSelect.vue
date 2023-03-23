@@ -58,6 +58,10 @@ export default {
       type: String,
       default: null,
     },
+    placeholder: {
+      type: String,
+      default: null,
+    },
   },
   emits: ['input', 'change'],
   data() {
@@ -69,7 +73,7 @@ export default {
   },
   computed: {
     selectedOption() {
-      return this.selectedValue || 'Select an option'
+      return this.selectedValue || this.placeholder || 'Select an option'
     },
   },
   methods: {
@@ -122,7 +126,7 @@ export default {
 
 <style lang="scss" scoped>
 .animated-dropdown {
-  width: 15rem;
+  width: 20rem;
   position: relative;
   display: inline-block;
 
@@ -134,20 +138,19 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--gap-md);
+    padding: var(--gap-sm) var(--gap-md);
     background-color: var(--color-button-bg);
     cursor: pointer;
     user-select: none;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
 
     &:hover {
       filter: brightness(1.25);
-      transition: filter 0.1s ease-in-out;
+      transition: filter 0.3s ease-in-out;
     }
 
     &.dropdown-open {
-      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-      transition: border-radius 0.1s ease-in-out;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
     }
 
     &:focus {
@@ -188,13 +191,13 @@ export default {
 
       &:hover {
         filter: brightness(1.25);
-        transition: filter 0.1s ease-in-out;
+        transition: filter 0.3s ease-in-out;
       }
 
       &:focus {
         outline: 0;
         filter: brightness(1.25);
-        transition: filter 0.1s ease-in-out;
+        transition: filter 0.3s ease-in-out;
       }
 
       &.selected-option {
@@ -221,7 +224,7 @@ export default {
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.5s ease, transform 0.3s ease;
 }
 
 .slide-fade-leave,

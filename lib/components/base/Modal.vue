@@ -21,6 +21,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   props: {
@@ -93,6 +94,8 @@ export default {
 
     h1 {
       font-size: 1.25rem;
+      color: var(--color-contrast);
+      font-weight: bolder;
     }
   }
 
