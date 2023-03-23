@@ -34,9 +34,9 @@
         <strong>Additional information</strong>
         <span> Include links and images if possible. Markdown formatting is supported. </span>
       </label>
-      <div class="text-input">
-        <Chips v-model="bodyViewType" class="separator" :items="['source', 'preview']" />
+      <div>
         <div v-if="bodyViewType === 'source'" class="text-input textarea-wrapper">
+          <Chips v-model="bodyViewType" class="separator" :items="['source', 'preview']" />
           <textarea id="body" v-model="body" spellcheck="true" />
         </div>
         <div v-else class="preview" v-html="renderString(body)"></div>
@@ -113,37 +113,37 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
 
-  .markdown-body {
-    margin-bottom: 1rem;
+.markdown-body {
+  margin-bottom: 1rem;
+}
+
+.report-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.button-group {
+  margin-left: auto;
+  display: flex;
+  grid-gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.text-input {
+  height: 12rem;
+  gap: 1rem;
+
+  textarea {
+    // here due to a bug in safari
+    max-height: 9rem;
   }
 
-  .report-label {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 0.5rem;
-  }
-
-  .button-group {
-    margin-left: auto;
-    display: flex;
-    grid-gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-
-  .text-input {
-    margin-top: 1rem;
-    height: 12rem;
-
-    textarea {
-      // here due to a bug in safari
-      max-height: 9rem;
-    }
-
-    .preview {
-      overflow-y: auto;
-    }
+  .preview {
+    overflow-y: auto;
   }
 }
 </style>
