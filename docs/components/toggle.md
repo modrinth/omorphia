@@ -1,29 +1,20 @@
 # Toggle
 
+<script setup>
+import { ref } from "vue"; 
+
+const value = ref(true)
+</script>
 <DemoContainer>
-  <input
-    class="switch stylized-toggle"
-    type="checkbox"
-    id="toggle"
-    checked
-  />
-  <input
-    class="switch stylized-toggle"
-    type="checkbox"
-    id="other-toggle"
-  />
+  <Toggle v-model="value" checked="true" />
 </DemoContainer>
 
 ```vue
-  <input
-    class="switch stylized-toggle"
-    type="checkbox"
-    id="toggle"
-    checked
-  />
-  <input
-    class="switch stylized-toggle"
-    type="checkbox"
-    id="other-toggle"
-  />
+<script setup>
+import { ref } from "vue"; 
+
+const value = ref(true)
+</script>
+
+<Toggle v-model="value" />
 ```
