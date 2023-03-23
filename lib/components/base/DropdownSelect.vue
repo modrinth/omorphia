@@ -92,7 +92,7 @@ export default {
     },
     onBlur(event) {
       if (!this.isChildOfDropdown(event.relatedTarget)) {
-        this.dropdownVisible = false;
+        this.dropdownVisible = false
       }
     },
     focusPreviousOption() {
@@ -111,15 +111,15 @@ export default {
       this.$refs.optionElements[this.focusedOptionIndex].focus()
     },
     isChildOfDropdown(element) {
-      let currentNode = element;
+      let currentNode = element
       while (currentNode) {
         if (currentNode === this.$el) {
-          return true;
+          return true
         }
-        currentNode = currentNode.parentNode;
+        currentNode = currentNode.parentNode
       }
-      return false;
-    }
+      return false
+    },
   },
 }
 </script>
