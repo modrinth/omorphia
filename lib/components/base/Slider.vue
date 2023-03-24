@@ -114,7 +114,8 @@ export default {
   width: 100%;
 }
 
-.slider-component, .slide-container {
+.slider-component,
+.slide-container {
   width: 100%;
 }
 
