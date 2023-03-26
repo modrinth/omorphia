@@ -8,9 +8,7 @@
             rel="noopener nofollow sponsored"
             target="_blank"
           >
-            <ExarotonIcon
-              class="MYYLVTXBPUVWMLVBPVSDLHADDRYFBF-3"
-            />
+            <ExarotonIcon class="MYYLVTXBPUVWMLVBPVSDLHADDRYFBF-3" />
             <span>
               <span> Host your Minecraft server on </span>
               <strong>exaroton</strong>
