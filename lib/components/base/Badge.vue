@@ -48,7 +48,7 @@
         v-tooltip="
           'Your project cannot be found in search or your profile until you submit it for review.'
         "
-        ><DraftIcon /> Draft
+        ><FileTextIcon /> Draft
       </span>
     </template>
     <template v-else-if="type === 'archived'">
@@ -63,7 +63,7 @@
     <template v-else-if="type === 'rejected'">
       <span
         v-tooltip="'Your project cannot be published. See the moderation message for more details.'"
-        ><CrossIcon /> Rejected</span
+        ><XIcon /> Rejected</span
       >
     </template>
     <template v-else-if="type === 'processing'">
@@ -86,8 +86,8 @@ import {
   BoxIcon,
   ListIcon,
   EyeOffIcon,
-  // FileTextIcon,
-  // XIcon,
+  FileTextIcon,
+  XIcon,
   ArchiveIcon,
   UpdatedIcon,
   CheckIcon,
