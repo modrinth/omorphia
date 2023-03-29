@@ -2,6 +2,7 @@
   <div
     tabindex="0"
     role="combobox"
+    ref="dropdown"
     :aria-expanded="dropdownVisible"
     class="animated-dropdown"
     @focus="onFocus"
@@ -92,6 +93,7 @@ export default {
   methods: {
     toggleDropdown() {
       this.dropdownVisible = !this.dropdownVisible
+      this.$refs.dropdown.focus()
     },
     selectOption(option, index) {
       this.radioValue = option
