@@ -31,7 +31,7 @@
         >
           <input
             :id="`${name}-${index}`"
-            v-model="selectedValue"
+            v-model="radioValue"
             type="radio"
             :value="option"
             :name="name"
@@ -62,12 +62,16 @@ export default {
       type: String,
       default: null,
     },
+    modelValue: {
+      type: String,
+      default: null,
+    }
   },
-  emits: ['input', 'change'],
+  emits: ['input', 'change', 'update:modelValue'],
   data() {
     return {
       dropdownVisible: false,
-      selectedValue: this.defaultValue,
+      selectedValue: this.modelValue || this.defaultValue,
       focusedOptionIndex: null,
     }
   },
@@ -75,14 +79,22 @@ export default {
     selectedOption() {
       return this.selectedValue || this.placeholder || 'Select an option'
     },
+    radioValue: {
+      get() {
+        return this.modelValue || this.selectedValue
+      },
+      set(newValue) {
+        this.$emit('update:modelValue', newValue)
+        this.selectedValue = newValue
+      },
+    }
   },
   methods: {
     toggleDropdown() {
       this.dropdownVisible = !this.dropdownVisible
     },
     selectOption(option, index) {
-      this.selectedValue = option
-      this.$emit('input', this.selectedValue)
+      this.radioValue = option
       this.$emit('change', { option, index })
       this.dropdownVisible = false
     },
