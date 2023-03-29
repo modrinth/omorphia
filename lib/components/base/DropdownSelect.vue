@@ -66,7 +66,7 @@ export default {
     modelValue: {
       type: String,
       default: null,
-    }
+    },
   },
   emits: ['input', 'change', 'update:modelValue'],
   data() {
@@ -88,7 +88,7 @@ export default {
         this.$emit('update:modelValue', newValue)
         this.selectedValue = newValue
       },
-    }
+    },
   },
   methods: {
     toggleDropdown() {
@@ -152,7 +152,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--gap-sm) var(--gap-md);
+    padding: var(--gap-sm) var(--gap-lg);
     background-color: var(--color-button-bg);
     cursor: pointer;
     user-select: none;
