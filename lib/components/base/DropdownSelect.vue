@@ -276,39 +276,40 @@ export default {
 }
 
 .slide-fade-enter {
-  opacity: 0;
-  transform: translateY(-20px);
+  transform: scale(1, 0);
 
   &.render-up {
-    transform: translateY(20px);
+    transform-origin: bottom;
+    transform: scale(1, 0);
   }
 
   &.render-down {
-    transform: translateY(-20px);
+    transform-origin: top;
+    transform: scale(1, 0);
   }
 }
 
 .slide-fade-enter-to {
-  opacity: 1;
   transform: translateY(0);
 }
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: transform 0.1s ease;
 }
 
 .slide-fade-leave,
 .slide-fade-leave-to {
-  opacity: 0;
-  transform: translateY(-20px);
+  transform: scale(1, 0);
 
   &.render-up {
-    transform: translateY(20px);
+    transform-origin: bottom;
+    transform: scale(1, 0);
   }
 
   &.render-down {
-    transform: translateY(-20px);
+    transform-origin: top;
+    transform: scale(1, 0);
   }
 }
 </style>
