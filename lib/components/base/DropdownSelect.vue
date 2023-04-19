@@ -12,12 +12,25 @@
     @keydown.up.prevent="focusPreviousOption"
     @keydown.down.prevent="focusNextOptionOrOpen"
   >
-    <div class="selected" :class="{ 'dropdown-open': dropdownVisible }" @click="toggleDropdown">
+    <div
+      class="selected"
+      :class="{
+        disabled: disabled,
+        'render-down': dropdownVisible && !renderUp && !disabled,
+        'render-up': dropdownVisible && renderUp && !disabled,
+      }"
+      @click="toggleDropdown"
+    >
       <span>{{ selectedOption }}</span>
       <i class="arrow" :class="{ rotate: dropdownVisible }"></i>
     </div>
-    <transition name="slide-fade">
-      <div v-show="dropdownVisible" class="options" role="listbox">
+    <transition name="slide-fade" :class="{ 'render-down': !renderUp, 'render-up': renderUp }">
+      <div
+        v-show="dropdownVisible"
+        class="options"
+        :class="{ 'render-down': !renderUp, 'render-up': renderUp }"
+        role="listbox"
+      >
         <div
           v-for="(option, index) in options"
           :key="index"
@@ -67,6 +80,14 @@ export default {
       type: String,
       default: null,
     },
+    renderUp: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['input', 'change', 'update:modelValue'],
   data() {
@@ -92,8 +113,10 @@ export default {
   },
   methods: {
     toggleDropdown() {
-      this.dropdownVisible = !this.dropdownVisible
-      this.$refs.dropdown.focus()
+      if (!this.disabled) {
+        this.dropdownVisible = !this.dropdownVisible
+        this.$refs.dropdown.focus()
+      }
     },
     selectOption(option, index) {
       this.radioValue = option
@@ -101,8 +124,10 @@ export default {
       this.dropdownVisible = false
     },
     onFocus() {
-      this.focusedOptionIndex = this.options.findIndex((option) => option === this.selectedValue)
-      this.dropdownVisible = true
+      if (!this.disabled) {
+        this.focusedOptionIndex = this.options.findIndex((option) => option === this.selectedValue)
+        this.dropdownVisible = true
+      }
     },
     onBlur(event) {
       if (!this.isChildOfDropdown(event.relatedTarget)) {
@@ -110,19 +135,23 @@ export default {
       }
     },
     focusPreviousOption() {
-      if (!this.dropdownVisible) {
-        this.toggleDropdown()
+      if (!this.disabled) {
+        if (!this.dropdownVisible) {
+          this.toggleDropdown()
+        }
+        this.focusedOptionIndex =
+          (this.focusedOptionIndex + this.options.length - 1) % this.options.length
+        this.$refs.optionElements[this.focusedOptionIndex].focus()
       }
-      this.focusedOptionIndex =
-        (this.focusedOptionIndex + this.options.length - 1) % this.options.length
-      this.$refs.optionElements[this.focusedOptionIndex].focus()
     },
     focusNextOptionOrOpen() {
-      if (!this.dropdownVisible) {
-        this.toggleDropdown()
+      if (!this.disabled) {
+        if (!this.dropdownVisible) {
+          this.toggleDropdown()
+        }
+        this.focusedOptionIndex = (this.focusedOptionIndex + 1) % this.options.length
+        this.$refs.optionElements[this.focusedOptionIndex].focus()
       }
-      this.focusedOptionIndex = (this.focusedOptionIndex + 1) % this.options.length
-      this.$refs.optionElements[this.focusedOptionIndex].focus()
     },
     isChildOfDropdown(element) {
       let currentNode = element
@@ -163,8 +192,17 @@ export default {
       transition: filter 0.3s ease-in-out;
     }
 
-    &.dropdown-open {
-      border-radius: var(--radius-md) var(--radius-md) 0 0;
+    &.disabled {
+      cursor: not-allowed;
+      filter: brightness(0.75);
+    }
+
+    &.render-up {
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
+
+    &.render-down {
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     }
 
     &:focus {
@@ -192,8 +230,19 @@ export default {
     position: absolute;
     width: 100%;
     z-index: 10;
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-    overflow: hidden;
+    box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
+    max-height: min(12rem);
+    overflow: auto;
+
+    &.render-up {
+      bottom: 100%;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    &.render-down {
+      top: 100%;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
 
     .option {
       background-color: var(--color-button-bg);
@@ -229,6 +278,14 @@ export default {
 .slide-fade-enter {
   opacity: 0;
   transform: translateY(-20px);
+
+  &.render-up {
+    transform: translateY(20px);
+  }
+
+  &.render-down {
+    transform: translateY(-20px);
+  }
 }
 
 .slide-fade-enter-to {
@@ -238,12 +295,20 @@ export default {
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: opacity 0.5s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .slide-fade-leave,
 .slide-fade-leave-to {
   opacity: 0;
   transform: translateY(-20px);
+
+  &.render-up {
+    transform: translateY(20px);
+  }
+
+  &.render-down {
+    transform: translateY(-20px);
+  }
 }
 </style>

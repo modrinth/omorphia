@@ -9,16 +9,32 @@ const value = ref(null)
   <DropdownSelect
     id="report-type"
     v-model="value"
-    :options="['Daily', 'Weekly', 'Monthly']"
+    :options="['Daily', 'Weekly', 'Monthly', 'Tomorrow', 'Yesterday', 'Today', 'Biweekly', 'Tuesday', 'January']"
     placeholder="Choose Frequency"
+  />
+  <DropdownSelect
+    id="report-type"
+    v-model="value"
+    :options="['Daily', 'Weekly', 'Monthly', 'Tomorrow', 'Yesterday', 'Today', 'Biweekly', 'Tuesday', 'January']"
+    placeholder="Choose Frequency"
+    render-up
+  />
+  <DropdownSelect
+    id="report-type"
+    v-model="value"
+    :options="['Daily', 'Weekly', 'Monthly', 'Tomorrow', 'Yesterday', 'Today', 'Biweekly', 'Tuesday', 'January']"
+    placeholder="Choose Frequency"
+    disabled
   />
 </DemoContainer>
 
 ```vue
 <DropdownSelect
   id="report-type"
-  v-model="reportType"
-  :options="['Daily', 'Weekly', 'Monthly']"
+  v-model="value"
+  :options="['Daily', 'Weekly', 'Monthly', 'Tomorrow', 'Yesterday', 'Today', 'Biweekly', 'Tuesday', 'January']"
   placeholder="Choose Frequency"
+  render-up
+  disabled
 />
 ```
