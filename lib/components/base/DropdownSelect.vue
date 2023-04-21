@@ -28,7 +28,8 @@
       <transition name="options">
         <div
           v-show="dropdownVisible"
-          class="options" role="listbox"
+          class="options"
+          role="listbox"
           :class="{ down: !renderUp, up: renderUp }"
         >
           <div
