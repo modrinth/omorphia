@@ -24,33 +24,34 @@
       <span>{{ selectedOption }}</span>
       <i class="arrow" :class="{ rotate: dropdownVisible }"></i>
     </div>
-    <transition name="slide-fade" :class="{ 'render-down': !renderUp, 'render-up': renderUp }">
+    <transition name="options">
       <div
-        v-show="dropdownVisible"
-        class="options"
-        :class="{ 'render-down': !renderUp, 'render-up': renderUp }"
-        role="listbox"
+        v-if="dropdownVisible"
+        class="options-wrapper"
+        :class="{ down: !renderUp, up: renderUp }"
       >
-        <div
-          v-for="(option, index) in options"
-          :key="index"
-          ref="optionElements"
-          tabindex="-1"
-          role="option"
-          :class="{ 'selected-option': selectedValue === option }"
-          :aria-selected="selectedValue === option"
-          class="option"
-          @click="selectOption(option, index)"
-          @keydown.space.prevent="selectOption(option, index)"
-        >
-          <input
-            :id="`${name}-${index}`"
-            v-model="radioValue"
-            type="radio"
-            :value="option"
-            :name="name"
-          />
-          <label :for="`${name}-${index}`">{{ option }}</label>
+        <div class="options" role="listbox">
+          <div
+            v-for="(option, index) in options"
+            :key="index"
+            ref="optionElements"
+            tabindex="-1"
+            role="option"
+            :class="{ 'selected-option': selectedValue === option }"
+            :aria-selected="selectedValue === option"
+            class="option"
+            @click="selectOption(option, index)"
+            @keydown.space.prevent="selectOption(option, index)"
+          >
+            <input
+              :id="`${name}-${index}`"
+              v-model="radioValue"
+              type="radio"
+              :value="option"
+              :name="name"
+            />
+            <label :for="`${name}-${index}`">{{ option }}</label>
+          </div>
         </div>
       </div>
     </transition>
@@ -188,7 +189,7 @@ export default {
     border-radius: var(--radius-md);
 
     &:hover {
-      filter: brightness(1.25);
+      filter: brightness(0.85);
       transition: filter 0.3s ease-in-out;
     }
 
@@ -198,11 +199,11 @@ export default {
     }
 
     &.render-up {
-      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+      border-radius: 0 0 var(--radius-md) var(--radius-md);
     }
 
     &.render-down {
-      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
     }
 
     &:focus {
@@ -227,23 +228,6 @@ export default {
   }
 
   .options {
-    position: absolute;
-    width: 100%;
-    z-index: 10;
-    box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
-    max-height: min(12rem);
-    overflow: auto;
-
-    &.render-up {
-      bottom: 100%;
-      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    }
-
-    &.render-down {
-      top: 100%;
-      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-    }
-
     .option {
       background-color: var(--color-button-bg);
       display: flex;
@@ -253,19 +237,20 @@ export default {
       user-select: none;
 
       &:hover {
-        filter: brightness(1.25);
+        filter: brightness(0.85);
         transition: filter 0.3s ease-in-out;
       }
 
       &:focus {
         outline: 0;
-        filter: brightness(1.25);
+        filter: brightness(0.85);
         transition: filter 0.3s ease-in-out;
       }
 
       &.selected-option {
         background-color: var(--color-brand);
         color: var(--color-accent-contrast);
+        font-weight: bolder;
       }
 
       input {
@@ -275,41 +260,53 @@ export default {
   }
 }
 
-.slide-fade-enter {
-  transform: scale(1, 0);
+.options-enter-active,
+.options-leave-active {
+  transition: transform 0.3s ease; // Update the transition duration to 0.3s
+}
 
-  &.render-up {
+.options-enter-from,
+.options-leave-to {
+  transform: scaleY(0); // Change scale to scaleY
+
+  &.up {
     transform-origin: bottom;
-    transform: scale(1, 0);
   }
 
-  &.render-down {
+  &.down {
     transform-origin: top;
-    transform: scale(1, 0);
   }
 }
 
-.slide-fade-enter-to {
-  transform: translateY(0);
-}
+.options-enter-to,
+.options-leave-from {
+  transform: scaleY(1); // Change scale to scaleY
 
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-  transition: transform 0.1s ease;
-}
-
-.slide-fade-leave,
-.slide-fade-leave-to {
-  transform: scale(1, 0);
-
-  &.render-up {
+  &.up {
     transform-origin: bottom;
-    transform: scale(1, 0);
   }
 
-  &.render-down {
+  &.down {
     transform-origin: top;
-    transform: scale(1, 0);
+  }
+}
+
+.options-wrapper {
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+  box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
+  max-height: min(12rem);
+  overflow: auto;
+
+  &.up {
+    bottom: 100%;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+
+  &.down {
+    top: 100%;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   }
 }
 </style>
