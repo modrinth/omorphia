@@ -24,13 +24,13 @@
       <span>{{ selectedOption }}</span>
       <i class="arrow" :class="{ rotate: dropdownVisible }"></i>
     </div>
-    <transition name="options">
-      <div
-        v-if="dropdownVisible"
-        class="options-wrapper"
-        :class="{ down: !renderUp, up: renderUp }"
-      >
-        <div class="options" role="listbox">
+    <div class="options-wrapper" :class="{ down: !renderUp, up: renderUp }">
+      <transition name="options">
+        <div
+          v-show="dropdownVisible"
+          class="options" role="listbox"
+          :class="{ down: !renderUp, up: renderUp }"
+        >
           <div
             v-for="(option, index) in options"
             :key="index"
@@ -53,8 +53,8 @@
             <label :for="`${name}-${index}`">{{ option }}</label>
           </div>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -228,6 +228,11 @@ export default {
   }
 
   .options {
+    z-index: 10;
+    max-height: min(12rem);
+    overflow-y: auto;
+    box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
+
     .option {
       background-color: var(--color-button-bg);
       display: flex;
@@ -262,51 +267,41 @@ export default {
 
 .options-enter-active,
 .options-leave-active {
-  transition: transform 0.3s ease; // Update the transition duration to 0.3s
+  transition: transform 0.3s ease;
 }
 
 .options-enter-from,
 .options-leave-to {
-  transform: scaleY(0); // Change scale to scaleY
-
   &.up {
-    transform-origin: bottom;
+    transform: translateY(100%);
   }
 
   &.down {
-    transform-origin: top;
+    transform: translateY(-100%);
   }
 }
 
 .options-enter-to,
 .options-leave-from {
-  transform: scaleY(1); // Change scale to scaleY
-
   &.up {
-    transform-origin: bottom;
-  }
-
-  &.down {
-    transform-origin: top;
+    transform: translateY(0%);
   }
 }
 
 .options-wrapper {
   position: absolute;
   width: 100%;
-  z-index: 10;
-  box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
-  max-height: min(12rem);
   overflow: auto;
+  z-index: 9;
 
   &.up {
-    bottom: 100%;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    top: 0;
+    transform: translateY(-100%);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
   }
 
   &.down {
-    top: 100%;
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
   }
 }
 </style>
