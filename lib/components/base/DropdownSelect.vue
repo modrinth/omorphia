@@ -189,11 +189,6 @@ export default {
     user-select: none;
     border-radius: var(--radius-md);
 
-    &:hover {
-      filter: brightness(0.85);
-      transition: filter 0.3s ease-in-out;
-    }
-
     &.disabled {
       cursor: not-allowed;
       filter: brightness(0.75);
@@ -221,7 +216,7 @@ export default {
       border-left: 0.4rem solid transparent;
       border-right: 0.4rem solid transparent;
       border-top: 0.4rem solid var(--color-base);
-      transition: transform 0.3s ease;
+      transition: transform 0.2s ease;
       &.rotate {
         transform: rotate(180deg);
       }
@@ -244,13 +239,13 @@ export default {
 
       &:hover {
         filter: brightness(0.85);
-        transition: filter 0.3s ease-in-out;
+        transition: filter 0.2s ease-in-out;
       }
 
       &:focus {
         outline: 0;
         filter: brightness(0.85);
-        transition: filter 0.3s ease-in-out;
+        transition: filter 0.2s ease-in-out;
       }
 
       &.selected-option {
@@ -268,7 +263,7 @@ export default {
 
 .options-enter-active,
 .options-leave-active {
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .options-enter-from,
