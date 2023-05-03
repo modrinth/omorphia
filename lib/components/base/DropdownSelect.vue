@@ -24,37 +24,40 @@
       <span>{{ selectedOption }}</span>
       <i class="arrow" :class="{ rotate: dropdownVisible }"></i>
     </div>
-    <transition name="options">
-      <div
-        v-if="dropdownVisible"
-        class="options-wrapper"
-        :class="{ down: !renderUp, up: renderUp }"
-      >
-        <div class="options" role="listbox">
-          <div
-            v-for="(option, index) in options"
-            :key="index"
-            ref="optionElements"
-            tabindex="-1"
-            role="option"
-            :class="{ 'selected-option': selectedValue === option }"
-            :aria-selected="selectedValue === option"
-            class="option"
-            @click="selectOption(option, index)"
-            @keydown.space.prevent="selectOption(option, index)"
-          >
-            <input
-              :id="`${name}-${index}`"
-              v-model="radioValue"
-              type="radio"
-              :value="option"
-              :name="name"
-            />
-            <label :for="`${name}-${index}`">{{ displayName(option) }}</label>
+    <div class="options-wrapper" :class="{ down: !renderUp, up: renderUp }">
+      <transition name="options">
+        <div
+          v-show="dropdownVisible"
+          class="options"
+          role="listbox"
+          :class="{ down: !renderUp, up: renderUp }"
+        >
+          <div class="options" role="listbox">
+            <div
+              v-for="(option, index) in options"
+              :key="index"
+              ref="optionElements"
+              tabindex="-1"
+              role="option"
+              :class="{ 'selected-option': selectedValue === option }"
+              :aria-selected="selectedValue === option"
+              class="option"
+              @click="selectOption(option, index)"
+              @keydown.space.prevent="selectOption(option, index)"
+            >
+              <input
+                :id="`${name}-${index}`"
+                v-model="radioValue"
+                type="radio"
+                :value="option"
+                :name="name"
+              />
+              <label :for="`${name}-${index}`">{{ displayName(option) }}</label>
+            </div>
           </div>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </div>
   </div>
 </template>
 
@@ -203,11 +206,7 @@ const isChildOfDropdown = (element) => {
     cursor: pointer;
     user-select: none;
     border-radius: var(--radius-md);
-
-    &:hover {
-      filter: brightness(0.85);
-      transition: filter 0.3s ease-in-out;
-    }
+    box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
 
     &.disabled {
       cursor: not-allowed;
@@ -236,7 +235,7 @@ const isChildOfDropdown = (element) => {
       border-left: 0.4rem solid transparent;
       border-right: 0.4rem solid transparent;
       border-top: 0.4rem solid var(--color-base);
-      transition: transform 0.3s ease;
+      transition: transform 0.2s ease;
       &.rotate {
         transform: rotate(180deg);
       }
@@ -244,6 +243,11 @@ const isChildOfDropdown = (element) => {
   }
 
   .options {
+    z-index: 10;
+    max-height: min(12rem);
+    overflow-y: auto;
+    box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
+
     .option {
       background-color: var(--color-button-bg);
       display: flex;
@@ -278,51 +282,40 @@ const isChildOfDropdown = (element) => {
 
 .options-enter-active,
 .options-leave-active {
-  transition: transform 0.3s ease; // Update the transition duration to 0.3s
+  transition: transform 0.2s ease; // Update the transition duration to 0.3s
 }
 
 .options-enter-from,
 .options-leave-to {
-  transform: scaleY(0); // Change scale to scaleY
-
   &.up {
-    transform-origin: bottom;
+    transform: translateY(100%);
   }
 
   &.down {
-    transform-origin: top;
+    transform: translateY(-100%);
   }
 }
 
 .options-enter-to,
 .options-leave-from {
-  transform: scaleY(1); // Change scale to scaleY
-
   &.up {
-    transform-origin: bottom;
-  }
-
-  &.down {
-    transform-origin: top;
+    transform: translateY(0%);
   }
 }
 
 .options-wrapper {
   position: absolute;
   width: 100%;
-  z-index: 10;
-  box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
-  max-height: min(12rem);
   overflow: auto;
 
   &.up {
-    bottom: 100%;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    top: 0;
+    transform: translateY(-100%);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
   }
 
   &.down {
-    top: 100%;
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
   }
 }
 </style>
