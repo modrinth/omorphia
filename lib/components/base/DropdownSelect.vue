@@ -32,28 +32,26 @@
           role="listbox"
           :class="{ down: !renderUp, up: renderUp }"
         >
-          <div class="options" role="listbox">
-            <div
-              v-for="(option, index) in options"
-              :key="index"
-              ref="optionElements"
-              tabindex="-1"
-              role="option"
-              :class="{ 'selected-option': selectedValue === option }"
-              :aria-selected="selectedValue === option"
-              class="option"
-              @click="selectOption(option, index)"
-              @keydown.space.prevent="selectOption(option, index)"
-            >
-              <input
-                :id="`${name}-${index}`"
-                v-model="radioValue"
-                type="radio"
-                :value="option"
-                :name="name"
-              />
-              <label :for="`${name}-${index}`">{{ displayName(option) }}</label>
-            </div>
+          <div
+            v-for="(option, index) in options"
+            :key="index"
+            ref="optionElements"
+            tabindex="-1"
+            role="option"
+            :class="{ 'selected-option': selectedValue === option }"
+            :aria-selected="selectedValue === option"
+            class="option"
+            @click="selectOption(option, index)"
+            @keydown.space.prevent="selectOption(option, index)"
+          >
+            <input
+              :id="`${name}-${index}`"
+              v-model="radioValue"
+              type="radio"
+              :value="option"
+              :name="name"
+            />
+            <label :for="`${name}-${index}`">{{ displayName(option) }}</label>
           </div>
         </div>
       </transition>
