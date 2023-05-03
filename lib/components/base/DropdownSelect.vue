@@ -24,14 +24,13 @@
       <span>{{ selectedOption }}</span>
       <i class="arrow" :class="{ rotate: dropdownVisible }"></i>
     </div>
-    <div class="options-wrapper" :class="{ down: !renderUp, up: renderUp }">
-      <transition name="options">
-        <div
-          v-show="dropdownVisible"
-          class="options"
-          role="listbox"
-          :class="{ down: !renderUp, up: renderUp }"
-        >
+    <transition name="options">
+      <div
+        v-if="dropdownVisible"
+        class="options-wrapper"
+        :class="{ down: !renderUp, up: renderUp }"
+      >
+        <div class="options" role="listbox">
           <div
             v-for="(option, index) in options"
             :key="index"
@@ -51,121 +50,137 @@
               :value="option"
               :name="name"
             />
-            <label :for="`${name}-${index}`">{{ option }}</label>
+            <label :for="`${name}-${index}`">{{ displayName(option) }}</label>
           </div>
         </div>
-      </transition>
-    </div>
+      </div>
+    </transition>
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    options: {
-      type: Array,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    defaultValue: {
-      type: String,
-      default: null,
-    },
-    placeholder: {
-      type: String,
-      default: null,
-    },
-    modelValue: {
-      type: String,
-      default: null,
-    },
-    renderUp: {
-      type: Boolean,
-      default: false,
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
+<script setup>
+import { computed, ref, watch } from 'vue'
+
+const props = defineProps({
+  options: {
+    type: Array,
+    required: true,
   },
-  emits: ['input', 'change', 'update:modelValue'],
-  data() {
-    return {
-      dropdownVisible: false,
-      selectedValue: this.modelValue || this.defaultValue,
-      focusedOptionIndex: null,
+  name: {
+    type: String,
+    required: true,
+  },
+  defaultValue: {
+    type: String,
+    default: null,
+  },
+  placeholder: {
+    type: String,
+    default: null,
+  },
+  modelValue: {
+    type: String,
+    default: null,
+  },
+  renderUp: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  displayName: {
+    type: Function,
+    default: (option) => option,
+  },
+})
+
+const emit = defineEmits(['input', 'change', 'update:modelValue'])
+
+const dropdownVisible = ref(false)
+const selectedValue = ref(props.modelValue || props.defaultValue)
+const focusedOptionIndex = ref(null)
+const dropdown = ref(null)
+const optionElements = ref(null)
+
+const selectedOption = computed(() => {
+  return props.displayName(selectedValue.value) || props.placeholder || 'Select an option'
+})
+
+const radioValue = computed({
+  get() {
+    return props.modelValue || selectedValue.value
+  },
+  set(newValue) {
+    emit('update:modelValue', newValue)
+    selectedValue.value = newValue
+  },
+})
+
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    selectedValue.value = newValue
+  }
+)
+
+const toggleDropdown = () => {
+  if (!props.disabled) {
+    dropdownVisible.value = !dropdownVisible.value
+    dropdown.value.focus()
+  }
+}
+
+const selectOption = (option, index) => {
+  radioValue.value = option
+  emit('change', { option, index })
+  dropdownVisible.value = false
+}
+
+const onFocus = () => {
+  if (!props.disabled) {
+    focusedOptionIndex.value = props.options.findIndex((option) => option === selectedValue.value)
+    dropdownVisible.value = true
+  }
+}
+
+const onBlur = (event) => {
+  if (!isChildOfDropdown(event.relatedTarget)) {
+    dropdownVisible.value = false
+  }
+}
+
+const focusPreviousOption = () => {
+  if (!props.disabled) {
+    if (!dropdownVisible.value) {
+      toggleDropdown()
     }
-  },
-  computed: {
-    selectedOption() {
-      return this.selectedValue || this.placeholder || 'Select an option'
-    },
-    radioValue: {
-      get() {
-        return this.modelValue || this.selectedValue
-      },
-      set(newValue) {
-        this.$emit('update:modelValue', newValue)
-        this.selectedValue = newValue
-      },
-    },
-  },
-  methods: {
-    toggleDropdown() {
-      if (!this.disabled) {
-        this.dropdownVisible = !this.dropdownVisible
-        this.$refs.dropdown.focus()
-      }
-    },
-    selectOption(option, index) {
-      this.radioValue = option
-      this.$emit('change', { option, index })
-      this.dropdownVisible = false
-    },
-    onFocus() {
-      if (!this.disabled) {
-        this.focusedOptionIndex = this.options.findIndex((option) => option === this.selectedValue)
-        this.dropdownVisible = true
-      }
-    },
-    onBlur(event) {
-      if (!this.isChildOfDropdown(event.relatedTarget)) {
-        this.dropdownVisible = false
-      }
-    },
-    focusPreviousOption() {
-      if (!this.disabled) {
-        if (!this.dropdownVisible) {
-          this.toggleDropdown()
-        }
-        this.focusedOptionIndex =
-          (this.focusedOptionIndex + this.options.length - 1) % this.options.length
-        this.$refs.optionElements[this.focusedOptionIndex].focus()
-      }
-    },
-    focusNextOptionOrOpen() {
-      if (!this.disabled) {
-        if (!this.dropdownVisible) {
-          this.toggleDropdown()
-        }
-        this.focusedOptionIndex = (this.focusedOptionIndex + 1) % this.options.length
-        this.$refs.optionElements[this.focusedOptionIndex].focus()
-      }
-    },
-    isChildOfDropdown(element) {
-      let currentNode = element
-      while (currentNode) {
-        if (currentNode === this.$el) {
-          return true
-        }
-        currentNode = currentNode.parentNode
-      }
-      return false
-    },
-  },
+    focusedOptionIndex.value =
+      (focusedOptionIndex.value + props.options.length - 1) % props.options.length
+    optionElements.value[focusedOptionIndex.value].focus()
+  }
+}
+
+const focusNextOptionOrOpen = () => {
+  if (!props.disabled) {
+    if (!dropdownVisible.value) {
+      toggleDropdown()
+    }
+    focusedOptionIndex.value = (focusedOptionIndex.value + 1) % props.options.length
+    optionElements.value[focusedOptionIndex.value].focus()
+  }
+}
+
+const isChildOfDropdown = (element) => {
+  let currentNode = element
+  while (currentNode) {
+    if (currentNode === this.$el) {
+      return true
+    }
+    currentNode = currentNode.parentNode
+  }
+  return false
 }
 </script>
 
@@ -188,7 +203,11 @@ export default {
     cursor: pointer;
     user-select: none;
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
+
+    &:hover {
+      filter: brightness(0.85);
+      transition: filter 0.3s ease-in-out;
+    }
 
     &.disabled {
       cursor: not-allowed;
@@ -217,7 +236,7 @@ export default {
       border-left: 0.4rem solid transparent;
       border-right: 0.4rem solid transparent;
       border-top: 0.4rem solid var(--color-base);
-      transition: transform 0.2s ease;
+      transition: transform 0.3s ease;
       &.rotate {
         transform: rotate(180deg);
       }
@@ -225,11 +244,6 @@ export default {
   }
 
   .options {
-    z-index: 10;
-    max-height: min(12rem);
-    overflow-y: auto;
-    box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
-
     .option {
       background-color: var(--color-button-bg);
       display: flex;
@@ -240,13 +254,13 @@ export default {
 
       &:hover {
         filter: brightness(0.85);
-        transition: filter 0.2s ease-in-out;
+        transition: filter 0.3s ease-in-out;
       }
 
       &:focus {
         outline: 0;
         filter: brightness(0.85);
-        transition: filter 0.2s ease-in-out;
+        transition: filter 0.3s ease-in-out;
       }
 
       &.selected-option {
@@ -264,41 +278,51 @@ export default {
 
 .options-enter-active,
 .options-leave-active {
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease; // Update the transition duration to 0.3s
 }
 
 .options-enter-from,
 .options-leave-to {
+  transform: scaleY(0); // Change scale to scaleY
+
   &.up {
-    transform: translateY(100%);
+    transform-origin: bottom;
   }
 
   &.down {
-    transform: translateY(-100%);
+    transform-origin: top;
   }
 }
 
 .options-enter-to,
 .options-leave-from {
+  transform: scaleY(1); // Change scale to scaleY
+
   &.up {
-    transform: translateY(0%);
+    transform-origin: bottom;
+  }
+
+  &.down {
+    transform-origin: top;
   }
 }
 
 .options-wrapper {
   position: absolute;
   width: 100%;
+  z-index: 10;
+  box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
+  max-height: min(12rem);
   overflow: auto;
-  z-index: 9;
 
   &.up {
-    top: 0;
-    transform: translateY(-100%);
-    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    bottom: 100%;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   }
 
   &.down {
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    top: 100%;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   }
 }
 </style>
