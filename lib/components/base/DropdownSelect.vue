@@ -258,13 +258,13 @@ const isChildOfDropdown = (element) => {
 
       &:hover {
         filter: brightness(0.85);
-        transition: filter 0.3s ease-in-out;
+        transition: filter 0.2s ease-in-out;
       }
 
       &:focus {
         outline: 0;
         filter: brightness(0.85);
-        transition: filter 0.3s ease-in-out;
+        transition: filter 0.2s ease-in-out;
       }
 
       &.selected-option {
@@ -282,7 +282,7 @@ const isChildOfDropdown = (element) => {
 
 .options-enter-active,
 .options-leave-active {
-  transition: transform 0.2s ease; // Update the transition duration to 0.3s
+  transition: transform 0.2s ease;
 }
 
 .options-enter-from,
@@ -307,6 +307,7 @@ const isChildOfDropdown = (element) => {
   position: absolute;
   width: 100%;
   overflow: auto;
+  z-index: 9;
 
   &.up {
     top: 0;
