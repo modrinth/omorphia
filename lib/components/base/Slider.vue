@@ -10,6 +10,7 @@
           :max="max"
           :step="step"
           class="slider"
+          :disabled="props.disabled"
           :style="{
             '--current-value': currentValue,
             '--min-value': min,
@@ -32,13 +33,15 @@
       :value="currentValue"
       type="text"
       class="slider-input"
+      :disabled="props.disabled"
+      :placeholder="props.placeholder ?? currentValue"
       @change="onInput($refs.value.value)"
     />
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -46,6 +49,10 @@ const props = defineProps({
   modelValue: {
     type: Number,
     default: 0,
+  },
+  placeholder: {
+    type: Number,
+    default: null,
   },
   min: {
     type: Number,
@@ -63,9 +70,17 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 })
 
-let currentValue = ref(Math.max(props.min, props.modelValue).toString())
+let currentValue = ref(
+  props.disabled === false
+    ? Math.max(props.min, props.modelValue).toString()
+    : Math.max(props.min, props.placeholder ?? props.modelValue).toString()
+)
 
 const inputValueValid = (newValue) => {
   const parsedValue = parseInt(newValue)
@@ -80,6 +95,16 @@ const inputValueValid = (newValue) => {
   }
   emit('update:modelValue', parseInt(currentValue.value))
 }
+
+watch(
+  () => props.disabled,
+  (_, updatedDisable) => {
+    currentValue.value =
+      updatedDisable === true
+        ? Math.max(props.min, props.modelValue).toString()
+        : Math.max(props.min, props.placeholder ?? props.modelValue).toString()
+  }
+)
 
 const onInput = (value) => {
   inputValueValid(value)
