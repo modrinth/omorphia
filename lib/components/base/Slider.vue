@@ -1,7 +1,7 @@
 <template>
   <div class="root-container">
     <div class="slider-component">
-      <div class="slide-container">
+      <div :class="props.disabled ? 'slider-container disabled' : 'slide-container'">
         <input
           ref="input"
           v-model="currentValue"
@@ -120,12 +120,12 @@ const onInput = (value) => {
 }
 
 .slide-container .slider {
-  width: 100%;
+  width: 100% !important;
 }
 
 .slider-component,
 .slide-container {
-  width: 100%;
+  width: 100% !important;
 }
 
 .slider-component .slide-container .slider {
@@ -190,5 +190,9 @@ const onInput = (value) => {
   justify-content: space-between;
   font-size: 0.75rem;
   margin: 0;
+}
+
+.slider {
+  width: 100% !important;
 }
 </style>
