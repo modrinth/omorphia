@@ -8,15 +8,17 @@
       class="modal-overlay"
       @click="hide"
     />
-    <div class="modal-body" :class="{ shown: actuallyShown }">
-      <div v-if="header" class="header">
-        <h1>{{ header }}</h1>
-        <button class="btn icon-only transparent" @click="hide">
-          <XIcon />
-        </button>
-      </div>
-      <div class="content">
-        <slot />
+    <div class="modal-container" :class="{ shown: actuallyShown }">
+      <div class="modal-body">
+        <div v-if="header" class="header">
+          <h1>{{ header }}</h1>
+          <button class="btn icon-only transparent" @click="hide">
+            <XIcon />
+          </button>
+        </div>
+        <div class="content">
+          <slot />
+        </div>
       </div>
     </div>
   </div>
