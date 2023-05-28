@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div v-if="shown">
     <div
       :class="{
-        shown: shown,
+        shown: actuallyShown,
         noblur: noblur,
       }"
       class="modal-overlay"
       @click="hide"
     />
-    <div class="modal-body" :class="{ shown: shown }">
+    <div class="modal-body" :class="{ shown: actuallyShown }">
       <div v-if="header" class="header">
         <h1>{{ header }}</h1>
         <button class="btn icon-only transparent" @click="hide">
@@ -20,6 +20,7 @@
       </div>
     </div>
   </div>
+  <div v-else></div>
 </template>
 
 <script setup>
@@ -42,14 +43,21 @@ export default defineComponent({
   data() {
     return {
       shown: false,
+      actuallyShown: false,
     }
   },
   methods: {
     show() {
       this.shown = true
+      setTimeout(() => {
+        this.actuallyShown = true
+      }, 50)
     },
     hide() {
-      this.shown = false
+      this.actuallyShown = false
+      setTimeout(() => {
+        this.shown = false
+      }, 300)
     },
   },
 })
@@ -64,7 +72,6 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   z-index: 20;
-
   transition: all 0.3s ease-in-out;
 
   &.shown {
@@ -79,48 +86,61 @@ export default defineComponent({
   }
 }
 
-.modal-body {
+.modal-container {
   position: fixed;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 21;
-  box-shadow: var(--shadow-raised), var(--shadow-inset);
-  border-radius: var(--radius-lg);
-  max-height: calc(100% - 2 * var(--gap-lg));
-  overflow-y: auto;
-  width: 600px;
+  visibility: hidden;
+  pointer-events: none;
 
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--color-bg);
-    padding: var(--gap-md) var(--gap-lg);
-
-    h1 {
-      font-size: 1.25rem;
-      color: var(--color-contrast);
-      font-weight: bolder;
+  &.shown {
+    visibility: visible;
+    .modal-body {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
   }
 
-  .content {
-    background-color: var(--color-raised-bg);
-  }
+  .modal-body {
+    position: fixed;
+    box-shadow: var(--shadow-raised), var(--shadow-inset);
+    border-radius: var(--radius-lg);
+    max-height: calc(100% - 2 * var(--gap-lg));
+    overflow-y: auto;
+    width: 600px;
+    pointer-events: auto;
 
-  top: calc(100% + 400px);
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.25s ease-in-out;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--color-bg);
+      padding: var(--gap-md) var(--gap-lg);
 
-  &.shown {
-    opacity: 1;
-    visibility: visible;
-    top: 50%;
-  }
+      h1 {
+        font-size: 1.25rem;
+      }
+    }
 
-  @media screen and (max-width: 650px) {
-    width: calc(100% - 2 * var(--gap-lg));
+    .content {
+      background-color: var(--color-raised-bg);
+    }
+
+    transform: translateY(50vh);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.25s ease-in-out;
+
+    @media screen and (max-width: 650px) {
+      width: calc(100% - 2 * var(--gap-lg));
+    }
   }
 }
 </style>
