@@ -3,15 +3,15 @@
     <div
       :class="{
         shown: actuallyShown,
-        noblur: noblur,
+        noblur: props.noblur,
       }"
       class="modal-overlay"
       @click="hide"
     />
     <div class="modal-container" :class="{ shown: actuallyShown }">
       <div class="modal-body">
-        <div v-if="header" class="header">
-          <h1>{{ header }}</h1>
+        <div v-if="props.header" class="header">
+          <h1>{{ props.header }}</h1>
           <button class="btn icon-only transparent" @click="hide">
             <XIcon />
           </button>
@@ -27,41 +27,39 @@
 
 <script setup>
 import { XIcon } from '@/components'
-</script>
-<script>
-import { defineComponent } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  props: {
-    header: {
-      type: String,
-      default: null,
-    },
-    noblur: {
-      type: Boolean,
-      default: false,
-    },
+const props = defineProps({
+  header: {
+    type: String,
+    default: null,
   },
-  data() {
-    return {
-      shown: false,
-      actuallyShown: false,
-    }
+  noblur: {
+    type: Boolean,
+    default: false,
   },
-  methods: {
-    show() {
-      this.shown = true
-      setTimeout(() => {
-        this.actuallyShown = true
-      }, 50)
-    },
-    hide() {
-      this.actuallyShown = false
-      setTimeout(() => {
-        this.shown = false
-      }, 300)
-    },
-  },
+})
+
+const shown = ref(false)
+const actuallyShown = ref(false)
+
+function show() {
+  shown.value = true
+  setTimeout(() => {
+    actuallyShown.value = true
+  }, 50)
+}
+
+function hide() {
+  actuallyShown.value = false
+  setTimeout(() => {
+    shown.value = false
+  }, 300)
+}
+
+defineExpose({
+  show,
+  hide,
 })
 </script>
 
@@ -127,6 +125,7 @@ export default defineComponent({
       padding: var(--gap-md) var(--gap-lg);
 
       h1 {
+        font-weight: bold;
         font-size: 1.25rem;
       }
     }

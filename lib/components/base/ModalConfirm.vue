@@ -1,17 +1,17 @@
 <template>
-  <Modal ref="modal" :header="title">
+  <Modal ref="modal" :header="props.title">
     <div class="modal-delete">
-      <div class="markdown-body" v-html="renderString(description)" />
-      <label v-if="hasToType" for="confirmation" class="confirmation-label">
+      <div class="markdown-body" v-html="renderString(props.description)" />
+      <label v-if="props.hasToType" for="confirmation" class="confirmation-label">
         <span>
           <strong>To verify, type</strong>
-          <em class="confirmation-text">{{ confirmationText }}</em>
+          <em class="confirmation-text">{{ props.confirmationText }}</em>
           <strong>below:</strong>
         </span>
       </label>
       <div class="confirmation-input">
         <input
-          v-if="hasToType"
+          v-if="props.hasToType"
           id="confirmation"
           v-model="confirmation_typed"
           type="text"
@@ -19,14 +19,14 @@
           @input="type"
         />
       </div>
-      <div class="button-group">
-        <button class="btn" @click="cancel">
+      <div class="input-group push-right">
+        <button class="btn" @click="modal.hide()">
           <XIcon />
           Cancel
         </button>
         <button class="btn btn-danger" :disabled="action_disabled" @click="proceed">
           <TrashIcon />
-          {{ proceedLabel }}
+          {{ props.proceedLabel }}
         </button>
       </div>
     </div>
@@ -38,63 +38,54 @@ import { renderString } from '@/helpers/parse'
 import { XIcon, TrashIcon, Modal } from '@/components'
 import { ref } from 'vue'
 
-const modal = ref('modal')
-defineExpose({
-  modal: modal,
+const props = defineProps({
+  confirmationText: {
+    type: String,
+    default: '',
+  },
+  hasToType: {
+    type: Boolean,
+    default: false,
+  },
+  title: {
+    type: String,
+    default: 'No title defined',
+    required: true,
+  },
+  description: {
+    type: String,
+    default: 'No description defined',
+    required: true,
+  },
+  proceedLabel: {
+    type: String,
+    default: 'Proceed',
+  },
 })
-</script>
-<script>
-export default {
-  props: {
-    confirmationText: {
-      type: String,
-      default: '',
-    },
-    hasToType: {
-      type: Boolean,
-      default: false,
-    },
-    title: {
-      type: String,
-      default: 'No title defined',
-      required: true,
-    },
-    description: {
-      type: String,
-      default: 'No description defined',
-      required: true,
-    },
-    proceedLabel: {
-      type: String,
-      default: 'Proceed',
-    },
-  },
-  emits: ['proceed'],
-  data() {
-    return {
-      action_disabled: this.hasToType,
-      confirmation_typed: '',
-    }
-  },
-  methods: {
-    cancel() {
-      this.$refs.modal.hide()
-    },
-    proceed() {
-      this.$refs.modal.hide()
-      this.$emit('proceed')
-    },
-    type() {
-      if (this.hasToType) {
-        this.action_disabled =
-          this.confirmation_typed.toLowerCase() !== this.confirmationText.toLowerCase()
-      }
-    },
-    show() {
-      this.$refs.modal.show()
-    },
-  },
+
+const emit = defineEmits(['proceed'])
+const modal = ref(null)
+
+const action_disabled = ref(props.hasToType)
+const confirmation_typed = ref('')
+
+function proceed() {
+  modal.value.hide()
+  emit('proceed')
 }
+
+function type() {
+  if (props.hasToType) {
+    action_disabled.value =
+      confirmation_typed.value.toLowerCase() !== props.confirmationText.toLowerCase()
+  }
+}
+
+function show() {
+  modal.value.show()
+}
+
+defineExpose({ show })
 </script>
 
 <style scoped lang="scss">
