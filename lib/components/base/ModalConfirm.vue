@@ -20,11 +20,11 @@
         />
       </div>
       <div class="button-group">
-        <button class="iconified-button" @click="cancel">
+        <button class="btn" @click="cancel">
           <XIcon />
           Cancel
         </button>
-        <button class="iconified-button danger-button" :disabled="action_disabled" @click="proceed">
+        <button class="btn btn-danger" :disabled="action_disabled" @click="proceed">
           <TrashIcon />
           {{ proceedLabel }}
         </button>
