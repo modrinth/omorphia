@@ -50,5 +50,5 @@
     "vite-svg-loader": "^4.0.0",
     "vitepress": "^1.0.0-beta.1"
   },
-  "packageManager": "pnpm@8.6.0"
+  "packageManager": "pnpm@8.5.1"
 }
