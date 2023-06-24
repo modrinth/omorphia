@@ -199,6 +199,7 @@ defineExpose({
   flex-direction: column;
   gap: var(--gap-sm);
   flex-grow: 1;
+  justify-content: center;
 }
 
 .iconified-input {
@@ -234,6 +235,7 @@ defineExpose({
 
 .qr-wrapper {
   position: relative;
+  margin: 0 auto;
 
   &:hover {
     .copy-button {
