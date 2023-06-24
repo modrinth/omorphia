@@ -113,7 +113,7 @@ defineExpose({
     <div class="share-body">
       <div v-if="link" class="qr-wrapper">
         <div ref="qrCode">
-          <QrcodeVue :value="content" class="qr-code" margin="3" />
+          <QrcodeVue :value="url" class="qr-code" margin="3" />
         </div>
         <Button v-tooltip="'Copy QR code'" icon-only class="copy-button" @click="copyImage">
           <ClipboardCopyIcon />
@@ -190,7 +190,7 @@ defineExpose({
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--gap-lg);
+  gap: var(--gap-sm);
   padding: var(--gap-xl);
 }
 
@@ -245,7 +245,6 @@ defineExpose({
 }
 
 .qr-code {
-  --size: 5rem;
   background-color: white !important;
   border-radius: var(--radius-md);
 }
