@@ -3,15 +3,17 @@ import {
   Button,
   Modal,
   ClipboardCopyIcon,
-  Avatar,
   LinkIcon,
-  SendIcon,
+  ShareIcon,
+  MailIcon,
   GlobeIcon,
   TwitterIcon,
   MastodonIcon,
   RedditIcon,
 } from '@/components'
 import { computed, ref } from 'vue'
+import QrcodeVue from 'qrcode.vue'
+import { nextTick } from '../../../docs/.vitepress/cache/deps/vue.js'
 
 const props = defineProps({
   header: {
@@ -24,7 +26,7 @@ const props = defineProps({
   },
   shareText: {
     type: String,
-    default: 'Share',
+    default: null,
   },
   link: {
     type: Boolean,
@@ -37,19 +39,41 @@ const shareModal = ref(null)
 const qrCode = ref(null)
 const qrImage = ref(null)
 const content = ref(null)
+const url = ref(null)
+const canShare = ref(false)
+const share = () => {
+  navigator.share(
+    props.link
+      ? {
+          title: props.shareTitle.toString(),
+          text: props.shareText,
+          url: url.value,
+        }
+      : {
+          title: props.shareTitle.toString(),
+          text: content.value,
+        }
+  )
+}
 
 const show = async (passedContent) => {
-  content.value = passedContent
+  content.value = props.shareText ? `${props.shareText}\n\n${passedContent}` : passedContent
+  shareModal.value.show()
   if (props.link) {
-    const url =
-      'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' +
-      encodeURIComponent(passedContent)
-    fetch(url).then(async (response) => {
-      qrImage.value = await response.blob()
-      qrCode.value = response.url
+    url.value = passedContent
+    nextTick(() => {
+      console.log(qrCode.value)
+      fetch(qrCode.value.getElementsByTagName('canvas')[0].toDataURL('image/png'))
+        .then((res) => res.blob())
+        .then((blob) => {
+          console.log(blob)
+          qrImage.value = blob
+        })
     })
   }
-  shareModal.value.show()
+  if (navigator.canShare({ title: props.shareTitle.toString(), text: content.value })) {
+    canShare.value = true
+  }
 }
 
 const copyImage = async () => {
@@ -65,25 +89,19 @@ const sendEmail = computed(
   () =>
     `mailto:user@test.com
     ?subject=${encodeURIComponent(props.shareTitle)}
-    &body=` + encodeURIComponent(`${props.shareText}\n${content.value}`)
+    &body=` + encodeURIComponent(content.value)
 )
 
 const sendTweet = computed(
-  () =>
-    `https://twitter.com/intent/tweet?text=` +
-    encodeURIComponent(`${props.shareText}\n${content.value}`)
+  () => `https://twitter.com/intent/tweet?text=` + encodeURIComponent(content.value)
 )
 
-const sendToot = computed(
-  () =>
-    `https://mastodon.social/share?text=` +
-    encodeURIComponent(`${props.shareText}\n${content.value}`)
-)
+const sendToot = computed(() => `https://tootpick.org/#text=` + encodeURIComponent(content.value))
 
 const postOnReddit = computed(
   () =>
-    `https://www.reddit.com/submit?title=${encodeURIComponent(props.shareTitle)}&url=` +
-    encodeURIComponent(`${props.shareText}\n${content.value}`)
+    `https://www.reddit.com/submit?title=${encodeURIComponent(props.shareTitle)}&text=` +
+    encodeURIComponent(content.value)
 )
 
 defineExpose({
@@ -95,8 +113,10 @@ defineExpose({
   <Modal ref="shareModal" :header="header">
     <div class="share-body">
       <div v-if="link" class="qr-wrapper">
-        <Avatar :src="qrCode" alt="QR Code" class="qr-code" size="md" />
-        <Button icon-only @click="copyImage" class="copy-button" v-tooltip="'Copy QR code'">
+        <div ref="qrCode">
+          <QrcodeVue :value="content" class="qr-code" margin="3" />
+        </div>
+        <Button v-tooltip="'Copy QR code'" icon-only class="copy-button" @click="copyImage">
           <ClipboardCopyIcon />
         </Button>
       </div>
@@ -110,13 +130,21 @@ defineExpose({
         </div>
         <div v-else class="resizable-textarea-wrapper">
           <textarea v-model="content" />
-        </div>
-        <div class="button-row">
-          <Button v-if="!link" v-tooltip="'Copy Text'" icon-only @click="copyText">
+          <Button
+            v-tooltip="'Copy Text'"
+            icon-only
+            class="copy-button transparent"
+            @click="copyText"
+          >
             <ClipboardCopyIcon />
           </Button>
+        </div>
+        <div class="button-row">
+          <Button v-if="canShare" v-tooltip="'Share'" icon-only @click="share">
+            <ShareIcon />
+          </Button>
           <a v-tooltip="'Send as an email'" class="btn icon-only" target="_blank" :href="sendEmail">
-            <SendIcon />
+            <MailIcon />
           </a>
           <a
             v-if="link"
@@ -127,15 +155,25 @@ defineExpose({
           >
             <GlobeIcon />
           </a>
-          <a v-tooltip="'Toot about it'" class="btn icon-only" target="_blank" :href="sendToot">
+          <a
+            v-tooltip="'Toot about it'"
+            class="btn mastodon icon-only"
+            target="_blank"
+            :href="sendToot"
+          >
             <MastodonIcon />
           </a>
-          <a v-tooltip="'Tweet about it'" class="btn icon-only" target="_blank" :href="sendTweet">
+          <a
+            v-tooltip="'Tweet about it'"
+            class="btn twitter icon-only"
+            target="_blank"
+            :href="sendTweet"
+          >
             <TwitterIcon />
           </a>
           <a
             v-tooltip="'Share on Reddit'"
-            class="btn icon-only"
+            class="btn reddit icon-only"
             target="_blank"
             :href="postOnReddit"
           >
@@ -152,15 +190,16 @@ defineExpose({
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--gap-lg);
   padding: var(--gap-xl);
 }
 
 .all-buttons {
-  width: 100%;
   display: flex;
   flex-direction: column;
   gap: var(--gap-sm);
+  flex-grow: 1;
 }
 
 .iconified-input {
@@ -179,6 +218,18 @@ defineExpose({
   .btn {
     fill: var(--color-contrast);
     color: var(--color-contrast);
+
+    &.reddit {
+      background-color: #ff4500;
+    }
+
+    &.mastodon {
+      background-color: #2b90d9;
+    }
+
+    &.twitter {
+      background-color: #1da1f2;
+    }
   }
 }
 
@@ -194,8 +245,8 @@ defineExpose({
 
 .qr-code {
   --size: 5rem;
-  padding: var(--gap-sm);
   background-color: white !important;
+  border-radius: var(--radius-md);
 }
 
 .copy-button {
@@ -208,11 +259,17 @@ defineExpose({
 }
 
 .resizable-textarea-wrapper {
+  position: relative;
   margin-bottom: calc(-14px + var(--gap-sm));
   height: 100%;
 
   textarea {
     width: 100%;
+    margin: 0;
+  }
+
+  .btn {
+    opacity: 1;
     margin: 0;
   }
 }
