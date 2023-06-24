@@ -11,9 +11,8 @@ import {
   MastodonIcon,
   RedditIcon,
 } from '@/components'
-import { computed, ref } from 'vue'
+import { computed, ref, nextTick } from 'vue'
 import QrcodeVue from 'qrcode.vue'
-import { nextTick } from '../../../docs/.vitepress/cache/deps/vue.js'
 
 const props = defineProps({
   header: {
