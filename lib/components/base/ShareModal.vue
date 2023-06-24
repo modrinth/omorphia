@@ -122,7 +122,7 @@ defineExpose({
       <div class="all-buttons">
         <div v-if="link" class="iconified-input">
           <LinkIcon />
-          <input type="text" :value="content" readonly disabled />
+          <input type="text" :value="url" readonly disabled />
           <Button v-tooltip="'Copy Text'" @click="copyText">
             <ClipboardCopyIcon />
           </Button>
@@ -150,7 +150,7 @@ defineExpose({
             v-tooltip="'Open link in browser'"
             class="btn icon-only"
             target="_blank"
-            :href="content"
+            :href="url"
           >
             <GlobeIcon />
           </a>

@@ -12,12 +12,12 @@
   <ShareModal
     ref="shareContent"
     share-title="This is the title for the content"
-    share-content="Share this content"
+    share-text="Share this content"
   />
   <ShareModal
     ref="shareLink"
     share-title="This is the title for the link"
-    share-content="Share this link"
+    share-text="Share this link"
     link
   />
 </DemoContainer>
@@ -26,12 +26,12 @@
   <ShareModal
     ref="shareContent"
     share-title="This is the title for the content"
-    share-content="Share this content"
+    share-text="Share this content"
   />
   <ShareModal
     ref="shareLink"
     share-title="This is the title for the link"
-    share-content="Share this link"
+    share-text="Share this link"
     link
   />
 
