@@ -81,7 +81,7 @@ const copyImage = async () => {
 }
 
 const copyText = async () => {
-  await navigator.clipboard.writeText(content.value)
+  await navigator.clipboard.writeText(url.value ?? content.value)
 }
 
 const sendEmail = computed(
@@ -119,22 +119,17 @@ defineExpose({
           <ClipboardCopyIcon />
         </Button>
       </div>
+      <div v-else class="resizable-textarea-wrapper">
+        <textarea v-model="content" />
+        <Button v-tooltip="'Copy Text'" icon-only class="copy-button transparent" @click="copyText">
+          <ClipboardCopyIcon />
+        </Button>
+      </div>
       <div class="all-buttons">
         <div v-if="link" class="iconified-input">
           <LinkIcon />
-          <input type="text" :value="url" readonly disabled />
+          <input type="text" :value="url" readonly />
           <Button v-tooltip="'Copy Text'" @click="copyText">
-            <ClipboardCopyIcon />
-          </Button>
-        </div>
-        <div v-else class="resizable-textarea-wrapper">
-          <textarea v-model="content" />
-          <Button
-            v-tooltip="'Copy Text'"
-            icon-only
-            class="copy-button transparent"
-            @click="copyText"
-          >
             <ClipboardCopyIcon />
           </Button>
         </div>
@@ -191,7 +186,7 @@ defineExpose({
   align-items: center;
   flex-wrap: wrap;
   gap: var(--gap-sm);
-  padding: var(--gap-xl);
+  padding: var(--gap-lg);
 }
 
 .all-buttons {
@@ -224,7 +219,7 @@ defineExpose({
     }
 
     &.mastodon {
-      background-color: #2b90d9;
+      background-color: #563acc;
     }
 
     &.twitter {
@@ -260,7 +255,6 @@ defineExpose({
 
 .resizable-textarea-wrapper {
   position: relative;
-  margin-bottom: calc(-14px + var(--gap-sm));
   height: 100%;
 
   textarea {
