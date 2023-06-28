@@ -249,6 +249,10 @@ const isChildOfDropdown = (element) => {
     overflow-y: auto;
     box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
 
+    &.small {
+      max-height: 9.375rem !important;
+    }
+  
     .option {
       background-color: var(--color-button-bg);
       display: flex;
