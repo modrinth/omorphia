@@ -19,6 +19,7 @@ const options = ref([{ test: 'hello', display: 'no' }, { test: 'nob', display: '
     :options="['Daily', 'Weekly', 'Monthly', 'Tomorrow', 'Yesterday', 'Today', 'Biweekly', 'Tuesday', 'January']"
     placeholder="Choose Frequency"
     render-up
+    small
   />
   <DropdownSelect
     v-model="value"
@@ -40,5 +41,6 @@ const options = ref([{ test: 'hello', display: 'no' }, { test: 'nob', display: '
   :options="['Daily', 'Weekly', 'Monthly', 'Tomorrow', 'Yesterday', 'Today', 'Biweekly', 'Tuesday', 'January']"
   placeholder="Choose Frequency"
   render-up
+  small
 />
 ```
