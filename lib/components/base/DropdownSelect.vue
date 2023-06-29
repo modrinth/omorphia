@@ -31,7 +31,7 @@
           v-show="dropdownVisible"
           class="options"
           role="listbox"
-          :class="{ down: !renderUp, up: renderUp }"
+          :class="{ down: !renderUp, up: renderUp, small: small }"
         >
           <div
             v-for="(option, index) in options"
@@ -95,6 +95,10 @@ const props = defineProps({
   displayName: {
     type: Function,
     default: (option) => option,
+  },
+  small: {
+    type: Boolean,
+    default: false,
   },
 })
 
