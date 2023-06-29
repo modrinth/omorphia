@@ -27,6 +27,7 @@
     default-value="delete"
     name="dropdown-two"
     render-up
+    small
   >
     <template #delete>
       <TrashIcon /> Delete
@@ -98,6 +99,7 @@
   @option-click="handleOptionClick"
   color="primary"
   render-up
+  small
 >
   <template #delete>
     <TrashIcon /> Delete
