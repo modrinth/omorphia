@@ -18,22 +18,23 @@
         </div>
       </div>
       <div class="MYYLVTXBPUVWMLVBPVSDLHADDRYFBF-4">
-        <a rel="noopener sponsored" :target="target" href="https://adrinth.com"> Ads via Adrinth </a>
+        <a rel="noopener sponsored" :target="target" href="https://adrinth.com">
+          Ads via Adrinth
+        </a>
       </div>
     </div>
   </div>
 </template>
 <script setup>
-import { computed } from 'vue';
+import { computed } from 'vue'
 import ExarotonIcon from '@/assets/external/exaroton.svg'
 const props = defineProps({
   external: {
     type: Boolean,
-    default: true
-  }
+    default: true,
+  },
 })
-const target = computed(() => props.external ? '_blank' : '_self')
-
+const target = computed(() => (props.external ? '_blank' : '_self'))
 </script>
 
 <style lang="scss">
