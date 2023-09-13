@@ -48,13 +48,13 @@
             @click="selectOption(option)"
           >
             <div class="project-label">
-              <Avatar :src="option.icon" />
+              <Avatar :src="option.icon" :circle="circledIcons" />
               <div class="text">
                 <div class="title">
                   {{ displayName(option.title) }}
                 </div>
                 <div class="author">
-                  {{ displayName(option.author) }}
+                  {{ displayName(option.subtitle) }}
                 </div>
               </div>
             </div>
@@ -97,6 +97,10 @@ const props = defineProps({
   displayName: {
     type: Function,
     default: (option) => option,
+  },
+  circledIcons: {
+    type: Boolean,
+    default: false,
   },
 })
 
