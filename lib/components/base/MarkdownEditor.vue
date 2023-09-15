@@ -212,6 +212,7 @@
       :class="{ hide: previewMode }"
       @input="() => onInput()"
       @keydown="(event) => onKeyDown(event)"
+      @keyup="(event) => onKeyUp(event)"
     />
     <div v-if="!previewMode" class="info-blurb">
       <InfoIcon />
@@ -350,6 +351,54 @@ const onKeyDown = (event) => {
   }
 }
 
+const onKeyUp = (event) => {
+  if (event.key === 'Enter') {
+    const editorInputElem = editorInput.value
+    if (!editorInputElem) {
+      return
+    }
+    const start = editorInputElem.selectionStart
+    const end = editorInputElem.selectionEnd
+
+    let str = currentValue.value
+    if (!str) {
+      str = ''
+    }
+
+    const lines = str.split('\n')
+
+    let lineIndex = 0
+    let lineStartIndex = 0
+    for (const line of lines) {
+      const nextLine = lineStartIndex + line.length + 1
+      if (nextLine >= start) {
+        break
+      }
+      lineStartIndex = nextLine
+      lineIndex++
+    }
+
+    const prefixes = ['- ', '1. ', '> ']
+
+    const line = lines[lineIndex]
+    // make sure there's a line *above* the current point
+    if (lineStartIndex + line.length < start) {
+      for (const prefix of prefixes) {
+        if (line.startsWith(prefix)) {
+          if (line === prefix) {
+            editorInputElem.selectionStart = lineStartIndex
+            insert('\n')
+            editorInputElem.selectionStart = start - 2
+            editorInputElem.selectionEnd = end - 2
+          } else {
+            toggleLines(prefix)
+          }
+        }
+      }
+    }
+  }
+}
+
 const countSurroundingPairs = (str, start, end, symbol) => {
   let count = 0
   if (!str) {
@@ -374,12 +423,16 @@ const countSurroundingPairs = (str, start, end, symbol) => {
 }
 
 function selectLines(str, start, end) {
+  if (!str) {
+    str = ''
+  }
   const lines = str.split('\n')
   let selectedStart = -1
   let selectedEnd = -1
 
+  let lineStart = 0
+
   for (const line of lines) {
-    const lineStart = str.indexOf(line)
     const lineEnd = lineStart + line.length
 
     // check if the selection intersects with the current line
@@ -393,6 +446,7 @@ function selectLines(str, start, end) {
         selectedEnd = lineEnd
       }
     }
+    lineStart = lineEnd + 1
   }
 
   return {
@@ -402,6 +456,9 @@ function selectLines(str, start, end) {
 }
 
 function toggleLinePrefix(str, start, end, symbol) {
+  if (!str) {
+    str = ''
+  }
   const selection = selectLines(str, start, end)
   const selectedLines = str.substring(selection.start, selection.end).split('\n')
   let modifiedLines
