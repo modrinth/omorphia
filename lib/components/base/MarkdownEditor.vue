@@ -497,8 +497,15 @@ function trimEmptyStrings(arr) {
 }
 
 function toggleLineSurroundings(str, start, end, symbol) {
+  if (!str) {
+    str = ''
+  }
   const selection = selectLines(str, start, end)
   const selectedLines = trimEmptyStrings(str.substring(selection.start, selection.end).split('\n'))
+
+  if (selectedLines.length === 0) {
+    selectedLines.push('')
+  }
 
   const linesBefore = trimEmptyStrings(str.substring(0, selection.start).split('\n'))
   const linesAfter = trimEmptyStrings(str.substring(selection.end).split('\n'))
@@ -515,10 +522,10 @@ function toggleLineSurroundings(str, start, end, symbol) {
     selectedLines.push(symbol)
   }
 
-  const joinedSelection = selectedLines.join('\n')
+  let selectedText = selectedLines.join('\n')
 
   return {
-    newText: joinedSelection,
+    newText: selectedText,
     newSelection: selection,
   }
 }
@@ -573,6 +580,9 @@ const toggleSurroundingLines = (formattingSymbol) => {
 
   editorInputElem.selectionStart = newSelection.start
   editorInputElem.selectionEnd = newSelection.end
+  if (!currentValue.value) {
+    currentValue.value = ''
+  }
   const beforeLength = currentValue.value.substring(newSelection.start, newSelection.end).length
   document.execCommand('insertText', false, newText)
 
