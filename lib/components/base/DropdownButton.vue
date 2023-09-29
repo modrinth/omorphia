@@ -278,6 +278,10 @@ onBeforeUnmount(() => {
       input {
         display: none;
       }
+
+      label {
+        pointer-events: none;
+      }
     }
   }
 }
