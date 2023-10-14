@@ -32,51 +32,48 @@
   </svg>
 </template>
 
-<script>
-export default {
-  props: {
-    src: {
-      type: String,
-      default: null,
-    },
-    alt: {
-      type: String,
-      default: '',
-    },
-    size: {
-      type: String,
-      default: 'sm',
-      validator(value) {
-        return ['xs', 'sm', 'md', 'lg', 'none'].includes(value)
-      },
-    },
-    circle: {
-      type: Boolean,
-      default: false,
-    },
-    noShadow: {
-      type: Boolean,
-      default: false,
-    },
-    loading: {
-      type: String,
-      default: 'lazy',
+<script setup>
+import { ref } from 'vue'
+
+defineProps({
+  src: {
+    type: String,
+    default: null,
+  },
+  alt: {
+    type: String,
+    default: '',
+  },
+  size: {
+    type: String,
+    default: 'sm',
+    validator(value) {
+      return ['xs', 'sm', 'md', 'lg', 'none'].includes(value)
     },
   },
-  data() {
-    return {
-      pixelated: false,
-    }
+  circle: {
+    type: Boolean,
+    default: false,
   },
-  methods: {
-    updatePixelated() {
-      if (this.$refs.img && this.$refs.img.naturalWidth && this.$refs.img.naturalWidth <= 96) {
-        this.pixelated = true
-      } else {
-        this.pixelated = false
-      }
-    },
+  noShadow: {
+    type: Boolean,
+    default: false,
   },
+  loading: {
+    type: String,
+    default: 'lazy',
+  },
+})
+
+const pixelated = ref(false)
+const img = ref(null)
+
+function updatePixelated() {
+  if (img.value && img.value.naturalWidth && img.value.naturalWidth <= 96) {
+    pixelated.value = true
+  } else {
+    pixelated.value = false
+  }
 }
 </script>
 
