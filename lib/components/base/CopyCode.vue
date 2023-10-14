@@ -7,28 +7,21 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { CheckIcon, ClipboardCopyIcon } from '@/components'
-</script>
 
-<script>
-export default {
-  props: {
-    text: {
-      type: String,
-      required: true,
-    },
+const props = defineProps({
+  text: {
+    type: String,
+    required: true,
   },
-  data() {
-    return {
-      copied: false,
-    }
-  },
-  methods: {
-    async copyText() {
-      await navigator.clipboard.writeText(this.text)
-      this.copied = true
-    },
-  },
+})
+
+const copied = ref(false)
+
+async function copyText() {
+  await navigator.clipboard.writeText(props.text)
+  copied.value = true
 }
 </script>
 
