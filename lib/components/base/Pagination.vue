@@ -50,62 +50,57 @@
   </div>
 </template>
 <script setup>
+import { computed } from 'vue'
 import { GapIcon, LeftArrowIcon, RightArrowIcon } from '@/components'
-</script>
-<script>
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  props: {
-    page: {
-      type: Number,
-      default: 1,
-    },
-    count: {
-      type: Number,
-      default: 1,
-    },
-    linkFunction: {
-      type: Function,
-      default() {
-        return null
-      },
-    },
+const emit = defineEmits(['switch-page'])
+
+const props = defineProps({
+  page: {
+    type: Number,
+    default: 1,
   },
-  emits: ['switch-page'],
-  computed: {
-    pages() {
-      let pages = []
-
-      if (this.count > 4) {
-        if (this.page + 3 >= this.count) {
-          pages = [
-            1,
-            '-',
-            this.count - 4,
-            this.count - 3,
-            this.count - 2,
-            this.count - 1,
-            this.count,
-          ]
-        } else if (this.page > 4) {
-          pages = [1, '-', this.page - 1, this.page, this.page + 1, '-', this.count]
-        } else {
-          pages = [1, 2, 3, 4, 5, '-', this.count]
-        }
-      } else {
-        pages = Array.from({ length: this.count }, (_, i) => i + 1)
-      }
-
-      return pages
-    },
+  count: {
+    type: Number,
+    default: 1,
   },
-  methods: {
-    switchPage(newPage) {
-      this.$emit('switch-page', newPage)
+  linkFunction: {
+    type: Function,
+    default() {
+      return null
     },
   },
 })
+
+const pages = computed(() => {
+  let pages = []
+
+  if (props.count > 4) {
+    if (props.page + 3 >= props.count) {
+      pages = [
+        1,
+        '-',
+        props.count - 4,
+        props.count - 3,
+        props.count - 2,
+        props.count - 1,
+        props.count,
+      ]
+    } else if (props.page > 4) {
+      pages = [1, '-', props.page - 1, props.page, props.page + 1, '-', props.count]
+    } else {
+      pages = [1, 2, 3, 4, 5, '-', props.count]
+    }
+  } else {
+    pages = Array.from({ length: props.count }, (_, i) => i + 1)
+  }
+
+  return pages
+})
+
+function switchPage(newPage) {
+  emit('switch-page', newPage)
+}
 </script>
 
 <style scoped lang="scss">
