@@ -138,10 +138,6 @@ const onInput = (value) => {
   width: 100%;
 }
 
-.slide-container .slider {
-  width: 100%;
-}
-
 .slider-component,
 .slide-container {
   width: 100%;
@@ -156,6 +152,8 @@ const onInput = (value) => {
 
   border-radius: var(--radius-sm);
   height: 0.25rem;
+  width: 100%;
+
   background: linear-gradient(
     to right,
     var(--color-brand),
