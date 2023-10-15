@@ -72,7 +72,7 @@
 
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { Button, DropdownIcon } from '@/components'
+import { Button, DropdownIcon } from '@'
 
 const props = defineProps({
   options: {

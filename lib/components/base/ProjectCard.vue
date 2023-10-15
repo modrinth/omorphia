@@ -34,6 +34,7 @@
         :server-side="serverSide"
         :type="projectTypeDisplay"
         :search="search"
+        :categories="categories"
       />
     </Categories>
     <div class="stats">
@@ -65,6 +66,7 @@
     </div>
   </article>
 </template>
+
 <script setup>
 import {
   Badge,
@@ -75,12 +77,14 @@ import {
   Avatar,
   Categories,
   EnvironmentIndicator,
-} from '@/components'
-import { formatNumber } from '@/helpers/utils.js'
+  formatNumber,
+} from '@'
+
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.extend(relativeTime)
 </script>
+
 <script>
 import { defineComponent } from 'vue'
 export default defineComponent({
@@ -151,10 +155,6 @@ export default defineComponent({
     status: {
       type: String,
       default: null,
-    },
-    hasModMessage: {
-      type: Boolean,
-      default: false,
     },
     serverSide: {
       type: String,
@@ -306,8 +306,7 @@ export default defineComponent({
     img,
     svg {
       border-radius: var(--radius-lg);
-      border: 4px solid var(--color-raised-bg);
-      border-bottom: none;
+      box-shadow: -2px -2px 0 2px var(--color-raised-bg), 2px -2px 0 2px var(--color-raised-bg);
     }
   }
 
