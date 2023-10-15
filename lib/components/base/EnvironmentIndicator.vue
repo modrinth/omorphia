@@ -45,41 +45,36 @@
 </template>
 <script setup>
 import { GlobeIcon, ClientIcon, ServerIcon, InfoIcon } from '@/components'
-</script>
-<script>
-import { defineComponent } from 'vue'
 
-export default defineComponent({
-  props: {
-    type: {
-      type: String,
-      default: 'mod',
-    },
-    serverSide: {
-      type: String,
-      required: false,
-      default: '',
-    },
-    clientSide: {
-      type: String,
-      required: false,
-      default: '',
-    },
-    typeOnly: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    alwaysShow: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    search: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
+defineProps({
+  type: {
+    type: String,
+    default: 'mod',
+  },
+  serverSide: {
+    type: String,
+    required: false,
+    default: '',
+  },
+  clientSide: {
+    type: String,
+    required: false,
+    default: '',
+  },
+  typeOnly: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  alwaysShow: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  search: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 })
 </script>
