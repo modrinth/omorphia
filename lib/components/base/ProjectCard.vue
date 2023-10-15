@@ -68,6 +68,7 @@
 </template>
 
 <script setup>
+import { formatNumber } from '@/helpers'
 import {
   Badge,
   HeartIcon,
@@ -77,7 +78,6 @@ import {
   Avatar,
   Categories,
   EnvironmentIndicator,
-  formatNumber,
 } from '@'
 
 import dayjs from 'dayjs'
