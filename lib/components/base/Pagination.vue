@@ -124,6 +124,7 @@ a {
   margin: 0;
   border-radius: 2rem;
   background: var(--color-raised-bg);
+  cursor: pointer;
 
   transition: opacity 0.5s ease-in-out, filter 0.2s ease-in-out, transform 0.05s ease-in-out,
     outline 0.2s ease-in-out;
@@ -144,6 +145,15 @@ a {
     cursor: not-allowed;
     filter: grayscale(50%);
     opacity: 0.5;
+  }
+
+  &:hover:not(&:disabled) {
+    filter: brightness(0.85);
+  }
+
+  &:active:not(&:disabled) {
+    transform: scale(0.95);
+    filter: brightness(0.8);
   }
 }
 
