@@ -608,6 +608,7 @@ a,
     padding: 1.5rem;
     line-height: 1.5;
     min-height: 0;
+
     a {
       color: var(--color-blue);
       text-decoration: underline;
@@ -962,11 +963,13 @@ a,
       background-color: var(--color-accent-contrast);
     }
 
-    td:not(:last-of-type), th:not(:last-of-type) {
+    td:not(:last-of-type),
+    th:not(:last-of-type) {
       border-right: 0.1rem solid var(--color-button-bg);
     }
 
-    tr:not(:last-of-type) td, th {
+    tr:not(:last-of-type) td,
+    th {
       border-bottom: 0.1rem solid var(--color-button-bg);
     }
   }
