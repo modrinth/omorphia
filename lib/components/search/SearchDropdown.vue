@@ -5,27 +5,32 @@
     role="combobox"
     :aria-expanded="dropdownVisible"
     class="animated-dropdown"
-    @focus="onFocus"
-    @blur="onBlur"
-    @focusout="onBlur"
-    @mousedown.prevent
-    @keydown.enter.prevent="toggleDropdown"
     @keydown.up.prevent="focusPreviousOption"
     @keydown.down.prevent="focusNextOptionOrOpen"
   >
-    <div
-      class="selected"
-      :class="{
-        disabled: disabled,
-        'render-down': dropdownVisible && !renderUp && !disabled,
-        'render-up': dropdownVisible && renderUp && !disabled,
-      }"
-      @click="toggleDropdown"
-    >
-      <span>{{ selectedOption }}</span>
-      <DropdownIcon class="arrow" :class="{ rotate: dropdownVisible }" />
+    <div class="iconified-input">
+      <SearchIcon />
+      <input
+        :value="modelValue"
+        type="text"
+        :name="name"
+        :disabled="disabled"
+        class="text-input"
+        autocomplete="off"
+        autocapitalize="off"
+        :placeholder="placeholder"
+        :class="{ down: !renderUp, up: renderUp }"
+        @input="$emit('update:modelValue', $event.target.value)"
+        @focus="onFocus"
+        @blur="onBlur"
+        @focusout="onBlur"
+        @keydown.enter.prevent="$emit('enter')"
+      />
+      <Button :disabled="disabled" @click="() => $emit('update:modelValue', '')">
+        <XIcon />
+      </Button>
     </div>
-    <div class="options-wrapper" :class="{ down: !renderUp, up: renderUp }">
+    <div ref="dropdownOptions" class="options-wrapper" :class="{ down: !renderUp, up: renderUp }">
       <transition name="options">
         <div
           v-show="dropdownVisible"
@@ -39,20 +44,20 @@
             ref="optionElements"
             tabindex="-1"
             role="option"
-            :class="{ 'selected-option': selectedValue === option }"
-            :aria-selected="selectedValue === option"
             class="option"
-            @click="selectOption(option, index)"
-            @keydown.space.prevent="selectOption(option, index)"
+            @click="selectOption(option)"
           >
-            <input
-              :id="`${name}-${index}`"
-              v-model="radioValue"
-              type="radio"
-              :value="option"
-              :name="name"
-            />
-            <label :for="`${name}-${index}`">{{ displayName(option) }}</label>
+            <div class="project-label">
+              <Avatar :src="option.icon" :circle="circledIcons" />
+              <div class="text">
+                <div class="title">
+                  {{ displayName(option.title) }}
+                </div>
+                <div class="author">
+                  {{ displayName(option.subtitle) }}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </transition>
@@ -61,8 +66,8 @@
 </template>
 
 <script setup>
-import { DropdownIcon } from '@/components'
-import { computed, ref, watch } from 'vue'
+import { ref } from 'vue'
+import { Avatar, Button, XIcon, SearchIcon } from '@/components'
 
 const props = defineProps({
   options: {
@@ -72,10 +77,6 @@ const props = defineProps({
   name: {
     type: String,
     required: true,
-  },
-  defaultValue: {
-    type: [String, Number, Object],
-    default: null,
   },
   placeholder: {
     type: [String, Number],
@@ -97,36 +98,19 @@ const props = defineProps({
     type: Function,
     default: (option) => option,
   },
+  circledIcons: {
+    type: Boolean,
+    default: false,
+  },
 })
 
-const emit = defineEmits(['input', 'change', 'update:modelValue'])
+const emit = defineEmits(['input', 'onSelected', 'update:modelValue', 'enter'])
 
 const dropdownVisible = ref(false)
-const selectedValue = ref(props.modelValue || props.defaultValue)
 const focusedOptionIndex = ref(null)
 const dropdown = ref(null)
 const optionElements = ref(null)
-
-const selectedOption = computed(() => {
-  return props.displayName(selectedValue.value) || props.placeholder || 'Select an option'
-})
-
-const radioValue = computed({
-  get() {
-    return props.modelValue || selectedValue.value
-  },
-  set(newValue) {
-    emit('update:modelValue', newValue)
-    selectedValue.value = newValue
-  },
-})
-
-watch(
-  () => props.modelValue,
-  (newValue) => {
-    selectedValue.value = newValue
-  }
-)
+const dropdownOptions = ref(null)
 
 const toggleDropdown = () => {
   if (!props.disabled) {
@@ -135,15 +119,17 @@ const toggleDropdown = () => {
   }
 }
 
-const selectOption = (option, index) => {
-  radioValue.value = option
-  emit('change', { option, index })
+const selectOption = (option) => {
+  emit('onSelected', option)
+  console.log('onSelected', option)
   dropdownVisible.value = false
 }
 
 const onFocus = () => {
   if (!props.disabled) {
-    focusedOptionIndex.value = props.options.findIndex((option) => option === selectedValue.value)
+    focusedOptionIndex.value = props.options.findIndex(
+      (option) => option === props.modelValue.value
+    )
     dropdownVisible.value = true
   }
 }
@@ -179,7 +165,7 @@ const focusNextOptionOrOpen = () => {
 const isChildOfDropdown = (element) => {
   let currentNode = element
   while (currentNode) {
-    if (currentNode === dropdown.value) {
+    if (currentNode === dropdownOptions.value) {
       return true
     }
     currentNode = currentNode.parentNode
@@ -191,6 +177,7 @@ const isChildOfDropdown = (element) => {
 <style lang="scss" scoped>
 .animated-dropdown {
   width: 20rem;
+  height: 2.5rem;
   position: relative;
   display: inline-block;
 
@@ -209,12 +196,6 @@ const isChildOfDropdown = (element) => {
     user-select: none;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
-
-    transition: 0.05s;
-
-    &:not(.render-down):not(.render-up) {
-      transition-delay: 0.2s;
-    }
 
     &.disabled {
       cursor: not-allowed;
@@ -235,21 +216,12 @@ const isChildOfDropdown = (element) => {
       filter: brightness(1.25);
       transition: filter 0.1s ease-in-out;
     }
-
-    .arrow {
-      transition: transform 0.2s ease;
-
-      &.rotate {
-        transform: rotate(180deg);
-      }
-    }
   }
 
   .options {
     z-index: 10;
-    max-height: 18.75rem;
+    max-height: 18rem;
     overflow-y: auto;
-    box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
 
     .option {
       background-color: var(--color-button-bg);
@@ -321,6 +293,43 @@ const isChildOfDropdown = (element) => {
 
   &.down {
     border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+}
+
+.project-label {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: var(--gap-md);
+  color: var(--color-contrast);
+
+  .title {
+    font-weight: bold;
+  }
+}
+
+.iconified-input {
+  width: 100%;
+}
+
+.text-input {
+  box-shadow: var(--shadow-inset-sm), 0 0 0 0 transparent !important;
+  width: 100%;
+
+  transition: 0.05s;
+
+  &:focus {
+    &.down {
+      border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
+    }
+
+    &.up {
+      border-radius: 0 0 var(--radius-md) var(--radius-md) !important;
+    }
+  }
+
+  &:not(:focus) {
+    transition-delay: 0.2s;
   }
 }
 </style>
