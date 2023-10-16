@@ -41,7 +41,7 @@
           color="primary"
           :action="
             () => {
-              insert(linkMarkdown)
+              accessEditor().insert(linkMarkdown)
               linkModal.hide()
             }
           "
@@ -100,7 +100,7 @@
           color="primary"
           :action="
             () => {
-              insert(imageMarkdown)
+              accessEditor().insert(imageMarkdown)
               imageModal.hide()
             }
           "
@@ -143,7 +143,7 @@
           color="primary"
           :action="
             () => {
-              insert(videoMarkdown)
+              accessEditor().insert(videoMarkdown)
               videoModal.hide()
             }
           "
@@ -154,55 +154,31 @@
     </div>
   </Modal>
   <div class="resizable-textarea-wrapper">
-    <div class="editor-actions">
-      <template v-if="headingButtons">
-        <Button icon-only :action="() => toggleLines('# ')" :disabled="previewMode || disabled">
-          <Heading1Icon />
-        </Button>
-        <Button icon-only :action="() => toggleLines('## ')" :disabled="previewMode || disabled">
-          <Heading2Icon />
-        </Button>
-        <Button icon-only :action="() => toggleLines('### ')" :disabled="previewMode || disabled">
-          <Heading3Icon />
-        </Button>
-      </template>
-      <Button icon-only :action="() => toggleSurround('**')" :disabled="previewMode || disabled">
-        <BoldIcon />
-      </Button>
-      <Button icon-only :action="() => toggleSurround('*')" :disabled="previewMode || disabled">
-        <ItalicIcon />
-      </Button>
-      <Button icon-only :action="() => toggleSurround('~~')" :disabled="previewMode || disabled">
-        <StrikethroughIcon />
-      </Button>
-      <Button
-        icon-only
-        :action="() => toggleSurroundingLines('```')"
-        :disabled="previewMode || disabled"
-      >
-        <CodeIcon />
-      </Button>
-      <div class="divider"></div>
-      <Button icon-only :action="() => toggleLines('- ')" :disabled="previewMode || disabled">
-        <ListBulletedIcon />
-      </Button>
-      <Button icon-only :action="() => toggleLines('1. ')" :disabled="previewMode || disabled">
-        <ListOrderedIcon />
-      </Button>
-      <Button icon-only :action="() => toggleLines('> ')" :disabled="previewMode || disabled">
-        <TextQuoteIcon />
-      </Button>
-      <div class="divider"></div>
-      <Button icon-only :action="() => openLinkModal()" :disabled="previewMode || disabled">
-        <LinkIcon />
-      </Button>
-      <Button icon-only :action="() => openImageModal()" :disabled="previewMode || disabled">
-        <ImageIcon />
-      </Button>
-      <Button icon-only :action="() => openVideoModal()" :disabled="previewMode || disabled">
-        <YouTubeIcon />
-      </Button>
-      <Checkbox v-model="previewMode" description="Preview" class="preview">Preview</Checkbox>
+    <div class="editor-action-row">
+      <div class="editor-actions">
+        <template
+          v-for="(buttonGroup, _i) in Object.values(BUTTONS).filter((bg) => bg.display)"
+          :key="_i"
+        >
+          <div class="divider"></div>
+          <template v-for="button in buttonGroup.buttons" :key="button.label">
+            <Button
+              v-tooltip="button.label"
+              icon-only
+              :aria-label="button.label"
+              :class="{ 'mobile-hidden-group': !!buttonGroup.hideOnMobile }"
+              :action="button.action"
+              :disabled="previewMode || disabled"
+            >
+              <component :is="button.icon" />
+            </Button>
+          </template>
+        </template>
+      </div>
+      <div class="preview">
+        <Toggle id="preview" v-model="previewMode" />
+        <label class="label" for="preview"> Preview </label>
+      </div>
     </div>
     <textarea
       id="project-description"
@@ -212,7 +188,6 @@
       :class="{ hide: previewMode }"
       @input="() => onInput()"
       @keydown="(event) => onKeyDown(event)"
-      @keyup="(event) => onKeyUp(event)"
     />
     <div v-if="!previewMode" class="info-blurb">
       <InfoIcon />
@@ -233,8 +208,25 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { renderHighlightedString } from '@/helpers/highlight.js'
-import Checkbox from '@/components/base/Checkbox.vue'
-import Modal from '@/components/base/Modal.vue'
+import { createEditor } from '@/helpers/editor.js'
+import {
+  Heading1Icon,
+  Heading2Icon,
+  Heading3Icon,
+  BoldIcon,
+  ItalicIcon,
+  StrikethroughIcon,
+  CodeIcon,
+  ListBulletedIcon,
+  ListOrderedIcon,
+  TextQuoteIcon,
+  LinkIcon,
+  ImageIcon,
+  YouTubeIcon,
+  Button,
+  Modal,
+  Toggle,
+} from '@/components'
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -253,18 +245,142 @@ const props = defineProps({
   },
 })
 
+const COMMANDS = {
+  CTRL: {
+    SHIFT: {
+      '*': () => accessEditor().mark('-').focus().togglePrefix().run(),
+      '&': () => accessEditor().mark('1.').focus().togglePrefix().run(),
+      '>': () => accessEditor().mark('>').focus().togglePrefix().run(),
+    },
+    ALT: {
+      1: () => accessEditor().mark('#').focus().togglePrefix().run(),
+      2: () => accessEditor().mark('#', 2).focus().togglePrefix().run(),
+      3: () => accessEditor().mark('#', 3).focus().togglePrefix().run(),
+      4: () => accessEditor().mark('#', 4).focus().togglePrefix().run(),
+    },
+    b: () => accessEditor().mark('*', 2).focus().toggleSurround().run(),
+    i: () => accessEditor().mark('*').focus().toggleSurround().run(),
+    k: () => openLinkModal(),
+  },
+  ALT: {
+    SHIFT: {
+      '%': () => accessEditor().mark('~', 2).focus().toggleSurround().run(),
+    },
+  },
+}
+
+const BUTTONS = {
+  headings: {
+    display: props.headingButtons,
+    hideOnMobile: true,
+    buttons: [
+      {
+        label: 'Heading 1',
+        icon: Heading1Icon,
+        action: () => accessEditor().mark('#').focus().togglePrefix().run(),
+      },
+      {
+        label: 'Heading 2',
+        icon: Heading2Icon,
+        action: () => accessEditor().mark('#', 2).focus().togglePrefix().run(),
+      },
+      {
+        label: 'Heading 3',
+        icon: Heading3Icon,
+        action: () => accessEditor().mark('#', 3).focus().togglePrefix().run(),
+      },
+    ],
+  },
+  modifiers: {
+    display: true,
+    buttons: [
+      {
+        label: 'Bold',
+        icon: BoldIcon,
+        action: () => accessEditor().mark('*', 2).focus().toggleSurround().run(),
+      },
+      {
+        label: 'Italic',
+        icon: ItalicIcon,
+        action: () => accessEditor().mark('*').focus().toggleSurround().run(),
+      },
+      {
+        label: 'Strikethrough',
+        icon: StrikethroughIcon,
+        action: () => accessEditor().mark('~', 2).focus().toggleSurround().run(),
+      },
+      {
+        label: 'Codeblock',
+        icon: CodeIcon,
+        action: () => accessEditor().mark('`', 3).focus().setSurroundingLines().run(),
+      },
+    ],
+  },
+  multiline: {
+    display: true,
+    hideOnMobile: true,
+    buttons: [
+      {
+        label: 'Unordered list',
+        icon: ListBulletedIcon,
+        action: () => accessEditor().mark('-').focus().togglePrefix().run(),
+      },
+      {
+        label: 'Numbered list',
+        icon: ListOrderedIcon,
+        action: () => accessEditor().mark('1.').focus().togglePrefix().run(),
+      },
+      {
+        label: 'Blockquote',
+        icon: TextQuoteIcon,
+        action: () => accessEditor().mark('>').focus().togglePrefix().run(),
+      },
+    ],
+  },
+  components: {
+    display: true,
+    buttons: [
+      {
+        label: 'Link',
+        icon: LinkIcon,
+        action: () => openLinkModal(),
+      },
+      {
+        label: 'Image',
+        icon: ImageIcon,
+        action: () => openImageModal(),
+      },
+      {
+        label: 'Video',
+        icon: YouTubeIcon,
+        action: () => openVideoModal(),
+      },
+    ],
+  },
+}
+
 const currentValue = ref(props.modelValue)
 const previewMode = ref(false)
+/** @type {import('vue').Ref<HTMLTextAreaElement | null>} */
 const editorInput = ref(null)
 
 const linkText = ref('')
 const linkUrl = ref('')
 
-function cleanUrl(url) {
-  if (!url.startsWith('https://')) {
-    url = 'https://' + url
+/**
+ * @ Note: This does not clean the URL, it just makes sure http urls and domains are given https protocol
+ * @param {string} input The URL to clean
+ * @returns {string} The cleaned URL
+ */
+function cleanUrl(input) {
+  // TODO: Validate urls against zod or browser URL object
+  if (input.startsWith('http://')) {
+    return input.replace('http://', 'https://')
   }
-  return url
+  if (!input.startsWith('https://')) {
+    input = 'https://' + input
+  }
+  return input
 }
 
 const linkMarkdown = computed(() => {
@@ -305,373 +421,40 @@ const onInput = () => {
 }
 
 const onKeyDown = (event) => {
+  let command
+
   if ((navigator.userAgent.includes('Mac') && event.metaKey) || event.ctrlKey) {
     if (event.shiftKey) {
-      switch (event.key) {
-        case '*':
-          toggleLines('- ')
-          break
-        case '&':
-          toggleLines('1. ')
-          break
-        case '>':
-          toggleLines('> ')
-          break
-      }
+      command = COMMANDS.CTRL.SHIFT?.[event.key]
     } else if (event.altKey) {
-      switch (event.key) {
-        case '1':
-          toggleLines('# ')
-          break
-        case '2':
-          toggleLines('## ')
-          break
-        case '3':
-          toggleLines('### ')
-          break
-        case '4':
-          toggleLines('#### ')
-          break
-      }
+      command = COMMANDS.CTRL.ALT?.[event.key]
     } else {
-      switch (event.key) {
-        case 'b':
-          toggleSurround('**')
-          break
-        case 'i':
-          toggleSurround('*')
-          break
-        case 'k':
-          openLinkModal()
-          break
-      }
+      command = COMMANDS.CTRL?.[event.key]
     }
-  } else if (event.altKey && event.shiftKey && event.key === '%') {
-    toggleSurround('~~')
+  } else if (event.altKey && event.shiftKey) {
+    command = COMMANDS.ALT.SHIFT?.[event.key]
+  }
+
+  if (command) {
+    // Prevent the default action to prevent the browser from inserting the character
+    event.preventDefault()
+    command()
   }
 }
 
-const onKeyUp = (event) => {
-  if (event.key === 'Enter') {
-    const editorInputElem = editorInput.value
-    if (!editorInputElem) {
-      return
-    }
-    const start = editorInputElem.selectionStart
-    const end = editorInputElem.selectionEnd
-
-    let str = currentValue.value
-    if (!str) {
-      str = ''
-    }
-
-    const lines = str.split('\n')
-
-    let lineIndex = 0
-    let lineStartIndex = 0
-    for (const line of lines) {
-      const nextLine = lineStartIndex + line.length + 1
-      if (nextLine >= start) {
-        break
-      }
-      lineStartIndex = nextLine
-      lineIndex++
-    }
-
-    const prefixes = ['- ', '1. ', '> ']
-
-    const line = lines[lineIndex]
-    // make sure there's a line *above* the current point
-    if (lineStartIndex + line.length < start) {
-      for (const prefix of prefixes) {
-        if (line.startsWith(prefix)) {
-          if (line === prefix) {
-            editorInputElem.selectionStart = lineStartIndex
-            insert('\n')
-            editorInputElem.selectionStart = start - 2
-            editorInputElem.selectionEnd = end - 2
-          } else {
-            toggleLines(prefix)
-          }
-        }
-      }
-    }
-  }
-}
-
-const countSurroundingPairs = (str, start, end, symbol) => {
-  let count = 0
-  if (!str) {
-    str = ''
-  }
-  const length = str.length
-
-  while (start > 0 && end < length) {
-    const prefix = str.substring(start - symbol.length, start)
-    const suffix = str.substring(end, end + symbol.length)
-
-    if (prefix === symbol && suffix === symbol) {
-      count++
-      start -= symbol.length
-      end += symbol.length
-    } else {
-      break
-    }
-  }
-
-  return count
-}
-
-function selectLines(str, start, end) {
-  if (!str) {
-    str = ''
-  }
-  const lines = str.split('\n')
-  let selectedStart = -1
-  let selectedEnd = -1
-
-  let lineStart = 0
-
-  for (const line of lines) {
-    const lineEnd = lineStart + line.length
-
-    // check if the selection intersects with the current line
-    const selected = start <= lineEnd && end >= lineStart
-
-    if (selected) {
-      if (selectedStart === -1 || lineStart < selectedStart) {
-        selectedStart = lineStart
-      }
-      if (lineEnd > selectedEnd) {
-        selectedEnd = lineEnd
-      }
-    }
-    lineStart = lineEnd + 1
-  }
-
-  return {
-    start: selectedStart,
-    end: selectedEnd,
-  }
-}
-
-function toggleLinePrefix(str, start, end, symbol) {
-  if (!str) {
-    str = ''
-  }
-  const selection = selectLines(str, start, end)
-  const selectedLines = str.substring(selection.start, selection.end).split('\n')
-  let modifiedLines
-
-  if (selectedLines.every((line) => line.startsWith(symbol))) {
-    // remove symbol from all lines
-    modifiedLines = selectedLines.map((line) => line.slice(symbol.length))
-  } else {
-    // add symbol to lines without it
-    modifiedLines = selectedLines.map((line) => {
-      if (!line.startsWith(symbol)) {
-        return symbol + line
-      }
-      return line
-    })
-  }
-
-  return {
-    newText: modifiedLines.join('\n'),
-    newSelection: selection,
-  }
-}
-
-function trimEmptyStrings(arr) {
-  // Trim from the beginning
-  while (arr.length > 0 && arr[0] === '') {
-    arr.shift()
-  }
-
-  // Trim from the end
-  while (arr.length > 0 && arr[arr.length - 1] === '') {
-    arr.pop()
-  }
-
-  return arr
-}
-
-function toggleLineSurroundings(str, start, end, symbol) {
-  if (!str) {
-    str = ''
-  }
-  const selection = selectLines(str, start, end)
-  const selectedLines = trimEmptyStrings(str.substring(selection.start, selection.end).split('\n'))
-
-  if (selectedLines.length === 0) {
-    selectedLines.push('')
-  }
-
-  const linesBefore = trimEmptyStrings(str.substring(0, selection.start).split('\n'))
-  const linesAfter = trimEmptyStrings(str.substring(selection.end).split('\n'))
-
-  const symbolsBefore = linesBefore.length > 0 && linesBefore[linesBefore.length - 1] === symbol
-  const symbolsAfter = linesAfter.length > 0 && linesAfter[0] === symbol
-
-  if (symbolsBefore && symbolsAfter) {
-    const expansionLength = symbol.length + '\n'.length
-    selection.start -= expansionLength
-    selection.end += expansionLength
-  } else {
-    selectedLines.unshift(symbol)
-    selectedLines.push(symbol)
-  }
-
-  let selectedText = selectedLines.join('\n')
-
-  return {
-    newText: selectedText,
-    newSelection: selection,
-  }
-}
-
-const toggleLines = (formattingSymbol) => {
-  const editorInputElem = editorInput.value
-  if (!editorInputElem) {
-    return
-  }
-  editorInputElem.focus()
-
-  const start = editorInputElem.selectionStart
-  const end = editorInputElem.selectionEnd
-
-  const { newText, newSelection } = toggleLinePrefix(
-    currentValue.value,
-    start,
-    end,
-    formattingSymbol
-  )
-
-  editorInputElem.selectionStart = newSelection.start
-  editorInputElem.selectionEnd = newSelection.end
-  document.execCommand('insertText', false, newText)
-
-  // reset selection to just the text
-  const newSelectionDiff = newText.length - (newSelection.end - newSelection.start)
-  if (start === end) {
-    editorInputElem.selectionStart = start + newSelectionDiff
-    editorInputElem.selectionEnd = end + newSelectionDiff
-  } else {
-    editorInputElem.selectionStart = newSelection.start
-    editorInputElem.selectionEnd = newSelection.end + newSelectionDiff
-  }
-}
-const toggleSurroundingLines = (formattingSymbol) => {
-  const editorInputElem = editorInput.value
-  if (!editorInputElem) {
-    return
-  }
-  editorInputElem.focus()
-
-  const start = editorInputElem.selectionStart
-  const end = editorInputElem.selectionEnd
-
-  const { newText, newSelection } = toggleLineSurroundings(
-    currentValue.value,
-    start,
-    end,
-    formattingSymbol
-  )
-
-  editorInputElem.selectionStart = newSelection.start
-  editorInputElem.selectionEnd = newSelection.end
-  if (!currentValue.value) {
-    currentValue.value = ''
-  }
-  const beforeLength = currentValue.value.substring(newSelection.start, newSelection.end).length
-  document.execCommand('insertText', false, newText)
-
-  // reset selection to just the text
-  const symbolLength = formattingSymbol.length + '\n'.length
-  if (newText.length > beforeLength) {
-    if (start === end) {
-      editorInputElem.selectionStart = start + symbolLength
-      editorInputElem.selectionEnd = end + symbolLength
-    } else {
-      editorInputElem.selectionStart = newSelection.start + symbolLength
-      editorInputElem.selectionEnd = newSelection.end + symbolLength
-    }
-  } else {
-    if (start === end) {
-      editorInputElem.selectionStart = start - symbolLength
-      editorInputElem.selectionEnd = end - symbolLength
-    } else {
-      editorInputElem.selectionStart = newSelection.start
-      editorInputElem.selectionEnd = newSelection.end
-    }
-  }
-}
-
-const toggleSurround = (formattingSymbol) => {
-  const editorInputElem = editorInput.value
-  if (!editorInputElem) {
-    return
-  }
-  editorInputElem.focus()
-
-  const start = editorInputElem.selectionStart
-  const end = editorInputElem.selectionEnd
-
-  const rawText = currentValue.value ? currentValue.value.slice(start, end) : ''
-
-  let symbolSurrounded
-
-  if (formattingSymbol === '*') {
-    symbolSurrounded =
-      countSurroundingPairs(currentValue.value, start, end, formattingSymbol) % 2 !== 0
-  } else {
-    symbolSurrounded = countSurroundingPairs(currentValue.value, start, end, formattingSymbol) > 0
-  }
-
-  if (symbolSurrounded) {
-    // select the symbols before and after the text
-    editorInputElem.selectionStart = start - formattingSymbol.length
-    editorInputElem.selectionEnd = end + formattingSymbol.length
-    document.execCommand('insertText', false, rawText) // replace with just the text without the symbols
-
-    // reset selection to just the text
-    editorInputElem.selectionStart = start - formattingSymbol.length
-    editorInputElem.selectionEnd = end - formattingSymbol.length
-  } else {
-    editorInputElem.selectionStart = start
-    editorInputElem.selectionEnd = end
-    document.execCommand('insertText', false, formattingSymbol + rawText + formattingSymbol)
-
-    editorInputElem.selectionStart = start + formattingSymbol.length
-    editorInputElem.selectionEnd = end + formattingSymbol.length
-  }
-}
-
-function insert(str) {
-  const editorInputElem = editorInput.value
-  if (!editorInputElem) {
-    return
-  }
-  editorInputElem.focus()
-
-  const start = editorInputElem.selectionStart
-
-  document.execCommand('insertText', false, str)
-
-  editorInputElem.selectionStart = start
-  editorInputElem.selectionEnd = start + str.length
+/**
+ * @returns {ReturnType<typeof createEditor> | undefined} The editor object to chain commands
+ */
+const accessEditor = () => {
+  // Editor is our constant reference so we don't really need to check if it exists
+  // but just in case we do, the type is added manually bc javascript is weird
+  return createEditor(editorInput, (str) => {
+    currentValue.value = str
+  })
 }
 
 function openLinkModal() {
-  const editorInputElem = editorInput.value
-  if (!editorInputElem) {
-    return
-  }
-
-  const start = editorInputElem.selectionStart
-  const end = editorInputElem.selectionEnd
-
-  linkText.value = currentValue.value ? currentValue.value.slice(start, end) : ''
+  linkText.value = accessEditor().getSelection()
   linkUrl.value = ''
   linkModal.value.show()
 }
@@ -693,12 +476,34 @@ function openVideoModal() {
   margin-bottom: var(--gap-sm);
 }
 
+.editor-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--gap-sm);
+  gap: var(--gap-xs);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: start;
+  }
+}
+
 .editor-actions {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: var(--gap-xs);
-  margin-bottom: var(--gap-sm);
+
+  @media (max-width: 768px) {
+    .divider {
+      display: none;
+    }
+
+    .mobile-hidden-group {
+      display: none;
+    }
+  }
 
   .divider {
     width: 0.125rem;
@@ -706,6 +511,10 @@ function openVideoModal() {
     background-color: var(--color-button-bg);
     border-radius: var(--radius-max);
     margin-inline: var(--gap-xs);
+  }
+
+  .divider:first-child {
+    display: none;
   }
 }
 
@@ -725,7 +534,10 @@ function openVideoModal() {
 }
 
 .preview {
-  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-items: end;
+  gap: var(--gap-xs);
 }
 
 .markdown-body {
