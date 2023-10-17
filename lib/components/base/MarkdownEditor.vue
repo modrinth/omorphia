@@ -36,13 +36,13 @@
         v-html="renderHighlightedString(linkMarkdown)"
       />
       <div class="input-group push-right">
-        <Button :action="() => linkModal.hide()"><XIcon /> Cancel</Button>
+        <Button :action="() => linkModal?.hide()"><XIcon /> Cancel</Button>
         <Button
           color="primary"
           :action="
             () => {
-              accessEditor().insert(linkMarkdown)
-              linkModal.hide()
+              accessEditor()?.insert(linkMarkdown)
+              linkModal?.hide()
             }
           "
           ><PlusIcon /> Insert</Button
@@ -95,13 +95,13 @@
         v-html="renderHighlightedString(imageMarkdown)"
       />
       <div class="input-group push-right">
-        <Button :action="() => imageModal.hide()"><XIcon /> Cancel</Button>
+        <Button :action="() => imageModal?.hide()"><XIcon /> Cancel</Button>
         <Button
           color="primary"
           :action="
             () => {
-              accessEditor().insert(imageMarkdown)
-              imageModal.hide()
+              accessEditor()?.insert(imageMarkdown)
+              imageModal?.hide()
             }
           "
         >
@@ -138,13 +138,13 @@
         v-html="renderHighlightedString(videoMarkdown)"
       />
       <div class="input-group push-right">
-        <Button :action="() => videoModal.hide()"><XIcon /> Cancel</Button>
+        <Button :action="() => videoModal?.hide()"><XIcon /> Cancel</Button>
         <Button
           color="primary"
           :action="
             () => {
-              accessEditor().insert(videoMarkdown)
-              videoModal.hide()
+              accessEditor()?.insert(videoMarkdown)
+              videoModal?.hide()
             }
           "
         >
@@ -205,10 +205,10 @@
   </div>
 </template>
 
-<script setup>
-import { computed, ref } from 'vue'
-import { renderHighlightedString } from '@/helpers/highlight.js'
-import { createEditor } from '@/helpers/editor.js'
+<script setup lang="ts">
+import { type Component, computed, ref } from 'vue'
+import { renderHighlightedString } from '@/helpers/highlight'
+import { createEditor } from '@/helpers/editor'
 import {
   Heading1Icon,
   Heading2Icon,
@@ -245,31 +245,40 @@ const props = defineProps({
   },
 })
 
-const COMMANDS = {
-  CTRL: {
-    SHIFT: {
-      '*': () => accessEditor().mark('-').focus().togglePrefix().run(),
-      '&': () => accessEditor().mark('1.').focus().togglePrefix().run(),
-      '>': () => accessEditor().mark('>').focus().togglePrefix().run(),
-    },
-    ALT: {
-      1: () => accessEditor().mark('#').focus().togglePrefix().run(),
-      2: () => accessEditor().mark('#', 2).focus().togglePrefix().run(),
-      3: () => accessEditor().mark('#', 3).focus().togglePrefix().run(),
-      4: () => accessEditor().mark('#', 4).focus().togglePrefix().run(),
-    },
-    b: () => accessEditor().mark('*', 2).focus().toggleSurround().run(),
-    i: () => accessEditor().mark('*').focus().toggleSurround().run(),
-    k: () => openLinkModal(),
-  },
-  ALT: {
-    SHIFT: {
-      '%': () => accessEditor().mark('~', 2).focus().toggleSurround().run(),
-    },
-  },
+type Command = () => void
+interface CommandMap {
+  [key: string]: Command
 }
 
-const BUTTONS = {
+const COMMANDS: CommandMap = {
+  'CTRL+SHIFT+8': () => accessEditor()?.mark('-').focus().togglePrefix().run(),
+  'CTRL+SHIFT+7': () => accessEditor()?.mark('1.').focus().togglePrefix().run(),
+  'CTRL+SHIFT+.': () => accessEditor()?.mark('>').focus().togglePrefix().run(),
+  'CTRL+ALT+1': () => accessEditor()?.mark('#').focus().togglePrefix().run(),
+  'CTRL+ALT+2': () => accessEditor()?.mark('#', 2).focus().togglePrefix().run(),
+  'CTRL+ALT+3': () => accessEditor()?.mark('#', 3).focus().togglePrefix().run(),
+  'CTRL+ALT+4': () => accessEditor()?.mark('#', 4).focus().togglePrefix().run(),
+  'CTRL+b': () => accessEditor()?.mark('*', 2).focus().toggleSurround().run(),
+  'CTRL+i': () => accessEditor()?.mark('*').focus().toggleSurround().run(),
+  'CTRL+k': () => openLinkModal(),
+  'ALT+SHIFT+5': () => accessEditor()?.mark('~', 2).focus().toggleSurround().run(),
+}
+
+type ButtonAction = {
+  label: string
+  icon: Component
+  action: () => void
+}
+type ButtonGroup = {
+  display: boolean
+  hideOnMobile: boolean
+  buttons: ButtonAction[]
+}
+type ButtonGroupMap = {
+  [key: string]: ButtonGroup
+}
+
+const BUTTONS: ButtonGroupMap = {
   headings: {
     display: props.headingButtons,
     hideOnMobile: true,
@@ -277,42 +286,43 @@ const BUTTONS = {
       {
         label: 'Heading 1',
         icon: Heading1Icon,
-        action: () => accessEditor().mark('#').focus().togglePrefix().run(),
+        action: () => accessEditor()?.mark('#').focus().togglePrefix().run(),
       },
       {
         label: 'Heading 2',
         icon: Heading2Icon,
-        action: () => accessEditor().mark('#', 2).focus().togglePrefix().run(),
+        action: () => accessEditor()?.mark('#', 2).focus().togglePrefix().run(),
       },
       {
         label: 'Heading 3',
         icon: Heading3Icon,
-        action: () => accessEditor().mark('#', 3).focus().togglePrefix().run(),
+        action: () => accessEditor()?.mark('#', 3).focus().togglePrefix().run(),
       },
     ],
   },
   modifiers: {
     display: true,
+    hideOnMobile: false,
     buttons: [
       {
         label: 'Bold',
         icon: BoldIcon,
-        action: () => accessEditor().mark('*', 2).focus().toggleSurround().run(),
+        action: () => accessEditor()?.mark('*', 2).focus().toggleSurround().run(),
       },
       {
         label: 'Italic',
         icon: ItalicIcon,
-        action: () => accessEditor().mark('*').focus().toggleSurround().run(),
+        action: () => accessEditor()?.mark('*').focus().toggleSurround().run(),
       },
       {
         label: 'Strikethrough',
         icon: StrikethroughIcon,
-        action: () => accessEditor().mark('~', 2).focus().toggleSurround().run(),
+        action: () => accessEditor()?.mark('~', 2).focus().toggleSurround().run(),
       },
       {
         label: 'Codeblock',
         icon: CodeIcon,
-        action: () => accessEditor().mark('`', 3).focus().setSurroundingLines().run(),
+        action: () => accessEditor()?.mark('`', 3).focus().setSurroundingLines().run(),
       },
     ],
   },
@@ -323,22 +333,23 @@ const BUTTONS = {
       {
         label: 'Unordered list',
         icon: ListBulletedIcon,
-        action: () => accessEditor().mark('-').focus().togglePrefix().run(),
+        action: () => accessEditor()?.mark('-').focus().togglePrefix().run(),
       },
       {
         label: 'Numbered list',
         icon: ListOrderedIcon,
-        action: () => accessEditor().mark('1.').focus().togglePrefix().run(),
+        action: () => accessEditor()?.mark('1.').focus().togglePrefix().run(),
       },
       {
         label: 'Blockquote',
         icon: TextQuoteIcon,
-        action: () => accessEditor().mark('>').focus().togglePrefix().run(),
+        action: () => accessEditor()?.mark('>').focus().togglePrefix().run(),
       },
     ],
   },
   components: {
     display: true,
+    hideOnMobile: false,
     buttons: [
       {
         label: 'Link',
@@ -361,18 +372,12 @@ const BUTTONS = {
 
 const currentValue = ref(props.modelValue)
 const previewMode = ref(false)
-/** @type {import('vue').Ref<HTMLTextAreaElement | null>} */
-const editorInput = ref(null)
+const editorInput = ref<HTMLTextAreaElement | null>(null)
 
 const linkText = ref('')
 const linkUrl = ref('')
 
-/**
- * @ Note: This does not clean the URL, it just makes sure http urls and domains are given https protocol
- * @param {string} input The URL to clean
- * @returns {string} The cleaned URL
- */
-function cleanUrl(input) {
+function cleanUrl(input: string) {
   // TODO: Validate urls against zod or browser URL object
   if (input.startsWith('http://')) {
     return input.replace('http://', 'https://')
@@ -412,28 +417,66 @@ const videoMarkdown = computed(() => {
   }
 })
 
-const linkModal = ref(null)
-const imageModal = ref(null)
-const videoModal = ref(null)
+const linkModal = ref<InstanceType<typeof Modal> | null>(null)
+const imageModal = ref<InstanceType<typeof Modal> | null>(null)
+const videoModal = ref<InstanceType<typeof Modal> | null>(null)
 
 const onInput = () => {
   emit('update:modelValue', currentValue.value)
 }
 
-const onKeyDown = (event) => {
+const onKeyDown = (event: KeyboardEvent) => {
+  handleKeyCommand(event)
+  handleNewLine(event)
+}
+
+const handleNewLine = (event: KeyboardEvent) => {
+  if (event.key !== 'Enter') {
+    return
+  }
+
+  const editor = accessEditor()
+  if (!editor) {
+    return
+  }
+  let potentialPrefix = editor.getPrefixFromAbove()
+  // If the line above starts with n. or - or >, then we want to continue the list
+  const prefixRegex = /^(?:\d+\.|-|>)/
+  if (potentialPrefix && prefixRegex.test(potentialPrefix)) {
+    event.preventDefault()
+    // If the prefix needs to change overtime, 1. 2. 3. etc, then we need to parse the number and increment it
+    if (potentialPrefix.endsWith('.')) {
+      const number = parseInt(potentialPrefix)
+      if (isNaN(number)) {
+        return editor.type('\n', editor.getSelectionPosition().end).focus().run()
+      }
+      potentialPrefix = (number + 1).toString() + '.'
+    }
+    editor
+      .type('\n' + potentialPrefix + ' ', editor.getSelectionPosition().end)
+      .focus()
+      .run()
+  }
+}
+
+const handleKeyCommand = (event: KeyboardEvent) => {
   let command
 
-  if ((navigator.userAgent.includes('Mac') && event.metaKey) || event.ctrlKey) {
-    if (event.shiftKey) {
-      command = COMMANDS.CTRL.SHIFT?.[event.key]
-    } else if (event.altKey) {
-      command = COMMANDS.CTRL.ALT?.[event.key]
-    } else {
-      command = COMMANDS.CTRL?.[event.key]
-    }
-  } else if (event.altKey && event.shiftKey) {
-    command = COMMANDS.ALT.SHIFT?.[event.key]
+  const control = navigator.userAgent.includes('Mac') ? event.metaKey : event.ctrlKey
+  const shift = event.shiftKey
+  const alt = event.altKey
+
+  if (!control && !alt) {
+    return
   }
+
+  const commandKey = [control ? 'CTRL' : '', shift ? 'SHIFT' : '', alt ? 'ALT' : '', event.key]
+    .filter((i) => i !== '')
+    .join('+')
+
+  console.log(event)
+
+  command = COMMANDS[commandKey]
 
   if (command) {
     // Prevent the default action to prevent the browser from inserting the character
@@ -446,28 +489,29 @@ const onKeyDown = (event) => {
  * @returns {ReturnType<typeof createEditor> | undefined} The editor object to chain commands
  */
 const accessEditor = () => {
-  // Editor is our constant reference so we don't really need to check if it exists
-  // but just in case we do, the type is added manually bc javascript is weird
-  return createEditor(editorInput, (str) => {
+  if (editorInput.value === null) {
+    return
+  }
+  return createEditor(editorInput.value, (str) => {
     currentValue.value = str
   })
 }
 
 function openLinkModal() {
-  linkText.value = accessEditor().getSelection()
+  linkText.value = accessEditor()?.getSelection() ?? ''
   linkUrl.value = ''
-  linkModal.value.show()
+  linkModal.value?.show()
 }
 
 function openImageModal() {
   imageAlt.value = ''
   imageUrl.value = ''
-  imageModal.value.show()
+  imageModal.value?.show()
 }
 
 function openVideoModal() {
   videoUrl.value = ''
-  videoModal.value.show()
+  videoModal.value?.show()
 }
 </script>
 

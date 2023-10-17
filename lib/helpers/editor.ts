@@ -1,27 +1,10 @@
-/**
- * Use a builder to perform operations on a textarea
- * @param {import('vue').Ref<HTMLTextAreaElement>} textareaReference
- * @param {(string) => void} setValue
- * @returns An editor object
- */
-export const createEditor = (textareaReference, setValue = console.log) => {
-  const editorReference = textareaReference
-  if (!editorReference) {
-    return undefined
-  }
+export const createEditor = (textarea: HTMLTextAreaElement, setValue: (output: string) => void) => {
   return {
     /**
      * Define the symbol of the given modifier
-     * ```js
-     * // To create a **bold** modifier:
-     * createEditor(editorInput).mark('*', 2)
-     * // Selection operations will consider this symbol
-     * // **bold** <=> bold
-     * // ***bold*** => *bold* => ***bold***
-     * ```
      */
-    mark: function (str, amt = 1) {
-      this._symbol = str
+    mark: function (s: string, amt = 1) {
+      this._symbol = s
       this._multiple = amt
       return this
     },
@@ -32,6 +15,9 @@ export const createEditor = (textareaReference, setValue = console.log) => {
     getSelection: function () {
       const selection = this._getSelection()
       return this._getElem().value.substring(selection.start, selection.end)
+    },
+    getSelectionPosition: function () {
+      return this._getSelection()
     },
     setSurroundingLines: function () {
       const elem = this._getElem()
@@ -95,29 +81,48 @@ export const createEditor = (textareaReference, setValue = console.log) => {
         this._setSelection(lines.start + tagToInsert.length, lines.end + tagToInsert.length)
       }
 
-      console.log(elem.value)
-
       return this
+    },
+    getPrefixFromAbove: function () {
+      const elem = this._getElem()
+      const lines = this._getLines()
+      const text = elem.value.substring(lines.start, lines.end)
+      // The prefix is the first word basically
+      const firstSpace = text.indexOf(' ')
+      if (firstSpace === -1) {
+        return ''
+      }
+      // there needs to be content after the spaces after the first word or else it's not a prefix
+      if (text.substring(firstSpace + 1).trim().length === 0) {
+        return ''
+      }
+      return text.substring(0, firstSpace)
     },
     run: function () {
       // Commit the current value of the editor to the refed value
       setValue(this._getElem().value)
     },
-    insert: function (str, pos = this._getSelection().start) {
+    insert: function (s: string, pos?: number) {
+      if (pos === undefined) {
+        pos = this._getSelection().start
+      }
       const elem = this._getElem()
-      elem.value = this._insert(str, pos)
-      this._setSelection(pos, pos + str.length)
+      elem.value = this._insert(s, pos)
+      this._setSelection(pos, pos + s.length)
       return this
     },
-    /**
-     * @private
-     */
-    _getElem: function () {
-      return editorReference.value
+    type: function (s: string, pos?: number) {
+      if (pos === undefined) {
+        pos = this._getSelection().start
+      }
+      const elem = this._getElem()
+      elem.value = this._insert(s, pos)
+      this._setSelection(pos + s.length)
+      return this
     },
-    /**
-     * @private
-     */
+    _getElem: function () {
+      return textarea
+    },
     _getSelection: function () {
       const elem = this._getElem()
       return {
@@ -125,9 +130,6 @@ export const createEditor = (textareaReference, setValue = console.log) => {
         end: elem.selectionEnd,
       }
     },
-    /**
-     * @private
-     */
     _getLines: function () {
       const elem = this._getElem()
       const selection = this._getSelection()
@@ -143,68 +145,32 @@ export const createEditor = (textareaReference, setValue = console.log) => {
         end: lineEnd === -1 ? elem.value.length : selection.end + lineEnd,
       }
     },
-    /**
-     * @private
-     */
     _getTag: function () {
       return this._symbol.repeat(this._multiple)
     },
-    /**
-     * @private
-     */
-    _setSelection: function (start, end = start) {
+    _setSelection: function (start: number, end: number = start) {
       const elem = this._getElem()
       elem.selectionStart = start
       elem.selectionEnd = end
     },
-    /**
-     * @private
-     */
-    _insert: function (str, start, end = start) {
+    _insert: function (s: string, start: number, end: number = start) {
       const elem = this._getElem()
-      return insertInSelection(elem.value, str, start, end)
+      return insertInSelection(elem.value, s, start, end)
     },
-    /**
-     * @private
-     */
     _symbol: '',
-    /**
-     * @private
-     */
     _multiple: 0,
   }
 }
 
-/**
- * Make regex safe
- * @param {string} symbol
- * @returns {string}
- */
-const escapeSymbol = (symbol) => {
+const escapeSymbol = (symbol: string) => {
   return symbol.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&')
 }
 
-/**
- * @param {string} s
- * @param {string} value the value to insert
- * @param {number} start Start index of the selection
- * @param {number} end End index of the selection
- * @returns {string}
- */
-export const insertInSelection = (s, value, start, end) => {
+export const insertInSelection = (s: string, value: string, start: number, end: number) => {
   return s.substring(0, start) + value + s.substring(end)
 }
 
-/**
- * Check for a valid tag around the selection. Markdown allows for a tag to be
- * a multiple of the same symbol, so we need to consider that.
- * @param {string} s
- * @param {number} start Index of the start of the selection
- * @param {number} end Index of the end of the selection
- * @param {string} symbol The symbol to check for
- * @returns {boolean}
- */
-export const isSurroundedBySymbol = (s, start, end, symbol) => {
+export const isSurroundedBySymbol = (s: string, start: number, end: number, symbol: string) => {
   const text = s
 
   // Symbols like * & ~ and such are protected symbols in regex, so we need to escape them
@@ -240,37 +206,29 @@ export const isSurroundedBySymbol = (s, start, end, symbol) => {
   return false
 }
 
-/**
- * @param {string} s The selection to look at inclusively
- * @param {string} symbol The symbol to look for
- */
-export const startsWithSymbolType = (s, symbol) => {
+/** Checks for N symbols + a space at the start of the string */
+export const startsWithSymbolType = (s: string, symbol: string) => {
   const escapedSymbol = escapeSymbol(symbol)
   const prefixRegex = new RegExp(`^${escapedSymbol}+ `)
   const prefix = prefixRegex.exec(s)
   return !!prefix
 }
 
-/**
- * @param {string} s
- * @param {number} start
- * @param {number} end
- * @param {string} symbol
- * @returns {string}
- */
-export const addSymbolAroundSelection = function (s, start, end, symbol) {
-  const tag = symbol
-  return s.substring(0, start) + tag + s.substring(start, end) + tag + s.substring(end)
+export const addSymbolAroundSelection = function (
+  s: string,
+  start: number,
+  end: number,
+  symbol: string
+) {
+  return s.substring(0, start) + symbol + s.substring(start, end) + symbol + s.substring(end)
 }
 
-/**
- * @param {string} s
- * @param {number} start
- * @param {number} end
- * @param {string} symbol
- * @returns {string}
- */
-export const removeSymbolAroundSelection = function (s, start, end, symbol) {
+export const removeSymbolAroundSelection = function (
+  s: string,
+  start: number,
+  end: number,
+  symbol: string
+) {
   return (
     s.substring(0, start - symbol.length) +
     s.substring(start, end) +
