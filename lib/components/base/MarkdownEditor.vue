@@ -437,24 +437,24 @@ const handleNewLine = (event: KeyboardEvent) => {
   if (event.key !== 'Enter') {
     return
   }
-
   const editor = accessEditor()
   if (!editor) {
     return
   }
   let potentialPrefix = editor.getPrefixFromAbove()
   // If the line above starts with n. or - or >, then we want to continue the list
+  // Only support the minimum needed for now
+  // Consider AST if not
   const prefixRegex = /^(?:\d+\.|-|>)/
   if (potentialPrefix && prefixRegex.test(potentialPrefix)) {
-    event.preventDefault()
-    // If the prefix needs to change overtime, 1. 2. 3. etc, then we need to parse the number and increment it
     if (potentialPrefix.endsWith('.')) {
       const number = parseInt(potentialPrefix)
       if (isNaN(number)) {
-        return editor.type('\n', editor.getSelectionPosition().end).focus().run()
+        return
       }
       potentialPrefix = (number + 1).toString() + '.'
     }
+    event.preventDefault()
     editor
       .type('\n' + potentialPrefix + ' ', editor.getSelectionPosition().end)
       .focus()
@@ -477,12 +477,9 @@ const handleKeyCommand = (event: KeyboardEvent) => {
     .filter((i) => i !== '')
     .join('+')
 
-  console.log(event)
-
   command = COMMANDS[commandKey]
 
   if (command) {
-    // Prevent the default action to prevent the browser from inserting the character
     event.preventDefault()
     command()
   }
