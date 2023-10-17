@@ -41,7 +41,7 @@
           color="primary"
           :action="
             () => {
-              accessEditor()?.insert(linkMarkdown)
+              // accessEditor()?.replaceSelection(linkMarkdown).run()
               linkModal?.hide()
             }
           "
@@ -100,7 +100,7 @@
           color="primary"
           :action="
             () => {
-              accessEditor()?.insert(imageMarkdown)
+              // accessEditor()?.insert(imageMarkdown)
               imageModal?.hide()
             }
           "
@@ -143,7 +143,7 @@
           color="primary"
           :action="
             () => {
-              accessEditor()?.insert(videoMarkdown)
+              // accessEditor()?.insert(videoMarkdown)
               videoModal?.hide()
             }
           "
@@ -180,15 +180,9 @@
         <label class="label" for="preview"> Preview </label>
       </div>
     </div>
-    <textarea
-      id="project-description"
-      ref="editorInput"
-      v-model="currentValue"
-      :disabled="disabled"
-      :class="{ hide: previewMode }"
-      @input="() => onInput()"
-      @keydown="(event) => onKeyDown(event)"
-    />
+    <div>
+      <div ref="editorRef" />
+    </div>
     <div v-if="!previewMode" class="info-blurb">
       <InfoIcon />
       <span>
@@ -206,20 +200,25 @@
 </template>
 
 <script setup lang="ts">
-import { type Component, computed, ref } from 'vue'
+import { type Component, computed, ref, onMounted, onBeforeUnmount } from 'vue'
+
+import { EditorState } from '@codemirror/state'
+import { EditorView, keymap } from '@codemirror/view'
+import { markdown, markdownKeymap } from '@codemirror/lang-markdown'
+import { indentWithTab, history, historyKeymap } from '@codemirror/commands'
+
 import { renderHighlightedString } from '@/helpers/highlight'
-import { createEditor } from '@/helpers/editor'
 import {
-  Heading1Icon,
-  Heading2Icon,
-  Heading3Icon,
-  BoldIcon,
-  ItalicIcon,
-  StrikethroughIcon,
-  CodeIcon,
-  ListBulletedIcon,
-  ListOrderedIcon,
-  TextQuoteIcon,
+  // Heading1Icon,
+  // Heading2Icon,
+  // Heading3Icon,
+  // BoldIcon,
+  // ItalicIcon,
+  // StrikethroughIcon,
+  // CodeIcon,
+  // ListBulletedIcon,
+  // ListOrderedIcon,
+  // TextQuoteIcon,
   LinkIcon,
   ImageIcon,
   YouTubeIcon,
@@ -230,8 +229,7 @@ import {
   Modal,
   Toggle,
 } from '@/components'
-
-const emit = defineEmits(['update:modelValue'])
+import { modrinthMarkdownEditorKeymap } from '@/helpers/codemirror'
 
 const props = defineProps({
   modelValue: {
@@ -248,24 +246,41 @@ const props = defineProps({
   },
 })
 
-type Command = () => void
-interface CommandMap {
-  [key: string]: Command
-}
+const editorRef = ref<HTMLDivElement>()
+let editor: EditorView | null = null
 
-const COMMANDS: CommandMap = {
-  'CTRL+SHIFT+8': () => accessEditor()?.mark('-').focus().togglePrefix().run(),
-  'CTRL+SHIFT+7': () => accessEditor()?.mark('1.').focus().togglePrefix().run(),
-  'CTRL+SHIFT+.': () => accessEditor()?.mark('>').focus().togglePrefix().run(),
-  'CTRL+ALT+1': () => accessEditor()?.mark('#').focus().togglePrefix().run(),
-  'CTRL+ALT+2': () => accessEditor()?.mark('#', 2).focus().togglePrefix().run(),
-  'CTRL+ALT+3': () => accessEditor()?.mark('#', 3).focus().togglePrefix().run(),
-  'CTRL+ALT+4': () => accessEditor()?.mark('#', 4).focus().togglePrefix().run(),
-  'CTRL+b': () => accessEditor()?.mark('*', 2).focus().toggleSurround().run(),
-  'CTRL+i': () => accessEditor()?.mark('*').focus().toggleSurround().run(),
-  'CTRL+k': () => openLinkModal(),
-  'ALT+SHIFT+5': () => accessEditor()?.mark('~', 2).focus().toggleSurround().run(),
-}
+onMounted(() => {
+  const updateListener = EditorView.updateListener.of((update) => {
+    if (update.docChanged) {
+      currentValue.value = update.state.doc.toString()
+    }
+  })
+
+  const editorState = EditorState.create({
+    doc: props.modelValue,
+    extensions: [
+      updateListener,
+      markdown(),
+      history(),
+      keymap.of([indentWithTab]),
+      keymap.of(modrinthMarkdownEditorKeymap),
+      keymap.of(historyKeymap),
+      keymap.of(markdownKeymap),
+    ],
+  })
+
+  editor = new EditorView({
+    state: editorState,
+    parent: editorRef.value,
+    doc: props.modelValue,
+  })
+
+  editor
+})
+
+onBeforeUnmount(() => {
+  editor?.destroy()
+})
 
 type ButtonAction = {
   label: string
@@ -282,74 +297,6 @@ type ButtonGroupMap = {
 }
 
 const BUTTONS: ButtonGroupMap = {
-  headings: {
-    display: props.headingButtons,
-    hideOnMobile: true,
-    buttons: [
-      {
-        label: 'Heading 1',
-        icon: Heading1Icon,
-        action: () => accessEditor()?.mark('#').focus().togglePrefix().run(),
-      },
-      {
-        label: 'Heading 2',
-        icon: Heading2Icon,
-        action: () => accessEditor()?.mark('#', 2).focus().togglePrefix().run(),
-      },
-      {
-        label: 'Heading 3',
-        icon: Heading3Icon,
-        action: () => accessEditor()?.mark('#', 3).focus().togglePrefix().run(),
-      },
-    ],
-  },
-  modifiers: {
-    display: true,
-    hideOnMobile: false,
-    buttons: [
-      {
-        label: 'Bold',
-        icon: BoldIcon,
-        action: () => accessEditor()?.mark('*', 2).focus().toggleSurround().run(),
-      },
-      {
-        label: 'Italic',
-        icon: ItalicIcon,
-        action: () => accessEditor()?.mark('*').focus().toggleSurround().run(),
-      },
-      {
-        label: 'Strikethrough',
-        icon: StrikethroughIcon,
-        action: () => accessEditor()?.mark('~', 2).focus().toggleSurround().run(),
-      },
-      {
-        label: 'Codeblock',
-        icon: CodeIcon,
-        action: () => accessEditor()?.mark('`', 3).focus().setSurroundingLines().run(),
-      },
-    ],
-  },
-  multiline: {
-    display: true,
-    hideOnMobile: true,
-    buttons: [
-      {
-        label: 'Unordered list',
-        icon: ListBulletedIcon,
-        action: () => accessEditor()?.mark('-').focus().togglePrefix().run(),
-      },
-      {
-        label: 'Numbered list',
-        icon: ListOrderedIcon,
-        action: () => accessEditor()?.mark('1.').focus().togglePrefix().run(),
-      },
-      {
-        label: 'Blockquote',
-        icon: TextQuoteIcon,
-        action: () => accessEditor()?.mark('>').focus().togglePrefix().run(),
-      },
-    ],
-  },
   components: {
     display: true,
     hideOnMobile: false,
@@ -375,7 +322,7 @@ const BUTTONS: ButtonGroupMap = {
 
 const currentValue = ref(props.modelValue)
 const previewMode = ref(false)
-const editorInput = ref<HTMLTextAreaElement | null>(null)
+// const editorInput = ref<HTMLTextAreaElement | null>(null)
 
 const linkText = ref('')
 const linkUrl = ref('')
@@ -424,81 +371,12 @@ const linkModal = ref<InstanceType<typeof Modal> | null>(null)
 const imageModal = ref<InstanceType<typeof Modal> | null>(null)
 const videoModal = ref<InstanceType<typeof Modal> | null>(null)
 
-const onInput = () => {
-  emit('update:modelValue', currentValue.value)
-}
-
-const onKeyDown = (event: KeyboardEvent) => {
-  handleKeyCommand(event)
-  handleNewLine(event)
-}
-
-const handleNewLine = (event: KeyboardEvent) => {
-  if (event.key !== 'Enter') {
-    return
-  }
-  const editor = accessEditor()
-  if (!editor) {
-    return
-  }
-  let potentialPrefix = editor.getPrefixFromAbove()
-  // If the line above starts with n. or - or >, then we want to continue the list
-  // Only support the minimum needed for now
-  // Consider AST if not
-  const prefixRegex = /^(?:\d+\.|-|>)/
-  if (potentialPrefix && prefixRegex.test(potentialPrefix)) {
-    if (potentialPrefix.endsWith('.')) {
-      const number = parseInt(potentialPrefix)
-      if (isNaN(number)) {
-        return
-      }
-      potentialPrefix = (number + 1).toString() + '.'
-    }
-    event.preventDefault()
-    editor
-      .type('\n' + potentialPrefix + ' ', editor.getSelectionPosition().end)
-      .focus()
-      .run()
-  }
-}
-
-const handleKeyCommand = (event: KeyboardEvent) => {
-  let command
-
-  const control = navigator.userAgent.includes('Mac') ? event.metaKey : event.ctrlKey
-  const shift = event.shiftKey
-  const alt = event.altKey
-
-  if (!control && !alt) {
-    return
-  }
-
-  const commandKey = [control ? 'CTRL' : '', shift ? 'SHIFT' : '', alt ? 'ALT' : '', event.key]
-    .filter((i) => i !== '')
-    .join('+')
-
-  command = COMMANDS[commandKey]
-
-  if (command) {
-    event.preventDefault()
-    command()
-  }
-}
-
-/**
- * @returns {ReturnType<typeof createEditor> | undefined} The editor object to chain commands
- */
-const accessEditor = () => {
-  if (editorInput.value === null) {
-    return
-  }
-  return createEditor(editorInput.value, (str) => {
-    currentValue.value = str
-  })
-}
+// const onInput = () => {
+//   emit('update:modelValue', currentValue.value)
+// }
 
 function openLinkModal() {
-  linkText.value = accessEditor()?.getSelection() ?? ''
+  // linkText.value = accessEditor()?.getSelection() ?? ''
   linkUrl.value = ''
   linkModal.value?.show()
 }
@@ -523,6 +401,8 @@ function openVideoModal() {
 .editor-action-row {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
   justify-content: space-between;
   margin-bottom: var(--gap-sm);
   gap: var(--gap-xs);
@@ -536,6 +416,7 @@ function openVideoModal() {
 .editor-actions {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--gap-xs);
 
