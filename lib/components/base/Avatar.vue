@@ -4,7 +4,7 @@
     ref="img"
     :class="`avatar size-${size} ${circle ? 'circle' : ''} ${noShadow ? 'no-shadow' : ''} ${
       pixelated ? 'pixelated' : ''
-    }`"
+    } ${raised ? 'raised' : ''}`"
     :src="src"
     :alt="alt"
     :loading="loading"
@@ -12,7 +12,9 @@
   />
   <svg
     v-else
-    :class="`avatar size-${size} ${circle ? 'circle' : ''} ${noShadow ? 'no-shadow' : ''}`"
+    :class="`avatar size-${size} ${circle ? 'circle' : ''} ${noShadow ? 'no-shadow' : ''} ${
+      raised ? 'raised' : ''
+    }`"
     xml:space="preserve"
     fill-rule="evenodd"
     stroke-linecap="round"
@@ -35,6 +37,9 @@
 <script setup>
 import { ref } from 'vue'
 
+const pixelated = ref(false)
+const img = ref(null)
+
 defineProps({
   src: {
     type: String,
@@ -48,7 +53,7 @@ defineProps({
     type: String,
     default: 'sm',
     validator(value) {
-      return ['xs', 'sm', 'md', 'lg', 'none'].includes(value)
+      return ['xxs', 'xs', 'sm', 'md', 'lg', 'none'].includes(value)
     },
   },
   circle: {
@@ -63,17 +68,14 @@ defineProps({
     type: String,
     default: 'lazy',
   },
+  raised: {
+    type: Boolean,
+    default: false,
+  },
 })
 
-const pixelated = ref(false)
-const img = ref(null)
-
 function updatePixelated() {
-  if (img.value && img.value.naturalWidth && img.value.naturalWidth <= 96) {
-    pixelated.value = true
-  } else {
-    pixelated.value = false
-  }
+  pixelated.value = !!(img.value && img.value.naturalWidth && img.value.naturalWidth <= 96)
 }
 </script>
 
@@ -87,6 +89,12 @@ function updatePixelated() {
   object-fit: cover;
   max-width: var(--size) !important;
   max-height: var(--size) !important;
+
+  &.size-xxs {
+    --size: 1.25rem;
+    box-shadow: var(--shadow-inset), var(--shadow-card);
+    border-radius: var(--radius-sm);
+  }
 
   &.size-xs {
     --size: 2.5rem;
@@ -124,6 +132,10 @@ function updatePixelated() {
 
   &.pixelated {
     image-rendering: pixelated;
+  }
+
+  &.raised {
+    background-color: var(--color-raised-bg);
   }
 }
 </style>
