@@ -1,6 +1,6 @@
 <template>
   <button class="code" :class="{ copied }" title="Copy code to clipboard" @click="copyText">
-    {{ text }}
+    <span>{{ text }}</span>
     <CheckIcon v-if="copied" />
     <ClipboardCopyIcon v-else />
   </button>
@@ -8,7 +8,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { CheckIcon, ClipboardCopyIcon } from '@/components'
+import { CheckIcon, ClipboardCopyIcon } from '@'
 
 const props = defineProps({
   text: {
@@ -27,7 +27,7 @@ async function copyText() {
 
 <style lang="scss" scoped>
 .code {
-  display: flex;
+  display: inline-flex;
   grid-gap: 0.5rem;
   font-family: var(--mono-font);
   font-size: var(--font-size-sm);
@@ -39,6 +39,12 @@ async function copyText() {
   user-select: text;
   transition: opacity 0.5s ease-in-out, filter 0.2s ease-in-out, transform 0.05s ease-in-out,
     outline 0.2s ease-in-out;
+
+  span {
+    max-width: 10rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
   svg {
     width: 1em;

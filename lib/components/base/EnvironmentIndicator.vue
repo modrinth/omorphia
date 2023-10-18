@@ -4,7 +4,11 @@
     A {{ type }}
   </span>
   <span
-    v-else-if="!['resourcepack', 'shader'].includes(type) && !(type === 'plugin' && search)"
+    v-else-if="
+      !['resourcepack', 'shader'].includes(type) &&
+      !(type === 'plugin' && search) &&
+      !categories.includes('datapack')
+    "
     class="environment"
   >
     <template v-if="clientSide === 'optional' && serverSide === 'optional'">
@@ -44,7 +48,7 @@
   </span>
 </template>
 <script setup>
-import { GlobeIcon, ClientIcon, ServerIcon, InfoIcon } from '@/components'
+import { GlobeIcon, ClientIcon, ServerIcon, InfoIcon } from '@'
 
 defineProps({
   type: {
@@ -75,6 +79,13 @@ defineProps({
     type: Boolean,
     required: false,
     default: false,
+  },
+  categories: {
+    type: Array,
+    required: false,
+    default() {
+      return []
+    },
   },
 })
 </script>
