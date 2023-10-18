@@ -204,8 +204,8 @@ import { type Component, computed, ref, onMounted, onBeforeUnmount } from 'vue'
 
 import { EditorState } from '@codemirror/state'
 import { EditorView, keymap } from '@codemirror/view'
-import { markdown, markdownKeymap } from '@codemirror/lang-markdown'
-import { indentWithTab, history, historyKeymap } from '@codemirror/commands'
+import { markdown } from '@codemirror/lang-markdown'
+import { indentWithTab, historyKeymap, history } from '@codemirror/commands'
 
 import { renderHighlightedString } from '@/helpers/highlight'
 import {
@@ -260,12 +260,13 @@ onMounted(() => {
     doc: props.modelValue,
     extensions: [
       updateListener,
-      markdown(),
-      history(),
       keymap.of([indentWithTab]),
       keymap.of(modrinthMarkdownEditorKeymap),
+      history(),
+      markdown({
+        addKeymap: false,
+      }),
       keymap.of(historyKeymap),
-      keymap.of(markdownKeymap),
     ],
   })
 
