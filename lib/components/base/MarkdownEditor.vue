@@ -167,7 +167,7 @@
               icon-only
               :aria-label="button.label"
               :class="{ 'mobile-hidden-group': !!buttonGroup.hideOnMobile }"
-              :action="button.action"
+              :action="() => button.action(editor)"
               :disabled="previewMode || disabled"
             >
               <component :is="button.icon" />
@@ -180,9 +180,7 @@
         <label class="label" for="preview"> Preview </label>
       </div>
     </div>
-    <div>
-      <div ref="editorRef" />
-    </div>
+    <div ref="editorRef" :class="{ hide: previewMode }" />
     <div v-if="!previewMode" class="info-blurb">
       <InfoIcon />
       <span>
@@ -209,16 +207,16 @@ import { indentWithTab, historyKeymap, history } from '@codemirror/commands'
 
 import { renderHighlightedString } from '@/helpers/highlight'
 import {
-  // Heading1Icon,
-  // Heading2Icon,
-  // Heading3Icon,
-  // BoldIcon,
-  // ItalicIcon,
-  // StrikethroughIcon,
-  // CodeIcon,
-  // ListBulletedIcon,
-  // ListOrderedIcon,
-  // TextQuoteIcon,
+  Heading1Icon,
+  Heading2Icon,
+  Heading3Icon,
+  BoldIcon,
+  ItalicIcon,
+  StrikethroughIcon,
+  CodeIcon,
+  ListBulletedIcon,
+  ListOrderedIcon,
+  TextQuoteIcon,
   LinkIcon,
   ImageIcon,
   YouTubeIcon,
@@ -229,7 +227,7 @@ import {
   Modal,
   Toggle,
 } from '@/components'
-import { modrinthMarkdownEditorKeymap } from '@/helpers/codemirror'
+import { markdownCommands, modrinthMarkdownEditorKeymap } from '@/helpers/codemirror'
 
 const props = defineProps({
   modelValue: {
@@ -256,9 +254,31 @@ onMounted(() => {
     }
   })
 
+  const theme = EditorView.theme({
+    '&': {
+      overflowY: 'auto',
+
+      backgroundColor: 'var(--color-button-bg)',
+      color: 'var(--color-base)',
+
+      borderRadius: 'var(--radius-md)',
+      padding: 'var(--radius-md)',
+      marginBottom: 'var(--gap-sm)',
+    },
+    '.cm-content, .cm-gutter': {
+      minHeight: '200px',
+      caretColor: 'var(--color-contrast)',
+    },
+    '.cm-scroller': {
+      height: '100%',
+      overflow: 'auto',
+    },
+  })
+
   const editorState = EditorState.create({
     doc: props.modelValue,
     extensions: [
+      theme,
       updateListener,
       keymap.of([indentWithTab]),
       keymap.of(modrinthMarkdownEditorKeymap),
@@ -275,8 +295,6 @@ onMounted(() => {
     parent: editorRef.value,
     doc: props.modelValue,
   })
-
-  editor
 })
 
 onBeforeUnmount(() => {
@@ -286,7 +304,7 @@ onBeforeUnmount(() => {
 type ButtonAction = {
   label: string
   icon: Component
-  action: () => void
+  action: (editor: EditorView | null) => void
 }
 type ButtonGroup = {
   display: boolean
@@ -297,7 +315,58 @@ type ButtonGroupMap = {
   [key: string]: ButtonGroup
 }
 
+function runEditorCommand(command: (view: EditorView) => boolean, editor: EditorView | null) {
+  if (editor) {
+    command(editor)
+    editor.focus()
+  }
+}
+
+const composeCommandButton = (
+  name: string,
+  icon: Component,
+  command: (view: EditorView) => boolean
+) => {
+  return {
+    label: name,
+    icon,
+    action: (e: EditorView | null) => runEditorCommand(command, e),
+  }
+}
+
 const BUTTONS: ButtonGroupMap = {
+  headings: {
+    display: props.headingButtons,
+    hideOnMobile: false,
+    buttons: [
+      composeCommandButton('Heading 1', Heading1Icon, markdownCommands.toggleHeader),
+      composeCommandButton('Heading 2', Heading2Icon, markdownCommands.toggleHeader2),
+      composeCommandButton('Heading 3', Heading3Icon, markdownCommands.toggleHeader3),
+    ],
+  },
+  stylizing: {
+    display: true,
+    hideOnMobile: false,
+    buttons: [
+      composeCommandButton('Bold', BoldIcon, markdownCommands.toggleBold),
+      composeCommandButton('Italic', ItalicIcon, markdownCommands.toggleItalic),
+      composeCommandButton(
+        'Strikethrough',
+        StrikethroughIcon,
+        markdownCommands.toggleStrikethrough
+      ),
+      composeCommandButton('Code', CodeIcon, markdownCommands.toggleCodeBlock),
+    ],
+  },
+  lists: {
+    display: true,
+    hideOnMobile: false,
+    buttons: [
+      composeCommandButton('Bulleted list', ListBulletedIcon, markdownCommands.toggleBulletList),
+      composeCommandButton('Ordered list', ListOrderedIcon, markdownCommands.toggleOrderedList),
+      composeCommandButton('Quote', TextQuoteIcon, markdownCommands.toggleQuote),
+    ],
+  },
   components: {
     display: true,
     hideOnMobile: false,
@@ -371,10 +440,6 @@ const videoMarkdown = computed(() => {
 const linkModal = ref<InstanceType<typeof Modal> | null>(null)
 const imageModal = ref<InstanceType<typeof Modal> | null>(null)
 const videoModal = ref<InstanceType<typeof Modal> | null>(null)
-
-// const onInput = () => {
-//   emit('update:modelValue', currentValue.value)
-// }
 
 function openLinkModal() {
   // linkText.value = accessEditor()?.getSelection() ?? ''

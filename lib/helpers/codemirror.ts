@@ -23,8 +23,36 @@ const toggleHeader: Command = ({ state, dispatch }) => {
   return toggleLineStart(state, dispatch, '# ')
 }
 
+const toggleHeader2: Command = ({ state, dispatch }) => {
+  return toggleLineStart(state, dispatch, '## ')
+}
+
+const toggleHeader3: Command = ({ state, dispatch }) => {
+  return toggleLineStart(state, dispatch, '### ')
+}
+
+const toggleHeader4: Command = ({ state, dispatch }) => {
+  return toggleLineStart(state, dispatch, '#### ')
+}
+
+const toggleHeader5: Command = ({ state, dispatch }) => {
+  return toggleLineStart(state, dispatch, '##### ')
+}
+
+const toggleHeader6: Command = ({ state, dispatch }) => {
+  return toggleLineStart(state, dispatch, '###### ')
+}
+
 const toggleQuote: Command = ({ state, dispatch }) => {
   return toggleLineStart(state, dispatch, '> ')
+}
+
+const toggleBulletList: Command = ({ state, dispatch }) => {
+  return toggleLineStart(state, dispatch, '- ')
+}
+
+const toggleOrderedList: Command = ({ state, dispatch }) => {
+  return toggleLineStart(state, dispatch, '1. ')
 }
 
 type Dispatch = (tr: Transaction) => void
@@ -305,7 +333,14 @@ const commands = {
   toggleStrikethrough,
   toggleCodeBlock,
   toggleHeader,
+  toggleHeader2,
+  toggleHeader3,
+  toggleHeader4,
+  toggleHeader5,
+  toggleHeader6,
   toggleQuote,
+  toggleBulletList,
+  toggleOrderedList,
   insertNewlineContinueMark,
 }
 
