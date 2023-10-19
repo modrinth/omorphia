@@ -19,7 +19,7 @@
         <input
           id="insert-link-url"
           v-model="linkUrl"
-          type="url"
+          type="text"
           placeholder="Enter the link's URL..."
           @input="validateURL"
         />
@@ -85,7 +85,7 @@
         <input
           id="insert-link-url"
           v-model="linkUrl"
-          type="url"
+          type="text"
           placeholder="Enter the image URL..."
           @input="validateURL"
         />
@@ -135,7 +135,7 @@
         <input
           id="insert-video-url"
           v-model="linkUrl"
-          type="url"
+          type="text"
           placeholder="Enter YouTube video URL"
           @input="validateURL"
         />
