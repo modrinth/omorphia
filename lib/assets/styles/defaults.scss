@@ -45,7 +45,8 @@ a.uncolored {
 input[type='text'],
 input[type='number'],
 input[type='password'],
-textarea {
+textarea,
+.cm-content {
   border-radius: var(--radius-md);
   box-sizing: border-box;
   // safari iOS rounds inputs by default

@@ -255,23 +255,19 @@ onMounted(() => {
   })
 
   const theme = EditorView.theme({
+    // in defualts.scss there's references to .cm-content and such to inherit global styles
     '&': {
-      overflowY: 'auto',
-
-      backgroundColor: 'var(--color-button-bg)',
-      color: 'var(--color-base)',
-
-      borderRadius: 'var(--radius-md)',
-      padding: 'var(--radius-md)',
-      marginBottom: 'var(--gap-sm)',
+      overflow: 'visible',
     },
     '.cm-content, .cm-gutter': {
+      marginBlockEnd: '0.5rem',
+      padding: '0.5rem',
       minHeight: '200px',
       caretColor: 'var(--color-contrast)',
     },
     '.cm-scroller': {
       height: '100%',
-      overflow: 'auto',
+      overflow: 'visible',
     },
   })
 

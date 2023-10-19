@@ -1,7 +1,7 @@
 import { deleteMarkupBackward } from '@codemirror/lang-markdown'
 import { getIndentation, indentString, syntaxTree } from '@codemirror/language'
 import { type EditorState, type Transaction } from '@codemirror/state'
-import { type Command, type KeyBinding } from '@codemirror/view'
+import { type EditorView, type Command, type KeyBinding } from '@codemirror/view'
 
 const toggleBold: Command = ({ state, dispatch }) => {
   return toggleAround(state, dispatch, '**', '**')
@@ -53,6 +53,22 @@ const toggleBulletList: Command = ({ state, dispatch }) => {
 
 const toggleOrderedList: Command = ({ state, dispatch }) => {
   return toggleLineStart(state, dispatch, '1. ')
+}
+
+const yankSelection = ({ state }: EditorView): string => {
+  const { from, to } = state.selection.main
+  const selectedText = state.doc.sliceString(from, to)
+  return selectedText
+}
+
+const replaceSelection = ({ state, dispatch }: EditorView, text: string) => {
+  const { from, to } = state.selection.main
+  const transaction = state.update({
+    changes: { from, to, insert: text },
+    selection: { anchor: from + text.length, head: from + text.length },
+  })
+  dispatch(transaction)
+  return true
 }
 
 type Dispatch = (tr: Transaction) => void
@@ -342,6 +358,10 @@ const commands = {
   toggleBulletList,
   toggleOrderedList,
   insertNewlineContinueMark,
+
+  // Utility
+  yankSelection,
+  replaceSelection,
 }
 
 export const markdownCommands = commands
