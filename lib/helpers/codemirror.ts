@@ -1,3 +1,4 @@
+import { insertNewlineAndIndent } from '@codemirror/commands'
 import { deleteMarkupBackward } from '@codemirror/lang-markdown'
 import { getIndentation, indentString, syntaxTree } from '@codemirror/language'
 import { type EditorState, type Transaction } from '@codemirror/state'
@@ -229,7 +230,8 @@ const getListStructure = (state: EditorState, head: number) => {
   return stack
 }
 
-const insertNewlineContinueMark: Command = ({ state, dispatch }): boolean => {
+const insertNewlineContinueMark: Command = (view): boolean => {
+  const { state, dispatch } = view
   const {
     selection: {
       main: { head },
@@ -238,7 +240,10 @@ const insertNewlineContinueMark: Command = ({ state, dispatch }): boolean => {
 
   // Get the current list structure to examine
   const stack = getListStructure(state, head)
-  if (!stack || stack.length === 0) return false
+  if (!stack || stack.length === 0) {
+    // insert a newline as normal so that mobile works
+    return insertNewlineAndIndent(view)
+  }
 
   const lastNode = stack[stack.length - 1]
 
