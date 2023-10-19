@@ -372,6 +372,5 @@ export const modrinthMarkdownEditorKeymap: KeyBinding[] = [
   { key: 'Mod-i', run: commands.toggleItalic },
   { key: 'Mod-e', run: commands.toggleCodeBlock },
   { key: 'Mod-s', run: commands.toggleStrikethrough },
-  //   { key: 'Mod-h', run: commands.toggleHeader },
   { key: 'Mod-Shift-.', run: commands.toggleQuote },
 ]

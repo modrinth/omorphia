@@ -19,13 +19,20 @@
         <input
           id="insert-link-url"
           v-model="linkUrl"
-          type="text"
+          type="url"
           placeholder="Enter the link's URL..."
+          @input="validateURL"
         />
         <Button @click="() => (linkUrl = '')">
           <XIcon />
         </Button>
       </div>
+      <template v-if="linkValidationErrorMessage">
+        <span class="label">
+          <span class="label__title">Error</span>
+          <span class="label__description">{{ linkValidationErrorMessage }}</span>
+        </span>
+      </template>
       <span class="label">
         <span class="label__title">Preview</span>
         <span class="label__description"></span>
@@ -41,7 +48,7 @@
           color="primary"
           :action="
             () => {
-              // accessEditor()?.replaceSelection(linkMarkdown).run()
+              if (editor) markdownCommands.replaceSelection(editor, linkMarkdown)
               linkModal?.hide()
             }
           "
@@ -62,11 +69,11 @@
         <AlignLeftIcon />
         <input
           id="insert-image-alt"
-          v-model="imageAlt"
+          v-model="linkText"
           type="text"
           placeholder="Describe the image..."
         />
-        <Button @click="() => (imageAlt = '')">
+        <Button @click="() => (linkText = '')">
           <XIcon />
         </Button>
       </div>
@@ -77,14 +84,21 @@
         <ImageIcon />
         <input
           id="insert-link-url"
-          v-model="imageUrl"
-          type="text"
+          v-model="linkUrl"
+          type="url"
           placeholder="Enter the image URL..."
+          @input="validateURL"
         />
-        <Button @click="() => (imageUrl = '')">
+        <Button @click="() => (linkUrl = '')">
           <XIcon />
         </Button>
       </div>
+      <template v-if="linkValidationErrorMessage">
+        <span class="label">
+          <span class="label__title">Error</span>
+          <span class="label__description">{{ linkValidationErrorMessage }}</span>
+        </span>
+      </template>
       <span class="label">
         <span class="label__title">Preview</span>
         <span class="label__description"></span>
@@ -100,7 +114,7 @@
           color="primary"
           :action="
             () => {
-              // accessEditor()?.insert(imageMarkdown)
+              if (editor) markdownCommands.replaceSelection(editor, imageMarkdown)
               imageModal?.hide()
             }
           "
@@ -120,14 +134,21 @@
         <YouTubeIcon />
         <input
           id="insert-video-url"
-          v-model="videoUrl"
-          type="text"
+          v-model="linkUrl"
+          type="url"
           placeholder="Enter YouTube video URL"
+          @input="validateURL"
         />
-        <Button @click="() => (videoUrl = '')">
+        <Button @click="() => (linkUrl = '')">
           <XIcon />
         </Button>
       </div>
+      <template v-if="linkValidationErrorMessage">
+        <span class="label">
+          <span class="label__title">Error</span>
+          <span class="label__description">{{ linkValidationErrorMessage }}</span>
+        </span>
+      </template>
       <span class="label">
         <span class="label__title">Preview</span>
         <span class="label__description"></span>
@@ -143,7 +164,7 @@
           color="primary"
           :action="
             () => {
-              // accessEditor()?.insert(videoMarkdown)
+              if (editor) markdownCommands.replaceSelection(editor, videoMarkdown)
               videoModal?.hide()
             }
           "
@@ -256,14 +277,13 @@ onMounted(() => {
 
   const theme = EditorView.theme({
     // in defualts.scss there's references to .cm-content and such to inherit global styles
-    '&': {
-      overflow: 'visible',
-    },
     '.cm-content, .cm-gutter': {
       marginBlockEnd: '0.5rem',
       padding: '0.5rem',
       minHeight: '200px',
       caretColor: 'var(--color-contrast)',
+      width: '100%',
+      overflowX: 'scroll',
     },
     '.cm-scroller': {
       height: '100%',
@@ -388,44 +408,66 @@ const BUTTONS: ButtonGroupMap = {
 
 const currentValue = ref(props.modelValue)
 const previewMode = ref(false)
-// const editorInput = ref<HTMLTextAreaElement | null>(null)
 
 const linkText = ref('')
 const linkUrl = ref('')
+const linkValidationErrorMessage = ref<string | undefined>()
 
-function cleanUrl(input: string) {
-  // TODO: Validate urls against zod or browser URL object
-  if (input.startsWith('http://')) {
-    return input.replace('http://', 'https://')
+function validateURL() {
+  if (!linkUrl.value || linkUrl.value === '') {
+    linkValidationErrorMessage.value = undefined
+    return
   }
-  if (!input.startsWith('https://')) {
-    input = 'https://' + input
+
+  try {
+    linkValidationErrorMessage.value = undefined
+    cleanUrl(linkUrl.value)
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      linkValidationErrorMessage.value = e.message
+    }
   }
-  return input
+}
+
+function cleanUrl(input: string): string {
+  let url
+
+  // Attempt to validate and parse the URL
+  try {
+    url = new URL(input)
+  } catch (e) {
+    throw new Error('Invalid URL. Make sure the URL is well-formed.')
+  }
+
+  // Check for unsupported protocols
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+    throw new Error('Unsupported protocol. Use http or https.')
+  }
+
+  // If the scheme is "http", automatically upgrade it to "https"
+  if (url.protocol === 'http:') {
+    url.protocol = 'https:'
+  }
+
+  return url.toString()
 }
 
 const linkMarkdown = computed(() => {
-  if (!linkUrl.value || !linkUrl.value.includes('.')) {
+  if (!linkUrl.value) {
     return ''
   }
   const url = cleanUrl(linkUrl.value)
   return url ? `[${linkText.value ? linkText.value : url}](${url})` : ''
 })
 
-const imageAlt = ref('')
-const imageUrl = ref('')
-
-const imageMarkdown = computed(() => {
-  const url = cleanUrl(imageUrl.value)
-  return url ? `![${imageAlt.value}](${url})` : ''
-})
+const imageMarkdown = computed(() => (linkMarkdown.value.length ? `!${linkMarkdown.value}` : ''))
 
 const videoUrl = ref('')
 const youtubeRegex =
   /^(?:https?:)?(?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9_-]{7,15})(?:[?&][a-zA-Z0-9_-]+=[a-zA-Z0-9_-]+)*$/
 
 const videoMarkdown = computed(() => {
-  const match = youtubeRegex.exec(videoUrl.value)
+  const match = youtubeRegex.exec(linkUrl.value)
   if (match) {
     return `<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/${match[1]}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
   } else {
@@ -438,14 +480,14 @@ const imageModal = ref<InstanceType<typeof Modal> | null>(null)
 const videoModal = ref<InstanceType<typeof Modal> | null>(null)
 
 function openLinkModal() {
-  // linkText.value = accessEditor()?.getSelection() ?? ''
+  if (editor) linkText.value = markdownCommands.yankSelection(editor)
   linkUrl.value = ''
   linkModal.value?.show()
 }
 
 function openImageModal() {
-  imageAlt.value = ''
-  imageUrl.value = ''
+  linkText.value = ''
+  linkUrl.value = ''
   imageModal.value?.show()
 }
 
