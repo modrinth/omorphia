@@ -48,6 +48,7 @@ export default {
           { text: 'Share Modal', link: '/components/share-modal' },
           { text: 'Analytics', link: '/components/analytics' },
           { text: 'Search dropdown', link: '/components/search-dropdown' },
+          { text: 'Hover cards', link: '/components/hover-cards' },
         ],
       },
     ],
