@@ -456,8 +456,15 @@ const linkMarkdown = computed(() => {
   if (!linkUrl.value) {
     return ''
   }
-  const url = cleanUrl(linkUrl.value)
-  return url ? `[${linkText.value ? linkText.value : url}](${url})` : ''
+  try {
+    const url = cleanUrl(linkUrl.value)
+    return url ? `[${linkText.value ? linkText.value : url}](${url})` : ''
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error(error.message)
+    }
+  }
+  return ''
 })
 
 const imageMarkdown = computed(() => (linkMarkdown.value.length ? `!${linkMarkdown.value}` : ''))

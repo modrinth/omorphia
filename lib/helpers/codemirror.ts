@@ -61,9 +61,8 @@ const yankSelection = ({ state }: EditorView): string => {
   return selectedText
 }
 
-const replaceSelection = ({ state, dispatch, focus, hasFocus }: EditorView, text: string) => {
+const replaceSelection = ({ state, dispatch }: EditorView, text: string) => {
   const { from, to } = state.selection.main
-  if (!hasFocus) focus() // Mobile Safari requires focus before inserting text
   const transaction = state.update({
     changes: { from, to, insert: text },
     selection: { anchor: from + text.length, head: from + text.length },
