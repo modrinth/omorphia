@@ -32,6 +32,7 @@
     <template v-else-if="type === 'closed'"> <XIcon /> Closed</template>
 
     <!-- Other -->
+    <template v-else-if="type === 'organization'"> <OrganizationIcon /> Organization</template>
     <template v-else> <span class="circle" /> {{ capitalizeString(type) }} </template>
   </span>
 </template>
@@ -50,6 +51,7 @@ import {
   CheckIcon,
   LockIcon,
   CalendarIcon,
+  OrganizationIcon,
   capitalizeString,
 } from '@'
 
