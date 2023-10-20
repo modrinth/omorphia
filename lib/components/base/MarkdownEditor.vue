@@ -21,11 +21,18 @@
           v-model="linkUrl"
           type="text"
           placeholder="Enter the link's URL..."
+          @input="validateURL"
         />
         <Button @click="() => (linkUrl = '')">
           <XIcon />
         </Button>
       </div>
+      <template v-if="linkValidationErrorMessage">
+        <span class="label">
+          <span class="label__title">Error</span>
+          <span class="label__description">{{ linkValidationErrorMessage }}</span>
+        </span>
+      </template>
       <span class="label">
         <span class="label__title">Preview</span>
         <span class="label__description"></span>
@@ -39,9 +46,10 @@
         <Button :action="() => linkModal?.hide()"><XIcon /> Cancel</Button>
         <Button
           color="primary"
+          :disabled="linkValidationErrorMessage || !linkUrl"
           :action="
             () => {
-              accessEditor()?.insert(linkMarkdown)
+              if (editor) markdownCommands.replaceSelection(editor, linkMarkdown)
               linkModal?.hide()
             }
           "
@@ -62,11 +70,11 @@
         <AlignLeftIcon />
         <input
           id="insert-image-alt"
-          v-model="imageAlt"
+          v-model="linkText"
           type="text"
           placeholder="Describe the image..."
         />
-        <Button @click="() => (imageAlt = '')">
+        <Button @click="() => (linkText = '')">
           <XIcon />
         </Button>
       </div>
@@ -77,14 +85,21 @@
         <ImageIcon />
         <input
           id="insert-link-url"
-          v-model="imageUrl"
+          v-model="linkUrl"
           type="text"
           placeholder="Enter the image URL..."
+          @input="validateURL"
         />
-        <Button @click="() => (imageUrl = '')">
+        <Button @click="() => (linkUrl = '')">
           <XIcon />
         </Button>
       </div>
+      <template v-if="linkValidationErrorMessage">
+        <span class="label">
+          <span class="label__title">Error</span>
+          <span class="label__description">{{ linkValidationErrorMessage }}</span>
+        </span>
+      </template>
       <span class="label">
         <span class="label__title">Preview</span>
         <span class="label__description"></span>
@@ -98,9 +113,10 @@
         <Button :action="() => imageModal?.hide()"><XIcon /> Cancel</Button>
         <Button
           color="primary"
+          :disabled="linkValidationErrorMessage || !linkUrl"
           :action="
             () => {
-              accessEditor()?.insert(imageMarkdown)
+              if (editor) markdownCommands.replaceSelection(editor, imageMarkdown)
               imageModal?.hide()
             }
           "
@@ -120,14 +136,21 @@
         <YouTubeIcon />
         <input
           id="insert-video-url"
-          v-model="videoUrl"
+          v-model="linkUrl"
           type="text"
           placeholder="Enter YouTube video URL"
+          @input="validateURL"
         />
-        <Button @click="() => (videoUrl = '')">
+        <Button @click="() => (linkUrl = '')">
           <XIcon />
         </Button>
       </div>
+      <template v-if="linkValidationErrorMessage">
+        <span class="label">
+          <span class="label__title">Error</span>
+          <span class="label__description">{{ linkValidationErrorMessage }}</span>
+        </span>
+      </template>
       <span class="label">
         <span class="label__title">Preview</span>
         <span class="label__description"></span>
@@ -141,9 +164,10 @@
         <Button :action="() => videoModal?.hide()"><XIcon /> Cancel</Button>
         <Button
           color="primary"
+          :disabled="linkValidationErrorMessage || !linkUrl"
           :action="
             () => {
-              accessEditor()?.insert(videoMarkdown)
+              if (editor) markdownCommands.replaceSelection(editor, videoMarkdown)
               videoModal?.hide()
             }
           "
@@ -167,7 +191,7 @@
               icon-only
               :aria-label="button.label"
               :class="{ 'mobile-hidden-group': !!buttonGroup.hideOnMobile }"
-              :action="button.action"
+              :action="() => button.action(editor)"
               :disabled="previewMode || disabled"
             >
               <component :is="button.icon" />
@@ -180,15 +204,7 @@
         <label class="label" for="preview"> Preview </label>
       </div>
     </div>
-    <textarea
-      id="project-description"
-      ref="editorInput"
-      v-model="currentValue"
-      :disabled="disabled"
-      :class="{ hide: previewMode }"
-      @input="() => onInput()"
-      @keydown="(event) => onKeyDown(event)"
-    />
+    <div ref="editorRef" :class="{ hide: previewMode }" />
     <div v-if="!previewMode" class="info-blurb">
       <InfoIcon />
       <span>
@@ -206,9 +222,13 @@
 </template>
 
 <script setup lang="ts">
-import { type Component, computed, ref } from 'vue'
-import { renderHighlightedString } from '@/helpers/highlight'
-import { createEditor } from '@/helpers/editor'
+import { type Component, computed, ref, onMounted, onBeforeUnmount } from 'vue'
+
+import { EditorState } from '@codemirror/state'
+import { EditorView, keymap } from '@codemirror/view'
+import { markdown } from '@codemirror/lang-markdown'
+import { indentWithTab, historyKeymap, history } from '@codemirror/commands'
+
 import {
   Heading1Icon,
   Heading2Icon,
@@ -230,8 +250,8 @@ import {
   Modal,
   Toggle,
 } from '@/components'
-
-const emit = defineEmits(['update:modelValue'])
+import { markdownCommands, modrinthMarkdownEditorKeymap } from '@/helpers/codemirror'
+import { renderHighlightedString } from '@/helpers/highlight'
 
 const props = defineProps({
   modelValue: {
@@ -248,29 +268,86 @@ const props = defineProps({
   },
 })
 
-type Command = () => void
-interface CommandMap {
-  [key: string]: Command
-}
+const editorRef = ref<HTMLDivElement>()
+let editor: EditorView | null = null
 
-const COMMANDS: CommandMap = {
-  'CTRL+SHIFT+8': () => accessEditor()?.mark('-').focus().togglePrefix().run(),
-  'CTRL+SHIFT+7': () => accessEditor()?.mark('1.').focus().togglePrefix().run(),
-  'CTRL+SHIFT+.': () => accessEditor()?.mark('>').focus().togglePrefix().run(),
-  'CTRL+ALT+1': () => accessEditor()?.mark('#').focus().togglePrefix().run(),
-  'CTRL+ALT+2': () => accessEditor()?.mark('#', 2).focus().togglePrefix().run(),
-  'CTRL+ALT+3': () => accessEditor()?.mark('#', 3).focus().togglePrefix().run(),
-  'CTRL+ALT+4': () => accessEditor()?.mark('#', 4).focus().togglePrefix().run(),
-  'CTRL+b': () => accessEditor()?.mark('*', 2).focus().toggleSurround().run(),
-  'CTRL+i': () => accessEditor()?.mark('*').focus().toggleSurround().run(),
-  'CTRL+k': () => openLinkModal(),
-  'ALT+SHIFT+5': () => accessEditor()?.mark('~', 2).focus().toggleSurround().run(),
-}
+onMounted(() => {
+  const updateListener = EditorView.updateListener.of((update) => {
+    if (update.docChanged) {
+      currentValue.value = update.state.doc.toString()
+    }
+  })
+
+  const theme = EditorView.theme({
+    // in defualts.scss there's references to .cm-content and such to inherit global styles
+    '.cm-content, .cm-gutter': {
+      marginBlockEnd: '0.5rem',
+      padding: '0.5rem',
+      minHeight: '200px',
+      caretColor: 'var(--color-contrast)',
+      width: '100%',
+      overflowX: 'scroll',
+    },
+    '.cm-scroller': {
+      height: '100%',
+      overflow: 'visible',
+    },
+  })
+
+  const eventHandlers = EditorView.domEventHandlers({
+    paste: (ev, view) => {
+      // If the user's pasting a url, automatically convert it to a link with the selection as the text or the url itself if no selection content.
+      const url = ev.clipboardData?.getData('text/plain')
+
+      if (url) {
+        try {
+          cleanUrl(url)
+        } catch (error: unknown) {
+          if (error instanceof Error) {
+            return
+          }
+        }
+
+        const selection = view.state.selection.main
+        const selectionText = view.state.doc.sliceString(selection.from, selection.to)
+        const linkText = selectionText ? selectionText : url
+        const linkMarkdown = `[${linkText}](${url})`
+        return markdownCommands.replaceSelection(view, linkMarkdown)
+      }
+    },
+  })
+
+  const editorState = EditorState.create({
+    doc: props.modelValue,
+    extensions: [
+      theme,
+      eventHandlers,
+      updateListener,
+      keymap.of([indentWithTab]),
+      keymap.of(modrinthMarkdownEditorKeymap),
+      history(),
+      markdown({
+        addKeymap: false,
+      }),
+      keymap.of(historyKeymap),
+    ],
+  })
+
+  editor = new EditorView({
+    state: editorState,
+    parent: editorRef.value,
+    doc: props.modelValue,
+  })
+})
+
+onBeforeUnmount(() => {
+  editor?.destroy()
+})
 
 type ButtonAction = {
   label: string
   icon: Component
-  action: () => void
+  action: (editor: EditorView | null) => void
 }
 type ButtonGroup = {
   display: boolean
@@ -281,73 +358,56 @@ type ButtonGroupMap = {
   [key: string]: ButtonGroup
 }
 
+function runEditorCommand(command: (view: EditorView) => boolean, editor: EditorView | null) {
+  if (editor) {
+    command(editor)
+    editor.focus()
+  }
+}
+
+const composeCommandButton = (
+  name: string,
+  icon: Component,
+  command: (view: EditorView) => boolean
+) => {
+  return {
+    label: name,
+    icon,
+    action: (e: EditorView | null) => runEditorCommand(command, e),
+  }
+}
+
 const BUTTONS: ButtonGroupMap = {
   headings: {
     display: props.headingButtons,
-    hideOnMobile: true,
+    hideOnMobile: false,
     buttons: [
-      {
-        label: 'Heading 1',
-        icon: Heading1Icon,
-        action: () => accessEditor()?.mark('#').focus().togglePrefix().run(),
-      },
-      {
-        label: 'Heading 2',
-        icon: Heading2Icon,
-        action: () => accessEditor()?.mark('#', 2).focus().togglePrefix().run(),
-      },
-      {
-        label: 'Heading 3',
-        icon: Heading3Icon,
-        action: () => accessEditor()?.mark('#', 3).focus().togglePrefix().run(),
-      },
+      composeCommandButton('Heading 1', Heading1Icon, markdownCommands.toggleHeader),
+      composeCommandButton('Heading 2', Heading2Icon, markdownCommands.toggleHeader2),
+      composeCommandButton('Heading 3', Heading3Icon, markdownCommands.toggleHeader3),
     ],
   },
-  modifiers: {
+  stylizing: {
     display: true,
     hideOnMobile: false,
     buttons: [
-      {
-        label: 'Bold',
-        icon: BoldIcon,
-        action: () => accessEditor()?.mark('*', 2).focus().toggleSurround().run(),
-      },
-      {
-        label: 'Italic',
-        icon: ItalicIcon,
-        action: () => accessEditor()?.mark('*').focus().toggleSurround().run(),
-      },
-      {
-        label: 'Strikethrough',
-        icon: StrikethroughIcon,
-        action: () => accessEditor()?.mark('~', 2).focus().toggleSurround().run(),
-      },
-      {
-        label: 'Codeblock',
-        icon: CodeIcon,
-        action: () => accessEditor()?.mark('`', 3).focus().setSurroundingLines().run(),
-      },
+      composeCommandButton('Bold', BoldIcon, markdownCommands.toggleBold),
+      composeCommandButton('Italic', ItalicIcon, markdownCommands.toggleItalic),
+      composeCommandButton(
+        'Strikethrough',
+        StrikethroughIcon,
+        markdownCommands.toggleStrikethrough
+      ),
+      composeCommandButton('Code', CodeIcon, markdownCommands.toggleCodeBlock),
     ],
   },
-  multiline: {
+  lists: {
     display: true,
-    hideOnMobile: true,
+    hideOnMobile: false,
     buttons: [
-      {
-        label: 'Unordered list',
-        icon: ListBulletedIcon,
-        action: () => accessEditor()?.mark('-').focus().togglePrefix().run(),
-      },
-      {
-        label: 'Numbered list',
-        icon: ListOrderedIcon,
-        action: () => accessEditor()?.mark('1.').focus().togglePrefix().run(),
-      },
-      {
-        label: 'Blockquote',
-        icon: TextQuoteIcon,
-        action: () => accessEditor()?.mark('>').focus().togglePrefix().run(),
-      },
+      composeCommandButton('Bulleted list', ListBulletedIcon, markdownCommands.toggleBulletList),
+      composeCommandButton('Ordered list', ListOrderedIcon, markdownCommands.toggleOrderedList),
+      composeCommandButton('Quote', TextQuoteIcon, markdownCommands.toggleQuote),
     ],
   },
   components: {
@@ -375,44 +435,72 @@ const BUTTONS: ButtonGroupMap = {
 
 const currentValue = ref(props.modelValue)
 const previewMode = ref(false)
-const editorInput = ref<HTMLTextAreaElement | null>(null)
 
 const linkText = ref('')
 const linkUrl = ref('')
+const linkValidationErrorMessage = ref<string | undefined>()
 
-function cleanUrl(input: string) {
-  // TODO: Validate urls against zod or browser URL object
-  if (input.startsWith('http://')) {
-    return input.replace('http://', 'https://')
+function validateURL() {
+  if (!linkUrl.value || linkUrl.value === '') {
+    linkValidationErrorMessage.value = undefined
+    return
   }
-  if (!input.startsWith('https://')) {
-    input = 'https://' + input
+
+  try {
+    linkValidationErrorMessage.value = undefined
+    cleanUrl(linkUrl.value)
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      linkValidationErrorMessage.value = e.message
+    }
   }
-  return input
+}
+
+function cleanUrl(input: string): string {
+  let url
+
+  // Attempt to validate and parse the URL
+  try {
+    url = new URL(input)
+  } catch (e) {
+    throw new Error('Invalid URL. Make sure the URL is well-formed.')
+  }
+
+  // Check for unsupported protocols
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+    throw new Error('Unsupported protocol. Use http or https.')
+  }
+
+  // If the scheme is "http", automatically upgrade it to "https"
+  if (url.protocol === 'http:') {
+    url.protocol = 'https:'
+  }
+
+  return url.toString()
 }
 
 const linkMarkdown = computed(() => {
-  if (!linkUrl.value || !linkUrl.value.includes('.')) {
+  if (!linkUrl.value) {
     return ''
   }
-  const url = cleanUrl(linkUrl.value)
-  return url ? `[${linkText.value ? linkText.value : url}](${url})` : ''
+  try {
+    const url = cleanUrl(linkUrl.value)
+    return url ? `[${linkText.value ? linkText.value : url}](${url})` : ''
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error(error.message)
+    }
+  }
+  return ''
 })
 
-const imageAlt = ref('')
-const imageUrl = ref('')
+const imageMarkdown = computed(() => (linkMarkdown.value.length ? `!${linkMarkdown.value}` : ''))
 
-const imageMarkdown = computed(() => {
-  const url = cleanUrl(imageUrl.value)
-  return url ? `![${imageAlt.value}](${url})` : ''
-})
-
-const videoUrl = ref('')
 const youtubeRegex =
   /^(?:https?:)?(?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9_-]{7,15})(?:[?&][a-zA-Z0-9_-]+=[a-zA-Z0-9_-]+)*$/
 
 const videoMarkdown = computed(() => {
-  const match = youtubeRegex.exec(videoUrl.value)
+  const match = youtubeRegex.exec(linkUrl.value)
   if (match) {
     return `<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/${match[1]}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
   } else {
@@ -424,93 +512,21 @@ const linkModal = ref<InstanceType<typeof Modal> | null>(null)
 const imageModal = ref<InstanceType<typeof Modal> | null>(null)
 const videoModal = ref<InstanceType<typeof Modal> | null>(null)
 
-const onInput = () => {
-  emit('update:modelValue', currentValue.value)
-}
-
-const onKeyDown = (event: KeyboardEvent) => {
-  handleKeyCommand(event)
-  handleNewLine(event)
-}
-
-const handleNewLine = (event: KeyboardEvent) => {
-  if (event.key !== 'Enter') {
-    return
-  }
-  const editor = accessEditor()
-  if (!editor) {
-    return
-  }
-  let potentialPrefix = editor.getPrefixFromAbove()
-  // If the line above starts with n. or - or >, then we want to continue the list
-  // Only support the minimum needed for now
-  // Consider AST if not
-  const prefixRegex = /^(?:\d+\.|-|>)/
-  if (potentialPrefix && prefixRegex.test(potentialPrefix)) {
-    if (potentialPrefix.endsWith('.')) {
-      const number = parseInt(potentialPrefix)
-      if (isNaN(number)) {
-        return
-      }
-      potentialPrefix = (number + 1).toString() + '.'
-    }
-    event.preventDefault()
-    editor
-      .type('\n' + potentialPrefix + ' ', editor.getSelectionPosition().end)
-      .focus()
-      .run()
-  }
-}
-
-const handleKeyCommand = (event: KeyboardEvent) => {
-  let command
-
-  const control = navigator.userAgent.includes('Mac') ? event.metaKey : event.ctrlKey
-  const shift = event.shiftKey
-  const alt = event.altKey
-
-  if (!control && !alt) {
-    return
-  }
-
-  const commandKey = [control ? 'CTRL' : '', shift ? 'SHIFT' : '', alt ? 'ALT' : '', event.key]
-    .filter((i) => i !== '')
-    .join('+')
-
-  command = COMMANDS[commandKey]
-
-  if (command) {
-    event.preventDefault()
-    command()
-  }
-}
-
-/**
- * @returns {ReturnType<typeof createEditor> | undefined} The editor object to chain commands
- */
-const accessEditor = () => {
-  if (editorInput.value === null) {
-    return
-  }
-  return createEditor(editorInput.value, (str) => {
-    currentValue.value = str
-  })
-}
-
 function openLinkModal() {
-  linkText.value = accessEditor()?.getSelection() ?? ''
+  if (editor) linkText.value = markdownCommands.yankSelection(editor)
   linkUrl.value = ''
   linkModal.value?.show()
 }
 
 function openImageModal() {
-  imageAlt.value = ''
-  imageUrl.value = ''
+  linkText.value = ''
+  linkUrl.value = ''
   imageModal.value?.show()
 }
 
 function openVideoModal() {
-  videoUrl.value = ''
+  linkText.value = ''
+  linkUrl.value = ''
   videoModal.value?.show()
 }
 </script>
@@ -523,6 +539,8 @@ function openVideoModal() {
 .editor-action-row {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
   justify-content: space-between;
   margin-bottom: var(--gap-sm);
   gap: var(--gap-xs);
@@ -536,6 +554,7 @@ function openVideoModal() {
 .editor-actions {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--gap-xs);
 
