@@ -1,7 +1,7 @@
 <script setup>
 import { Hoverable, Avatar, Card } from '@'
 const props = defineProps({
-  icon: {
+  iconUrl: {
     type: String,
     default: '',
   },
@@ -9,11 +9,11 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  bio: {
+  id: {
     type: String,
     default: '',
   },
-  role: {
+  description: {
     type: String,
     default: '',
   },
@@ -23,38 +23,51 @@ const props = defineProps({
       return []
     },
   },
+  position: {
+    type: String,
+    default: 'bottom',
+  },
+  direction: {
+    type: String,
+    default: 'left',
+  },
 })
 </script>
 
 <template>
-  <Hoverable>
+  <Hoverable :position="position" :direction="direction">
     <slot />
     <template #popup>
       <Card class="user-tooltip">
         <div class="user-tooltip-header">
-          <Avatar :src="icon" />
+          <RouterLink :to="`collection/${id}`" class="button-base">
+            <Avatar :src="iconUrl" />
+          </RouterLink>
           <div class="user-tooltip-header-text">
-            <div class="user-tooltip-header-text-username">{{ name }}</div>
+            <RouterLink
+              class="user-tooltip-header-text-username button-base"
+              :to="`collection/${id}`"
+            >
+              {{ name }}
+            </RouterLink>
             <div class="projects">
               <div class="icons">
                 <Avatar
-                  v-for="member in [...props.projects].splice(0, 5)"
-                  v-tooltip="member.name"
-                  :key="member.name"
-                  :src="member.icon"
+                  v-for="project in [...props.projects].splice(0, 5)"
+                  :key="project.title"
+                  v-tooltip="project.title"
+                  :src="project.icon_url"
                 />
               </div>
             </div>
           </div>
         </div>
-        <div class="user-tooltip-header-text">
-          <div class="markdown-body user-tooltip-bio">
-            <p>
-              {{ bio }}
-            </p>
-          </div>
-          <slot name="button" />
+        <div class="markdown-body user-tooltip-bio">
+          <p>
+            {{ description }}
+          </p>
         </div>
+        <slot name="button" />
       </Card>
     </template>
   </Hoverable>
@@ -68,15 +81,24 @@ const props = defineProps({
   border-radius: var(--radius-md);
   border: 1px solid var(--color-button-bg);
   width: 20rem;
-  gap: var(--gap-sm);
+  gap: var(--gap-md);
+
+  :deep(.avatar) {
+    min-width: var(--size);
+    min-height: var(--size);
+  }
 
   .user-tooltip-header {
     display: flex;
     align-items: center;
     gap: var(--gap-md);
 
+    .avatar {
+      border: 1px solid var(--color-button-bg);
+    }
+
     :deep(.avatar) {
-      --size: 4rem;
+      --size: 3.5rem !important;
     }
   }
 
@@ -123,7 +145,7 @@ const props = defineProps({
     flex-direction: row;
 
     :deep(.avatar) {
-      --size: 2rem !important;
+      --size: 1.75rem !important;
     }
 
     .avatar:not(:first-child) {

@@ -1,12 +1,13 @@
 <script setup>
 import { Hoverable, Avatar, Card, Badge } from '@'
+import { formatNumber } from '@/helpers'
 
 defineProps({
-  icon: {
+  iconUrl: {
     type: String,
     default: '',
   },
-  name: {
+  username: {
     type: String,
     default: '',
   },
@@ -14,43 +15,64 @@ defineProps({
     type: String,
     default: '',
   },
-  stats: {
-    type: Array,
-    default() {
-      return []
-    },
-  },
   role: {
     type: String,
     default: '',
+  },
+  downloads: {
+    type: Number,
+    default: 0,
+  },
+  followers: {
+    type: Number,
+    default: 0,
+  },
+  position: {
+    type: String,
+    default: 'bottom',
+  },
+  direction: {
+    type: String,
+    default: 'left',
   },
 })
 </script>
 
 <template>
-  <Hoverable>
+  <Hoverable :position="position" :direction="direction">
     <slot />
     <template #popup>
       <Card class="user-tooltip">
         <div class="user-tooltip-header">
-          <Avatar :src="icon" circle />
-          <slot name="button" />
-        </div>
-        <div class="user-tooltip-header-text">
-          <div class="user-tooltip-header-text-username">{{ name }}</div>
-          <Badge v-if="role" :type="role" />
-          <div class="markdown-body user-tooltip-bio">
-            <p>
-              {{ bio }}
-            </p>
-          </div>
-          <div class="user-tooltip-stats">
-            <div v-for="stat in stats" :key="stat.label" class="user-tooltip-stats-item">
-              <div class="user-tooltip-stats-item-value">{{ stat.value }}</div>
-              <div class="user-tooltip-stats-item-label">{{ stat.label }}</div>
-            </div>
+          <RouterLink :to="`user/${username}`" class="button-base">
+            <Avatar :src="iconUrl" circle />
+          </RouterLink>
+          <div class="user-tooltip-header-text">
+            <RouterLink
+              class="user-tooltip-header-text-username button-base"
+              :to="`user/${username}`"
+            >
+              {{ username }}
+            </RouterLink>
+            <Badge :type="role" />
           </div>
         </div>
+        <div class="markdown-body user-tooltip-bio">
+          <p>
+            {{ bio }}
+          </p>
+        </div>
+        <div class="user-tooltip-stats">
+          <div class="user-tooltip-stats-item">
+            <div class="user-tooltip-stats-item-value">{{ formatNumber(downloads) }}</div>
+            <div class="user-tooltip-stats-item-label">Downloads</div>
+          </div>
+          <div class="user-tooltip-stats-item">
+            <div class="user-tooltip-stats-item-value">{{ formatNumber(followers) }}</div>
+            <div class="user-tooltip-stats-item-label">Followers</div>
+          </div>
+        </div>
+        <slot name="button" />
       </Card>
     </template>
   </Hoverable>
@@ -64,13 +86,24 @@ defineProps({
   border-radius: var(--radius-md);
   border: 1px solid var(--color-button-bg);
   width: 20rem;
-  gap: var(--gap-sm);
+  gap: var(--gap-md);
+
+  :deep(.avatar) {
+    min-width: var(--size);
+    min-height: var(--size);
+  }
 
   .user-tooltip-header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--gap-xl);
+    gap: var(--gap-md);
+
+    .avatar {
+      border: 1px solid var(--color-button-bg);
+    }
+
+    :deep(.avatar) {
+      --size: 3.5rem !important;
+    }
   }
 
   .user-tooltip-header-text {
@@ -80,6 +113,7 @@ defineProps({
     width: 100%;
 
     .user-tooltip-header-text-username {
+      width: fit-content;
       font-weight: bolder;
       font-size: var(--font-size-md);
       color: var(--color-contrast);
@@ -101,10 +135,6 @@ defineProps({
         color: var(--color-contrast);
       }
     }
-  }
-
-  .user-tooltip-bio {
-    margin: var(--gap-sm) 0;
   }
 }
 </style>

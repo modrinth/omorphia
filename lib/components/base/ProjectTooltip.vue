@@ -1,8 +1,9 @@
 <script setup>
 import { Hoverable, Avatar, Card } from '@'
+import { formatNumber } from '@/helpers'
 
 defineProps({
-  icon: {
+  iconUrl: {
     type: String,
     default: '',
   },
@@ -10,45 +11,72 @@ defineProps({
     type: String,
     default: '',
   },
-  bio: {
+  author: {
     type: String,
     default: '',
   },
-  stats: {
-    type: Array,
-    default() {
-      return []
-    },
-  },
-  projectType: {
+  description: {
     type: String,
     default: '',
+  },
+  downloads: {
+    type: Number,
+    default: 0,
+  },
+  followers: {
+    type: Number,
+    default: 0,
+  },
+  projectUrl: {
+    type: String,
+    default: '',
+  },
+  position: {
+    type: String,
+    default: 'bottom',
+  },
+  direction: {
+    type: String,
+    default: 'left',
   },
 })
 </script>
 
 <template>
-  <Hoverable>
+  <Hoverable :position="position" :direction="direction">
     <slot />
     <template #popup>
       <Card class="user-tooltip">
-        <div class="banner" />
         <div class="user-tooltip-header">
-          <Avatar :src="icon" />
+          <RouterLink :to="projectUrl" class="button-base">
+            <Avatar :src="iconUrl" />
+          </RouterLink>
           <div class="user-tooltip-header-text">
-            <div class="user-tooltip-header-text-username">{{ name }}</div>
-            <div class="user-tooltip-stats">
-              <div v-for="stat in stats" :key="stat.label" class="user-tooltip-stats-item">
-                <div class="user-tooltip-stats-item-value">{{ stat.value }}</div>
-                <div class="user-tooltip-stats-item-label">{{ stat.label }}</div>
-              </div>
+            <RouterLink class="user-tooltip-header-text-username button-base" :to="projectUrl">
+              {{ name }}
+            </RouterLink>
+            <div v-if="author" class="user-tooltip-header-text-author">
+              by
+              <RouterLink :to="`/user/${author}`" class="button-base">
+                {{ author }}
+              </RouterLink>
             </div>
           </div>
         </div>
         <div class="markdown-body user-tooltip-bio">
           <p>
-            {{ bio }}
+            {{ description }}
           </p>
+        </div>
+        <div class="user-tooltip-stats">
+          <div class="user-tooltip-stats-item">
+            <div class="user-tooltip-stats-item-value">{{ formatNumber(downloads) }}</div>
+            <div class="user-tooltip-stats-item-label">Downloads</div>
+          </div>
+          <div class="user-tooltip-stats-item">
+            <div class="user-tooltip-stats-item-value">{{ formatNumber(followers) }}</div>
+            <div class="user-tooltip-stats-item-label">Followers</div>
+          </div>
         </div>
         <slot name="button" />
       </Card>
@@ -64,14 +92,29 @@ defineProps({
   border-radius: var(--radius-md);
   border: 1px solid var(--color-button-bg);
   width: 20rem;
-  gap: var(--gap-sm);
+  gap: var(--gap-md);
+
+  :deep(.avatar) {
+    min-width: var(--size);
+    min-height: var(--size);
+  }
 
   .user-tooltip-header {
     display: flex;
     gap: var(--gap-md);
 
+    .avatar {
+      border: 1px solid var(--color-button-bg);
+    }
+
     :deep(.avatar) {
-      --size: 4rem;
+      --size: 3.5rem !important;
+    }
+
+    .user-tooltip-header-text-author {
+      .button-base {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -79,9 +122,9 @@ defineProps({
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
 
     .user-tooltip-header-text-username {
+      width: fit-content;
       font-weight: bolder;
       font-size: var(--font-size-md);
       color: var(--color-contrast);
@@ -92,7 +135,6 @@ defineProps({
     display: flex;
     width: 100%;
     gap: var(--gap-sm);
-    font-size: var(--font-size-sm);
 
     .user-tooltip-stats-item {
       display: flex;
@@ -104,17 +146,6 @@ defineProps({
         color: var(--color-contrast);
       }
     }
-  }
-
-  .banner {
-    width: calc(100% + 1.5rem);
-    height: 6rem;
-    background-color: var(--color-button-bg);
-    background-image: url('https://wsrv.nl/?url=https%3A%2F%2Fwww.bisecthosting.com%2Fimages%2FCF%2FSpirit%2FBH_NU_HEADER.png&n=-1');
-    background-size: cover;
-    background-position: center;
-    border-radius: var(--radius-md) var(--radius-md) 0 0;
-    margin: -0.75rem -0.75rem var(--gap-xs) -0.75rem;
   }
 }
 </style>
