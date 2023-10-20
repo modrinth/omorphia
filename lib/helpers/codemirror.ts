@@ -17,7 +17,9 @@ const toggleStrikethrough: Command = ({ state, dispatch }) => {
 }
 
 const toggleCodeBlock: Command = ({ state, dispatch }) => {
-  return toggleAround(state, dispatch, '\n```\n', '\n```\n')
+  const lineBreak = state.lineBreak
+  const codeBlockMark = lineBreak + '```' + lineBreak
+  return toggleAround(state, dispatch, codeBlockMark, codeBlockMark)
 }
 
 const toggleHeader: Command = ({ state, dispatch }) => {
@@ -98,6 +100,7 @@ const surroundedByText = (
   return 'none'
 }
 
+// TODO: Node based toggleAround so that we can support nested delimiters
 const toggleAround = (
   state: EditorState,
   dispatch: Dispatch,
@@ -144,12 +147,6 @@ const toggleAround = (
   })
 
   dispatch(transaction)
-
-  // if (isBlock) {
-  //   const cursorPos = from + open.length + 1
-  //   dispatch(state.update({ selection: { anchor: cursorPos, head: cursorPos } }))
-  // }
-
   return true
 }
 
@@ -165,31 +162,34 @@ const toggleLineStart = (state: EditorState, dispatch: Dispatch, text: string): 
   const selectedText = state.doc.sliceString(range.from, range.to)
   const shouldRemove = selectedText.startsWith(text)
 
+  let transaction: Transaction | undefined
+
   if (shouldRemove) {
     const numOfSelectedLinesThatNeedToBeRemoved = selectedText.split(lineBreak + text).length
     const modifiedText = selectedText.substring(text.length).replaceAll(lineBreak + text, lineBreak)
-    const transaction = state.update({
+    transaction = state.update({
       changes: { from: range.from, to: range.to, insert: modifiedText },
       selection: {
         anchor: state.selection.main.from - text.length,
         head: state.selection.main.to - text.length * numOfSelectedLinesThatNeedToBeRemoved,
       },
     })
-    dispatch(transaction)
-    return true
   } else {
     const modifiedText = text + selectedText.replaceAll(lineBreak, lineBreak + text)
     const lengthDiff = modifiedText.length - selectedText.length
-    const transaction = state.update({
+    transaction = state.update({
       changes: { from: range.from, to: range.to, insert: modifiedText },
       selection: {
         anchor: state.selection.main.from + text.length,
         head: state.selection.main.to + lengthDiff,
       },
     })
-    dispatch(transaction)
-    return true
   }
+
+  if (!transaction) return false
+
+  dispatch(transaction)
+  return true
 }
 
 const continueNodeTypes = ['ListItem', 'Blockquote']
@@ -245,6 +245,7 @@ const insertNewlineContinueMark: Command = (view): boolean => {
   const lineContent = state.doc.lineAt(head).text
 
   // Identify the patterns that should cancel the list continuation
+  // TODO: Implement Node based cancellation
   const cancelPatterns = ['```', '# ', '> ']
 
   const listMark = lastNode.getChild('ListMark')
