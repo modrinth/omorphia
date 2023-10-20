@@ -17,7 +17,7 @@
 
 <script setup>
 import { ref, defineProps, defineEmits, watchEffect } from 'vue'
-import Checkbox from '@/components/base/Checkbox.vue'
+import { Checkbox } from '@'
 
 const props = defineProps({
   facetName: {
@@ -55,11 +55,14 @@ const toggle = () => {
 <style lang="scss" scoped>
 .filter {
   margin-bottom: 0.5rem;
+
   :deep(.filter-text) {
     display: flex;
     align-items: center;
+
     .icon {
       height: 1rem;
+
       svg {
         margin-right: 0.25rem;
         width: 1rem;
@@ -67,6 +70,7 @@ const toggle = () => {
       }
     }
   }
+
   span {
     user-select: none;
   }
