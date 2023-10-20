@@ -294,10 +294,34 @@ onMounted(() => {
     },
   })
 
+  const eventHandlers = EditorView.domEventHandlers({
+    paste: (ev, view) => {
+      // If the user's pasting a url, automatically convert it to a link with the selection as the text or the url itself if no selection content.
+      const url = ev.clipboardData?.getData('text/plain')
+
+      if (url) {
+        try {
+          cleanUrl(url)
+        } catch (error: unknown) {
+          if (error instanceof Error) {
+            return
+          }
+        }
+
+        const selection = view.state.selection.main
+        const selectionText = view.state.doc.sliceString(selection.from, selection.to)
+        const linkText = selectionText ? selectionText : url
+        const linkMarkdown = `[${linkText}](${url})`
+        return markdownCommands.replaceSelection(view, linkMarkdown)
+      }
+    },
+  })
+
   const editorState = EditorState.create({
     doc: props.modelValue,
     extensions: [
       theme,
+      eventHandlers,
       updateListener,
       keymap.of([indentWithTab]),
       keymap.of(modrinthMarkdownEditorKeymap),

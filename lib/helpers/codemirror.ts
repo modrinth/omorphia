@@ -373,9 +373,9 @@ export const markdownCommands = commands
 export const modrinthMarkdownEditorKeymap: KeyBinding[] = [
   { key: 'Enter', run: insertNewlineContinueMark },
   { key: 'Backspace', run: deleteMarkupBackward },
-  { key: 'Mod-b', run: commands.toggleBold },
-  { key: 'Mod-i', run: commands.toggleItalic },
-  { key: 'Mod-e', run: commands.toggleCodeBlock },
-  { key: 'Mod-s', run: commands.toggleStrikethrough },
-  { key: 'Mod-Shift-.', run: commands.toggleQuote },
+  { key: 'Mod-b', run: toggleBold },
+  { key: 'Mod-i', run: toggleItalic },
+  { key: 'Mod-e', run: toggleCodeBlock },
+  { key: 'Mod-s', run: toggleStrikethrough },
+  { key: 'Mod-Shift-.', run: toggleQuote },
 ]
