@@ -17,7 +17,7 @@ const toggleStrikethrough: Command = ({ state, dispatch }) => {
 }
 
 const toggleCodeBlock: Command = ({ state, dispatch }) => {
-  return toggleAround(state, dispatch, '```', '```', true)
+  return toggleAround(state, dispatch, '\n```\n', '\n```\n')
 }
 
 const toggleHeader: Command = ({ state, dispatch }) => {
@@ -102,8 +102,7 @@ const toggleAround = (
   state: EditorState,
   dispatch: Dispatch,
   open: string,
-  close: string,
-  isBlock = false
+  close: string
 ): boolean => {
   const { from, to } = state.selection.main
 
@@ -135,17 +134,6 @@ const toggleAround = (
     return true
   }
 
-  if (isBlock) {
-    // Check for nested block elements (naive implementation)
-    const lineBreak = state.lineBreak
-    const lines = state.doc.sliceString(0).split(lineBreak)
-    for (const line of lines) {
-      if (line.startsWith('```') || line.startsWith('# ') || line.startsWith('> ')) {
-        return false // Block elements should not be nested
-      }
-    }
-  }
-
   // Add delimiters around the selected text
   const transaction = state.update({
     changes: [
@@ -157,10 +145,10 @@ const toggleAround = (
 
   dispatch(transaction)
 
-  if (isBlock) {
-    const cursorPos = from + open.length + 1
-    dispatch(state.update({ selection: { anchor: cursorPos, head: cursorPos } }))
-  }
+  // if (isBlock) {
+  //   const cursorPos = from + open.length + 1
+  //   dispatch(state.update({ selection: { anchor: cursorPos, head: cursorPos } }))
+  // }
 
   return true
 }
