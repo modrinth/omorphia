@@ -69,13 +69,14 @@ const props = defineProps({
         </div>
         <div class="members">
           <div class="icons">
-            <Avatar
+            <RouterLink
               v-for="member in [...props.members].splice(0, 5)"
               :key="member.username"
-              v-tooltip="member.username"
-              :src="member.icon_url"
-              circle
-            />
+              :to="`/user/${member.username}`"
+              class="button-base avatar"
+            >
+              <Avatar v-tooltip="member.username" :src="member.icon_url" circle />
+            </RouterLink>
             <div v-if="members.length > 5" class="avatar overflow">+{{ members.length - 5 }}</div>
           </div>
         </div>
