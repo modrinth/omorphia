@@ -34,4 +34,3 @@ const description = ref(null)
 
 <MarkdownEditor v-model="description" :heading-buttons="false" />
 ```
-a
