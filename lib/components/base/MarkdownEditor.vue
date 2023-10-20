@@ -46,6 +46,7 @@
         <Button :action="() => linkModal?.hide()"><XIcon /> Cancel</Button>
         <Button
           color="primary"
+          :disabled="linkValidationErrorMessage || !linkUrl"
           :action="
             () => {
               if (editor) markdownCommands.replaceSelection(editor, linkMarkdown)
@@ -112,6 +113,7 @@
         <Button :action="() => imageModal?.hide()"><XIcon /> Cancel</Button>
         <Button
           color="primary"
+          :disabled="linkValidationErrorMessage || !linkUrl"
           :action="
             () => {
               if (editor) markdownCommands.replaceSelection(editor, imageMarkdown)
@@ -162,6 +164,7 @@
         <Button :action="() => videoModal?.hide()"><XIcon /> Cancel</Button>
         <Button
           color="primary"
+          :disabled="linkValidationErrorMessage || !linkUrl"
           :action="
             () => {
               if (editor) markdownCommands.replaceSelection(editor, videoMarkdown)
@@ -226,7 +229,6 @@ import { EditorView, keymap } from '@codemirror/view'
 import { markdown } from '@codemirror/lang-markdown'
 import { indentWithTab, historyKeymap, history } from '@codemirror/commands'
 
-import { renderHighlightedString } from '@/helpers/highlight'
 import {
   Heading1Icon,
   Heading2Icon,
@@ -249,6 +251,7 @@ import {
   Toggle,
 } from '@/components'
 import { markdownCommands, modrinthMarkdownEditorKeymap } from '@/helpers/codemirror'
+import { renderHighlightedString } from '@/helpers/highlight'
 
 const props = defineProps({
   modelValue: {
@@ -469,7 +472,6 @@ const linkMarkdown = computed(() => {
 
 const imageMarkdown = computed(() => (linkMarkdown.value.length ? `!${linkMarkdown.value}` : ''))
 
-const videoUrl = ref('')
 const youtubeRegex =
   /^(?:https?:)?(?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9_-]{7,15})(?:[?&][a-zA-Z0-9_-]+=[a-zA-Z0-9_-]+)*$/
 
@@ -499,7 +501,8 @@ function openImageModal() {
 }
 
 function openVideoModal() {
-  videoUrl.value = ''
+  linkText.value = ''
+  linkUrl.value = ''
   videoModal.value?.show()
 }
 </script>
