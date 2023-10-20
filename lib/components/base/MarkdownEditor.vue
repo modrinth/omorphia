@@ -271,10 +271,13 @@ const props = defineProps({
 const editorRef = ref<HTMLDivElement>()
 let editor: EditorView | null = null
 
+const emit = defineEmits(['update:modelValue'])
+
 onMounted(() => {
   const updateListener = EditorView.updateListener.of((update) => {
     if (update.docChanged) {
       currentValue.value = update.state.doc.toString()
+      emit('update:modelValue', currentValue.value)
     }
   })
 
