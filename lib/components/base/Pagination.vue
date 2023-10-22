@@ -49,11 +49,13 @@
     </a>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { GapIcon, LeftArrowIcon, RightArrowIcon } from '@'
 
-const emit = defineEmits(['switch-page'])
+const emit = defineEmits<{
+  'switch-page': [page: number]
+}>()
 
 const props = defineProps({
   page: {

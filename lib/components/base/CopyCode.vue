@@ -6,16 +6,11 @@
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { CheckIcon, ClipboardCopyIcon } from '@'
 
-const props = defineProps({
-  text: {
-    type: String,
-    required: true,
-  },
-})
+const props = defineProps<{ text: string }>()
 
 const copied = ref(false)
 
