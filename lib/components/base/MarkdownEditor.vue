@@ -482,7 +482,7 @@ function cleanUrl(input: string): string {
   // Block certain domains for compliance
   const blockedDomains = ['forgecdn', 'cdn.discordapp', 'media.discordapp']
   if (blockedDomains.some((domain) => url.hostname.includes(domain))) {
-    throw new Error('Invalid URL. Make sure the URL is well-formed.')
+    throw new Error('Invalid URL. This domain is not allowed.')
   }
 
   return url.toString()
