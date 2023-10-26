@@ -7,7 +7,7 @@ const description2 = ref(null);
 const description3 = ref(null);
 
 const onImageUpload = (file) => {
-  return URL.createObjectURL(file);
+  return URL.createObjectURL(file).replace("blob:", "");
 };
 </script>
 
@@ -39,8 +39,9 @@ const description = ref(null)
 
 // Return a URL to the image for the editor to consume
 const onImageUpload = (file: File): string => {
-  // ... Upload the file to your server and return a URL
-  return URL.createObjectURL(file);
+  // Upload the file to your server and return a URL
+  // This example url will not work bc of proxy
+  return URL.createObjectURL(file).replace("blob:", "");
 };
 </script>
 
