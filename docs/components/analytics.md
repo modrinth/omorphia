@@ -99,6 +99,29 @@
 </Chart>
 </client-only>
 </DemoContainer>
+<DemoContainer>
+<client-only>
+<div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--gap-md);">
+  <CompactChart 
+    v-for="i in 4"
+    title="Downloads"
+    value="10,230"
+    :labels="[
+      '2021-01-01', '2021-01-02', '2021-01-03', '2021-01-04', '2021-01-05',
+      '2021-01-06', '2021-01-07', '2021-01-08', '2021-01-09', '2021-01-10',
+      '2021-01-11', '2021-01-12', '2021-01-13', '2021-01-14', '2021-01-15',
+      '2021-01-16', '2021-01-17'
+    ]"
+    :data="[
+      {
+        name: 'Downloads',
+        data: [240, 180, 210, 160, 250, 130, 220, 270, 120, 260, 200, 230, 140, 280, 190, 150, 170],
+      }
+    ]"  
+  />
+</div>
+</client-only>
+</DemoContainer>
 
 ```vue
 <Chart
@@ -125,4 +148,21 @@
     ... slot for toolbar stuff
   </template>
 </Chart>
+```
+
+```vue
+<CompactChart
+  title="Chart title"
+  value="Chart value"
+  :labels="['array', 'of', 'labels', 'for', 'x-axis', 'typically', 'dates']"
+  :data="[
+      {
+        name: 'Spirit',
+        data: ['array', 'of', 'data', 'equal', 'length', 'to', 'x-axis'],
+      },
+      ...
+  ]"
+  prefix="string or svg icon to append to each data point"
+  suffix="string or svg icon to append to each data point"
+/>
 ```

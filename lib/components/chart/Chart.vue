@@ -273,7 +273,7 @@ svg {
   font-size: var(--font-size-nm) !important;
 }
 
-:deep(.apexcharts-grid-boders) {
+:deep(.apexcharts-grid-borders) {
   line {
     stroke: var(--color-button-bg) !important;
   }
