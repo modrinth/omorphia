@@ -88,19 +88,7 @@
           prompt="Upload an image"
           class="btn"
           should-always-reset
-          @change="(event: DragEvent) => {
-            if (props.onImageUpload) {
-              const dataTransferItem = event.dataTransfer?.items[0]
-              const file = dataTransferItem?.getAsFile()
-              if (file) {
-                props.onImageUpload(file)
-                  .then((url) => {
-                    linkUrl = url
-                  })
-                  .catch(console.error)
-              }
-            }
-          }"
+          @change="handleImageUpload"
         >
           <UploadIcon />
         </FileInput>
@@ -529,6 +517,21 @@ const linkMarkdown = computed(() => {
   }
   return ''
 })
+
+const handleImageUpload = async (event: DragEvent) => {
+  if (props.onImageUpload) {
+    const dataTransferItem = event.dataTransfer?.items[0]
+    const file = dataTransferItem?.getAsFile()
+    if (file) {
+      try {
+        const url = await props.onImageUpload(file)
+        linkUrl.value = url
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
+}
 
 const imageMarkdown = computed(() => (linkMarkdown.value.length ? `!${linkMarkdown.value}` : ''))
 
