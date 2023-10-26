@@ -81,9 +81,8 @@
       <label class="label" for="insert-link-url">
         <span class="label__title">URL<span class="required">*</span></span>
       </label>
-      <div v-if="!props.onImageUpload" class="iconified-input btn-input-alternative">
+      <div v-if="props.onImageUpload" class="iconified-input btn-input-alternative">
         <FileInput
-          :max-size="262144"
           accept="image/png,image/jpeg,image/gif,image/webp"
           prompt="Upload an image"
           class="btn"
@@ -518,10 +517,9 @@ const linkMarkdown = computed(() => {
   return ''
 })
 
-const handleImageUpload = async (event: DragEvent) => {
+const handleImageUpload = async (files: FileList) => {
   if (props.onImageUpload) {
-    const dataTransferItem = event.dataTransfer?.items[0]
-    const file = dataTransferItem?.getAsFile()
+    const file = files[0]
     if (file) {
       try {
         const url = await props.onImageUpload(file)
