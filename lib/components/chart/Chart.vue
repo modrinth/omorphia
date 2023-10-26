@@ -90,10 +90,13 @@ const chartOptions = ref({
     axisTicks: {
       show: false,
     },
+    tooltip: {
+      enabled: false,
+    },
   },
   yaxis: {
     tooltip: {
-      enabled: true,
+      enabled: false,
     },
   },
   colors: props.colors,
