@@ -203,10 +203,10 @@ defineExpose({
     <div class="title-bar">
       <slot />
       <div v-if="!hideToolbar" class="toolbar">
-        <Button icon-only v-tooltip="'Download data as CSV'" @click="downloadCSV">
+        <Button v-tooltip="'Download data as CSV'" icon-only @click="downloadCSV">
           <DownloadIcon />
         </Button>
-        <Button icon-only v-tooltip="'Reset chart'" @click="resetChart">
+        <Button v-tooltip="'Reset chart'" icon-only @click="resetChart">
           <UpdatedIcon />
         </Button>
         <slot name="toolbar" />
