@@ -1,5 +1,6 @@
 # Analytics
 
+<client-only>
 <DemoContainer>
   <Chart 
     name="Chart"
@@ -93,6 +94,7 @@
   </template>
 </Chart>
 </DemoContainer>
+</client-only>
 
 ```vue
 <Chart
