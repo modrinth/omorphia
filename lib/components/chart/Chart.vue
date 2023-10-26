@@ -24,7 +24,13 @@ const props = defineProps({
   },
   colors: {
     type: Array,
-    default: () => ['var(--color-brand)'],
+    default: () => [
+      'var(--color-brand)',
+      'var(--color-blue)',
+      'var(--color-purple)',
+      'var(--color-red)',
+      'var(--color-orange)',
+    ],
   },
   prefix: {
     type: String,
@@ -113,6 +119,15 @@ const chartOptions = ref({
     fillOpacity: 1,
     hover: {
       size: 6,
+    },
+  },
+  plotOptions: {
+    bar: {
+      columnWidth: '80%',
+      endingShape: 'rounded',
+      borderRadius: 5,
+      borderRadiusApplication: 'end',
+      borderRadiusWhenStacked: 'last',
     },
   },
   tooltip: {
