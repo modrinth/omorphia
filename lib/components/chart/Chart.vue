@@ -1,8 +1,9 @@
 <script setup>
-import VueApexCharts from 'vue3-apexcharts'
 import dayjs from 'dayjs'
 import { Button, DownloadIcon, UpdatedIcon, Checkbox } from '@'
-import { ref } from 'vue'
+import { defineAsyncComponent, ref } from 'vue'
+
+const VueApexCharts = defineAsyncComponent(() => import('vue3-apexcharts'))
 
 const props = defineProps({
   name: {
