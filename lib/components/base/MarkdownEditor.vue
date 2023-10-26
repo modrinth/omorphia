@@ -81,7 +81,13 @@
       <label class="label" for="insert-link-url">
         <span class="label__title">URL<span class="required">*</span></span>
       </label>
-      <div v-if="props.onImageUpload" class="iconified-input btn-input-alternative">
+      <div v-if="props.onImageUpload" class="image-strategy-chips">
+        <Chips v-model="imageUploadOption" :items="['upload', 'link']" />
+      </div>
+      <div
+        v-if="props.onImageUpload && imageUploadOption === 'upload'"
+        class="iconified-input btn-input-alternative"
+      >
         <FileInput
           accept="image/png,image/jpeg,image/gif,image/webp"
           prompt="Upload an image"
@@ -91,9 +97,8 @@
         >
           <UploadIcon />
         </FileInput>
-        <div>or</div>
       </div>
-      <div class="iconified-input">
+      <div v-if="!props.onImageUpload || imageUploadOption === 'link'" class="iconified-input">
         <ImageIcon />
         <input
           id="insert-link-url"
@@ -263,6 +268,7 @@ import {
   Toggle,
   FileInput,
   UploadIcon,
+  Chips,
 } from '@/components'
 import { markdownCommands, modrinthMarkdownEditorKeymap } from '@/helpers/codemirror'
 import { renderHighlightedString } from '@/helpers/highlight'
@@ -532,6 +538,7 @@ const handleImageUpload = async (files: FileList) => {
   }
 }
 
+const imageUploadOption = ref<string>('upload')
 const imageMarkdown = computed(() => (linkMarkdown.value.length ? `!${linkMarkdown.value}` : ''))
 
 const youtubeRegex =
@@ -557,6 +564,7 @@ function openLinkModal() {
 }
 
 function openImageModal() {
+  linkValidationErrorMessage.value = undefined
   linkText.value = ''
   linkUrl.value = ''
   imageModal.value?.show()
@@ -676,6 +684,14 @@ function openVideoModal() {
   }
 }
 
+.image-strategy-chips {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-xs);
+  padding-bottom: var(--gap-md);
+}
+
 .btn-input-alternative {
   display: flex;
   flex-direction: column;
@@ -687,7 +703,7 @@ function openVideoModal() {
   .btn {
     width: 100%;
     padding-left: 2.5rem;
-    min-height: 2.5rem;
+    min-height: 4rem;
     display: flex;
     align-items: center;
     justify-content: start;
