@@ -524,6 +524,7 @@ const handleImageUpload = async (files: FileList) => {
       try {
         const url = await props.onImageUpload(file)
         linkUrl.value = url
+        validateURL()
       } catch (error) {
         console.error(error)
       }
