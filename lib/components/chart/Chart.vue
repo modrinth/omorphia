@@ -1,6 +1,6 @@
 <script setup>
 import dayjs from 'dayjs'
-import { Button, DownloadIcon, UpdatedIcon, Checkbox } from '@'
+import { Button, DownloadIcon, UpdatedIcon, Checkbox, formatNumber } from '@'
 import { defineAsyncComponent, ref } from 'vue'
 
 const VueApexCharts = defineAsyncComponent(() => import('vue3-apexcharts'))
@@ -127,7 +127,7 @@ const chartOptions = ref({
         (!props.hideTotal
           ? `<div class="value">
         ${props.prefix}
-        ${series.reduce((a, b) => a + b[dataPointIndex], 0).toString()}
+        ${formatNumber(series.reduce((a, b) => a + b[dataPointIndex], 0).toString(), false)}
         ${props.suffix}
         </div>`
           : ``) +
@@ -142,7 +142,7 @@ const chartOptions = ref({
                 </div>
                 <div class="value">
                   ${props.prefix}
-                  ${value[dataPointIndex]}
+                  ${formatNumber(value[dataPointIndex], false)}
                   ${props.suffix}
                 </div>
               </div>`

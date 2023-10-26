@@ -1,6 +1,7 @@
 <script setup>
-import { Card } from '@'
+import { Card, formatNumber } from '@'
 import { defineAsyncComponent, ref } from 'vue'
+import dayjs from 'dayjs'
 const VueApexCharts = defineAsyncComponent(() => import('vue3-apexcharts'))
 
 const props = defineProps({
@@ -109,16 +110,19 @@ const chartOptions = ref({
       return (
         '<div class="bar-tooltip">' +
         series
-          .map((value, index) =>
+          .map((value) =>
             value[dataPointIndex] > 0
               ? `<div class="list-entry">
-                <span class="circle" style="background-color: ${w.globals.colors[index]}"> </span>
                 <div class="label">
-                  ${w.globals.seriesNames[index]}
+                  <span class="circle" style="background-color: ${w.globals.colors[0]}"> </span>
+                  ${dayjs(w.globals.lastXAxis.categories[dataPointIndex]).format('MMM D')}
+                </div>
+                <div class="divider">
+                  |
                 </div>
                 <div class="value">
                   ${props.prefix}
-                  ${value[dataPointIndex]}
+                  ${formatNumber(value[dataPointIndex], false)}
                   ${props.suffix}
                 </div>
               </div>`
@@ -208,19 +212,10 @@ svg {
       margin: var(--gap-xs) 0;
     }
 
-    .seperated-entry {
+    .label {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
       align-items: center;
-    }
-
-    .title {
-      font-weight: bolder;
-    }
-
-    .label {
-      color: var(--color-contrast);
     }
 
     .value {
@@ -235,15 +230,8 @@ svg {
       display: flex;
       flex-direction: row;
       align-items: center;
-      font-size: var(--font-size-sm);
-
-      .value {
-        margin-left: auto;
-      }
-
-      .label {
-        margin-right: var(--gap-md);
-      }
+      justify-content: space-between;
+      gap: var(--gap-md);
     }
 
     .circle {
@@ -257,6 +245,11 @@ svg {
     svg {
       height: 1em;
       width: 1em;
+    }
+
+    .divider {
+      font-size: var(--font-size-lg);
+      font-weight: 400;
     }
   }
 }
