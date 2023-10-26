@@ -88,6 +88,7 @@ textarea,
 }
 
 input[type='number'] {
+  -moz-appearance: textfield !important;
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
