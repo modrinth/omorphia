@@ -7,7 +7,7 @@
       <div class="iconified-input">
         <AlignLeftIcon />
         <input id="insert-link-label" v-model="linkText" type="text" placeholder="Enter label..." />
-        <Button @click="() => (linkText = '')">
+        <Button class="r-btn" @click="() => (linkText = '')">
           <XIcon />
         </Button>
       </div>
@@ -23,7 +23,7 @@
           placeholder="Enter the link's URL..."
           @input="validateURL"
         />
-        <Button @click="() => (linkUrl = '')">
+        <Button class="r-btn" @click="() => (linkUrl = '')">
           <XIcon />
         </Button>
       </div>
@@ -74,13 +74,38 @@
           type="text"
           placeholder="Describe the image..."
         />
-        <Button @click="() => (linkText = '')">
+        <Button class="r-btn" @click="() => (linkText = '')">
           <XIcon />
         </Button>
       </div>
       <label class="label" for="insert-link-url">
         <span class="label__title">URL<span class="required">*</span></span>
       </label>
+      <div v-if="!props.onImageUpload" class="iconified-input btn-input-alternative">
+        <FileInput
+          :max-size="262144"
+          accept="image/png,image/jpeg,image/gif,image/webp"
+          prompt="Upload an image"
+          class="btn"
+          should-always-reset
+          @change="(event: DragEvent) => {
+            if (props.onImageUpload) {
+              const dataTransferItem = event.dataTransfer?.items[0]
+              const file = dataTransferItem?.getAsFile()
+              if (file) {
+                props.onImageUpload(file)
+                  .then((url) => {
+                    linkUrl = url
+                  })
+                  .catch(console.error)
+              }
+            }
+          }"
+        >
+          <UploadIcon />
+        </FileInput>
+        <div>or</div>
+      </div>
       <div class="iconified-input">
         <ImageIcon />
         <input
@@ -90,7 +115,7 @@
           placeholder="Enter the image URL..."
           @input="validateURL"
         />
-        <Button @click="() => (linkUrl = '')">
+        <Button class="r-btn" @click="() => (linkUrl = '')">
           <XIcon />
         </Button>
       </div>
@@ -141,7 +166,7 @@
           placeholder="Enter YouTube video URL"
           @input="validateURL"
         />
-        <Button @click="() => (linkUrl = '')">
+        <Button class="r-btn" @click="() => (linkUrl = '')">
           <XIcon />
         </Button>
       </div>
@@ -200,7 +225,7 @@
         </template>
       </div>
       <div class="preview">
-        <Toggle id="preview" v-model="previewMode" />
+        <Toggle id="preview" v-model="previewMode" :checked="previewMode" />
         <label class="label" for="preview"> Preview </label>
       </div>
     </div>
@@ -249,24 +274,26 @@ import {
   Button,
   Modal,
   Toggle,
+  FileInput,
+  UploadIcon,
 } from '@/components'
 import { markdownCommands, modrinthMarkdownEditorKeymap } from '@/helpers/codemirror'
 import { renderHighlightedString } from '@/helpers/highlight'
 
-const props = defineProps({
-  modelValue: {
-    type: String,
-    default: '',
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  headingButtons: {
-    type: Boolean,
-    default: true,
-  },
-})
+const props = withDefaults(
+  defineProps<{
+    modelValue: string
+    disabled: boolean
+    headingButtons: boolean
+    onImageUpload?: (file: File) => Promise<string>
+  }>(),
+  {
+    modelValue: '',
+    disabled: false,
+    headingButtons: true,
+    onImageUpload: undefined,
+  }
+)
 
 const editorRef = ref<HTMLDivElement>()
 let editor: EditorView | null = null
@@ -644,6 +671,24 @@ function openVideoModal() {
 
   .input-group {
     margin-top: var(--gap-lg);
+  }
+}
+
+.btn-input-alternative {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-xs);
+  padding-bottom: var(--gap-xs);
+
+  .btn {
+    width: 100%;
+    padding-left: 2.5rem;
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
   }
 }
 </style>

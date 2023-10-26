@@ -15,12 +15,14 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, ref, onMounted } from 'vue'
 
-const props = defineProps({
-  accept: {
-    type: String,
-    default: '',
-  },
-})
+const props = withDefaults(
+  defineProps<{
+    accept: string
+  }>(),
+  {
+    accept: '*',
+  }
+)
 
 const emit = defineEmits(['change'])
 
