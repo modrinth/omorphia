@@ -177,9 +177,7 @@ const chartOptions = ref({
 
 .chart {
   width: calc(100% + 3rem);
-  margin: 0 -1.5rem;
-  border-radius: var(--radius-md);
-  overflow: hidden;
+  margin: 0 -1.5rem 0.25rem -1.5rem;
 }
 
 svg {

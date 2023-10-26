@@ -73,18 +73,19 @@
     ]"
     :data="[
       {
-        name: 'Spirit',
+        name: 'Downloads',
         data: [120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280],
       },
       {
-        name: 'Ad Astra',
+        name: 'Revenue',
         data: [150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200, 205, 210, 215, 220, 225, 230],
       },
       {
-        name: 'Tempad',
+        name: 'Page views',
         data: [180, 182, 184, 186, 188, 190, 192, 194, 196, 198, 200, 202, 204, 206, 208, 210, 212],
       },
     ]"  
+    hide-total
     :colors="['#FF0000', '#00FF00', '#0000FF']"
     suffix="<svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor' stroke-width='2'><path stroke-linecap='round' stroke-linejoin='round' d='M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4' /></svg>"
   >
