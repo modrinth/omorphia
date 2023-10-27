@@ -276,6 +276,7 @@ import {
   Toggle,
   FileInput,
   UploadIcon,
+  InfoIcon,
   Chips,
 } from '@/components'
 import { markdownCommands, modrinthMarkdownEditorKeymap } from '@/helpers/codemirror'
