@@ -223,11 +223,19 @@
     </div>
     <div ref="editorRef" :class="{ hide: previewMode }" />
     <div v-if="!previewMode" class="info-blurb">
-      <InfoIcon />
-      <span>
-        This editor supports
-        <a href="https://docs.modrinth.com/docs/markdown" target="_blank">Markdown formatting</a>.
-      </span>
+      <div class="info-blurb">
+        <InfoIcon />
+        <span
+          >This editor supports
+          <a class="link" href="https://docs.modrinth.com/docs/markdown" target="_blank"
+            >Markdown formatting</a
+          >.</span
+        >
+      </div>
+      <div :class="{ hide: !props.maxLength }" class="max-length-label">
+        <span>Max length: </span>
+        <span>{{ props.maxLength ?? 'Unlimited' }}</span>
+      </div>
     </div>
     <div
       v-if="previewMode"
@@ -287,7 +295,7 @@ const props = withDefaults(
     disabled: false,
     headingButtons: true,
     onImageUpload: undefined,
-    placeholder: 'Write something...',
+    placeholder: undefined,
     maxLength: undefined,
   }
 )
@@ -668,6 +676,7 @@ function openVideoModal() {
 .info-blurb {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--gap-xs);
 }
 
