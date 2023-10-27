@@ -618,7 +618,7 @@ function openVideoModal() {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 .display-options {
   margin-bottom: var(--gap-sm);
 }
@@ -627,7 +627,6 @@ function openVideoModal() {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  overflow: hidden;
   justify-content: space-between;
   margin-bottom: var(--gap-sm);
   gap: var(--gap-xs);
