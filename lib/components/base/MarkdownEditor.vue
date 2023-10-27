@@ -280,6 +280,7 @@ const props = withDefaults(
     headingButtons: boolean
     onImageUpload?: (file: File) => Promise<string>
     placeholder?: string
+    maxLength?: number
   }>(),
   {
     modelValue: '',
@@ -287,6 +288,7 @@ const props = withDefaults(
     headingButtons: true,
     onImageUpload: undefined,
     placeholder: 'Write something...',
+    maxLength: undefined,
   }
 )
 
@@ -323,7 +325,6 @@ onMounted(() => {
     paste: (ev, view) => {
       // If the user's pasting a url, automatically convert it to a link with the selection as the text or the url itself if no selection content.
       const url = ev.clipboardData?.getData('text/plain')
-
       if (url) {
         try {
           cleanUrl(url)
@@ -338,6 +339,35 @@ onMounted(() => {
         const linkText = selectionText ? selectionText : url
         const linkMarkdown = `[${linkText}](${url})`
         return markdownCommands.replaceSelection(view, linkMarkdown)
+      }
+      // Check if the length of the document is greater than the max length. If it is, prevent the paste.
+      if (props.maxLength && view.state.doc.length > props.maxLength) {
+        ev.preventDefault()
+        return false
+      }
+    },
+    beforeinput: (ev, view) => {
+      if (props.maxLength && view.state.doc.length > props.maxLength) {
+        ev.preventDefault()
+        // Calculate how many characters to remove from the end
+        const excessLength = view.state.doc.length - props.maxLength
+        // Dispatch transaction to remove excess characters
+        view.dispatch({
+          changes: { from: view.state.doc.length - excessLength, to: view.state.doc.length },
+          selection: { anchor: props.maxLength, head: props.maxLength }, // Place cursor at the end
+        })
+        return true
+      }
+    },
+    blur: (_, view) => {
+      if (props.maxLength && view.state.doc.length > props.maxLength) {
+        // Calculate how many characters to remove from the end
+        const excessLength = view.state.doc.length - props.maxLength
+        // Dispatch transaction to remove excess characters
+        view.dispatch({
+          changes: { from: view.state.doc.length - excessLength, to: view.state.doc.length },
+          selection: { anchor: props.maxLength, head: props.maxLength }, // Place cursor at the end
+        })
       }
     },
   })

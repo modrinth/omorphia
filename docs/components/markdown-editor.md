@@ -3,6 +3,7 @@
 import { ref } from "vue";
 
 const description = ref(null);
+const description1 = ref(null);
 const description2 = ref(null);
 const description3 = ref(null);
 
@@ -15,7 +16,7 @@ The Markdown editor allows for easy formatting of Markdown text whether the user
 
 ## Full editor
 <DemoContainer>
-  <MarkdownEditor v-model="description" placeholder="Hello, world!" />
+  <MarkdownEditor v-model="description" />
 </DemoContainer>
 
 ```vue
@@ -24,7 +25,21 @@ import { ref } from "vue";
 const description = ref(null)
 </script>
 
-<MarkdownEditor v-model="description" placeholder="Hello, world!" />
+<MarkdownEditor v-model="description" />
+```
+
+## With options
+<DemoContainer>
+  <MarkdownEditor v-model="description1" placeholder="Enter a description" max-length="30" />
+</DemoContainer>
+
+```vue
+<script setup>
+import { ref } from "vue";
+const description = ref(null)
+</script>
+
+<MarkdownEditor v-model="description" placeholder="Enter a description" max-length="30" />
 ```
 
 ## With image upload
