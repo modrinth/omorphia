@@ -286,6 +286,10 @@ const props = withDefaults(
     modelValue: string
     disabled: boolean
     headingButtons: boolean
+    /**
+     * @param file The file to upload
+     * @throws If the file is invalid or the upload fails
+     */
     onImageUpload?: (file: File) => Promise<string>
     placeholder?: string
     maxLength?: number
@@ -573,6 +577,9 @@ const handleImageUpload = async (files: FileList) => {
         linkUrl.value = url
         validateURL()
       } catch (error) {
+        if (error instanceof Error) {
+          linkValidationErrorMessage.value = error.message
+        }
         console.error(error)
       }
     }
