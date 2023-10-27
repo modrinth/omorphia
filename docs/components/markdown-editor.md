@@ -15,7 +15,7 @@ The Markdown editor allows for easy formatting of Markdown text whether the user
 
 ## Full editor
 <DemoContainer>
-  <MarkdownEditor v-model="description" />
+  <MarkdownEditor v-model="description" placeholder="Hello, world!" />
 </DemoContainer>
 
 ```vue
@@ -24,7 +24,7 @@ import { ref } from "vue";
 const description = ref(null)
 </script>
 
-<MarkdownEditor v-model="description" />
+<MarkdownEditor v-model="description" placeholder="Hello, world!" />
 ```
 
 ## With image upload

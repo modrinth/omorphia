@@ -242,7 +242,7 @@
 import { type Component, computed, ref, onMounted, onBeforeUnmount } from 'vue'
 
 import { EditorState } from '@codemirror/state'
-import { EditorView, keymap } from '@codemirror/view'
+import { EditorView, keymap, placeholder as cm_placeholder } from '@codemirror/view'
 import { markdown } from '@codemirror/lang-markdown'
 import { indentWithTab, historyKeymap, history } from '@codemirror/commands'
 
@@ -279,12 +279,14 @@ const props = withDefaults(
     disabled: boolean
     headingButtons: boolean
     onImageUpload?: (file: File) => Promise<string>
+    placeholder?: string
   }>(),
   {
     modelValue: '',
     disabled: false,
     headingButtons: true,
     onImageUpload: undefined,
+    placeholder: 'Write something...',
   }
 )
 
@@ -353,6 +355,7 @@ onMounted(() => {
         addKeymap: false,
       }),
       keymap.of(historyKeymap),
+      cm_placeholder(props.placeholder || ''),
     ],
   })
 
