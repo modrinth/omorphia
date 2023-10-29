@@ -23,34 +23,30 @@
     <slot v-else />
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { CheckIcon, DropdownIcon } from '@'
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits<{
+	'update:modelValue': [boolean]
+}>()
 
-const props = defineProps({
-  label: {
-    type: String,
-    default: '',
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  description: {
-    type: String,
-    default: '',
-  },
-  modelValue: Boolean,
-  clickEvent: {
-    type: Function,
-    default: () => {},
-  },
-  collapsingToggleStyle: {
-    type: Boolean,
-    default: false,
-  },
-})
+const props = withDefaults(
+  defineProps<{
+    label: string,
+    disabled: boolean,
+    description: string,
+    modelValue: boolean,
+    clickEvent: Function,
+    collapsingToggleStyle: boolean
+  }>(),
+  {
+    label: '',
+    disabled: false,
+    description: '',
+    clickEvent: () => {},
+    collapsingToggleStyle: false,
+  }
+)
 
 function toggle() {
   if (!props.disabled) {
