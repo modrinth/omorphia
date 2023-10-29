@@ -58,7 +58,7 @@ withDefaults(
     typeOnly?: boolean
     alwaysShow?: boolean
     search?: boolean
-    categories?: Array<string>
+    categories?: string[]
   }>(),
   {
     type: 'mod',
