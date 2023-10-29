@@ -27,16 +27,16 @@
 import { CheckIcon, DropdownIcon } from '@'
 
 const emit = defineEmits<{
-	'update:modelValue': [boolean]
+  'update:modelValue': [boolean]
 }>()
 
 const props = withDefaults(
   defineProps<{
-    label: string,
-    disabled: boolean,
-    description: string,
-    modelValue: boolean,
-    clickEvent: Function,
+    label: string
+    disabled: boolean
+    description: string
+    modelValue: boolean
+    clickEvent: () => void
     collapsingToggleStyle: boolean
   }>(),
   {
