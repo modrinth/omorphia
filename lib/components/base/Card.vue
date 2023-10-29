@@ -20,7 +20,7 @@ const state = reactive({
   collapsed: props.defaultCollapsed,
 })
 
-function toggleCollapsed(): void {
+function toggleCollapsed() {
   state.collapsed = !state.collapsed
 }
 </script>
