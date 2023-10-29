@@ -1,28 +1,26 @@
-<script setup>
+<script setup lang="ts">
 import { Button, DropdownIcon } from '@'
 
 import { reactive } from 'vue'
 
-const props = defineProps({
-  collapsible: {
-    type: Boolean,
-    default: false,
-  },
-  defaultCollapsed: {
-    type: Boolean,
-    default: false,
-  },
-  noAutoBody: {
-    type: Boolean,
-    default: false,
-  },
-})
+const props = withDefaults(
+  defineProps<{
+    collapsible: boolean
+    defaultCollapsed: boolean
+    noAutoBody: boolean
+  }>(),
+  {
+    collapsible: false,
+    defaultCollapsed: false,
+    noAutoBody: false,
+  }
+)
 
 const state = reactive({
   collapsed: props.defaultCollapsed,
 })
 
-function toggleCollapsed() {
+function toggleCollapsed(): void {
   state.collapsed = !state.collapsed
 }
 </script>
