@@ -47,47 +47,29 @@
     </template>
   </span>
 </template>
-<script setup>
+<script setup lang="ts">
 import { GlobeIcon, ClientIcon, ServerIcon, InfoIcon } from '@'
 
-defineProps({
-  type: {
-    type: String,
-    default: 'mod',
-  },
-  serverSide: {
-    type: String,
-    required: false,
-    default: '',
-  },
-  clientSide: {
-    type: String,
-    required: false,
-    default: '',
-  },
-  typeOnly: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
-  alwaysShow: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
-  search: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
-  categories: {
-    type: Array,
-    required: false,
-    default() {
-      return []
-    },
-  },
-})
+withDefaults(
+  defineProps<{
+    type: string
+    serverSide?: string
+    clientSide?: string
+    typeOnly?: boolean
+    alwaysShow?: boolean
+    search?: boolean
+    categories?: Array<string>
+  }>(),
+  {
+    type: 'mod',
+    serverSide: '',
+    clientSide: '',
+    typeOnly: false,
+    alwaysShow: false,
+    search: false,
+    categories: () => [],
+  }
+)
 </script>
 <style lang="scss" scoped>
 .environment {
