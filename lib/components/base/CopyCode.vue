@@ -6,29 +6,17 @@
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref } from 'vue'
 import { CheckIcon, ClipboardCopyIcon } from '@'
-</script>
 
-<script>
-export default {
-  props: {
-    text: {
-      type: String,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      copied: false,
-    }
-  },
-  methods: {
-    async copyText() {
-      await navigator.clipboard.writeText(this.text)
-      this.copied = true
-    },
-  },
+const props = defineProps<{ text: string }>()
+
+const copied = ref(false)
+
+async function copyText() {
+  await navigator.clipboard.writeText(props.text)
+  copied.value = true
 }
 </script>
 
