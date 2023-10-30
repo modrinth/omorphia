@@ -369,19 +369,6 @@ onMounted(() => {
         return false
       }
     },
-    beforeinput: (ev, view) => {
-      if (props.maxLength && view.state.doc.length > props.maxLength) {
-        ev.preventDefault()
-        // Calculate how many characters to remove from the end
-        const excessLength = view.state.doc.length - props.maxLength
-        // Dispatch transaction to remove excess characters
-        view.dispatch({
-          changes: { from: view.state.doc.length - excessLength, to: view.state.doc.length },
-          selection: { anchor: props.maxLength, head: props.maxLength }, // Place cursor at the end
-        })
-        return true
-      }
-    },
     blur: (_, view) => {
       if (props.maxLength && view.state.doc.length > props.maxLength) {
         // Calculate how many characters to remove from the end
@@ -393,6 +380,13 @@ onMounted(() => {
         })
       }
     },
+  })
+
+  const inputFilter = EditorState.changeFilter.of((transaction) => {
+    if (props.maxLength && transaction.newDoc.length > props.maxLength) {
+      return false
+    }
+    return true
   })
 
   const editorState = EditorState.create({
@@ -409,6 +403,7 @@ onMounted(() => {
       }),
       keymap.of(historyKeymap),
       cm_placeholder(props.placeholder || ''),
+      inputFilter,
     ],
   })
 
