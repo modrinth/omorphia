@@ -37,11 +37,13 @@
         <span class="label__title">Preview</span>
         <span class="label__description"></span>
       </span>
-      <div
-        style="width: 100%"
-        class="markdown-body"
-        v-html="renderHighlightedString(linkMarkdown)"
-      />
+      <div class="markdown-body-wrapper">
+        <div
+          style="width: 100%"
+          class="markdown-body"
+          v-html="renderHighlightedString(linkMarkdown)"
+        />
+      </div>
       <div class="input-group push-right">
         <Button :action="() => linkModal?.hide()"><XIcon /> Cancel</Button>
         <Button
@@ -122,11 +124,13 @@
         <span class="label__title">Preview</span>
         <span class="label__description"></span>
       </span>
-      <div
-        style="width: 100%"
-        class="markdown-body"
-        v-html="renderHighlightedString(imageMarkdown)"
-      />
+      <div class="markdown-body-wrapper">
+        <div
+          style="width: 100%"
+          class="markdown-body"
+          v-html="renderHighlightedString(imageMarkdown)"
+        />
+      </div>
       <div class="input-group push-right">
         <Button :action="() => imageModal?.hide()"><XIcon /> Cancel</Button>
         <Button
@@ -173,11 +177,14 @@
         <span class="label__title">Preview</span>
         <span class="label__description"></span>
       </span>
-      <div
-        style="width: 100%"
-        class="markdown-body"
-        v-html="renderHighlightedString(videoMarkdown)"
-      />
+
+      <div class="markdown-body-wrapper">
+        <div
+          style="width: 100%"
+          class="markdown-body"
+          v-html="renderHighlightedString(videoMarkdown)"
+        />
+      </div>
       <div class="input-group push-right">
         <Button :action="() => videoModal?.hide()"><XIcon /> Cancel</Button>
         <Button
@@ -243,12 +250,15 @@
         </span>
       </div>
     </div>
-    <div
-      v-if="previewMode"
-      style="width: 100%"
-      class="markdown-body"
-      v-html="renderHighlightedString(currentValue ?? '')"
-    />
+    <div v-if="previewMode">
+      <div class="markdown-body-wrapper">
+        <div
+          style="width: 100%"
+          class="markdown-body"
+          v-html="renderHighlightedString(currentValue ?? '')"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -633,7 +643,7 @@ function openVideoModal() {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .file-input {
   width: 100%;
   padding: 1.5rem;
@@ -737,9 +747,10 @@ function openVideoModal() {
   gap: var(--gap-xs);
 }
 
-.markdown-body {
+.markdown-body-wrapper {
   border: 1px solid var(--color-button-bg);
   border-radius: var(--radius-md);
+  width: 100%;
   padding: var(--radius-md);
   min-height: 6rem;
 }
