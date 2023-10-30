@@ -633,7 +633,7 @@ function openVideoModal() {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .file-input {
   width: 100%;
   padding: 1.5rem;
@@ -651,14 +651,8 @@ function openVideoModal() {
 }
 
 .markdown-resource-link {
-  color: var(--color-primary);
-  text-decoration: none;
-  font-weight: 700;
-  transition: color 0.2s ease-in-out;
-
-  &:hover {
-    color: var(--color-primary-dark);
-  }
+  color: var(--color-link);
+  text-decoration: underline;
 }
 
 .display-options {
