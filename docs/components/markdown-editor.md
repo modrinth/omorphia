@@ -56,6 +56,9 @@ const description = ref(null)
 const onImageUpload = (file: File): string => {
   // Upload the file to your server and return a URL
   // This example url will not work bc of proxy
+
+  // If the upload fails, throw an error and it will show as
+  // a Validation Error to the user
   return URL.createObjectURL(file).replace("blob:", "");
 };
 </script>
