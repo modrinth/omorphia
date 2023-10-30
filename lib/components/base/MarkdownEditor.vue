@@ -230,7 +230,7 @@
           >This editor supports
           <a
             class="markdown-resource-link"
-            href="https://docs.modrinth.com/docs/markdown"
+            href="https://docs.modrinth.com/markdown"
             target="_blank"
             >Markdown formatting</a
           >.</span
