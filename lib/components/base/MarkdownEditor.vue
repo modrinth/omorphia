@@ -266,6 +266,7 @@ import {
   Heading3Icon,
   BoldIcon,
   ItalicIcon,
+  ScanEyeIcon,
   StrikethroughIcon,
   CodeIcon,
   ListBulletedIcon,
@@ -473,6 +474,7 @@ const BUTTONS: ButtonGroupMap = {
         markdownCommands.toggleStrikethrough
       ),
       composeCommandButton('Code', CodeIcon, markdownCommands.toggleCodeBlock),
+      composeCommandButton('Spoiler', ScanEyeIcon, markdownCommands.toggleSpoiler),
     ],
   },
   lists: {
