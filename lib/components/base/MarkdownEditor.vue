@@ -86,13 +86,14 @@
       </div>
       <div
         v-if="props.onImageUpload && imageUploadOption === 'upload'"
-        class="iconified-input btn-input-alternative"
+        class="btn-input-alternative"
       >
         <FileInput
           accept="image/png,image/jpeg,image/gif,image/webp"
           prompt="Upload an image"
-          class="btn"
+          long-style
           should-always-reset
+          class="file-input"
           @change="handleImageUpload"
         >
           <UploadIcon />
@@ -223,11 +224,24 @@
     </div>
     <div ref="editorRef" :class="{ hide: previewMode }" />
     <div v-if="!previewMode" class="info-blurb">
-      <InfoIcon />
-      <span>
-        This editor supports
-        <a href="https://docs.modrinth.com/docs/markdown" target="_blank">Markdown formatting</a>.
-      </span>
+      <div class="info-blurb">
+        <InfoIcon />
+        <span
+          >This editor supports
+          <a
+            class="markdown-resource-link"
+            href="https://docs.modrinth.com/docs/markdown"
+            target="_blank"
+            >Markdown formatting</a
+          >.</span
+        >
+      </div>
+      <div :class="{ hide: !props.maxLength }" class="max-length-label">
+        <span>Max length: </span>
+        <span>
+          {{ props.maxLength ? `${currentValue.length}/${props.maxLength}` : 'Unlimited' }}
+        </span>
+      </div>
     </div>
     <div
       v-if="previewMode"
@@ -268,6 +282,7 @@ import {
   Toggle,
   FileInput,
   UploadIcon,
+  InfoIcon,
   Chips,
 } from '@/components'
 import { markdownCommands, modrinthMarkdownEditorKeymap } from '@/helpers/codemirror'
@@ -278,9 +293,14 @@ const props = withDefaults(
     modelValue: string
     disabled: boolean
     headingButtons: boolean
+    /**
+     * @param file The file to upload
+     * @throws If the file is invalid or the upload fails
+     */
     onImageUpload?: (file: File) => Promise<string>
     placeholder?: string
     maxLength?: number
+    maxHeight?: number
   }>(),
   {
     modelValue: '',
@@ -289,6 +309,7 @@ const props = withDefaults(
     onImageUpload: undefined,
     placeholder: 'Write something...',
     maxLength: undefined,
+    maxHeight: undefined,
   }
 )
 
@@ -307,13 +328,15 @@ onMounted(() => {
 
   const theme = EditorView.theme({
     // in defualts.scss there's references to .cm-content and such to inherit global styles
-    '.cm-content, .cm-gutter': {
+    '.cm-content': {
       marginBlockEnd: '0.5rem',
       padding: '0.5rem',
       minHeight: '200px',
       caretColor: 'var(--color-contrast)',
       width: '100%',
       overflowX: 'scroll',
+      maxHeight: props.maxHeight ? `${props.maxHeight}px` : 'unset',
+      overflowY: 'scroll',
     },
     '.cm-scroller': {
       height: '100%',
@@ -565,6 +588,9 @@ const handleImageUpload = async (files: FileList) => {
         linkUrl.value = url
         validateURL()
       } catch (error) {
+        if (error instanceof Error) {
+          linkValidationErrorMessage.value = error.message
+        }
         console.error(error)
       }
     }
@@ -610,7 +636,34 @@ function openVideoModal() {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.file-input {
+  width: 100%;
+  padding: 1.5rem;
+  padding-left: 2.5rem;
+  background: var(--color-button-bg);
+  border: 2px dashed var(--color-gray);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: opacity 0.5s ease-in-out, filter 0.2s ease-in-out, scale 0.05s ease-in-out,
+    outline 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(0.85);
+  }
+}
+
+.markdown-resource-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: var(--color-primary-dark);
+  }
+}
+
 .display-options {
   margin-bottom: var(--gap-sm);
 }
@@ -619,7 +672,6 @@ function openVideoModal() {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  overflow: hidden;
   justify-content: space-between;
   margin-bottom: var(--gap-sm);
   gap: var(--gap-xs);
