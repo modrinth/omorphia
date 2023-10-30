@@ -90,7 +90,7 @@
       >
         <FileInput
           accept="image/png,image/jpeg,image/gif,image/webp"
-          prompt="Upload an image"
+          prompt="Drag and drop to upload or click to select file"
           long-style
           should-always-reset
           class="file-input"
