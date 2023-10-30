@@ -5,7 +5,7 @@
       :tabindex="page === 1 ? -1 : 0"
       class="left-arrow paginate has-icon"
       aria-label="Previous Page"
-      :href="linkFunction(page - 1)"
+      :href="linkFunction?(page - 1)"
       @click.prevent="page !== 1 ? switchPage(page - 1) : null"
     >
       <LeftArrowIcon />
@@ -15,7 +15,7 @@
       :key="'page-' + item + '-' + index"
       :class="{
         'page-number': page !== item,
-        shrink: (item as number) > 99,
+        shrink: item !== '-' && item > 99,
       }"
       class="page-number-container"
     >
@@ -26,9 +26,9 @@
         v-else
         :class="{
           'page-number current': page === item,
-          shrink: (item as number) > 99,
+          shrink: item > 99,
         }"
-        :href="linkFunction(item)"
+        :href="linkFunction?(item)"
         @click.prevent="page !== item ? switchPage(item) : null"
       >
         {{ item }}
@@ -42,7 +42,7 @@
       :tabindex="page === pages[pages.length - 1] ? -1 : 0"
       class="right-arrow paginate has-icon"
       aria-label="Next Page"
-      :href="linkFunction(page + 1)"
+      :href="linkFunction?(page + 1)"
       @click.prevent="page !== pages[pages.length - 1] ? switchPage(page + 1) : null"
     >
       <RightArrowIcon />
@@ -57,25 +57,21 @@ const emit = defineEmits<{
   'switch-page': [page: number]
 }>()
 
-const props = defineProps({
-  page: {
-    type: Number,
-    default: 1,
-  },
-  count: {
-    type: Number,
-    default: 1,
-  },
-  linkFunction: {
-    type: Function,
-    default() {
-      return null
-    },
-  },
-})
+const props = withDefaults(
+  defineProps<{
+    page: number
+    count: number
+    linkFunction: (page: number) => string | undefined
+  }>(),
+  {
+    page: 1,
+    count: 1,
+    linkFunction: () => undefined,
+  }
+)
 
 const pages = computed(() => {
-  let pages = []
+  let pages: ('-' | number)[] = []
 
   if (props.count > 7) {
     if (props.page + 3 >= props.count) {
@@ -100,12 +96,8 @@ const pages = computed(() => {
   return pages
 })
 
-function switchPage(newPage: number | string) {
-  let newPageNumber: number = newPage as number
-  emit('switch-page', newPageNumber)
-  if (newPage !== null && newPage !== '' && !isNaN(newPageNumber)) {
-    emit('switch-page', Math.min(Math.max(newPageNumber, 1), props.count))
-  }
+function switchPage(newPage: number) {
+  emit('switch-page', Math.min(Math.max(newPage, 1), props.count))
 }
 </script>
 
