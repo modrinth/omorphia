@@ -651,8 +651,19 @@ function openVideoModal() {
 }
 
 .markdown-resource-link {
+  cursor: pointer;
   color: var(--color-link);
-  text-decoration: underline;
+
+  &:focus-visible,
+  &:hover {
+    filter: brightness(1.2);
+    text-decoration: none;
+  }
+
+  &:active {
+    filter: brightness(1.1);
+    text-decoration: none;
+  }
 }
 
 .display-options {
