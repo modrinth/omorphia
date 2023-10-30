@@ -239,7 +239,7 @@
       <div :class="{ hide: !props.maxLength }" class="max-length-label">
         <span>Max length: </span>
         <span>
-          {{ props.maxLength ? `${currentValue.length}/${props.maxLength}` : 'Unlimited' }}
+          {{ props.maxLength ? `${currentValue?.length || 0}/${props.maxLength}` : 'Unlimited' }}
         </span>
       </div>
     </div>
