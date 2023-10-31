@@ -36,7 +36,7 @@
   </span>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {
   ModrinthIcon,
   ScaleIcon,
@@ -53,16 +53,15 @@ import {
   capitalizeString,
 } from '@'
 
-defineProps({
-  type: {
-    type: String,
-    required: true,
-  },
-  color: {
-    type: String,
-    default: '',
-  },
-})
+withDefaults(
+  defineProps<{
+    type: string
+    color: string
+  }>(),
+  {
+    color: '',
+  }
+)
 </script>
 <style lang="scss" scoped>
 .version-badge {
