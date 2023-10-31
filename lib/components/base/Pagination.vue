@@ -5,7 +5,7 @@
       :tabindex="page === 1 ? -1 : 0"
       class="left-arrow paginate has-icon"
       aria-label="Previous Page"
-      :href="linkFunction?.(page - 1)"
+      :href="linkFunction(page - 1)"
       @click.prevent="page !== 1 ? switchPage(page - 1) : null"
     >
       <LeftArrowIcon />
@@ -28,7 +28,7 @@
           'page-number current': page === item,
           shrink: item > 99,
         }"
-        :href="linkFunction?.(item)"
+        :href="linkFunction(item)"
         @click.prevent="page !== item ? switchPage(item) : null"
       >
         {{ item }}
@@ -42,7 +42,7 @@
       :tabindex="page === pages[pages.length - 1] ? -1 : 0"
       class="right-arrow paginate has-icon"
       aria-label="Next Page"
-      :href="linkFunction?.(page + 1)"
+      :href="linkFunction(page + 1)"
       @click.prevent="page !== pages[pages.length - 1] ? switchPage(page + 1) : null"
     >
       <RightArrowIcon />
@@ -66,7 +66,7 @@ const props = withDefaults(
   {
     page: 1,
     count: 1,
-    linkFunction: () => undefined,
+    linkFunction: (page: number) => void page,
   }
 )
 
