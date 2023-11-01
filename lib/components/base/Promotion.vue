@@ -41,7 +41,7 @@ const props = withDefaults(
   }
 )
 
-const target = computed<string>(() => (props.external ? '_blank' : '_self'))
+const target = computed(() => (props.external ? '_blank' : '_self'))
 </script>
 
 <style lang="scss">
