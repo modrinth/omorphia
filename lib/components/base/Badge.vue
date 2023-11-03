@@ -46,7 +46,7 @@
     <template v-else-if="type === 'draft'">
       <span
         v-tooltip="
-          'Your project cannot be found in search or your profile until you submit it for review.'
+          'Your project is only visible to members of the project until you submit it for review.'
         "
         ><FileTextIcon /> Draft
       </span>
