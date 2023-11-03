@@ -54,7 +54,7 @@
     <template v-else-if="type === 'archived'">
       <span
         v-tooltip="
-          'Your project is visible in search, and will display a archival notice to visitors.'
+          'Your project is visible in search and will display a archival notice to visitors.'
         "
       >
         <ArchiveIcon /> Archived
