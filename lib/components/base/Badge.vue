@@ -62,7 +62,7 @@
     </template>
     <template v-else-if="type === 'rejected'">
       <span
-        v-tooltip="'Your project cannot be published. See the moderation message for more details.'"
+        v-tooltip="'Your project cannot be published. See the Moderation tab of the project for more details.'"
         ><XIcon /> Rejected</span
       >
     </template>
