@@ -32,7 +32,7 @@
       </span>
     </template>
     <template v-else-if="type === 'private'">
-      <span v-tooltip="'Your project is only visible to members of your team.'">
+      <span v-tooltip="'Your project is only visible to members of the project.'">
         <LockIcon /> Private
       </span>
     </template>
