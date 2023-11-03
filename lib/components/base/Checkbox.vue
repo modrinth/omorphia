@@ -24,7 +24,7 @@
   </div>
 </template>
 <script setup>
-import { CheckIcon, DropdownIcon } from '@/components'
+import { CheckIcon, DropdownIcon } from '@'
 </script>
 <script>
 import { defineComponent } from 'vue'
@@ -86,6 +86,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  outline: none;
 
   min-width: 1rem;
   min-height: 1rem;

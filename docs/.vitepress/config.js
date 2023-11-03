@@ -1,5 +1,6 @@
 import { resolve } from 'path'
 import svgLoader from 'vite-svg-loader'
+import eslintPlugin from 'vite-plugin-eslint'
 
 export default {
   title: 'Omorphia',
@@ -26,6 +27,10 @@ export default {
           { text: 'Drop Area', link: '/components/drop-area' },
           { text: 'Icons', link: '/components/icons' },
           { text: 'Pagination', link: '/components/pagination' },
+          { text: 'Modal', link: '/components/modal' },
+          { text: 'Dropdown Select', link: '/components/dropdown-select' },
+          { text: 'Popout Menu', link: '/components/popout-menu' },
+          { text: 'Overflow Menu', link: '/components/overflow-menu' },
           { text: 'Project Card', link: '/components/project-card' },
           { text: 'Environment Indicator', link: '/components/environment-indicator' },
           { text: 'Categories', link: '/components/categories' },
@@ -33,13 +38,23 @@ export default {
           { text: 'Text Logo', link: '/components/text-logo' },
           { text: 'Slider', link: '/components/slider' },
           { text: 'Text Inputs', link: '/components/text-inputs' },
+          { text: 'Number Inputs', link: '/components/number-inputs' },
           { text: 'Search Filter', link: '/components/search-filter' },
+          { text: 'Toggle', link: '/components/toggle' },
+          { text: 'Promotion', link: '/components/promotion' },
+          { text: 'Markdown', link: '/components/markdown' },
+          { text: 'Markdown Editor', link: '/components/markdown-editor' },
+          { text: 'Copy Code', link: '/components/copy-code' },
+          { text: 'Notifications', link: '/components/notifications' },
+          { text: 'Share Modal', link: '/components/share-modal' },
+          { text: 'Analytics', link: '/components/analytics' },
+          { text: 'Search dropdown', link: '/components/search-dropdown' },
         ],
       },
     ],
     footer: {
       message:
-        'Released under the <a href="https://github.com/modrinth/omoprhia/blob/main/LICENSE">GPLv3 License</a>.',
+        'Released under the <a href="https://github.com/modrinth/omoprhia/blob/main/LICENSE">AGPLv3 License</a>.',
       copyright: 'Copyright © 2023-present <a href="https://modrinth.com">Rinth, Inc.</a>',
     },
   },
@@ -59,6 +74,7 @@ export default {
           ],
         },
       }),
+      eslintPlugin(),
     ],
     resolve: {
       alias: {

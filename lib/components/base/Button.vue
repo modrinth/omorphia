@@ -1,5 +1,5 @@
 <script setup>
-import { ExternalIcon, UnknownIcon } from '@/components'
+import { ExternalIcon, UnknownIcon } from '@'
 
 import { computed } from 'vue'
 
@@ -24,9 +24,31 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  large: {
+    type: Boolean,
+    default: false,
+  },
+  outline: {
+    type: Boolean,
+    default: false,
+  },
+  transparent: {
+    type: Boolean,
+    default: false,
+  },
+  hoverFilled: {
+    type: Boolean,
+    default: false,
+  },
+  hoverFilledOnly: {
+    type: Boolean,
+    default: false,
+  },
 })
 
-const accentedButton = computed(() => ['danger', 'primary'].includes(props.color))
+const accentedButton = computed(() =>
+  ['danger', 'primary', 'red', 'orange', 'green', 'blue', 'purple', 'gray'].includes(props.color)
+)
 </script>
 
 <template>
@@ -34,12 +56,22 @@ const accentedButton = computed(() => ['danger', 'primary'].includes(props.color
     v-if="link"
     class="btn"
     :class="{
-      'icon-only': props.iconOnly,
-      'btn-raised': color === 'raised',
+      'icon-only': iconOnly,
+      'btn-large': large,
       'btn-danger': color === 'danger',
       'btn-primary': color === 'primary',
       'btn-secondary': color === 'secondary',
       'btn-highlight': color === 'highlight',
+      'btn-red': color === 'red',
+      'btn-orange': color === 'orange',
+      'btn-green': color === 'green',
+      'btn-blue': color === 'blue',
+      'btn-purple': color === 'purple',
+      'btn-gray': color === 'gray',
+      'btn-transparent': transparent,
+      'btn-hover-filled': hoverFilled,
+      'btn-hover-filled-only': hoverFilledOnly,
+      'btn-outline': outline,
       'color-accent-contrast': accentedButton,
     }"
     :to="link"
@@ -53,12 +85,22 @@ const accentedButton = computed(() => ['danger', 'primary'].includes(props.color
     v-else
     class="btn"
     :class="{
-      'icon-only': props.iconOnly,
-      'btn-raised': color === 'raised',
+      'icon-only': iconOnly,
+      'btn-large': large,
       'btn-danger': color === 'danger',
       'btn-primary': color === 'primary',
       'btn-secondary': color === 'secondary',
       'btn-highlight': color === 'highlight',
+      'btn-red': color === 'red',
+      'btn-orange': color === 'orange',
+      'btn-green': color === 'green',
+      'btn-blue': color === 'blue',
+      'btn-purple': color === 'purple',
+      'btn-gray': color === 'gray',
+      'btn-transparent': transparent,
+      'btn-hover-filled': hoverFilled,
+      'btn-hover-filled-only': hoverFilledOnly,
+      'btn-outline': outline,
       'color-accent-contrast': accentedButton,
     }"
     @click="action"

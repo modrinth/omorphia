@@ -2,12 +2,18 @@
   <label :class="{ 'long-style': longStyle }" @drop.prevent="handleDrop" @dragover.prevent>
     <slot />
     {{ prompt }}
-    <input type="file" :multiple="multiple" :accept="accept" @change="handleChange" />
+    <input
+      type="file"
+      :multiple="multiple"
+      :accept="accept"
+      :disabled="disabled"
+      @change="handleChange"
+    />
   </label>
 </template>
 
 <script>
-import { fileIsValid } from '@/components/utils'
+import { fileIsValid } from '@'
 import { defineComponent } from 'vue'
 export default defineComponent({
   props: {
@@ -39,6 +45,10 @@ export default defineComponent({
       default: false,
     },
     longStyle: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -90,7 +100,7 @@ label {
     border-radius: var(--radius-sm);
     border: dashed 0.3rem var(--color-contrast);
     cursor: pointer;
-    color: var(--color-accent-contrast);
+    color: var(--color-contrast);
   }
 }
 </style>

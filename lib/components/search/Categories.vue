@@ -9,27 +9,16 @@
   </div>
 </template>
 <script setup>
-import { formatCategory } from '@/components/utils'
-</script>
-<script>
-export default {
-  name: 'Categories',
-  props: {
-    categories: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
-    type: {
-      type: String,
-      required: true,
+import { formatCategory } from '@'
+
+defineProps({
+  categories: {
+    type: Array,
+    default() {
+      return []
     },
   },
-  methods: {
-    formatCategory,
-  },
-}
+})
 </script>
 
 <style lang="scss" scoped>
@@ -42,8 +31,11 @@ export default {
   :deep(span) {
     display: flex;
     flex-direction: row;
-    color: var(--color-icon);
     align-items: center;
+
+    &:not(.version-badge) {
+      color: var(--color-gray);
+    }
 
     svg {
       width: 1rem;

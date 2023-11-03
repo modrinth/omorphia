@@ -2,14 +2,19 @@
   <img
     v-if="src"
     ref="img"
-    :class="`avatar size-${size} ${circle ? 'circle' : ''} ${noShadow ? 'no-shadow' : ''}`"
+    :class="`avatar size-${size} ${circle ? 'circle' : ''} ${noShadow ? 'no-shadow' : ''} ${
+      pixelated ? 'pixelated' : ''
+    } ${raised ? 'raised' : ''}`"
     :src="src"
     :alt="alt"
     :loading="loading"
+    @load="updatePixelated"
   />
   <svg
     v-else
-    :class="`avatar size-${size} ${circle ? 'circle' : ''} ${noShadow ? 'no-shadow' : ''}`"
+    :class="`avatar size-${size} ${circle ? 'circle' : ''} ${noShadow ? 'no-shadow' : ''} ${
+      raised ? 'raised' : ''
+    }`"
     xml:space="preserve"
     fill-rule="evenodd"
     stroke-linecap="round"
@@ -29,52 +34,48 @@
   </svg>
 </template>
 
-<script>
-export default {
-  props: {
-    src: {
-      type: String,
-      default: null,
-    },
-    alt: {
-      type: String,
-      default: '',
-    },
-    size: {
-      type: String,
-      default: 'sm',
-      validator(value) {
-        return ['xs', 'sm', 'md', 'lg'].includes(value)
-      },
-    },
-    circle: {
-      type: Boolean,
-      default: false,
-    },
-    noShadow: {
-      type: Boolean,
-      default: false,
-    },
-    loading: {
-      type: String,
-      default: 'eager',
-    },
-  },
-  mounted() {
-    if (this.$refs.img && this.$refs.img.naturalWidth) {
-      const isPixelated = () => {
-        if (this.$refs.img.naturalWidth < 96 && this.$refs.img.naturalWidth > 0) {
-          this.$refs.img.style.imageRendering = 'pixelated'
-        }
-      }
+<script setup>
+import { ref } from 'vue'
 
-      if (this.$refs.img.naturalWidth) {
-        isPixelated()
-      } else {
-        this.$refs.img.onload = isPixelated
-      }
-    }
+const pixelated = ref(false)
+const img = ref(null)
+
+defineProps({
+  src: {
+    type: String,
+    default: null,
   },
+  alt: {
+    type: String,
+    default: '',
+  },
+  size: {
+    type: String,
+    default: 'sm',
+    validator(value) {
+      return ['xxs', 'xs', 'sm', 'md', 'lg', 'none'].includes(value)
+    },
+  },
+  circle: {
+    type: Boolean,
+    default: false,
+  },
+  noShadow: {
+    type: Boolean,
+    default: false,
+  },
+  loading: {
+    type: String,
+    default: 'lazy',
+  },
+  raised: {
+    type: Boolean,
+    default: false,
+  },
+})
+
+function updatePixelated() {
+  pixelated.value = !!(img.value && img.value.naturalWidth && img.value.naturalWidth <= 96)
 }
 </script>
 
@@ -88,6 +89,12 @@ export default {
   object-fit: cover;
   max-width: var(--size) !important;
   max-height: var(--size) !important;
+
+  &.size-xxs {
+    --size: 1.25rem;
+    box-shadow: var(--shadow-inset), var(--shadow-card);
+    border-radius: var(--radius-sm);
+  }
 
   &.size-xs {
     --size: 2.5rem;
@@ -111,12 +118,24 @@ export default {
     border-radius: var(--radius-lg);
   }
 
+  &.size-none {
+    --size: unset;
+  }
+
   &.circle {
     border-radius: 50%;
   }
 
   &.no-shadow {
     box-shadow: none;
+  }
+
+  &.pixelated {
+    image-rendering: pixelated;
+  }
+
+  &.raised {
+    background-color: var(--color-raised-bg);
   }
 }
 </style>

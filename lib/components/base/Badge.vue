@@ -1,10 +1,10 @@
 <template>
   <span :class="'version-badge ' + color + ' type--' + type">
-    <template v-if="color"> <span class="circle" /> {{ type }} </template>
+    <template v-if="color"> <span class="circle" /> {{ capitalizeString(type) }}</template>
 
     <!-- User roles -->
-    <template v-else-if="type === 'admin'"> <ModrinthIcon /> Modrinth Team </template>
-    <template v-else-if="type === 'moderator'"> <ScaleIcon /> Moderator </template>
+    <template v-else-if="type === 'admin'"> <ModrinthIcon /> Modrinth Team</template>
+    <template v-else-if="type === 'moderator'"> <ScaleIcon /> Moderator</template>
     <template v-else-if="type === 'creator'"><BoxIcon /> Creator</template>
 
     <!-- Project statuses -->
@@ -74,8 +74,18 @@
 
     <!-- Team members -->
     <template v-else-if="type === 'accepted'"><CheckIcon /> Accepted</template>
-    <template v-else-if="type === 'pending'"> <UpdatedIcon /> Pending </template>
-    <template v-else> <span class="circle" /> {{ type }} </template>
+    <template v-else-if="type === 'pending'"> <UpdatedIcon /> Pending</template>
+
+    <!-- Transaction statuses (pending, processing reused) -->
+    <template v-else-if="type === 'processed'"><CheckIcon /> Processed</template>
+    <template v-else-if="type === 'failed'"><XIcon /> Failed</template>
+    <template v-else-if="type === 'returned'"><XIcon /> Returned</template>
+
+    <!-- Report status -->
+    <template v-else-if="type === 'closed'"> <XIcon /> Closed</template>
+
+    <!-- Other -->
+    <template v-else> <span class="circle" /> {{ capitalizeString(type) }} </template>
   </span>
 </template>
 
@@ -93,7 +103,8 @@ import {
   CheckIcon,
   LockIcon,
   CalendarIcon,
-} from '@/components'
+  capitalizeString,
+} from '@'
 
 defineProps({
   type: {
@@ -106,7 +117,6 @@ defineProps({
   },
 })
 </script>
-
 <style lang="scss" scoped>
 .version-badge {
   display: flex;
@@ -129,8 +139,11 @@ defineProps({
     margin-right: 0.25rem;
   }
 
+  &.type--closed,
   &.type--withheld,
   &.type--rejected,
+  &.type--returned,
+  &.type--failed,
   &.red {
     --badge-color: var(--color-red);
   }
@@ -145,6 +158,8 @@ defineProps({
 
   &.type--accepted,
   &.type--admin,
+  &.type--processed,
+  &.type--approved-general,
   &.green {
     --badge-color: var(--color-green);
   }
@@ -152,12 +167,12 @@ defineProps({
   &.type--creator,
   &.type--approved,
   &.blue {
-    color: var(--color-blue);
+    --badge-color: var(--color-blue);
   }
 
   &.type--unlisted,
   &.purple {
-    color: var(--color-purple);
+    --badge-color: var(--color-purple);
   }
 
   &.type--private,

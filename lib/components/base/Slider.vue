@@ -2,6 +2,17 @@
   <div class="root-container">
     <div class="slider-component">
       <div class="slide-container">
+        <div class="snap-points-wrapper">
+          <div class="snap-points">
+            <div
+              v-for="snapPoint in props.snapPoints"
+              :key="snapPoint"
+              class="snap-point"
+              :class="{ green: snapPoint <= currentValue }"
+              :style="{ left: ((snapPoint - props.min) / (props.max - props.min)) * 100 + '%' }"
+            ></div>
+          </div>
+        </div>
         <input
           ref="input"
           v-model="currentValue"
@@ -10,20 +21,20 @@
           :max="max"
           :step="step"
           class="slider"
+          :class="{
+            disabled: disabled,
+          }"
+          :disabled="disabled"
           :style="{
             '--current-value': currentValue,
             '--min-value': min,
             '--max-value': max,
           }"
-          @input="onInput($refs.input.value)"
+          @input="onInputWithSnap($refs.input.value)"
         />
         <div class="slider-range">
-          <span>
-            {{ min }}
-          </span>
-          <span>
-            {{ max }}
-          </span>
+          <span> {{ min }} {{ unit }} </span>
+          <span> {{ max }} {{ unit }} </span>
         </div>
       </div>
     </div>
@@ -32,73 +43,90 @@
       :value="currentValue"
       type="text"
       class="slider-input"
+      :disabled="disabled"
       @change="onInput($refs.value.value)"
     />
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Slider',
-  props: {
-    value: {
-      type: Number,
-      default: 0,
-    },
-    min: {
-      type: Number,
-      default: 0,
-    },
-    max: {
-      type: Number,
-      default: 100,
-    },
-    step: {
-      type: Number,
-      default: 10,
-    },
-    forceStep: {
-      type: Boolean,
-      default: true,
-    },
+<script setup>
+import { ref } from 'vue'
+
+const emit = defineEmits(['update:modelValue'])
+
+const props = defineProps({
+  modelValue: {
+    type: Number,
+    default: 0,
   },
-  emits: ['input'],
-  data() {
-    return {
-      sliderWidth: 0,
-      objectPosition: 0,
-      startOffset: 0,
-      currentValue: Math.max(this.min, this.value).toString(),
+  min: {
+    type: Number,
+    default: 0,
+  },
+  max: {
+    type: Number,
+    default: 100,
+  },
+  step: {
+    type: Number,
+    default: 10,
+  },
+  forceStep: {
+    type: Boolean,
+    default: true,
+  },
+  snapPoints: {
+    type: Array,
+    default: () => [],
+  },
+  snapRange: {
+    type: Number,
+    default: 100,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  unit: {
+    type: String,
+    default: '',
+  },
+})
+
+let currentValue = ref(Math.max(props.min, props.modelValue).toString())
+
+const inputValueValid = (newValue) => {
+  const parsedValue = parseInt(newValue)
+
+  if (parsedValue < props.min) {
+    currentValue.value = props.min.toString()
+  } else if (parsedValue > props.max) {
+    currentValue.value = props.max.toString()
+  } else if (!parsedValue) {
+    currentValue.value = props.min.toString()
+  } else {
+    currentValue.value = (parsedValue - (props.forceStep ? parsedValue % props.step : 0)).toString()
+  }
+
+  emit('update:modelValue', parseInt(currentValue.value))
+}
+
+const onInputWithSnap = (value) => {
+  let parsedValue = parseInt(value)
+
+  for (let snapPoint of props.snapPoints) {
+    const distance = Math.abs(snapPoint - parsedValue)
+
+    if (distance < props.snapRange) {
+      parsedValue = snapPoint
     }
-  },
-  computed: {
-    inputValueValid: {
-      get() {
-        return this.$refs.value.value
-      },
-      set(newValue) {
-        const parsedValue = parseInt(newValue)
-        if (parsedValue < this.min) {
-          this.currentValue = this.min.toString()
-        } else if (parsedValue > this.max) {
-          this.currentValue = this.max.toString()
-        } else if (!parsedValue) {
-          this.currentValue = this.min.toString()
-        } else {
-          this.currentValue = (
-            parsedValue - (this.forceStep ? parsedValue % this.step : 0)
-          ).toString()
-        }
-        this.$refs.value.value = this.currentValue
-        this.$emit('input', parseInt(this.currentValue))
-      },
-    },
-  },
-  methods: {
-    onInput(value) {
-      this.inputValueValid = parseInt(value)
-    },
-  },
+  }
+
+  inputValueValid(parsedValue)
+}
+
+const onInput = (value) => {
+  inputValueValid(value)
 }
 </script>
 
@@ -107,21 +135,25 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-.slide-container .slider {
-  width: 12rem;
-}
-
-.slider-component .slide-container {
   width: 100%;
+}
+
+.slider-component,
+.slide-container {
+  width: 100%;
+
+  position: relative;
 }
 
 .slider-component .slide-container .slider {
   -webkit-appearance: none;
   appearance: none;
+  position: relative;
+
   border-radius: var(--radius-sm);
   height: 0.25rem;
+  width: 100%;
+
   background: linear-gradient(
     to right,
     var(--color-brand),
@@ -148,6 +180,7 @@ export default {
 }
 
 .slider-component .slide-container .slider::-moz-range-thumb {
+  border: none;
   width: 0.75rem;
   height: 0.75rem;
   background: var(--color-brand);
@@ -156,16 +189,51 @@ export default {
   transition: 0.2s;
 }
 
-.slider-component .slide-container .slider:hover::-webkit-slider-thumb {
+.slider-component .slide-container .slider:hover::-webkit-slider-thumb:not(.disabled) {
   width: 1rem;
   height: 1rem;
   transition: 0.2s;
 }
 
-.slider-component .slide-container .slider:hover::-moz-range-thumb {
+.slider-component .slide-container .slider:hover::-moz-range-thumb:not(.disabled) {
   width: 1rem;
   height: 1rem;
   transition: 0.2s;
+}
+
+.slider-component .slide-container .snap-points-wrapper {
+  position: absolute;
+  height: 50%;
+  width: 100%;
+
+  .snap-points {
+    position: relative;
+    display: inline-block;
+
+    vertical-align: middle;
+
+    width: calc(100% - 0.75rem);
+    height: 0.75rem;
+
+    left: calc(0.75rem / 2);
+
+    .snap-point {
+      position: absolute;
+      display: inline-block;
+
+      width: 0.25rem;
+      height: 100%;
+      border-radius: var(--radius-sm);
+
+      background-color: var(--color-base);
+
+      transform: translateX(calc(-0.25rem / 2));
+
+      &.green {
+        background-color: var(--color-brand);
+      }
+    }
+  }
 }
 
 .slider-input {
@@ -179,5 +247,10 @@ export default {
   justify-content: space-between;
   font-size: 0.75rem;
   margin: 0;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 </style>

@@ -3,8 +3,8 @@
     <Button
       v-for="item in items"
       :key="item"
-      class="iconified-button"
-      :class="{ selected: selected === item }"
+      class="btn"
+      :class="{ selected: selected === item, capitalize: capitalize }"
       @click="toggleItem(item)"
     >
       <CheckIcon v-if="selected === item" />
@@ -13,7 +13,7 @@
   </div>
 </template>
 <script setup>
-import { CheckIcon, Button } from '@/components'
+import { CheckIcon, Button } from '@'
 </script>
 <script>
 import { defineComponent } from 'vue'
@@ -35,6 +35,10 @@ export default defineComponent({
     formatLabel: {
       default: (x) => x,
       type: Function,
+    },
+    capitalize: {
+      type: Boolean,
+      default: true,
     },
   },
   emits: ['update:modelValue'],
@@ -71,8 +75,10 @@ export default defineComponent({
   grid-gap: 0.5rem;
   flex-wrap: wrap;
 
-  .iconified-button {
-    text-transform: capitalize;
+  .btn {
+    &.capitalize {
+      text-transform: capitalize;
+    }
 
     svg {
       width: 1em;

@@ -1,64 +1,68 @@
 <template>
   <Checkbox
     class="filter"
-    :model-value="activeFilters.includes(facetName)"
+    :model-value="isActive"
     :description="displayName"
-    @update:model-value="toggle()"
+    @update:model-value="toggle"
   >
     <div class="filter-text">
-      <div v-if="icon" aria-hidden="true" class="icon" v-html="icon" />
+      <div v-if="props.icon" aria-hidden="true" class="icon" v-html="props.icon" />
       <div v-else class="icon">
         <slot />
       </div>
-      <span aria-hidden="true"> {{ displayName }}</span>
+      <span aria-hidden="true"> {{ props.displayName }}</span>
     </div>
   </Checkbox>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
-import Checkbox from '@/components/base/Checkbox.vue'
-export default defineComponent({
-  components: {
-    Checkbox,
+<script setup>
+import { ref, defineProps, defineEmits, watchEffect } from 'vue'
+import { Checkbox } from '@'
+
+const props = defineProps({
+  facetName: {
+    type: String,
+    default: '',
   },
-  props: {
-    facetName: {
-      type: String,
-      default: '',
-    },
-    displayName: {
-      type: String,
-      default: '',
-    },
-    icon: {
-      type: String,
-      default: '',
-    },
-    activeFilters: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
+  displayName: {
+    type: String,
+    default: '',
   },
-  emits: ['toggle'],
-  methods: {
-    toggle() {
-      this.$emit('toggle', this.facetName)
+  icon: {
+    type: String,
+    default: '',
+  },
+  activeFilters: {
+    type: Array,
+    default() {
+      return []
     },
   },
 })
+
+const isActive = ref(props.activeFilters.value.includes(props.facetName))
+const emit = defineEmits(['toggle'])
+
+watchEffect(() => {
+  isActive.value = props.activeFilters.value.includes(props.facetName)
+})
+
+const toggle = () => {
+  emit('toggle', props.facetName)
+}
 </script>
 
 <style lang="scss" scoped>
 .filter {
   margin-bottom: 0.5rem;
+
   :deep(.filter-text) {
     display: flex;
     align-items: center;
+
     .icon {
       height: 1rem;
+
       svg {
         margin-right: 0.25rem;
         width: 1rem;
@@ -66,6 +70,7 @@ export default defineComponent({
       }
     }
   }
+
   span {
     user-select: none;
   }

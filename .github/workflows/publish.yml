@@ -17,15 +17,30 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-          registry-url: https://registry.npmjs.org/
-
+      - name: Install pnpm via corepack
+        shell: bash
+        run: |
+          corepack enable
+          corepack prepare --activate
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --check-cache
-
-      - name: Build package
-        run: npm run build
-
-      - name: Publish package
-        run: npm publish
+        run: pnpm install
+      - name: Build
+        run: pnpm build
+      - name: Set publishing config
+        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Publish package
+        run: pnpm publish --no-git-checks --access=public --tag latest
