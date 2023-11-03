@@ -16,7 +16,7 @@
     <template v-else-if="type === 'unlisted'">
       <span
         v-tooltip="
-          'Your project is published, and can be accessed with a link, but cannot be seen in search or on your profile.'
+          'Your project is published and can be accessed with a link, but it is not accessible in search or on your profile.'
         "
       >
         <EyeOffIcon /> Unlisted
