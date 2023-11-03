@@ -25,7 +25,7 @@
     <template v-else-if="type === 'withheld'">
       <span
         v-tooltip="
-          'Your project is accessible by link but is not published in search. See the moderation message for more details.'
+          'Your project is accessible by link but is not published in search. See the Moderation tab of the project for more details.'
         "
       >
         <EyeOffIcon /> Withheld
