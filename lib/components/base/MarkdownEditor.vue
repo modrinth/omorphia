@@ -37,11 +37,13 @@
         <span class="label__title">Preview</span>
         <span class="label__description"></span>
       </span>
-      <div
-        style="width: 100%"
-        class="markdown-body"
-        v-html="renderHighlightedString(linkMarkdown)"
-      />
+      <div class="markdown-body-wrapper">
+        <div
+          style="width: 100%"
+          class="markdown-body"
+          v-html="renderHighlightedString(linkMarkdown)"
+        />
+      </div>
       <div class="input-group push-right">
         <Button :action="() => linkModal?.hide()"><XIcon /> Cancel</Button>
         <Button
@@ -86,13 +88,14 @@
       </div>
       <div
         v-if="props.onImageUpload && imageUploadOption === 'upload'"
-        class="iconified-input btn-input-alternative"
+        class="btn-input-alternative"
       >
         <FileInput
           accept="image/png,image/jpeg,image/gif,image/webp"
-          prompt="Upload an image"
-          class="btn"
+          prompt="Drag and drop to upload or click to select file"
+          long-style
           should-always-reset
+          class="file-input"
           @change="handleImageUpload"
         >
           <UploadIcon />
@@ -121,11 +124,13 @@
         <span class="label__title">Preview</span>
         <span class="label__description"></span>
       </span>
-      <div
-        style="width: 100%"
-        class="markdown-body"
-        v-html="renderHighlightedString(imageMarkdown)"
-      />
+      <div class="markdown-body-wrapper">
+        <div
+          style="width: 100%"
+          class="markdown-body"
+          v-html="renderHighlightedString(imageMarkdown)"
+        />
+      </div>
       <div class="input-group push-right">
         <Button :action="() => imageModal?.hide()"><XIcon /> Cancel</Button>
         <Button
@@ -172,11 +177,14 @@
         <span class="label__title">Preview</span>
         <span class="label__description"></span>
       </span>
-      <div
-        style="width: 100%"
-        class="markdown-body"
-        v-html="renderHighlightedString(videoMarkdown)"
-      />
+
+      <div class="markdown-body-wrapper">
+        <div
+          style="width: 100%"
+          class="markdown-body"
+          v-html="renderHighlightedString(videoMarkdown)"
+        />
+      </div>
       <div class="input-group push-right">
         <Button :action="() => videoModal?.hide()"><XIcon /> Cancel</Button>
         <Button
@@ -223,18 +231,34 @@
     </div>
     <div ref="editorRef" :class="{ hide: previewMode }" />
     <div v-if="!previewMode" class="info-blurb">
-      <InfoIcon />
-      <span>
-        This editor supports
-        <a href="https://docs.modrinth.com/docs/markdown" target="_blank">Markdown formatting</a>.
-      </span>
+      <div class="info-blurb">
+        <InfoIcon />
+        <span
+          >This editor supports
+          <a
+            class="markdown-resource-link"
+            href="https://docs.modrinth.com/markdown"
+            target="_blank"
+            >Markdown formatting</a
+          >.</span
+        >
+      </div>
+      <div :class="{ hide: !props.maxLength }" class="max-length-label">
+        <span>Max length: </span>
+        <span>
+          {{ props.maxLength ? `${currentValue?.length || 0}/${props.maxLength}` : 'Unlimited' }}
+        </span>
+      </div>
     </div>
-    <div
-      v-if="previewMode"
-      style="width: 100%"
-      class="markdown-body"
-      v-html="renderHighlightedString(currentValue ?? '')"
-    />
+    <div v-if="previewMode">
+      <div class="markdown-body-wrapper">
+        <div
+          style="width: 100%"
+          class="markdown-body"
+          v-html="renderHighlightedString(currentValue ?? '')"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -242,7 +266,7 @@
 import { type Component, computed, ref, onMounted, onBeforeUnmount } from 'vue'
 
 import { EditorState } from '@codemirror/state'
-import { EditorView, keymap } from '@codemirror/view'
+import { EditorView, keymap, placeholder as cm_placeholder } from '@codemirror/view'
 import { markdown } from '@codemirror/lang-markdown'
 import { indentWithTab, historyKeymap, history } from '@codemirror/commands'
 
@@ -252,6 +276,7 @@ import {
   Heading3Icon,
   BoldIcon,
   ItalicIcon,
+  ScanEyeIcon,
   StrikethroughIcon,
   CodeIcon,
   ListBulletedIcon,
@@ -268,6 +293,7 @@ import {
   Toggle,
   FileInput,
   UploadIcon,
+  InfoIcon,
   Chips,
 } from '@/components'
 import { markdownCommands, modrinthMarkdownEditorKeymap } from '@/helpers/codemirror'
@@ -278,13 +304,23 @@ const props = withDefaults(
     modelValue: string
     disabled: boolean
     headingButtons: boolean
+    /**
+     * @param file The file to upload
+     * @throws If the file is invalid or the upload fails
+     */
     onImageUpload?: (file: File) => Promise<string>
+    placeholder?: string
+    maxLength?: number
+    maxHeight?: number
   }>(),
   {
     modelValue: '',
     disabled: false,
     headingButtons: true,
     onImageUpload: undefined,
+    placeholder: 'Write something...',
+    maxLength: undefined,
+    maxHeight: undefined,
   }
 )
 
@@ -303,13 +339,15 @@ onMounted(() => {
 
   const theme = EditorView.theme({
     // in defualts.scss there's references to .cm-content and such to inherit global styles
-    '.cm-content, .cm-gutter': {
+    '.cm-content': {
       marginBlockEnd: '0.5rem',
       padding: '0.5rem',
       minHeight: '200px',
       caretColor: 'var(--color-contrast)',
       width: '100%',
       overflowX: 'scroll',
+      maxHeight: props.maxHeight ? `${props.maxHeight}px` : 'unset',
+      overflowY: 'scroll',
     },
     '.cm-scroller': {
       height: '100%',
@@ -321,7 +359,6 @@ onMounted(() => {
     paste: (ev, view) => {
       // If the user's pasting a url, automatically convert it to a link with the selection as the text or the url itself if no selection content.
       const url = ev.clipboardData?.getData('text/plain')
-
       if (url) {
         try {
           cleanUrl(url)
@@ -337,7 +374,30 @@ onMounted(() => {
         const linkMarkdown = `[${linkText}](${url})`
         return markdownCommands.replaceSelection(view, linkMarkdown)
       }
+      // Check if the length of the document is greater than the max length. If it is, prevent the paste.
+      if (props.maxLength && view.state.doc.length > props.maxLength) {
+        ev.preventDefault()
+        return false
+      }
     },
+    blur: (_, view) => {
+      if (props.maxLength && view.state.doc.length > props.maxLength) {
+        // Calculate how many characters to remove from the end
+        const excessLength = view.state.doc.length - props.maxLength
+        // Dispatch transaction to remove excess characters
+        view.dispatch({
+          changes: { from: view.state.doc.length - excessLength, to: view.state.doc.length },
+          selection: { anchor: props.maxLength, head: props.maxLength }, // Place cursor at the end
+        })
+      }
+    },
+  })
+
+  const inputFilter = EditorState.changeFilter.of((transaction) => {
+    if (props.maxLength && transaction.newDoc.length > props.maxLength) {
+      return false
+    }
+    return true
   })
 
   const editorState = EditorState.create({
@@ -353,6 +413,8 @@ onMounted(() => {
         addKeymap: false,
       }),
       keymap.of(historyKeymap),
+      cm_placeholder(props.placeholder || ''),
+      inputFilter,
     ],
   })
 
@@ -422,6 +484,7 @@ const BUTTONS: ButtonGroupMap = {
         markdownCommands.toggleStrikethrough
       ),
       composeCommandButton('Code', CodeIcon, markdownCommands.toggleCodeBlock),
+      composeCommandButton('Spoiler', ScanEyeIcon, markdownCommands.toggleSpoiler),
     ],
   },
   lists: {
@@ -532,6 +595,9 @@ const handleImageUpload = async (files: FileList) => {
         linkUrl.value = url
         validateURL()
       } catch (error) {
+        if (error instanceof Error) {
+          linkValidationErrorMessage.value = error.message
+        }
         console.error(error)
       }
     }
@@ -577,7 +643,39 @@ function openVideoModal() {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.file-input {
+  width: 100%;
+  padding: 1.5rem;
+  padding-left: 2.5rem;
+  background: var(--color-button-bg);
+  border: 2px dashed var(--color-gray);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: opacity 0.5s ease-in-out, filter 0.2s ease-in-out, scale 0.05s ease-in-out,
+    outline 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(0.85);
+  }
+}
+
+.markdown-resource-link {
+  cursor: pointer;
+  color: var(--color-link);
+
+  &:focus-visible,
+  &:hover {
+    filter: brightness(1.2);
+    text-decoration: none;
+  }
+
+  &:active {
+    filter: brightness(1.1);
+    text-decoration: none;
+  }
+}
+
 .display-options {
   margin-bottom: var(--gap-sm);
 }
@@ -586,7 +684,6 @@ function openVideoModal() {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  overflow: hidden;
   justify-content: space-between;
   margin-bottom: var(--gap-sm);
   gap: var(--gap-xs);
@@ -635,6 +732,7 @@ function openVideoModal() {
 .info-blurb {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--gap-xs);
 }
 
@@ -649,9 +747,10 @@ function openVideoModal() {
   gap: var(--gap-xs);
 }
 
-.markdown-body {
+.markdown-body-wrapper {
   border: 1px solid var(--color-button-bg);
   border-radius: var(--radius-md);
+  width: 100%;
   padding: var(--radius-md);
   min-height: 6rem;
 }

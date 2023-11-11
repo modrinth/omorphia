@@ -7,6 +7,7 @@ import DemoContainer from './DemoContainer.vue'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 
 import './compat.scss'
+import './style.scss'
 
 /** @type {import('vitepress').Theme} */
 export default {
