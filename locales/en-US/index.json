@@ -1,5 +1,11 @@
 {
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "Copy code to clipboard"
+  },
+  "omorphia.component.pagination.label.next-page": {
+    "defaultMessage": "Next Page"
+  },
+  "omorphia.component.pagination.label.previous-page": {
+    "defaultMessage": "Previous Page"
   }
 }
