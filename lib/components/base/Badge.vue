@@ -8,13 +8,13 @@
     <template v-else-if="type === 'creator'"><BoxIcon /> {{ formatMessage(messages.creatorLabel) }}</template>
 
     <!-- Project statuses -->
-    <template v-else-if="type === 'approved'"><ListIcon /> Listed</template>
+    <template v-else-if="type === 'approved'"><ListIcon /> {{ formatMessage(messages.listedLabel) }}</template>
     <template v-else-if="type === 'approved-general'"><CheckIcon /> {{ formatMessage(messages.approvedLabel) }}</template>
     <template v-else-if="type === 'unlisted'"><EyeOffIcon /> Unlisted</template>
     <template v-else-if="type === 'withheld'"><EyeOffIcon /> Withheld</template>
     <template v-else-if="type === 'private'"><LockIcon /> Private</template>
     <template v-else-if="type === 'scheduled'"> <CalendarIcon /> Scheduled</template>
-    <template v-else-if="type === 'draft'"><FileTextIcon /> Draft</template>
+    <template v-else-if="type === 'draft'"><FileTextIcon /> {{ formatMessage(messages.draftLabel) }}</template>
     <template v-else-if="type === 'archived'"> <ArchiveIcon /> {{ formatMessage(messages.archivedLabel) }}</template>
     <template v-else-if="type === 'rejected'"><XIcon /> Rejected</template>
     <template v-else-if="type === 'processing'"> <UpdatedIcon /> Under review</template>
@@ -25,7 +25,7 @@
 
     <!-- Transaction statuses (pending, processing reused) -->
     <template v-else-if="type === 'processed'"><CheckIcon /> Processed</template>
-    <template v-else-if="type === 'failed'"><XIcon /> Failed</template>
+    <template v-else-if="type === 'failed'"><XIcon /> {{ formatMessage(messages.failedLabel) }}</template>
     <template v-else-if="type === 'returned'"><XIcon /> Returned</template>
 
     <!-- Report status -->
@@ -74,6 +74,18 @@ const messages = defineMessages({
   creatorLabel: {
     id: 'omorphia.component.badge.label.creator',
     defaultMessage: 'Creator',
+  },
+  draftLabel: {
+    id: 'omorphia.component.badge.label.draft',
+    defaultMessage: 'Draft',
+  },
+  failedLabel: {
+    id: 'omorphia.component.badge.label.failed',
+    defaultMessage: 'Failed',
+  },
+  listedLabel: {
+    id: 'omorphia.component.badge.label.listed',
+    defaultMessage: 'Listed',
   },
   moderatorLabel: {
     id: 'omorphia.component.badge.label.moderator',
