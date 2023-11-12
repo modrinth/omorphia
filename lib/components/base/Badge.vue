@@ -20,31 +20,49 @@
     <template v-else-if="type === 'approved-general'">
       <CheckIcon /> {{ formatMessage(messages.approvedLabel) }}
     </template>
-    <template v-else-if="type === 'unlisted'"><EyeOffIcon /> Unlisted</template>
-    <template v-else-if="type === 'withheld'"><EyeOffIcon /> Withheld</template>
-    <template v-else-if="type === 'private'"><LockIcon /> Private</template>
-    <template v-else-if="type === 'scheduled'"> <CalendarIcon /> Scheduled</template>
+    <template v-else-if="type === 'unlisted'">
+      <EyeOffIcon /> {{ formatMessage(messages.unlistedLabel) }}
+    </template>
+    <template v-else-if="type === 'withheld'">
+      <EyeOffIcon /> {{ formatMessage(messages.withheldLabel) }}
+    </template>
+    <template v-else-if="type === 'private'">
+      <LockIcon /> {{ formatMessage(messages.privateLabel) }}
+    </template>
+    <template v-else-if="type === 'scheduled'">
+      <CalendarIcon /> {{ formatMessage(messages.scheduledLabel) }}
+    </template>
     <template v-else-if="type === 'draft'">
       <FileTextIcon /> {{ formatMessage(messages.draftLabel) }}
     </template>
     <template v-else-if="type === 'archived'">
       <ArchiveIcon /> {{ formatMessage(messages.archivedLabel) }}
     </template>
-    <template v-else-if="type === 'rejected'"><XIcon /> Rejected</template>
-    <template v-else-if="type === 'processing'"> <UpdatedIcon /> Under review</template>
+    <template v-else-if="type === 'rejected'">
+      <XIcon /> {{ formatMessage(messages.rejectedLabel) }}
+    </template>
+    <template v-else-if="type === 'processing'">
+      <UpdatedIcon /> {{ formatMessage(messages.underReviewLabel) }}
+    </template>
 
     <!-- Team members -->
     <template v-else-if="type === 'accepted'">
       <CheckIcon /> {{ formatMessage(messages.acceptedLabel) }}
     </template>
-    <template v-else-if="type === 'pending'"> <UpdatedIcon /> Pending</template>
+    <template v-else-if="type === 'pending'">
+      <UpdatedIcon /> {{ formatMessage(messages.pendingLabel) }}
+    </template>
 
     <!-- Transaction statuses (pending, processing reused) -->
-    <template v-else-if="type === 'processed'"><CheckIcon /> Processed</template>
+    <template v-else-if="type === 'processed'">
+      <CheckIcon /> {{ formatMessage(messages.processedLabel) }}
+    </template>
     <template v-else-if="type === 'failed'">
       <XIcon /> {{ formatMessage(messages.failedLabel) }}
     </template>
-    <template v-else-if="type === 'returned'"><XIcon /> Returned</template>
+    <template v-else-if="type === 'returned'">
+      <XIcon /> {{ formatMessage(messages.returnedLabel) }}
+    </template>
 
     <!-- Report status -->
     <template v-else-if="type === 'closed'">
@@ -85,11 +103,11 @@ const messages = defineMessages({
   },
   archivedLabel: {
     id: 'omorphia.component.badge.label.archived',
-    defaultMessage: 'Closed',
+    defaultMessage: 'Archived',
   },
   closedLabel: {
     id: 'omorphia.component.badge.label.closed',
-    defaultMessage: 'Creator',
+    defaultMessage: 'Closed',
   },
   creatorLabel: {
     id: 'omorphia.component.badge.label.creator',
@@ -114,6 +132,42 @@ const messages = defineMessages({
   modrinthTeamLabel: {
     id: 'omorphia.component.badge.label.modrinth-team',
     defaultMessage: 'Modrinth Team',
+  },
+  pendingLabel: {
+    id: 'omorphia.component.badge.label.pending',
+    defaultMessage: 'Pending',
+  },
+  privateLabel: {
+    id: 'omorphia.component.badge.label.private',
+    defaultMessage: 'Private',
+  },
+  processedLabel: {
+    id: 'omorphia.component.badge.label.processed',
+    defaultMessage: 'Processed',
+  },
+  rejectedLabel: {
+    id: 'omorphia.component.badge.label.rejected',
+    defaultMessage: 'Rejected',
+  },
+  returnedLabel: {
+    id: 'omorphia.component.badge.label.returned',
+    defaultMessage: 'Returned',
+  },
+  scheduledLabel: {
+    id: 'omorphia.component.badge.label.scheduled',
+    defaultMessage: 'Scheduled',
+  },
+  underReviewLabel: {
+    id: 'omorphia.component.badge.label.under-review',
+    defaultMessage: 'Under review',
+  },
+  unlistedLabel: {
+    id: 'omorphia.component.badge.label.unlisted',
+    defaultMessage: 'Unlisted',
+  },
+  withheldLabel: {
+    id: 'omorphia.component.badge.label.withheld',
+    defaultMessage: 'Withheld',
   },
 })
 const { formatMessage } = useVIntl()
