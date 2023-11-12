@@ -3,9 +3,9 @@
     <template v-if="color"> <span class="circle" /> {{ capitalizeString(type) }}</template>
 
     <!-- User roles -->
-    <template v-else-if="type === 'admin'"> <ModrinthIcon /> Modrinth Team</template>
-    <template v-else-if="type === 'moderator'"> <ScaleIcon /> Moderator</template>
-    <template v-else-if="type === 'creator'"><BoxIcon /> Creator</template>
+    <template v-else-if="type === 'admin'"> <ModrinthIcon /> {{ formatMessage(messages.modrinthTeamLabel) }}</template>
+    <template v-else-if="type === 'moderator'"> <ScaleIcon /> {{ formatMessage(messages.moderatorLabel) }}</template>
+    <template v-else-if="type === 'creator'"><BoxIcon /> {{ formatMessage(messages.creatorLabel) }}</template>
 
     <!-- Project statuses -->
     <template v-else-if="type === 'approved'"><ListIcon /> Listed</template>
@@ -52,6 +52,23 @@ import {
   CalendarIcon,
   capitalizeString,
 } from '@'
+
+import { useVIntl, defineMessages } from '@vintl/vintl'
+const messages = defineMessages({
+  modrinthTeamLabel: {
+    id: 'omorphia.component.badge.label.modrinth-team',
+    defaultMessage: 'Modrinth Team',
+  },
+  moderatorLabel: {
+    id: 'omorphia.component.badge.label.moderator',
+    defaultMessage: 'Moderator',
+  },
+  creatorLabel: {
+    id: 'omorphia.component.badge.label.creator',
+    defaultMessage: 'Creator',
+  }
+})
+const { formatMessage } = useVIntl()
 
 defineProps({
   type: {
