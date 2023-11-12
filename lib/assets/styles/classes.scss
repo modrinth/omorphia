@@ -70,8 +70,6 @@
   :where(input) {
     box-sizing: border-box;
     max-height: 40px;
-    width: 24rem;
-    flex-basis: 24rem;
 
     &:not(.stylized-toggle) {
       max-width: 100%;
@@ -885,7 +883,7 @@ a,
 
   a {
     cursor: pointer;
-    color: var(--color-blue);
+    color: var(--color-link);
 
     &:focus-visible,
     &:hover {

@@ -1,5 +1,5 @@
 <template>
-  <button class="code" :class="{ copied }" title="Copy code to clipboard" @click="copyText">
+  <button class="code" :class="{ copied }" :title="formatMessage(copiedMessage)" @click="copyText">
     <span>{{ text }}</span>
     <CheckIcon v-if="copied" />
     <ClipboardCopyIcon v-else />
@@ -9,6 +9,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { CheckIcon, ClipboardCopyIcon } from '@'
+import { useVIntl, defineMessage } from '@vintl/vintl'
+const copiedMessage = defineMessage({
+  id: 'omorphia.component.copy.action.copy',
+  defaultMessage: 'Copy code to clipboard',
+})
+const { formatMessage } = useVIntl()
 
 const props = defineProps<{ text: string }>()
 
@@ -34,6 +40,10 @@ async function copyText() {
   user-select: text;
   transition: opacity 0.5s ease-in-out, filter 0.2s ease-in-out, transform 0.05s ease-in-out,
     outline 0.2s ease-in-out;
+
+  @media (prefers-reduced-motion) {
+    transition: none !important;
+  }
 
   span {
     max-width: 10rem;
