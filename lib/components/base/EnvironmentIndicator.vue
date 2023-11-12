@@ -26,7 +26,7 @@
       "
     >
       <ClientIcon aria-hidden="true" />
-      Client
+      {{ formatMessage(messages.clientLabel) }}
     </template>
     <template
       v-else-if="
@@ -35,7 +35,7 @@
       "
     >
       <ServerIcon aria-hidden="true" />
-      Server
+      {{ formatMessage(messages.serverLabel) }}
     </template>
     <template v-else-if="serverSide === 'unsupported' && clientSide === 'unsupported'">
       <GlobeIcon aria-hidden="true" />
@@ -49,6 +49,18 @@
 </template>
 <script setup>
 import { GlobeIcon, ClientIcon, ServerIcon, InfoIcon } from '@'
+import { useVIntl, defineMessages } from '@vintl/vintl'
+const messages = defineMessages({
+  clientLabel: {
+    id: 'omorphia.component.environment-indicator.label.client',
+    defaultMessage: 'Client',
+  },
+  serverLabel: {
+    id: 'omorphia.component.environment-indicator.label.server',
+    defaultMessage: 'Server',
+  },
+})
+const { formatMessage } = useVIntl()
 </script>
 <script>
 import { defineComponent } from 'vue'
