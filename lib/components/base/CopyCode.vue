@@ -10,6 +10,7 @@
 import { ref } from 'vue'
 import { CheckIcon, ClipboardCopyIcon } from '@'
 import { useVIntl, defineMessage } from '@vintl/vintl'
+
 const copiedMessage = defineMessage({
   id: 'omorphia.component.copy.action.copy',
   defaultMessage: 'Copy code to clipboard',
