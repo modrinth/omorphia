@@ -3,33 +3,53 @@
     <template v-if="color"> <span class="circle" /> {{ capitalizeString(type) }}</template>
 
     <!-- User roles -->
-    <template v-else-if="type === 'admin'"> <ModrinthIcon /> {{ formatMessage(messages.modrinthTeamLabel) }}</template>
-    <template v-else-if="type === 'moderator'"> <ScaleIcon /> {{ formatMessage(messages.moderatorLabel) }}</template>
-    <template v-else-if="type === 'creator'"><BoxIcon /> {{ formatMessage(messages.creatorLabel) }}</template>
+    <template v-else-if="type === 'admin'">
+      <ModrinthIcon /> {{ formatMessage(messages.modrinthTeamLabel) }}
+    </template>
+    <template v-else-if="type === 'moderator'">
+      <ScaleIcon /> {{ formatMessage(messages.moderatorLabel) }}
+    </template>
+    <template v-else-if="type === 'creator'">
+      <BoxIcon /> {{ formatMessage(messages.creatorLabel) }}
+    </template>
 
     <!-- Project statuses -->
-    <template v-else-if="type === 'approved'"><ListIcon /> {{ formatMessage(messages.listedLabel) }}</template>
-    <template v-else-if="type === 'approved-general'"><CheckIcon /> {{ formatMessage(messages.approvedLabel) }}</template>
+    <template v-else-if="type === 'approved'">
+      <ListIcon /> {{ formatMessage(messages.listedLabel) }}
+    </template>
+    <template v-else-if="type === 'approved-general'">
+      <CheckIcon /> {{ formatMessage(messages.approvedLabel) }}
+    </template>
     <template v-else-if="type === 'unlisted'"><EyeOffIcon /> Unlisted</template>
     <template v-else-if="type === 'withheld'"><EyeOffIcon /> Withheld</template>
     <template v-else-if="type === 'private'"><LockIcon /> Private</template>
     <template v-else-if="type === 'scheduled'"> <CalendarIcon /> Scheduled</template>
-    <template v-else-if="type === 'draft'"><FileTextIcon /> {{ formatMessage(messages.draftLabel) }}</template>
-    <template v-else-if="type === 'archived'"> <ArchiveIcon /> {{ formatMessage(messages.archivedLabel) }}</template>
+    <template v-else-if="type === 'draft'">
+      <FileTextIcon /> {{ formatMessage(messages.draftLabel) }}
+    </template>
+    <template v-else-if="type === 'archived'">
+      <ArchiveIcon /> {{ formatMessage(messages.archivedLabel) }}
+    </template>
     <template v-else-if="type === 'rejected'"><XIcon /> Rejected</template>
     <template v-else-if="type === 'processing'"> <UpdatedIcon /> Under review</template>
 
     <!-- Team members -->
-    <template v-else-if="type === 'accepted'"><CheckIcon /> {{ formatMessage(messages.acceptedLabel) }}</template>
+    <template v-else-if="type === 'accepted'">
+      <CheckIcon /> {{ formatMessage(messages.acceptedLabel) }}
+    </template>
     <template v-else-if="type === 'pending'"> <UpdatedIcon /> Pending</template>
 
     <!-- Transaction statuses (pending, processing reused) -->
     <template v-else-if="type === 'processed'"><CheckIcon /> Processed</template>
-    <template v-else-if="type === 'failed'"><XIcon /> {{ formatMessage(messages.failedLabel) }}</template>
+    <template v-else-if="type === 'failed'">
+      <XIcon /> {{ formatMessage(messages.failedLabel) }}
+    </template>
     <template v-else-if="type === 'returned'"><XIcon /> Returned</template>
 
     <!-- Report status -->
-    <template v-else-if="type === 'closed'"> <XIcon /> {{ formatMessage(messages.closedLabel) }}</template>
+    <template v-else-if="type === 'closed'">
+      <XIcon /> {{ formatMessage(messages.closedLabel) }}
+    </template>
 
     <!-- Other -->
     <template v-else> <span class="circle" /> {{ capitalizeString(type) }} </template>
