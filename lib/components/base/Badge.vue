@@ -9,18 +9,18 @@
 
     <!-- Project statuses -->
     <template v-else-if="type === 'approved'"><ListIcon /> Listed</template>
-    <template v-else-if="type === 'approved-general'"><CheckIcon /> Approved</template>
+    <template v-else-if="type === 'approved-general'"><CheckIcon /> {{ formatMessage(messages.approvedLabel) }}</template>
     <template v-else-if="type === 'unlisted'"><EyeOffIcon /> Unlisted</template>
     <template v-else-if="type === 'withheld'"><EyeOffIcon /> Withheld</template>
     <template v-else-if="type === 'private'"><LockIcon /> Private</template>
     <template v-else-if="type === 'scheduled'"> <CalendarIcon /> Scheduled</template>
     <template v-else-if="type === 'draft'"><FileTextIcon /> Draft</template>
-    <template v-else-if="type === 'archived'"> <ArchiveIcon /> Archived</template>
+    <template v-else-if="type === 'archived'"> <ArchiveIcon /> {{ formatMessage(messages.archivedLabel) }}</template>
     <template v-else-if="type === 'rejected'"><XIcon /> Rejected</template>
     <template v-else-if="type === 'processing'"> <UpdatedIcon /> Under review</template>
 
     <!-- Team members -->
-    <template v-else-if="type === 'accepted'"><CheckIcon /> Accepted</template>
+    <template v-else-if="type === 'accepted'"><CheckIcon /> {{ formatMessage(messages.acceptedLabel) }}</template>
     <template v-else-if="type === 'pending'"> <UpdatedIcon /> Pending</template>
 
     <!-- Transaction statuses (pending, processing reused) -->
@@ -29,7 +29,7 @@
     <template v-else-if="type === 'returned'"><XIcon /> Returned</template>
 
     <!-- Report status -->
-    <template v-else-if="type === 'closed'"> <XIcon /> Closed</template>
+    <template v-else-if="type === 'closed'"> <XIcon /> {{ formatMessage(messages.closedLabel) }}</template>
 
     <!-- Other -->
     <template v-else> <span class="circle" /> {{ capitalizeString(type) }} </template>
@@ -55,18 +55,34 @@ import {
 
 import { useVIntl, defineMessages } from '@vintl/vintl'
 const messages = defineMessages({
-  modrinthTeamLabel: {
-    id: 'omorphia.component.badge.label.modrinth-team',
-    defaultMessage: 'Modrinth Team',
+  acceptedLabel: {
+    id: 'omorphia.component.badge.label.accepted',
+    defaultMessage: 'Accepted',
+  },
+  approvedLabel: {
+    id: 'omorphia.component.badge.label.approved',
+    defaultMessage: 'Approved',
+  },
+  archivedLabel: {
+    id: 'omorphia.component.badge.label.archived',
+    defaultMessage: 'Closed',
+  },
+  closedLabel: {
+    id: 'omorphia.component.badge.label.closed',
+    defaultMessage: 'Creator',
+  },
+  creatorLabel: {
+    id: 'omorphia.component.badge.label.creator',
+    defaultMessage: 'Creator',
   },
   moderatorLabel: {
     id: 'omorphia.component.badge.label.moderator',
     defaultMessage: 'Moderator',
   },
-  creatorLabel: {
-    id: 'omorphia.component.badge.label.creator',
-    defaultMessage: 'Creator',
-  }
+  modrinthTeamLabel: {
+    id: 'omorphia.component.badge.label.modrinth-team',
+    defaultMessage: 'Modrinth Team',
+  },
 })
 const { formatMessage } = useVIntl()
 
