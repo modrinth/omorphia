@@ -1,12 +1,12 @@
 {
-  "omorphia.component.badge.label.modrinth-team": {
-    "defaultMessage": "Modrinth Team"
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Creator"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "Moderator"
   },
-  "omorphia.component.badge.label.creator": {
-    "defaultMessage": "Creator"
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Modrinth Team"
   },
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "Copy code to clipboard"
