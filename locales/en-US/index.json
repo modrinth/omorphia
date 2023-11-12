@@ -5,7 +5,19 @@
   "omorphia.component.environment-indicator.label.client": {
     "defaultMessage": "Client"
   },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Client and server"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Client or server"
+  },
   "omorphia.component.environment-indicator.label.server": {
     "defaultMessage": "Server"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "A {type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Unsupported"
   }
 }
