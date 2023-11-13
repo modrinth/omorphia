@@ -1,27 +1,27 @@
 {
   "omorphia.component.badge.label.accepted": {
-    "defaultMessage": "Accepted"
+    "defaultMessage": "Angenommen"
   },
   "omorphia.component.badge.label.approved": {
-    "defaultMessage": "Approved"
+    "defaultMessage": "Bestätigt"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "Archived"
+    "defaultMessage": "Archiviert"
   },
   "omorphia.component.badge.label.closed": {
-    "defaultMessage": "Closed"
+    "defaultMessage": "Geschlossen"
   },
   "omorphia.component.badge.label.creator": {
-    "defaultMessage": "Creator"
+    "defaultMessage": "Ersteller"
   },
   "omorphia.component.badge.label.draft": {
-    "defaultMessage": "Draft"
+    "defaultMessage": "Entwurf"
   },
   "omorphia.component.badge.label.failed": {
-    "defaultMessage": "Failed"
+    "defaultMessage": "Fehlgeschlagen"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Listed"
+    "defaultMessage": "Gelistet"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "Moderator"
@@ -30,31 +30,31 @@
     "defaultMessage": "Modrinth Team"
   },
   "omorphia.component.badge.label.pending": {
-    "defaultMessage": "Pending"
+    "defaultMessage": "Ausstehend"
   },
   "omorphia.component.badge.label.private": {
-    "defaultMessage": "Private"
+    "defaultMessage": "Privat"
   },
   "omorphia.component.badge.label.processed": {
-    "defaultMessage": "Processed"
+    "defaultMessage": "Verarbeitet"
   },
   "omorphia.component.badge.label.rejected": {
-    "defaultMessage": "Rejected"
+    "defaultMessage": "Abgelehnt"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "Returned"
+    "defaultMessage": "Zurückgeschickt"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "Scheduled"
+    "defaultMessage": "Geplant"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "Under review"
+    "defaultMessage": "Wird überprüft"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Unlisted"
+    "defaultMessage": "Nicht gelistet"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "Withheld"
+    "defaultMessage": "Zurückgehalten"
   },
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "Code in Zwischenablage kopieren"
@@ -63,19 +63,19 @@
     "defaultMessage": "Client"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
-    "defaultMessage": "Client and server"
+    "defaultMessage": "Client und Server"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
-    "defaultMessage": "Client or server"
+    "defaultMessage": "Client oder Server"
   },
   "omorphia.component.environment-indicator.label.server": {
     "defaultMessage": "Server"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "A {type}"
+    "defaultMessage": "Ein {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Unsupported"
+    "defaultMessage": "Nicht unterstützt"
   }
 }
 
