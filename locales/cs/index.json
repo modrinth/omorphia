@@ -1,81 +1,81 @@
 {
   "omorphia.component.badge.label.accepted": {
-    "defaultMessage": "Accepted"
+    "defaultMessage": "Přijato"
   },
   "omorphia.component.badge.label.approved": {
-    "defaultMessage": "Approved"
+    "defaultMessage": "Schváleno"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "Archived"
+    "defaultMessage": "Archivováno"
   },
   "omorphia.component.badge.label.closed": {
-    "defaultMessage": "Closed"
+    "defaultMessage": "Uzavřeno"
   },
   "omorphia.component.badge.label.creator": {
-    "defaultMessage": "Creator"
+    "defaultMessage": "Autor"
   },
   "omorphia.component.badge.label.draft": {
-    "defaultMessage": "Draft"
+    "defaultMessage": "Koncept"
   },
   "omorphia.component.badge.label.failed": {
-    "defaultMessage": "Failed"
+    "defaultMessage": "Selhalo"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Listed"
+    "defaultMessage": "Zařazeno"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "Moderator"
+    "defaultMessage": "Moderátor"
   },
   "omorphia.component.badge.label.modrinth-team": {
-    "defaultMessage": "Modrinth Team"
+    "defaultMessage": "Modrinth tým"
   },
   "omorphia.component.badge.label.pending": {
-    "defaultMessage": "Pending"
+    "defaultMessage": "Čekající"
   },
   "omorphia.component.badge.label.private": {
-    "defaultMessage": "Private"
+    "defaultMessage": "Soukromé"
   },
   "omorphia.component.badge.label.processed": {
-    "defaultMessage": "Processed"
+    "defaultMessage": "Zpracováno"
   },
   "omorphia.component.badge.label.rejected": {
-    "defaultMessage": "Rejected"
+    "defaultMessage": "Zamítnuto"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "Returned"
+    "defaultMessage": "Vráceno"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "Scheduled"
+    "defaultMessage": "Naplánováno"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "Under review"
+    "defaultMessage": "Probíhá kontrola"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Unlisted"
+    "defaultMessage": "Nezařazeno"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "Withheld"
+    "defaultMessage": "Odmítnuto"
   },
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "Zkopírovat kód do schránky"
   },
   "omorphia.component.environment-indicator.label.client": {
-    "defaultMessage": "Client"
+    "defaultMessage": "Klient"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
-    "defaultMessage": "Client and server"
+    "defaultMessage": "Klient a server"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
-    "defaultMessage": "Client or server"
+    "defaultMessage": "Klient nebo server"
   },
   "omorphia.component.environment-indicator.label.server": {
     "defaultMessage": "Server"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "A {type}"
+    "defaultMessage": "{type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Unsupported"
+    "defaultMessage": "Nepodporováno"
   }
 }
 
