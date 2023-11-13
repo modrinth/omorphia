@@ -6,13 +6,13 @@
     "defaultMessage": "Одобрен"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "Архивирован"
+    "defaultMessage": "Заморожен"
   },
   "omorphia.component.badge.label.closed": {
     "defaultMessage": "Закрыт"
   },
   "omorphia.component.badge.label.creator": {
-    "defaultMessage": "Создатель"
+    "defaultMessage": "Автор"
   },
   "omorphia.component.badge.label.draft": {
     "defaultMessage": "Черновик"
@@ -60,16 +60,16 @@
     "defaultMessage": "Скопировать код в буфер обмена"
   },
   "omorphia.component.environment-indicator.label.client": {
-    "defaultMessage": "Клиентский"
+    "defaultMessage": "Клиент"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
-    "defaultMessage": "Клиентско-серверный"
+    "defaultMessage": "Клиент и сервер"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
-    "defaultMessage": "Серверный или клиентский"
+    "defaultMessage": "Клиент или сервер"
   },
   "omorphia.component.environment-indicator.label.server": {
-    "defaultMessage": "Серверный"
+    "defaultMessage": "Сервер"
   },
   "omorphia.component.environment-indicator.label.type": {
     "defaultMessage": "{type}"
