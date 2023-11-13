@@ -1,54 +1,54 @@
 {
   "omorphia.component.badge.label.accepted": {
-    "defaultMessage": "Accepted"
+    "defaultMessage": "Acceptat"
   },
   "omorphia.component.badge.label.approved": {
-    "defaultMessage": "Approved"
+    "defaultMessage": "Aprovat"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "Archived"
+    "defaultMessage": "Arxivat"
   },
   "omorphia.component.badge.label.closed": {
-    "defaultMessage": "Closed"
+    "defaultMessage": "Tancat"
   },
   "omorphia.component.badge.label.creator": {
-    "defaultMessage": "Creator"
+    "defaultMessage": "Autor"
   },
   "omorphia.component.badge.label.draft": {
-    "defaultMessage": "Draft"
+    "defaultMessage": "Esborrany"
   },
   "omorphia.component.badge.label.failed": {
-    "defaultMessage": "Failed"
+    "defaultMessage": "S'ha produït un error"
   },
   "omorphia.component.badge.label.listed": {
     "defaultMessage": "Listed"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "Moderator"
+    "defaultMessage": "Moderador"
   },
   "omorphia.component.badge.label.modrinth-team": {
-    "defaultMessage": "Modrinth Team"
+    "defaultMessage": "Equip de Modrinth"
   },
   "omorphia.component.badge.label.pending": {
-    "defaultMessage": "Pending"
+    "defaultMessage": "Pendent"
   },
   "omorphia.component.badge.label.private": {
-    "defaultMessage": "Private"
+    "defaultMessage": "Privat"
   },
   "omorphia.component.badge.label.processed": {
-    "defaultMessage": "Processed"
+    "defaultMessage": "Processat"
   },
   "omorphia.component.badge.label.rejected": {
-    "defaultMessage": "Rejected"
+    "defaultMessage": "Rebutjat"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "Returned"
+    "defaultMessage": "Retornat"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "Scheduled"
+    "defaultMessage": "Programat"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "Under review"
+    "defaultMessage": "En revisió"
   },
   "omorphia.component.badge.label.unlisted": {
     "defaultMessage": "Unlisted"
@@ -57,25 +57,25 @@
     "defaultMessage": "Withheld"
   },
   "omorphia.component.copy.action.copy": {
-    "defaultMessage": "Copy code to clipboard"
+    "defaultMessage": "Copiar el codi al porta-retalls"
   },
   "omorphia.component.environment-indicator.label.client": {
     "defaultMessage": "Client"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
-    "defaultMessage": "Client and server"
+    "defaultMessage": "Client i servidor"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
-    "defaultMessage": "Client or server"
+    "defaultMessage": "Client o servidor"
   },
   "omorphia.component.environment-indicator.label.server": {
-    "defaultMessage": "Server"
+    "defaultMessage": "Servidor"
   },
   "omorphia.component.environment-indicator.label.type": {
     "defaultMessage": "A {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Unsupported"
+    "defaultMessage": "No suportat"
   }
 }
 
