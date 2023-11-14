@@ -42,7 +42,7 @@
     "defaultMessage": "Abgelehnt"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "Returned"
+    "defaultMessage": "Zurückgegeben"
   },
   "omorphia.component.badge.label.scheduled": {
     "defaultMessage": "Geplant"
