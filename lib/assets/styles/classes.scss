@@ -487,6 +487,10 @@ a,
   display: flex;
   gap: 1px;
 
+  .popup-menu {
+    pointer-events: auto !important;
+  }
+
   > :not(:first-child) {
     &.btn,
     > .btn {
