@@ -6,7 +6,7 @@
     "defaultMessage": "已批准"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "已归档"
+    "defaultMessage": "存档"
   },
   "omorphia.component.badge.label.closed": {
     "defaultMessage": "已关闭"
@@ -21,10 +21,10 @@
     "defaultMessage": "失败"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "已发表"
+    "defaultMessage": "上架"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "管理员"
+    "defaultMessage": "版主"
   },
   "omorphia.component.badge.label.modrinth-team": {
     "defaultMessage": "Modrinth 团队"
@@ -33,7 +33,7 @@
     "defaultMessage": "待确认"
   },
   "omorphia.component.badge.label.private": {
-    "defaultMessage": "私有的"
+    "defaultMessage": "私有"
   },
   "omorphia.component.badge.label.processed": {
     "defaultMessage": "已处理"
@@ -51,7 +51,7 @@
     "defaultMessage": "审核中"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "未列出"
+    "defaultMessage": "未上架"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "Withheld"
@@ -75,7 +75,7 @@
     "defaultMessage": "{type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "不支持"
+    "defaultMessage": "无效的"
   }
 }
 
