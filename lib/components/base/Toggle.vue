@@ -3,6 +3,9 @@
     :id="id"
     type="checkbox"
     class="switch stylized-toggle"
+    :class="{
+      disabled: disabled,
+    }"
     :checked="checked"
     @change="toggle"
   />
@@ -23,10 +26,14 @@ const props = defineProps({
     type: Boolean,
     required: true,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 function toggle() {
-  if (!disabled) {
+  if (!props.disabled) {
     emit('update:modelValue', !props.modelValue)
   }
 }
