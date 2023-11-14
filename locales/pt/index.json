@@ -9,7 +9,7 @@
     "defaultMessage": "Arquivado"
   },
   "omorphia.component.badge.label.closed": {
-    "defaultMessage": "Fechado"
+    "defaultMessage": "Terminado"
   },
   "omorphia.component.badge.label.creator": {
     "defaultMessage": "Criador"
@@ -48,7 +48,7 @@
     "defaultMessage": "Agendado"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "Em revisão"
+    "defaultMessage": "Sob revisão"
   },
   "omorphia.component.badge.label.unlisted": {
     "defaultMessage": "Não listado"
@@ -72,10 +72,10 @@
     "defaultMessage": "Servidor"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "A {type}"
+    "defaultMessage": "Um {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Não suportado"
+    "defaultMessage": "Incompatível"
   }
 }
 
