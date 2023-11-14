@@ -27,16 +27,16 @@
     "defaultMessage": "Modérateur"
   },
   "omorphia.component.badge.label.modrinth-team": {
-    "defaultMessage": "Modrinth Team"
+    "defaultMessage": "Équipe Modrinth"
   },
   "omorphia.component.badge.label.pending": {
-    "defaultMessage": "Pending"
+    "defaultMessage": "En attente"
   },
   "omorphia.component.badge.label.private": {
     "defaultMessage": "Privé"
   },
   "omorphia.component.badge.label.processed": {
-    "defaultMessage": "Processed"
+    "defaultMessage": "Traité"
   },
   "omorphia.component.badge.label.rejected": {
     "defaultMessage": "Refusé"
@@ -48,7 +48,7 @@
     "defaultMessage": "Scheduled"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "Under review"
+    "defaultMessage": "En cours d'examen"
   },
   "omorphia.component.badge.label.unlisted": {
     "defaultMessage": "Non répertorié"
@@ -72,7 +72,7 @@
     "defaultMessage": "Serveur"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "A {type}"
+    "defaultMessage": "Un {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
     "defaultMessage": "Non pris en charge"
