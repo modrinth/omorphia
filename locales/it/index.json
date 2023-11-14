@@ -42,7 +42,7 @@
     "defaultMessage": "Rifiutato"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "Mandato indietro"
+    "defaultMessage": "Restituito"
   },
   "omorphia.component.badge.label.scheduled": {
     "defaultMessage": "Pianificato"
