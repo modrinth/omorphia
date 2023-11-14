@@ -6,10 +6,10 @@
     "defaultMessage": "已批准"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "存档"
+    "defaultMessage": "归档"
   },
   "omorphia.component.badge.label.closed": {
-    "defaultMessage": "已关闭"
+    "defaultMessage": "关闭"
   },
   "omorphia.component.badge.label.creator": {
     "defaultMessage": "创建者"
@@ -21,7 +21,7 @@
     "defaultMessage": "失败"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "已列出"
+    "defaultMessage": "可见"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "版主"
@@ -51,7 +51,7 @@
     "defaultMessage": "审核中"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "未上架"
+    "defaultMessage": "不可见"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "隐藏的"
