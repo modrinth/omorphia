@@ -21,7 +21,7 @@
     "defaultMessage": "失败"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "上架"
+    "defaultMessage": "已列出"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "版主"
@@ -45,7 +45,7 @@
     "defaultMessage": "已退回"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "已计划"
+    "defaultMessage": "计划中"
   },
   "omorphia.component.badge.label.under-review": {
     "defaultMessage": "审核中"
@@ -54,7 +54,7 @@
     "defaultMessage": "未上架"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "Withheld"
+    "defaultMessage": "隐藏的"
   },
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "将代码复制到剪贴板"
