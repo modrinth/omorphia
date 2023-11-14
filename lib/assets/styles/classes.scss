@@ -70,8 +70,6 @@
   :where(input) {
     box-sizing: border-box;
     max-height: 40px;
-    width: 24rem;
-    flex-basis: 24rem;
 
     &:not(.stylized-toggle) {
       max-width: 100%;
@@ -231,29 +229,8 @@ a,
   transition: opacity 0.5s ease-in-out, filter 0.2s ease-in-out, scale 0.05s ease-in-out,
     outline 0.2s ease-in-out;
 
-  position: relative;
-
-  &:not(.markdown-body a) {
-    pointer-events: none;
-  }
-
   &:active:not(&:disabled) {
     scale: 0.95;
-  }
-
-  &:not(.markdown-body a)::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    pointer-events: all;
-    border-radius: inherit;
-  }
-
-  &:active::before {
-    scale: 1.1;
   }
 }
 
@@ -885,7 +862,7 @@ a,
 
   a {
     cursor: pointer;
-    color: var(--color-blue);
+    color: var(--color-link);
 
     &:focus-visible,
     &:hover {

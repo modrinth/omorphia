@@ -129,7 +129,7 @@ defineExpose({
         <div v-if="link" class="iconified-input">
           <LinkIcon />
           <input type="text" :value="url" readonly />
-          <Button v-tooltip="'Copy Text'" @click="copyText">
+          <Button v-tooltip="'Copy Text'" class="r-btn" @click="copyText">
             <ClipboardCopyIcon />
           </Button>
         </div>
@@ -251,6 +251,10 @@ defineExpose({
   margin: var(--gap-sm);
   transition: all 0.2s ease-in-out;
   opacity: 0;
+
+  @media (prefers-reduced-motion) {
+    transition: none !important;
+  }
 }
 
 .resizable-textarea-wrapper {
