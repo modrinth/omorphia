@@ -12,7 +12,7 @@
     "defaultMessage": "Закрито"
   },
   "omorphia.component.badge.label.creator": {
-    "defaultMessage": "Творець"
+    "defaultMessage": "Автор"
   },
   "omorphia.component.badge.label.draft": {
     "defaultMessage": "Чернетка"
@@ -33,7 +33,7 @@
     "defaultMessage": "Очікується"
   },
   "omorphia.component.badge.label.private": {
-    "defaultMessage": "Приватний"
+    "defaultMessage": "Приватно"
   },
   "omorphia.component.badge.label.processed": {
     "defaultMessage": "Оброблено"
@@ -48,10 +48,10 @@
     "defaultMessage": "Заплановано"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "На розгляді"
+    "defaultMessage": "Розглядається"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Прихований"
+    "defaultMessage": "Не у списку"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "Утримується"
@@ -60,16 +60,16 @@
     "defaultMessage": "Скопіювати код у буфер обміну"
   },
   "omorphia.component.environment-indicator.label.client": {
-    "defaultMessage": "Клієнт"
+    "defaultMessage": "Для клієнта"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
-    "defaultMessage": "Клієнт і сервер"
+    "defaultMessage": "Для клієнта та сервера"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
-    "defaultMessage": "Клієнт або сервер"
+    "defaultMessage": "Для клієнта або сервера"
   },
   "omorphia.component.environment-indicator.label.server": {
-    "defaultMessage": "Сервер"
+    "defaultMessage": "Для сервера"
   },
   "omorphia.component.environment-indicator.label.type": {
     "defaultMessage": "{type}"
