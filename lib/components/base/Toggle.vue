@@ -8,28 +8,26 @@
   />
 </template>
 
-<script>
-export default {
-  props: {
-    id: {
-      type: String,
-      required: true,
-    },
-    modelValue: {
-      type: Boolean,
-    },
-    checked: {
-      type: Boolean,
-      required: true,
-    },
+<script setup>
+const emit = defineEmits(['update:modelValue'])
+
+const props = defineProps({
+  id: {
+    type: String,
+    required: true,
   },
-  emits: ['update:modelValue'],
-  methods: {
-    toggle() {
-      if (!this.disabled) {
-        this.$emit('update:modelValue', !this.modelValue)
-      }
-    },
+  modelValue: {
+    type: Boolean,
   },
+  checked: {
+    type: Boolean,
+    required: true,
+  },
+})
+
+function toggle() {
+  if (!disabled) {
+    emit('update:modelValue', !props.modelValue)
+  }
 }
 </script>
