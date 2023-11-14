@@ -21,7 +21,7 @@
     "defaultMessage": "Fehlgeschlagen"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Gelistet"
+    "defaultMessage": "Angezeigt"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "Moderator"
@@ -51,7 +51,7 @@
     "defaultMessage": "Wird überprüft"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Nicht gelistet"
+    "defaultMessage": "Nicht angezeigt"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "Zurückgehalten"
