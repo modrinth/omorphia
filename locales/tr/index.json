@@ -33,7 +33,7 @@
     "defaultMessage": "Beklemede"
   },
   "omorphia.component.badge.label.private": {
-    "defaultMessage": "Özel"
+    "defaultMessage": "Gizli"
   },
   "omorphia.component.badge.label.processed": {
     "defaultMessage": "İşlenmiş"
