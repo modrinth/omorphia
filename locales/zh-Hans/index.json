@@ -1,57 +1,57 @@
 {
   "omorphia.component.badge.label.accepted": {
-    "defaultMessage": "接受"
+    "defaultMessage": "已接受"
   },
   "omorphia.component.badge.label.approved": {
-    "defaultMessage": "批准"
+    "defaultMessage": "已批准"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "归档"
+    "defaultMessage": "已归档"
   },
   "omorphia.component.badge.label.closed": {
-    "defaultMessage": "关闭"
+    "defaultMessage": "已关闭"
   },
   "omorphia.component.badge.label.creator": {
     "defaultMessage": "创建者"
   },
   "omorphia.component.badge.label.draft": {
-    "defaultMessage": "Draft"
+    "defaultMessage": "草稿"
   },
   "omorphia.component.badge.label.failed": {
     "defaultMessage": "失败"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Listed"
+    "defaultMessage": "已发表"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "Moderator"
+    "defaultMessage": "管理员"
   },
   "omorphia.component.badge.label.modrinth-team": {
     "defaultMessage": "Modrinth 团队"
   },
   "omorphia.component.badge.label.pending": {
-    "defaultMessage": "Pending"
+    "defaultMessage": "待确认"
   },
   "omorphia.component.badge.label.private": {
     "defaultMessage": "私有的"
   },
   "omorphia.component.badge.label.processed": {
-    "defaultMessage": "Processed"
+    "defaultMessage": "已处理"
   },
   "omorphia.component.badge.label.rejected": {
-    "defaultMessage": "Rejected"
+    "defaultMessage": "已拒绝"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "Returned"
+    "defaultMessage": "已退回"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "Scheduled"
+    "defaultMessage": "已计划"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "Under review"
+    "defaultMessage": "审核中"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Unlisted"
+    "defaultMessage": "未列出"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "Withheld"
@@ -72,10 +72,10 @@
     "defaultMessage": "服务端"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "A {type}"
+    "defaultMessage": "{type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Unsupported"
+    "defaultMessage": "不支持"
   }
 }
 
