@@ -33,13 +33,13 @@
     "defaultMessage": "Pending"
   },
   "omorphia.component.badge.label.private": {
-    "defaultMessage": "Private"
+    "defaultMessage": "Pribadi"
   },
   "omorphia.component.badge.label.processed": {
     "defaultMessage": "Processed"
   },
   "omorphia.component.badge.label.rejected": {
-    "defaultMessage": "Rejected"
+    "defaultMessage": "Ditolak"
   },
   "omorphia.component.badge.label.returned": {
     "defaultMessage": "Returned"
@@ -60,7 +60,7 @@
     "defaultMessage": "Copy code to clipboard"
   },
   "omorphia.component.environment-indicator.label.client": {
-    "defaultMessage": "Client"
+    "defaultMessage": "Klien"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
     "defaultMessage": "Client and server"
