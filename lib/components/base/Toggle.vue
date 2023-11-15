@@ -10,7 +10,9 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits<{
+  'update:modelValue': [boolean]
+}>()
 
 const props = withDefaults(
   defineProps<{
