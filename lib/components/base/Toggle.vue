@@ -3,9 +3,7 @@
     :id="id"
     type="checkbox"
     class="switch stylized-toggle"
-    :class="{
-      disabled: disabled,
-    }"
+    :disabled="disabled"
     :checked="checked"
     @change="toggle"
   />
