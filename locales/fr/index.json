@@ -42,10 +42,10 @@
     "defaultMessage": "Refusé"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "Returned"
+    "defaultMessage": "Retourné·e"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "Scheduled"
+    "defaultMessage": "Programmé·e"
   },
   "omorphia.component.badge.label.under-review": {
     "defaultMessage": "En cours d'examen"
