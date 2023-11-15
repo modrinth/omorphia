@@ -19,7 +19,7 @@ const props = withDefaults(
     id: string
     modelValue: boolean
     checked: boolean
-    disabled: boolean
+    disabled?: boolean
   }>(),
   {
     disabled: false,
