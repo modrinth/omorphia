@@ -9,26 +9,20 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 const emit = defineEmits(['update:modelValue'])
 
-const props = defineProps({
-  id: {
-    type: String,
-    required: true,
-  },
-  modelValue: {
-    type: Boolean,
-  },
-  checked: {
-    type: Boolean,
-    required: true,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-})
+const props = withDefaults(
+  defineProps<{
+    id: string
+    modelValue: boolean
+    checked: boolean
+    disabled: boolean
+  }>(),
+  {
+    disabled: false,
+  }
+)
 
 function toggle() {
   if (!props.disabled) {
