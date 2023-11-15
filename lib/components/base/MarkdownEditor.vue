@@ -631,22 +631,25 @@ const linkModal = ref<InstanceType<typeof Modal> | null>(null)
 const imageModal = ref<InstanceType<typeof Modal> | null>(null)
 const videoModal = ref<InstanceType<typeof Modal> | null>(null)
 
+function resetModalStates() {
+  linkText.value = ''
+  linkUrl.value = ''
+  linkValidationErrorMessage.value = undefined
+}
+
 function openLinkModal() {
   if (editor) linkText.value = markdownCommands.yankSelection(editor)
-  linkUrl.value = ''
+  resetModalStates()
   linkModal.value?.show()
 }
 
 function openImageModal() {
-  linkValidationErrorMessage.value = undefined
-  linkText.value = ''
-  linkUrl.value = ''
+  resetModalStates()
   imageModal.value?.show()
 }
 
 function openVideoModal() {
-  linkText.value = ''
-  linkUrl.value = ''
+  resetModalStates()
   videoModal.value?.show()
 }
 </script>
