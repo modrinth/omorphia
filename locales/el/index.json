@@ -24,10 +24,10 @@
     "defaultMessage": "Listed"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "Moderator"
+    "defaultMessage": "Συντονιστής"
   },
   "omorphia.component.badge.label.modrinth-team": {
-    "defaultMessage": "Modrinth Team"
+    "defaultMessage": "Ομάδα Modrinth"
   },
   "omorphia.component.badge.label.pending": {
     "defaultMessage": "Pending"
@@ -36,7 +36,7 @@
     "defaultMessage": "Private"
   },
   "omorphia.component.badge.label.processed": {
-    "defaultMessage": "Processed"
+    "defaultMessage": "Επεξεργασμένο"
   },
   "omorphia.component.badge.label.rejected": {
     "defaultMessage": "Rejected"
@@ -45,10 +45,10 @@
     "defaultMessage": "Returned"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "Scheduled"
+    "defaultMessage": "Προγραμματισμένο"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "Under review"
+    "defaultMessage": "Υπό αξιολόγηση"
   },
   "omorphia.component.badge.label.unlisted": {
     "defaultMessage": "Unlisted"
@@ -63,10 +63,10 @@
     "defaultMessage": "Client"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
-    "defaultMessage": "Client and server"
+    "defaultMessage": "Πελάτης και διακομιστής"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
-    "defaultMessage": "Client or server"
+    "defaultMessage": "Πελάτης ή διακομιστής"
   },
   "omorphia.component.environment-indicator.label.server": {
     "defaultMessage": "Server"
@@ -75,7 +75,7 @@
     "defaultMessage": "A {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Unsupported"
+    "defaultMessage": "Δεν Υποστηρίζεται"
   }
 }
 
