@@ -75,7 +75,7 @@
     "defaultMessage": "En {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Unsupported"
+    "defaultMessage": "Ostöttad"
   }
 }
 
