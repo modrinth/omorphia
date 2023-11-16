@@ -1,27 +1,27 @@
 {
   "omorphia.component.badge.label.accepted": {
-    "defaultMessage": "Accepted"
+    "defaultMessage": "Αποδεκτό"
   },
   "omorphia.component.badge.label.approved": {
-    "defaultMessage": "Approved"
+    "defaultMessage": "Εγκεκριμένο"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "Archived"
+    "defaultMessage": "Αρχειοθετημένο"
   },
   "omorphia.component.badge.label.closed": {
-    "defaultMessage": "Closed"
+    "defaultMessage": "Κλειστό"
   },
   "omorphia.component.badge.label.creator": {
-    "defaultMessage": "Creator"
+    "defaultMessage": "Δημιουργός"
   },
   "omorphia.component.badge.label.draft": {
-    "defaultMessage": "Draft"
+    "defaultMessage": "Πρόχειρο"
   },
   "omorphia.component.badge.label.failed": {
-    "defaultMessage": "Failed"
+    "defaultMessage": "Απέτυχε"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Listed"
+    "defaultMessage": "Καταχωρημένο"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "Συντονιστής"
@@ -30,19 +30,19 @@
     "defaultMessage": "Ομάδα Modrinth"
   },
   "omorphia.component.badge.label.pending": {
-    "defaultMessage": "Pending"
+    "defaultMessage": "Εκκρεμεί"
   },
   "omorphia.component.badge.label.private": {
-    "defaultMessage": "Private"
+    "defaultMessage": "Ιδιωτικό"
   },
   "omorphia.component.badge.label.processed": {
     "defaultMessage": "Επεξεργασμένο"
   },
   "omorphia.component.badge.label.rejected": {
-    "defaultMessage": "Rejected"
+    "defaultMessage": "Απορρίφθηκε"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "Returned"
+    "defaultMessage": "Επιστράφηκε"
   },
   "omorphia.component.badge.label.scheduled": {
     "defaultMessage": "Προγραμματισμένο"
@@ -51,16 +51,16 @@
     "defaultMessage": "Υπό αξιολόγηση"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Unlisted"
+    "defaultMessage": "Μη Καταχωρημένο"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "Withheld"
+    "defaultMessage": "Αποσύρθηκε"
   },
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "Copy code to clipboard"
   },
   "omorphia.component.environment-indicator.label.client": {
-    "defaultMessage": "Client"
+    "defaultMessage": "Πελάτης"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
     "defaultMessage": "Πελάτης και διακομιστής"
@@ -69,10 +69,10 @@
     "defaultMessage": "Πελάτης ή διακομιστής"
   },
   "omorphia.component.environment-indicator.label.server": {
-    "defaultMessage": "Server"
+    "defaultMessage": "Διακομιστής"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "A {type}"
+    "defaultMessage": "Ένα {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
     "defaultMessage": "Δεν Υποστηρίζεται"
