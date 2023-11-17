@@ -72,7 +72,7 @@
     "defaultMessage": "robot in hol of robot"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "ae {type}"
+    "defaultMessage": "aey {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
     "defaultMessage": "Dont work here"
