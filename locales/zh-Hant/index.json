@@ -21,7 +21,7 @@
     "defaultMessage": "失敗"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "可見"
+    "defaultMessage": "公開"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "版主"
