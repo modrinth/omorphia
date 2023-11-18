@@ -42,10 +42,10 @@
     "defaultMessage": "已拒絕"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "已返回"
+    "defaultMessage": "已退回"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "已安排"
+    "defaultMessage": "已排定"
   },
   "omorphia.component.badge.label.under-review": {
     "defaultMessage": "審核中"
@@ -54,7 +54,7 @@
     "defaultMessage": "不公開"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "隱藏的"
+    "defaultMessage": "已隱藏"
   },
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "將代碼複製到剪貼簿"
