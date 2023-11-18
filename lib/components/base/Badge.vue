@@ -1,5 +1,5 @@
 <template>
-  <span :class="'version-badge ' + color + ' type--' + type">
+  <span :class="['version-badge', color, `type--${type}`]">
     <template v-if="color"> <span class="circle" /> {{ capitalizeString(type) }}</template>
 
     <!-- User roles -->
@@ -53,15 +53,10 @@ import {
   capitalizeString,
 } from '@'
 
-withDefaults(
-  defineProps<{
-    type: string
-    color: string
-  }>(),
-  {
-    color: '',
-  }
-)
+defineProps<{
+  type: string | (string & Record<never, never>)
+  color?: string
+}>()
 </script>
 <style lang="scss" scoped>
 .version-badge {
