@@ -1,34 +1,29 @@
 <template>
-  <button class="code" :class="{ copied }" title="Copy code to clipboard" @click="copyText">
+  <button class="code" :class="{ copied }" :title="formatMessage(copiedMessage)" @click="copyText">
     <span>{{ text }}</span>
     <CheckIcon v-if="copied" />
     <ClipboardCopyIcon v-else />
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref } from 'vue'
 import { CheckIcon, ClipboardCopyIcon } from '@'
-</script>
+import { useVIntl, defineMessage } from '@vintl/vintl'
 
-<script>
-export default {
-  props: {
-    text: {
-      type: String,
-      required: true,
-    },
-  },
-  data() {
-    return {
-      copied: false,
-    }
-  },
-  methods: {
-    async copyText() {
-      await navigator.clipboard.writeText(this.text)
-      this.copied = true
-    },
-  },
+const copiedMessage = defineMessage({
+  id: 'omorphia.component.copy.action.copy',
+  defaultMessage: 'Copy code to clipboard',
+})
+const { formatMessage } = useVIntl()
+
+const props = defineProps<{ text: string }>()
+
+const copied = ref(false)
+
+async function copyText() {
+  await navigator.clipboard.writeText(props.text)
+  copied.value = true
 }
 </script>
 
@@ -46,6 +41,10 @@ export default {
   user-select: text;
   transition: opacity 0.5s ease-in-out, filter 0.2s ease-in-out, transform 0.05s ease-in-out,
     outline 0.2s ease-in-out;
+
+  @media (prefers-reduced-motion) {
+    transition: none !important;
+  }
 
   span {
     max-width: 10rem;
