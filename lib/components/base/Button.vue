@@ -1,50 +1,34 @@
-<script setup>
+<script setup lang="ts">
 import { ExternalIcon, UnknownIcon } from '@'
 
 import { computed } from 'vue'
 
-const props = defineProps({
-  link: {
-    type: String,
-    default: null,
-  },
-  external: {
-    type: Boolean,
-    default: false,
-  },
-  action: {
-    type: Function,
-    default: null,
-  },
-  color: {
-    type: String,
-    default: 'default',
-  },
-  iconOnly: {
-    type: Boolean,
-    default: false,
-  },
-  large: {
-    type: Boolean,
-    default: false,
-  },
-  outline: {
-    type: Boolean,
-    default: false,
-  },
-  transparent: {
-    type: Boolean,
-    default: false,
-  },
-  hoverFilled: {
-    type: Boolean,
-    default: false,
-  },
-  hoverFilledOnly: {
-    type: Boolean,
-    default: false,
-  },
-})
+const props = withDefaults(
+  defineProps<{
+    link?: string
+    external: boolean
+    action?: (event: MouseEvent) => void
+    color: 'default' | 'danger'| 'primary'| 'red'| 'orange'| 'green'| 'blue'| 'purple'| 'gray' | 'secondary' | 'highlight'
+    iconOnly: boolean
+    large: boolean
+    outline: boolean
+    transparent: boolean
+    hoverFilled: boolean
+    hoverFilledOnly: boolean
+  }>(),
+  {
+    link: undefined,
+    external: false,
+    action: undefined,
+    color: 'default',
+    iconOnly: false,
+    large: false,
+    outline: false,
+    transparent: false,
+    hoverFilled: false,
+    hoverFilledOnly: false,
+  }
+)
 
 const accentedButton = computed(() =>
   ['danger', 'primary', 'red', 'orange', 'green', 'blue', 'purple', 'gray'].includes(props.color)
