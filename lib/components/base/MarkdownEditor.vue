@@ -366,9 +366,8 @@ onMounted(() => {
         uploadImagesFromList(clipboardData.files)
           .then(function (url) {
             const selection = markdownCommands.yankSelection(view)
-            const altText = selection
-              ? selection
-              : 'Replace this text with a description of the image.'
+            const fileName = clipboardData.files[0].name
+            const altText = selection || fileName || 'Replace this with a description'
             const linkMarkdown = `![${altText}](${url})`
             return markdownCommands.replaceSelection(view, linkMarkdown)
           })
