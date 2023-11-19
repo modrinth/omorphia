@@ -60,16 +60,16 @@
     "defaultMessage": "o poki e nanpa ni"
   },
   "omorphia.component.environment-indicator.label.client": {
-    "defaultMessage": "Client"
+    "defaultMessage": "jan"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
-    "defaultMessage": "Client and server"
+    "defaultMessage": "jan en kulupu"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
-    "defaultMessage": "Client or server"
+    "defaultMessage": "jan anu kulupu"
   },
   "omorphia.component.environment-indicator.label.server": {
-    "defaultMessage": "Server"
+    "defaultMessage": "kulupu"
   },
   "omorphia.component.environment-indicator.label.type": {
     "defaultMessage": "A {type}"
