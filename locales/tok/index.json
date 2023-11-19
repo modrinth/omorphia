@@ -12,22 +12,22 @@
     "defaultMessage": "Closed"
   },
   "omorphia.component.badge.label.creator": {
-    "defaultMessage": "Creator"
+    "defaultMessage": "jan pali"
   },
   "omorphia.component.badge.label.draft": {
-    "defaultMessage": "Draft"
+    "defaultMessage": "pini ala"
   },
   "omorphia.component.badge.label.failed": {
-    "defaultMessage": "Failed"
+    "defaultMessage": "pakala"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Listed"
+    "defaultMessage": "lon lipu"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "Moderator"
+    "defaultMessage": "jan lawa"
   },
   "omorphia.component.badge.label.modrinth-team": {
-    "defaultMessage": "Modrinth Team"
+    "defaultMessage": "kulupu Modrinth"
   },
   "omorphia.component.badge.label.pending": {
     "defaultMessage": "Pending"
@@ -60,7 +60,7 @@
     "defaultMessage": "o poki e nanpa ni"
   },
   "omorphia.component.environment-indicator.label.client": {
-    "defaultMessage": "jan"
+    "defaultMessage": "jan taso"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
     "defaultMessage": "jan en kulupu"
@@ -69,13 +69,13 @@
     "defaultMessage": "jan anu kulupu"
   },
   "omorphia.component.environment-indicator.label.server": {
-    "defaultMessage": "kulupu"
+    "defaultMessage": "kulupu taso"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "A {type}"
+    "defaultMessage": "{type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Unsupported"
+    "defaultMessage": "kepeken ala"
   }
 }
 
