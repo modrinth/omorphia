@@ -371,7 +371,7 @@ onMounted(() => {
           })
           .catch((error) => {
             if (error instanceof Error) {
-              console.error('Problem uploading image to CDN', error.message)
+              console.error('Problem with handling image.', error)
             }
           })
 
@@ -630,8 +630,15 @@ const uploadImagesFromList = async (files: FileList): Promise<string> => {
     throw new Error('No image upload handler provided')
   }
   if (file) {
-    const url = await props.onImageUpload(file)
-    return url
+    try {
+      const url = await props.onImageUpload(file)
+      return url
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Unable to upload image using handler.', error.message)
+        throw new Error(error.message)
+      }
+    }
   }
   throw new Error('No file provided')
 }
