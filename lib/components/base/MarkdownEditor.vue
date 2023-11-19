@@ -263,7 +263,7 @@
 </template>
 
 <script setup lang="ts">
-import { type Component, computed, ref, onMounted, onBeforeUnmount } from 'vue'
+import { type Component, computed, ref, onMounted, onBeforeUnmount, toRef, watch } from 'vue'
 
 import { EditorState } from '@codemirror/state'
 import { EditorView, keymap, placeholder as cm_placeholder } from '@codemirror/view'
@@ -333,8 +333,7 @@ const emit = defineEmits(['update:modelValue'])
 onMounted(() => {
   const updateListener = EditorView.updateListener.of((update) => {
     if (update.docChanged) {
-      currentValue.value = update.state.doc.toString()
-      emit('update:modelValue', currentValue.value)
+      updateCurrentValue(update.state.doc.toString())
     }
   })
 
@@ -426,7 +425,6 @@ onMounted(() => {
   })
 
   const editorState = EditorState.create({
-    doc: props.modelValue,
     extensions: [
       theme,
       eventHandlers,
@@ -544,7 +542,23 @@ const BUTTONS: ButtonGroupMap = {
   },
 }
 
-const currentValue = ref(props.modelValue)
+const currentValue = toRef(props, 'modelValue')
+watch(currentValue, (newValue) => {
+  if (editor) {
+    editor.dispatch({
+      changes: {
+        from: 0,
+        to: editor.state.doc.length,
+        insert: newValue,
+      },
+    })
+  }
+})
+
+const updateCurrentValue = (newValue: string) => {
+  emit('update:modelValue', newValue)
+}
+
 const previewMode = ref(false)
 
 const linkText = ref('')
