@@ -296,6 +296,7 @@ import {
   InfoIcon,
   Chips,
 } from '@/components'
+
 import { markdownCommands, modrinthMarkdownEditorKeymap } from '@/helpers/codemirror'
 import { renderHighlightedString } from '@/helpers/highlight'
 
@@ -357,8 +358,32 @@ onMounted(() => {
 
   const eventHandlers = EditorView.domEventHandlers({
     paste: (ev, view) => {
+      const { clipboardData } = ev
+      if (!clipboardData) return
+
+      if (clipboardData.files && clipboardData.files.length > 0 && props.onImageUpload) {
+        // If the user is pasting a file, upload it if there's an included handler and insert the link.
+        uploadImagesFromList(clipboardData.files)
+          .then(function (url) {
+            const selection = markdownCommands.yankSelection(view)
+            const altText = selection
+              ? selection
+              : 'Replace this text with a description of the image.'
+            const linkMarkdown = `![${altText}](${url})`
+            return markdownCommands.replaceSelection(view, linkMarkdown)
+          })
+          .catch((error) => {
+            if (error instanceof Error) {
+              console.error('Problem uploading image to CDN', error.message)
+            }
+          })
+
+        return false
+      }
+
       // If the user's pasting a url, automatically convert it to a link with the selection as the text or the url itself if no selection content.
       const url = ev.clipboardData?.getData('text/plain')
+
       if (url) {
         try {
           cleanUrl(url)
@@ -374,6 +399,7 @@ onMounted(() => {
         const linkMarkdown = `[${linkText}](${url})`
         return markdownCommands.replaceSelection(view, linkMarkdown)
       }
+
       // Check if the length of the document is greater than the max length. If it is, prevent the paste.
       if (props.maxLength && view.state.doc.length > props.maxLength) {
         ev.preventDefault()
@@ -586,20 +612,29 @@ const linkMarkdown = computed(() => {
   return ''
 })
 
+const uploadImagesFromList = async (files: FileList): Promise<string> => {
+  const file = files[0]
+  if (!props.onImageUpload) {
+    throw new Error('No image upload handler provided')
+  }
+  if (file) {
+    const url = await props.onImageUpload(file)
+    return url
+  }
+  throw new Error('No file provided')
+}
+
 const handleImageUpload = async (files: FileList) => {
   if (props.onImageUpload) {
-    const file = files[0]
-    if (file) {
-      try {
-        const url = await props.onImageUpload(file)
-        linkUrl.value = url
-        validateURL()
-      } catch (error) {
-        if (error instanceof Error) {
-          linkValidationErrorMessage.value = error.message
-        }
-        console.error(error)
+    try {
+      const uploadedURL = await uploadImagesFromList(files)
+      linkUrl.value = uploadedURL
+      validateURL()
+    } catch (error) {
+      if (error instanceof Error) {
+        linkValidationErrorMessage.value = error.message
       }
+      console.error(error)
     }
   }
 }
