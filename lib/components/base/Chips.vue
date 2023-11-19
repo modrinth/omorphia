@@ -12,61 +12,44 @@
     </Button>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { CheckIcon, Button } from '@'
-</script>
-<script>
-import { defineComponent } from 'vue'
+import { ref, watch } from 'vue'
 
-export default defineComponent({
-  props: {
-    modelValue: {
-      required: true,
-      type: String,
-    },
-    items: {
-      required: true,
-      type: Array,
-    },
-    neverEmpty: {
-      default: true,
-      type: Boolean,
-    },
-    formatLabel: {
-      default: (x) => x,
-      type: Function,
-    },
-    capitalize: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  emits: ['update:modelValue'],
-  computed: {
-    selected: {
-      get() {
-        return this.modelValue
-      },
-      set(value) {
-        this.$emit('update:modelValue', value)
-      },
-    },
-  },
-  created() {
-    if (this.items.length > 0 && this.neverEmpty) {
-      this.selected = this.items[0]
-    }
-  },
-  methods: {
-    toggleItem(item) {
-      if (this.selected === item && !this.neverEmpty) {
-        this.selected = null
-      } else {
-        this.selected = item
-      }
-    },
-  },
+const props = withDefaults(
+  defineProps<{
+    modelValue: string
+    items: string[]
+    neverEmpty: boolean
+    formatLabel: (label: string) => string
+    capitalize: boolean
+  }>(),
+  { neverEmpty: true, formatLabel: (label: string) => label, capitalize: true }
+)
+
+const emit = defineEmits<{
+  'update:modelValue': [model: string | null]
+}>()
+
+let selected = ref<string | null>(null)
+
+watch(selected, () => {
+  emit('update:modelValue', selected.value)
 })
+
+if (props.items.length > 0 && props.neverEmpty) {
+  selected.value = props.items[0]
+}
+
+function toggleItem(item: string) {
+  console.log(selected.value === item, props.neverEmpty)
+
+  if (selected.value === item && !props.neverEmpty) {
+    selected.value = null
+  } else {
+    selected.value = item
+  }
+}
 </script>
 
 <style lang="scss" scoped>
