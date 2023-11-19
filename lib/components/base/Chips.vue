@@ -14,7 +14,7 @@
 </template>
 <script setup lang="ts">
 import { CheckIcon, Button } from '@'
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 const props = withDefaults(
   defineProps<{
@@ -37,13 +37,13 @@ watch(selected, () => {
   emit('update:modelValue', selected.value)
 })
 
-if (props.items.length > 0 && props.neverEmpty) {
-  selected.value = props.items[0]
-}
+onMounted(() => {
+  if (props.items.length > 0 && props.neverEmpty) {
+    selected.value = props.items[0]
+  }
+})
 
 function toggleItem(item: string) {
-  console.log(selected.value === item, props.neverEmpty)
-
   if (selected.value === item && !props.neverEmpty) {
     selected.value = null
   } else {
