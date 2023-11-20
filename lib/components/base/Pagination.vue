@@ -4,7 +4,7 @@
       :class="{ disabled: page === 1 }"
       :tabindex="page === 1 ? -1 : 0"
       class="left-arrow paginate has-icon"
-      aria-label="Previous Page"
+      :aria-label="formatMessage(messages.previousPageLabel)"
       :href="linkFunction(page - 1)"
       @click.prevent="page !== 1 ? switchPage(page - 1) : null"
     >
@@ -41,7 +41,7 @@
       }"
       :tabindex="page === pages[pages.length - 1] ? -1 : 0"
       class="right-arrow paginate has-icon"
-      aria-label="Next Page"
+      :aria-label="formatMessage(messages.nextPageLabel)"
       :href="linkFunction(page + 1)"
       @click.prevent="page !== pages[pages.length - 1] ? switchPage(page + 1) : null"
     >
@@ -52,6 +52,18 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { GapIcon, LeftArrowIcon, RightArrowIcon } from '@'
+import { useVIntl, defineMessages } from '@vintl/vintl'
+const messages = defineMessages({
+  nextPageLabel: {
+    id: 'omorphia.component.pagination.label.next-page',
+    defaultMessage: 'Next Page',
+  },
+  previousPageLabel: {
+    id: 'omorphia.component.pagination.label.previous-page',
+    defaultMessage: 'Previous Page',
+  },
+})
+const { formatMessage } = useVIntl()
 
 const emit = defineEmits<{
   'switch-page': [page: number]

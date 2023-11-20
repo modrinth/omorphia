@@ -76,5 +76,11 @@
   },
   "omorphia.component.environment-indicator.label.unsupported": {
     "defaultMessage": "Unsupported"
+  },
+  "omorphia.component.pagination.label.next-page": {
+    "defaultMessage": "Next Page"
+  },
+  "omorphia.component.pagination.label.previous-page": {
+    "defaultMessage": "Previous Page"
   }
 }
