@@ -75,7 +75,7 @@
     "defaultMessage": "{type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "不支援"
+    "defaultMessage": "無效的"
   }
 }
 
