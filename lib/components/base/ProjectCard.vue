@@ -8,7 +8,7 @@
       :class="{ 'no-image': !featuredImage }"
       tabindex="-1"
       :to="`/${projectTypeUrl}/${id}`"
-      :style="color ? `background-color: ${toColor};` : ''"
+      :style="color ? `background-color: ${rgbColor};` : ''"
     >
       <img v-if="featuredImage" :src="featuredImage" alt="gallery image" loading="lazy" />
     </router-link>
@@ -57,7 +57,7 @@
       </div>
       <div v-if="showUpdatedDate" v-tooltip="updatedDate" class="stat date">
         <EditIcon aria-hidden="true" />
-        <span class="date-label">Updated </span> {{ sinceUpdated }}
+        <span class="date-label">Updated </span> {{ sinceUpdate }}
       </div>
       <div v-else v-tooltip="createdDate" class="stat date">
         <CalendarIcon aria-hidden="true" />
@@ -67,7 +67,10 @@
   </article>
 </template>
 
-<script setup>
+<script setup lang="ts">
+/* eslint vue/require-default-prop: "off" -- https://github.com/vuejs/eslint-plugin-vue/issues/2051 */
+
+import { computed } from 'vue'
 import { formatNumber } from '@/helpers'
 import {
   Badge,
@@ -83,147 +86,69 @@ import {
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime.js'
 dayjs.extend(relativeTime)
-</script>
 
-<script>
-import { defineComponent } from 'vue'
-export default defineComponent({
-  props: {
-    id: {
-      type: String,
-      default: 'modrinth-0',
-    },
-    type: {
-      type: String,
-      default: 'mod',
-    },
-    name: {
-      type: String,
-      default: 'Project Name',
-    },
-    author: {
-      type: String,
-      default: null,
-    },
-    description: {
-      type: String,
-      default: 'A _type description',
-    },
-    iconUrl: {
-      type: String,
-      default: '#',
-      required: false,
-    },
-    downloads: {
-      type: String,
-      default: null,
-      required: false,
-    },
-    follows: {
-      type: String,
-      default: null,
-      required: false,
-    },
-    createdAt: {
-      type: String,
-      default: '0000-00-00',
-    },
-    updatedAt: {
-      type: String,
-      default: null,
-    },
-    categories: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
-    filteredCategories: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
-    projectTypeDisplay: {
-      type: String,
-      default: null,
-    },
-    projectTypeUrl: {
-      type: String,
-      default: null,
-    },
-    status: {
-      type: String,
-      default: null,
-    },
-    serverSide: {
-      type: String,
-      required: false,
-      default: '',
-    },
-    clientSide: {
-      type: String,
-      required: false,
-      default: '',
-    },
-    moderation: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    search: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    featuredImage: {
-      type: String,
-      required: false,
-      default: null,
-    },
-    showUpdatedDate: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
-    hideLoaders: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    color: {
-      type: Number,
-      required: false,
-      default: null,
-    },
-  },
-  computed: {
-    toColor() {
-      let color = this.color
+/** Creates a type that contains original T string, but allows other string values as well. */
+type LaxString<T extends string> = T | (string & Record<never, never>)
 
-      color >>>= 0
-      const b = color & 0xff
-      const g = (color & 0xff00) >>> 8
-      const r = (color & 0xff0000) >>> 16
-      return 'rgba(' + [r, g, b, 1].join(',') + ')'
+type ProjectType = 'mod' | 'plugin' | 'modpack' | 'resourcepack'
+type SideRequirement = 'required' | 'optional' | 'unsupported'
+
+const props = withDefaults(
+  defineProps<{
+    id?: string
+    type?: LaxString<ProjectType>
+    name?: string
+    author?: string
+    description: string
+    iconUrl?: string
+    downloads?: string
+    follows?: string
+    createdAt?: string
+    updatedAt?: string
+    categories?: string[]
+    projectTypeDisplay: string
+    projectTypeUrl: string
+    status?: string
+    serverSide?: LaxString<SideRequirement>
+    clientSide?: LaxString<SideRequirement>
+    moderation?: boolean
+    search?: boolean
+    featuredImage?: string
+    showUpdatedDate?: boolean
+    hideLoaders?: boolean
+    color?: number
+  }>(),
+  {
+    id: 'modrinth-0',
+    type: 'mod',
+    name: 'Project Name',
+    description: 'A _type description', // ???
+    iconUrl: '#',
+    createdAt: '0000-00-00',
+    categories() {
+      return []
     },
-    createdDate() {
-      return dayjs(this.createdAt).format('MMMM D, YYYY [at] h:mm:ss A')
-    },
-    sinceCreation() {
-      return dayjs(this.createdAt).fromNow()
-    },
-    updatedDate() {
-      return dayjs(this.updatedAt).format('MMMM D, YYYY [at] h:mm:ss A')
-    },
-    sinceUpdated() {
-      return dayjs(this.updatedAt).fromNow()
-    },
-  },
-  methods: {
-    formatNumber,
-  },
+    moderation: false,
+    search: false,
+    showUpdatedDate: false,
+    hideLoaders: false,
+  }
+)
+
+const rgbColor = computed(() => {
+  const color = (props.color ?? 0) >>> 0
+  const b = color & 0xff
+  const g = (color & 0xff00) >>> 8
+  const r = (color & 0xff0000) >>> 16
+  return `rgb(${r}, ${g}, ${b})`
 })
+
+const dateFormat = 'MMMM D, YYYY [at] h:mm:ss A'
+
+const createdDate = computed(() => dayjs(props.createdAt).format(dateFormat))
+const updatedDate = computed(() => dayjs(props.updatedAt).format(dateFormat))
+const sinceCreation = computed(() => dayjs(props.createdAt).fromNow())
+const sinceUpdate = computed(() => dayjs(props.updatedAt).fromNow())
 </script>
 
 <style lang="scss" scoped>
