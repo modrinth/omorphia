@@ -13,48 +13,50 @@
       class="popup-menu"
       :class="`position-${position}-${direction} ${dropdownVisible ? 'visible' : ''}`"
     >
-      <slot name="menu"> </slot>
+      <slot name="menu"></slot>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
-const props = defineProps({
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  position: {
-    type: String,
-    default: 'bottom',
-  },
-  direction: {
-    type: String,
-    default: 'left',
-  },
-})
+type Positions = 'top' | 'bottom' | 'left' | 'right'
+type Direction = 'up' | 'down' | 'left' | 'right'
+
+const props = withDefaults(
+  defineProps<{
+    disabled?: boolean
+    position?: Positions
+    direction?: Direction
+  }>(),
+  {
+    disabled: false,
+    position: 'bottom',
+    direction: 'left',
+  }
+)
+
 defineOptions({
   inheritAttrs: false,
 })
 
 const dropdownVisible = ref(false)
-const dropdown = ref(null)
-const dropdownButton = ref(null)
+const dropdown = ref<HTMLElement | null>(null)
+const dropdownButton = ref<HTMLElement | null>(null)
 
 const toggleDropdown = () => {
   if (!props.disabled) {
     dropdownVisible.value = !dropdownVisible.value
     if (!dropdownVisible.value) {
-      dropdownButton.value.focus()
+      dropdownButton.value!.focus()
     }
   }
 }
 
 const hide = () => {
   dropdownVisible.value = false
-  dropdownButton.value.focus()
+  dropdownButton.value!.focus()
 }
 
 const show = () => {
@@ -66,12 +68,13 @@ defineExpose({
   hide,
 })
 
-const handleClickOutside = (event) => {
+const handleClickOutside = (event: MouseEvent) => {
   const elements = document.elementsFromPoint(event.clientX, event.clientY)
+
   if (
-    dropdown.value.$el !== event.target &&
-    !elements.includes(dropdown.value.$el) &&
-    !dropdown.value.contains(event.target)
+    dropdown.value !== event.target &&
+    !elements.includes(dropdown.value!) &&
+    !dropdown.value!.contains(event.target as HTMLElement)
   ) {
     dropdownVisible.value = false
   }
