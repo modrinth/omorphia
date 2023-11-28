@@ -57,7 +57,7 @@
     "defaultMessage": "Αποσύρθηκε"
   },
   "omorphia.component.copy.action.copy": {
-    "defaultMessage": "Copy code to clipboard"
+    "defaultMessage": "Αντιγραφή κωδικού στο πρόχειρο"
   },
   "omorphia.component.environment-indicator.label.client": {
     "defaultMessage": "Πελάτης"
