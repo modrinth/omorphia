@@ -84,13 +84,13 @@
     "defaultMessage": "{count} 次下载"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} 位关注者"
   },
   "project.tooltip.published": {
     "defaultMessage": "发布于 {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "更新于 {date}"
   }
 }
 
