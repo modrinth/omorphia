@@ -78,13 +78,13 @@
     "defaultMessage": "Хупламый"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "Автор: {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} йөкләнү"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} язылучы"
   },
   "project.tooltip.published": {
     "defaultMessage": "Published {date}"
