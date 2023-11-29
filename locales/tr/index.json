@@ -78,16 +78,16 @@
     "defaultMessage": "Desteksiz"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "{author} tarafından"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} indirme"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} takipçi"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "{date} tarihinde yayınlandı"
   },
   "project.tooltip.updated": {
     "defaultMessage": "Updated {date}"
