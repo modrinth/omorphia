@@ -27,7 +27,7 @@
         v-else
         class="btn"
         :class="{
-          'page-number current btn-highlighted': page === item,
+          'page-number current btn-brand-highlight': page === item,
           'btn-transparent': page !== item,
           shrink: item > 99,
         }"
