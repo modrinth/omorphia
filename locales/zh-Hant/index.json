@@ -78,19 +78,19 @@
     "defaultMessage": "無效的"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "作者 {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} 次下載"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} 位追蹤者"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "發布於 {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "更新於 {date}"
   }
 }
 
