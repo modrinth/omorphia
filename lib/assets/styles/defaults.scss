@@ -40,6 +40,7 @@ body {
 
 a.uncolored {
   color: inherit;
+  text-decoration: none;
 }
 
 input[type='text'],
@@ -129,6 +130,7 @@ input[type='number'] {
   input {
     padding: 0 2.5rem;
     width: 100%;
+    box-shadow: none;
   }
 
   &:focus-within svg {
@@ -223,4 +225,10 @@ h2 {
 h3 {
   margin-block: var(--gap-md) var(--gap-md);
   color: var(--color-contrast);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
 }

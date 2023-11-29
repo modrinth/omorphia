@@ -727,7 +727,7 @@ function openVideoModal() {
 
 .markdown-resource-link {
   cursor: pointer;
-  color: var(--color-link);
+  color: var(--color-blue);
 
   &:focus-visible,
   &:hover {
