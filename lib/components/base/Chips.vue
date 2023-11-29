@@ -14,7 +14,7 @@
 </template>
 <script setup>
 import { CheckIcon, Button } from '@'
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   modelValue: {
@@ -58,11 +58,9 @@ function toggleItem(item) {
   }
 }
 
-onMounted(() => {
-  if (props.items.length > 0 && props.neverEmpty) {
-    selected.value = props.items[0]
-  }
-})
+if (props.items.length > 0 && props.neverEmpty) {
+  selected.value = props.items[0]
+}
 </script>
 
 <style lang="scss" scoped>

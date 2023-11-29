@@ -78,7 +78,6 @@ import {
   Avatar,
   formatNumber,
 } from '@'
-import { RouterLink } from 'vue-router'
 import { useVIntl, defineMessages } from '@vintl/vintl'
 import dayjs from 'dayjs'
 
@@ -204,7 +203,7 @@ defineProps({
   fromNow: {
     type: Function,
     required: false,
-    default: (x) => x,
+    default: (x) => x.toString(),
   },
 })
 </script>
