@@ -90,7 +90,7 @@
     "defaultMessage": "Published {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "{date} яңартылды"
   }
 }
 
