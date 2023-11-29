@@ -76,6 +76,21 @@
   },
   "omorphia.component.environment-indicator.label.unsupported": {
     "defaultMessage": "No suportat"
+  },
+  "project.by-author": {
+    "defaultMessage": "by {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} downloads"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} followers"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "Published {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "Updated {date}"
   }
 }
 
