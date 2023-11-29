@@ -78,19 +78,19 @@
     "defaultMessage": "Mittetoetatud"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "autorilt {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} allalaadimist"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} jälgijat"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Avaldatud {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Uuendatud {date}"
   }
 }
 
