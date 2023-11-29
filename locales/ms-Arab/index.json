@@ -78,19 +78,19 @@
     "defaultMessage": "تيدق دسوکوڠ"
   },
   "project.by-author": {
-    "defaultMessage": "oleh {author}"
+    "defaultMessage": "اوليه {author}"
   },
   "project.tooltip.downloads": {
     "defaultMessage": "{count} موات تورون"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} pengikut"
+    "defaultMessage": "{count} ڤڠيکوت"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Diterbitkan pada {date}"
+    "defaultMessage": "دتربيتکن ڤد {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Dikemas kini pada {date}"
+    "defaultMessage": "دكمس کيني ڤد {date}"
   }
 }
 
