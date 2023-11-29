@@ -85,6 +85,8 @@ import {
 } from '@'
 import { useVIntl, defineMessages } from '@vintl/vintl'
 import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+dayjs.extend(relativeTime)
 
 const vintl = useVIntl()
 const { formatMessage } = vintl
