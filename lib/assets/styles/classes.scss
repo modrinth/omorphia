@@ -499,6 +499,11 @@ a,
     border-color: transparent;
   }
 
+  &.raised {
+    background-color: var(--color-raised-bg);
+    box-shadow: var(--shadow-inset-sm), var(--shadow-raised);
+  }
+
   &.btn-dropdown-animation {
     svg:last-child {
       transition: transform 0.125s ease-in-out;
