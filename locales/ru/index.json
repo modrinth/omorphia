@@ -78,19 +78,19 @@
     "defaultMessage": "Не поддерживается"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "от {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} загрузок"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} подписчиков"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Опубликовано {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Обновлено {date}"
   }
 }
 
