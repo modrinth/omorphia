@@ -61,12 +61,7 @@
       </span>
       <div class="tags">
         <TagIcon />
-        <Categories
-          :type="type"
-          :categories="
-            categories.filter((cat) => !tags.loaders.some((loader) => loader.name === cat))
-          "
-        />
+        <Categories :type="type" :categories="categories" />
       </div>
     </div>
   </article>
@@ -94,7 +89,7 @@ const { formatMessage } = vintl
 const messages = defineMessages({
   byAuthor: {
     id: 'project.by-author',
-    defaultMessage: 'by {author} ',
+    defaultMessage: 'by {author}',
   },
   published: {
     id: 'project.tooltip.published',
