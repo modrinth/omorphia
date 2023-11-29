@@ -15,12 +15,12 @@
       :key="'page-' + item + '-' + index"
       :class="{
         'page-number': page !== item,
-        shrink: item !== '-' && item > 99,
+        shrink: item !== -1 && item > 99,
         'desktop-only': page - 1 !== item && page + 1 !== item && item !== page,
       }"
       class="page-number-container"
     >
-      <div v-if="item === '-'" class="has-icon">
+      <div v-if="item === -1" class="has-icon">
         <GapIcon class="gap-icon" />
       </div>
       <a
@@ -53,8 +53,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue'
 import { GapIcon, LeftArrowIcon, RightArrowIcon } from '@'
+import { computed } from 'vue'
 
 const emit = defineEmits<{
   'switch-page': [page: number]
@@ -82,13 +82,13 @@ const pages = computed(() => {
     pages.push(2, 3, 4, 5)
   }
   if (props.page > fourFromStart) {
-    pages.push('-')
+    pages.push(-1)
   }
   if (props.page > fourFromStart && props.page < fourFromEnd) {
     pages.push(props.page - 1, props.page, props.page + 1)
   }
   if (props.page < fourFromEnd) {
-    pages.push('-')
+    pages.push(-1)
   }
   if (props.page >= fourFromEnd) {
     pages.push(props.count - 4, props.count - 3, props.count - 2, props.count - 1)
