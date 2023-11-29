@@ -78,7 +78,7 @@
     "defaultMessage": "Non supportato"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "di {author}"
   },
   "project.tooltip.downloads": {
     "defaultMessage": "{count} download"
