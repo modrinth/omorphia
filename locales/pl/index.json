@@ -78,7 +78,7 @@
     "defaultMessage": "Nieobsługiwany"
   },
   "project.by-author": {
-    "defaultMessage": "autorstwa {author}"
+    "defaultMessage": "utworzone przez {author}"
   },
   "project.tooltip.downloads": {
     "defaultMessage": "{count} pobrań"
@@ -87,10 +87,10 @@
     "defaultMessage": "{count} obserwujących"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Opublikowano {date}"
+    "defaultMessage": "Opublikowano dnia {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Zaktualizowano {date}"
+    "defaultMessage": "Zaktualizowano dnia {date}"
   }
 }
 
