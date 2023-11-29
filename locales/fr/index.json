@@ -78,19 +78,19 @@
     "defaultMessage": "Non pris en charge"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "par {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} téléchargements"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} abonnés"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Publié le {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Mis à jour le {date}"
   }
 }
 
