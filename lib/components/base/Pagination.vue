@@ -3,7 +3,7 @@
     <a
       :class="{ disabled: page === 1 }"
       :tabindex="page === 1 ? -1 : 0"
-      class="left-arrow paginate has-icon"
+      class="btn btn-transparent icon-only l-btn"
       aria-label="Previous Page"
       :href="linkFunction(page - 1)"
       @click.prevent="page !== 1 ? switchPage(page - 1) : null"
@@ -16,16 +16,19 @@
       :class="{
         'page-number': page !== item,
         shrink: item !== '-' && item > 99,
+        'desktop-only': page - 1 !== item && page + 1 !== item && item !== page,
       }"
       class="page-number-container"
     >
       <div v-if="item === '-'" class="has-icon">
-        <GapIcon />
+        <GapIcon class="gap-icon" />
       </div>
       <a
         v-else
+        class="btn"
         :class="{
-          'page-number current': page === item,
+          'page-number current btn-highlighted': page === item,
+          'btn-transparent': page !== item,
           shrink: item > 99,
         }"
         :href="linkFunction(item)"
@@ -40,7 +43,7 @@
         disabled: page === pages[pages.length - 1],
       }"
       :tabindex="page === pages[pages.length - 1] ? -1 : 0"
-      class="right-arrow paginate has-icon"
+      class="btn btn-transparent icon-only"
       aria-label="Next Page"
       :href="linkFunction(page + 1)"
       @click.prevent="page !== pages[pages.length - 1] ? switchPage(page + 1) : null"
@@ -71,28 +74,26 @@ const props = withDefaults(
 )
 
 const pages = computed(() => {
-  let pages: ('-' | number)[] = []
-
-  if (props.count > 7) {
-    if (props.page + 3 >= props.count) {
-      pages = [
-        1,
-        '-',
-        props.count - 4,
-        props.count - 3,
-        props.count - 2,
-        props.count - 1,
-        props.count,
-      ]
-    } else if (props.page > 5) {
-      pages = [1, '-', props.page - 1, props.page, props.page + 1, '-', props.count]
-    } else {
-      pages = [1, 2, 3, 4, 5, '-', props.count]
-    }
-  } else {
-    pages = Array.from({ length: props.count }, (_, i) => i + 1)
+  const pages = []
+  const fourFromStart = 4
+  const fourFromEnd = props.count - 3
+  pages.push(1)
+  if (props.page <= fourFromStart) {
+    pages.push(2, 3, 4, 5)
   }
-
+  if (props.page > fourFromStart) {
+    pages.push('-')
+  }
+  if (props.page > fourFromStart && props.page < fourFromEnd) {
+    pages.push(props.page - 1, props.page, props.page + 1)
+  }
+  if (props.page < fourFromEnd) {
+    pages.push('-')
+  }
+  if (props.page >= fourFromEnd) {
+    pages.push(props.count - 4, props.count - 3, props.count - 2, props.count - 1)
+  }
+  pages.push(props.count)
   return pages
 })
 
@@ -102,53 +103,12 @@ function switchPage(newPage: number) {
 </script>
 
 <style lang="scss" scoped>
-.paginates {
-  display: flex;
-}
-
 a {
-  color: var(--color-contrast);
-  box-shadow: var(--shadow-raised), var(--shadow-inset);
-
-  padding: 0.5rem 1rem;
+  padding: var(--gap-sm);
   margin: 0;
-  border-radius: 2rem;
-  background: var(--color-raised-bg);
-  cursor: pointer;
-
-  transition: opacity 0.5s ease-in-out, filter 0.2s ease-in-out, transform 0.05s ease-in-out,
-    outline 0.2s ease-in-out;
-
-  @media (prefers-reduced-motion) {
-    transition: none !important;
-  }
-
-  &:hover {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  &.page-number.current {
-    background: var(--color-brand);
-    color: var(--color-accent-contrast);
-    cursor: default;
-  }
-
-  &.paginate.disabled {
-    background-color: transparent;
-    cursor: not-allowed;
-    filter: grayscale(50%);
-    opacity: 0.5;
-  }
-
-  &:hover:not(&:disabled) {
-    filter: brightness(0.85);
-  }
-
-  &:active:not(&:disabled) {
-    transform: scale(0.95);
-    filter: brightness(0.8);
-  }
+  height: 2.25rem;
+  min-width: 2.25rem;
+  box-shadow: none;
 }
 
 .has-icon {
@@ -168,26 +128,8 @@ a,
 }
 
 .paginates {
-  height: 2em;
-  margin: 0.5rem 0;
-  > div,
-  .has-icon {
-    margin: 0 0.3em;
-  }
-}
-
-.left-arrow {
-  margin-left: auto !important;
-}
-
-.right-arrow {
-  margin-right: auto !important;
-}
-
-@media screen and (max-width: 400px) {
-  .paginates {
-    font-size: 80%;
-  }
+  display: flex;
+  gap: var(--gap-xs);
 }
 
 @media screen and (max-width: 530px) {
@@ -195,5 +137,23 @@ a,
     width: 2.5rem;
     padding: 0.5rem 0;
   }
+}
+
+.gap-icon {
+  margin-inline: 0.25rem;
+}
+
+@media screen and (max-width: 500px) {
+  .paginates {
+    font-size: 80%;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+}
+
+.l-btn {
+  margin-left: auto;
 }
 </style>

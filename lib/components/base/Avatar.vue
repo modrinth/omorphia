@@ -85,15 +85,17 @@ function updatePixelated() {
   box-shadow: var(--shadow-inset-lg), var(--shadow-card);
   height: var(--size) !important;
   width: var(--size) !important;
-  background-color: var(--color-button-bg);
   object-fit: cover;
   max-width: var(--size) !important;
   max-height: var(--size) !important;
 
+  background-color: var(--color-raised-bg);
+  border: 1px solid var(--color-divider);
+
   &.size-xxs {
     --size: 1.25rem;
     box-shadow: var(--shadow-inset), var(--shadow-card);
-    border-radius: var(--radius-sm);
+    border-radius: 5px;
   }
 
   &.size-xs {
