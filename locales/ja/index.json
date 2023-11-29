@@ -1,6 +1,6 @@
 {
   "omorphia.component.badge.label.accepted": {
-    "defaultMessage": "Accepted"
+    "defaultMessage": "承認済み"
   },
   "omorphia.component.badge.label.approved": {
     "defaultMessage": "Approved"
