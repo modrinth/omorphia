@@ -39,7 +39,7 @@
         v-if="showUpdatedDate"
         v-tooltip="
           formatMessage(messages.updated, {
-            date: $dayjs(updatedAt).format('MMMM D, YYYY [at] h:mm A'),
+            date: dayjs(updatedAt).format('MMMM D, YYYY [at] h:mm A'),
           })
         "
         class="stat consumes-click"
@@ -51,7 +51,7 @@
         v-else
         v-tooltip="
           formatMessage(messages.published, {
-            date: $dayjs(createdAt).format('MMMM D, YYYY [at] h:mm A'),
+            date: dayjs(createdAt).format('MMMM D, YYYY [at] h:mm A'),
           })
         "
         class="stat consumes-click"
@@ -84,6 +84,7 @@ import {
   formatNumber,
 } from '@'
 import { useVIntl, defineMessages } from '@vintl/vintl'
+import dayjs from 'dayjs'
 
 const vintl = useVIntl()
 const { formatMessage } = vintl
