@@ -45,7 +45,7 @@
         class="stat consumes-click"
       >
         <span class="label"><HistoryIcon /></span>
-        <span class="value">{{ dayjs(updatedAt).fromNow() }}</span>
+        <span class="value">{{ fromNow(updatedAt) }}</span>
       </span>
       <span
         v-else
@@ -57,7 +57,7 @@
         class="stat consumes-click"
       >
         <span class="label"><CalendarIcon /></span>
-        <span class="value">{{ dayjs(createdAt).fromNow() }}</span>
+        <span class="value">{{ fromNow(createdAt) }}</span>
       </span>
       <div class="tags">
         <TagIcon />
@@ -80,8 +80,6 @@ import {
 } from '@'
 import { useVIntl, defineMessages } from '@vintl/vintl'
 import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-dayjs.extend(relativeTime)
 
 const vintl = useVIntl()
 const { formatMessage } = vintl
@@ -201,6 +199,11 @@ defineProps({
     type: Number,
     required: false,
     default: null,
+  },
+  fromNow: {
+    type: Function,
+    required: false,
+    default: (x) => x,
   },
 })
 </script>
