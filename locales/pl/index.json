@@ -78,19 +78,19 @@
     "defaultMessage": "Nieobsługiwany"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "autorstwa {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} pobrań"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} obserwujących"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Opublikowano {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Zaktualizowano {date}"
   }
 }
 
