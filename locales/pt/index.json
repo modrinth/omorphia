@@ -78,19 +78,19 @@
     "defaultMessage": "Incompatível"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "por {author}"
   },
   "project.tooltip.downloads": {
     "defaultMessage": "{count} downloads"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} seguidores"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Publicado em {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Atualizado em {date}"
   }
 }
 
