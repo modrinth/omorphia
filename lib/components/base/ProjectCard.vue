@@ -441,6 +441,7 @@ defineProps({
     width: auto;
     aspect-ratio: 2 / 1;
     border: 4px solid var(--color-button-bg);
+    border-radius: var(--radius-md);
   }
 }
 
