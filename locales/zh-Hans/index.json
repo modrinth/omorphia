@@ -78,16 +78,16 @@
     "defaultMessage": "无效的"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "来自 {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} 次下载"
   },
   "project.tooltip.followers": {
     "defaultMessage": "{count} followers"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "发布于 {date}"
   },
   "project.tooltip.updated": {
     "defaultMessage": "Updated {date}"
