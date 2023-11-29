@@ -78,19 +78,19 @@
     "defaultMessage": "Nicht unterstützt"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "von {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} Downloads"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} Follower"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Veröffentlicht am {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Aktualisiert am {date}"
   }
 }
 
