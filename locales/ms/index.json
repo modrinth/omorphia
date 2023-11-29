@@ -78,19 +78,19 @@
     "defaultMessage": "Tidak disokong"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "oleh {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} muat turun"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} pengikut"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Diterbitkan pada {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Dikemas kini pada {date}"
   }
 }
 
