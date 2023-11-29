@@ -78,19 +78,19 @@
     "defaultMessage": "Ostöttad"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "gjort av {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} nedladdningar"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} följare"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Publicerades {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Uppdaterades {date}"
   }
 }
 
