@@ -78,6 +78,7 @@ import {
   Avatar,
   formatNumber,
 } from '@'
+import { RouterLink } from 'vue-router'
 import { useVIntl, defineMessages } from '@vintl/vintl'
 import dayjs from 'dayjs'
 

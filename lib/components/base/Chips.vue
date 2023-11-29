@@ -14,58 +14,54 @@
 </template>
 <script setup>
 import { CheckIcon, Button } from '@'
-</script>
-<script>
-import { defineComponent } from 'vue'
+import { computed, onMounted } from 'vue'
 
-export default defineComponent({
-  props: {
-    modelValue: {
-      required: true,
-      type: String,
-    },
-    items: {
-      required: true,
-      type: Array,
-    },
-    neverEmpty: {
-      default: true,
-      type: Boolean,
-    },
-    formatLabel: {
-      default: (x) => x,
-      type: Function,
-    },
-    capitalize: {
-      type: Boolean,
-      default: true,
-    },
+const props = defineProps({
+  modelValue: {
+    required: true,
+    type: String,
   },
-  emits: ['update:modelValue'],
-  computed: {
-    selected: {
-      get() {
-        return this.modelValue
-      },
-      set(value) {
-        this.$emit('update:modelValue', value)
-      },
-    },
+  items: {
+    required: true,
+    type: Array,
   },
-  created() {
-    if (this.items.length > 0 && this.neverEmpty) {
-      this.selected = this.items[0]
-    }
+  neverEmpty: {
+    default: true,
+    type: Boolean,
   },
-  methods: {
-    toggleItem(item) {
-      if (this.selected === item && !this.neverEmpty) {
-        this.selected = null
-      } else {
-        this.selected = item
-      }
-    },
+  formatLabel: {
+    default: (x) => x,
+    type: Function,
   },
+  capitalize: {
+    type: Boolean,
+    default: true,
+  },
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const selected = computed({
+  get() {
+    return props.modelValue
+  },
+  set(value) {
+    emit('update:modelValue', value)
+  },
+})
+
+function toggleItem(item) {
+  if (selected.value === item && !props.neverEmpty) {
+    selected.value = null
+  } else {
+    selected.value = item
+  }
+}
+
+onMounted(() => {
+  if (props.items.length > 0 && props.neverEmpty) {
+    selected.value = props.items[0]
+  }
 })
 </script>
 

@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink } from 'vue-router'
 import { ExternalIcon, UnknownIcon } from '@'
 
 import { computed } from 'vue'
