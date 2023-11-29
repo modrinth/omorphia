@@ -78,19 +78,19 @@
     "defaultMessage": "Не підтримується"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "від {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} завантажень"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} підписників"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Опубліковано {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Оновлено {date}"
   }
 }
 
