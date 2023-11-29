@@ -45,7 +45,7 @@
         class="stat consumes-click"
       >
         <span class="label"><HistoryIcon /></span>
-        <span class="value">{{ fromNow(updatedAt) }}</span>
+        <span class="value">{{ dayjs(updatedAt).fromNow() }}</span>
       </span>
       <span
         v-else
@@ -57,7 +57,7 @@
         class="stat consumes-click"
       >
         <span class="label"><CalendarIcon /></span>
-        <span class="value">{{ fromNow(createdAt) }}</span>
+        <span class="value">{{ dayjs(createdAt).fromNow() }}</span>
       </span>
       <div class="tags">
         <TagIcon />
