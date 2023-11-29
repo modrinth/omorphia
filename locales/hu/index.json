@@ -78,19 +78,19 @@
     "defaultMessage": "Nem támogatott"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "Készítette {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} letöltés"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} követő"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Közzétéve {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Frissítve {date}"
   }
 }
 
