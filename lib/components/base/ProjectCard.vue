@@ -1,7 +1,6 @@
 <template>
   <article class="project-card">
-    <router-link :to="`/${type}/${id}`" class="project-card__link">
-    </router-link>
+    <router-link :to="`/${type}/${id}`" class="project-card__link"> </router-link>
     <div class="icon">
       <Avatar :src="iconUrl" />
     </div>
@@ -74,10 +73,17 @@
 </template>
 
 <script setup>
-import { HeartIcon, DownloadIcon, CalendarIcon, HistoryIcon, Categories, TagIcon, Avatar, formatNumber } from '@'
+import {
+  HeartIcon,
+  DownloadIcon,
+  CalendarIcon,
+  HistoryIcon,
+  Categories,
+  TagIcon,
+  Avatar,
+  formatNumber,
+} from '@'
 import { useVIntl, defineMessages } from '@vintl/vintl'
-
-const tags = useTags()
 
 const vintl = useVIntl()
 const { formatMessage } = vintl
@@ -105,7 +111,7 @@ const messages = defineMessages({
   },
 })
 
-const props = defineProps({
+defineProps({
   id: {
     type: String,
     default: 'modrinth-0',

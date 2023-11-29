@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import {ref, onMounted, onUnmounted} from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const scrollableAtTop = ref(true)
 const scrollableAtBottom = ref(false)

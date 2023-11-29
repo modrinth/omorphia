@@ -1,10 +1,7 @@
 <template>
   <div class="categories">
     <slot />
-    <span
-      v-for="category in categories"
-      :key="category.name"
-    >
+    <span v-for="category in categories" :key="category.name">
       {{ formatCategory(category.name) }}
     </span>
   </div>
