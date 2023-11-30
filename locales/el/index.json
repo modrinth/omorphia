@@ -78,19 +78,19 @@
     "defaultMessage": "Δεν Υποστηρίζεται"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "από {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} λήψεις"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} ακόλουθοι"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Δημοσιεύθηκε {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Ενημερώθηκε {date}"
   }
 }
 
