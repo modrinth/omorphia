@@ -81,10 +81,10 @@
     "defaultMessage": "utworzone przez {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} pobrań"
+    "defaultMessage": "{count, plural, one {{count} pobranie} few {{count} pobrania} other {{count} pobrań}}"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} obserwujących"
+    "defaultMessage": "{count, plural, one {{count} obserwujący} other {{count} obserwujących}}"
   },
   "project.tooltip.published": {
     "defaultMessage": "Opublikowano dnia {date}"
