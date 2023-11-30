@@ -78,19 +78,19 @@
     "defaultMessage": "Không hỗ trợ"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "bởi {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} lượt tải xuống"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} lượt theo dõi"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Đăng tải vào {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Cập nhật vào {date}"
   }
 }
 
