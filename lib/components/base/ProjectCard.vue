@@ -203,7 +203,7 @@ defineProps({
   fromNow: {
     type: Function,
     required: false,
-    default: (x) => x,
+    default: (x) => x.toString(),
   },
 })
 </script>
@@ -441,6 +441,7 @@ defineProps({
     width: auto;
     aspect-ratio: 2 / 1;
     border: 4px solid var(--color-button-bg);
+    border-radius: var(--radius-md);
   }
 }
 

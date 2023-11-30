@@ -625,18 +625,22 @@ a,
     }
   }
 
-  // TODO: Add back later
-  //&.warning {
-  //  border-left: 0.5rem solid var(--color-warning-banner-side);
-  //  background-color: var(--color-warning-banner-bg);
-  //  color: var(--color-warning-banner-text);
-  //}
-  //
-  //&.information {
-  //  border-left: 0.5rem solid var(--color-info-banner-side);
-  //  background-color: var(--color-info-banner-bg);
-  //  color: var(--color-info-banner-text);
-  //}
+  &.recessed {
+    background-color: var(--color-bg);
+    box-shadow: none;
+  }
+
+  &.warning {
+    border-left: 0.5rem solid var(--color-red);
+    background-color: var(--color-red-bg);
+    color: var(--color-base);
+  }
+
+  &.information {
+    border-left: 0.5rem solid var(--color-blue);
+    background-color: var(--color-blue-bg);
+    color: var(--color-base);
+  }
 }
 
 .card {

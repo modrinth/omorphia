@@ -21,7 +21,7 @@ html {
   --gap-lg: 1rem;
   --gap-xl: 1.25rem;
 
-  --radius-xs: var(--round-univ);
+  --radius-xs: var(--round-little);
   --radius-sm: var(--round-univ);
   --radius-md: var(--round-univ);
   --radius-lg: var(--round-univ);
@@ -34,6 +34,7 @@ html {
   --color-bg: #fafafa;
   --color-raised-bg: #ffffff;
   --color-super-raised-bg: #e9e9e9;
+  --color-alt-bg: #f2f4f7;
   --color-button-bg: #f0f1f2;
 
   --color-divider: rgba(78, 67, 121, 0.2);
@@ -56,6 +57,9 @@ html {
   --color-blue: #1f68c0;
   --color-purple: #8e32f3;
   --color-gray: #595b61;
+
+  --color-red-bg: rgba(203, 34, 69, 0.3);
+  --color-blue-bg: rgba(31, 104, 192, 0.3);
 
   --color-brand: var(--color-green);
   --color-brand-highlight: rgba(0, 175, 92, 0.25);
@@ -82,6 +86,7 @@ html {
   --color-bg: #16181c;
   --color-raised-bg: #24262b;
   --color-super-raised-bg: #40434a;
+  --color-alt-bg: #202228;
   --color-button-bg: rgb(51, 54, 61);
 
   --color-divider: rgba(176, 169, 207, 0.2);
@@ -104,6 +109,9 @@ html {
   --color-blue: #4f9cff;
   --color-purple: #c78aff;
   --color-gray: #9fa4b3;
+
+  --color-red-bg: rgba(255, 73, 110, 0.3);
+  --color-blue-bg: rgba(79, 156, 255, 0.3);
 
   --color-brand: var(--color-green);
   --color-brand-highlight: rgba(27, 217, 106, 0.25);
