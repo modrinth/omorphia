@@ -268,8 +268,8 @@ a,
   border: none;
   outline: 2px solid transparent;
 
-  &:focus-visible:not(&:disabled),
-  &:hover:not(&:disabled) {
+  &:focus-visible:not(&:disabled, &.disabled),
+  &:hover:not(&:disabled, &.disabled) {
     cursor: pointer;
 
     &:not(.btn-outline.btn-hover-filled, .btn-transparent) {
@@ -277,7 +277,7 @@ a,
     }
   }
 
-  &:active:not(&:disabled, .btn-outline.btn-hover-filled, .btn-transparent) {
+  &:active:not(&:disabled, &.disabled, .btn-outline.btn-hover-filled, .btn-transparent) {
     filter: var(--filter-active);
   }
 
@@ -286,7 +286,8 @@ a,
   }
 
   &:disabled:not(.quiet-disabled),
-  &[disabled]:not(.quiet-disabled) {
+  &[disabled]:not(.quiet-disabled),
+  &.disabled:not(.quiet-disabled) {
     cursor: not-allowed;
     filter: grayscale(50%);
     opacity: 0.5;
@@ -353,8 +354,8 @@ a,
       color: var(--color-base);
     }
 
-    &:focus-visible:not(&:disabled),
-    &:hover:not(&:disabled) {
+    &:focus-visible:not(&:disabled, &.disabled),
+    &:hover:not(&:disabled, &.disabled) {
       background-color: var(--color-button-bg);
 
       &.btn-hover-filled,
@@ -376,8 +377,8 @@ a,
       border-color: var(--color-contrast);
     }
 
-    &:focus-visible:not(&:disabled),
-    &:hover:not(&:disabled) {
+    &:focus-visible:not(&:disabled, &.disabled),
+    &:hover:not(&:disabled, &.disabled) {
       &.btn-hover-filled,
       &.btn-hover-filled-only {
         border-color: var(--_accent-color);
@@ -570,6 +571,7 @@ a,
 .project-list.display-mode--grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
 
   @media screen and (max-width: 80rem) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -596,7 +598,7 @@ a,
 
   background-color: var(--color-raised-bg);
   border-radius: var(--radius-lg);
-  border: var(--card-border-width) solid var(--card-divider);
+  border: var(--card-border-width) solid var(--color-card-divider);
 
   margin-bottom: var(--gap-md);
   outline: 2px solid transparent;
@@ -974,7 +976,7 @@ a,
     }
 
     tr:nth-child(2n) {
-      background-color: var(--color-accent-contrast);
+      background-color: var(--color-alt-bg);
     }
 
     td:not(:last-of-type),

@@ -44,6 +44,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const accentedButton = computed(() =>
@@ -73,6 +77,7 @@ const accentedButton = computed(() =>
       'btn-hover-filled-only': hoverFilledOnly,
       'btn-outline': outline,
       'color-accent-contrast': accentedButton,
+      disabled: disabled,
     }"
     :to="link"
     :target="external ? '_blank' : '_self'"
@@ -102,6 +107,7 @@ const accentedButton = computed(() =>
       'btn-hover-filled-only': hoverFilledOnly,
       'btn-outline': outline,
       'color-accent-contrast': accentedButton,
+      disabled: disabled,
     }"
     :href="link"
     :target="external ? '_blank' : '_self'"
@@ -132,6 +138,7 @@ const accentedButton = computed(() =>
       'btn-outline': outline,
       'color-accent-contrast': accentedButton,
     }"
+    :disabled="disabled"
     @click="action"
   >
     <slot />
