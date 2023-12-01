@@ -87,10 +87,10 @@
     "defaultMessage": "{count} seguidores"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Publicado em {date}"
+    "defaultMessage": "Publicado {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Atualizado em {date}"
+    "defaultMessage": "Atualizado {date}"
   }
 }
 
