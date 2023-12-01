@@ -48,7 +48,7 @@
         <Button :action="() => linkModal?.hide()"><XIcon /> Cancel</Button>
         <Button
           color="primary"
-          :disabled="linkValidationErrorMessage || !linkUrl"
+          :disabled="!!linkValidationErrorMessage || !linkUrl"
           :action="
             () => {
               if (editor) markdownCommands.replaceSelection(editor, linkMarkdown)
@@ -189,7 +189,7 @@
         <Button :action="() => videoModal?.hide()"><XIcon /> Cancel</Button>
         <Button
           color="primary"
-          :disabled="linkValidationErrorMessage || !linkUrl"
+          :disabled="!!linkValidationErrorMessage || !linkUrl"
           :action="
             () => {
               if (editor) markdownCommands.replaceSelection(editor, videoMarkdown)
