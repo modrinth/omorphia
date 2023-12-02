@@ -78,10 +78,10 @@
     "defaultMessage": "미지원"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "{author} 개발"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} 다운로드"
+    "defaultMessage": "다운로드 {count} 회"
   },
   "project.tooltip.followers": {
     "defaultMessage": "팔로워 {count} 명"
@@ -90,7 +90,7 @@
     "defaultMessage": "{date} 에 게시됨"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "{date} 에 업데이트"
+    "defaultMessage": "{date} 에 업데이트됨"
   }
 }
 
