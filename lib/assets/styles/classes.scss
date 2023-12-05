@@ -226,7 +226,7 @@
 .universal-modal {
   @extend .universal-body;
 
-  padding: var(--spacing-card-bg);
+  padding: var(--gap-lg);
   display: flex;
   flex-direction: column;
 
@@ -549,16 +549,16 @@ a,
 
 .project-list {
   width: 100%;
-  gap: var(--spacing-card-md);
+  gap: var(--gap-md);
   overflow: unset !important;
   container-type: inline-size;
 
   &:not(:first-child) {
-    margin-top: var(--spacing-card-md);
+    margin-top: var(--gap-md);
   }
 
   &:not(:empty) {
-    margin-bottom: var(--spacing-card-md);
+    margin-bottom: var(--gap-md);
   }
 }
 
