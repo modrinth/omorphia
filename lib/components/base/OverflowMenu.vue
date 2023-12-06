@@ -5,6 +5,7 @@
     :disabled="disabled"
     :position="position"
     :direction="direction"
+    :allow-hover="allowHover"
   >
     <slot></slot>
     <template #menu>
@@ -65,6 +66,10 @@ defineProps({
   direction: {
     type: String,
     default: 'left',
+  },
+  allowHover: {
+    type: Boolean,
+    default: false,
   },
 })
 defineOptions({
