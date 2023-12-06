@@ -22,6 +22,7 @@
     <div class="summary">{{ description }}</div>
     <div class="stats">
       <span
+        v-if="downloads"
         v-tooltip="formatMessage(messages.downloads, { count: formatNumber(downloads, false) })"
         class="stat consumes-click"
       >
@@ -29,6 +30,7 @@
         <span class="value">{{ formatNumber(downloads) }}</span>
       </span>
       <span
+        v-if="follows"
         v-tooltip="formatMessage(messages.followers, { count: formatNumber(follows, false) })"
         class="stat consumes-click"
       >
@@ -36,7 +38,7 @@
         <span class="value">{{ formatNumber(follows) }}</span>
       </span>
       <span
-        v-if="showUpdatedDate"
+        v-if="showUpdatedDate && updatedAt"
         v-tooltip="
           formatMessage(messages.updated, {
             date: dayjs(updatedAt).format('MMMM D, YYYY [at] h:mm A'),
@@ -48,7 +50,7 @@
         <span class="value">{{ fromNow(updatedAt) }}</span>
       </span>
       <span
-        v-else
+        v-else-if="createdAt"
         v-tooltip="
           formatMessage(messages.published, {
             date: dayjs(createdAt).format('MMMM D, YYYY [at] h:mm A'),
@@ -60,8 +62,10 @@
         <span class="value">{{ fromNow(createdAt) }}</span>
       </span>
       <div class="tags">
-        <TagIcon />
-        <Categories :type="type" :categories="categories" />
+        <template v-if="categories && categories.length > 0">
+          <TagIcon />
+          <Categories :type="type" :categories="categories" />
+        </template>
       </div>
     </div>
   </article>
@@ -145,7 +149,7 @@ defineProps({
   },
   createdAt: {
     type: String,
-    default: '0000-00-00',
+    default: null,
   },
   updatedAt: {
     type: String,
