@@ -13,6 +13,11 @@
     'action': () => {}
   },
   {
+    'id': 'disabled',
+    'disabled': true,
+    'action': () => {}
+  },
+  {
     'id': 'report',
     'link': 'https://example.com/report',
     'external': true,
@@ -36,6 +41,9 @@
     </template>
     <template #duplicate>
       <CopyIcon /> Duplicate
+    </template>
+    <template #disabled>
+      <XIcon /> Disabled
     </template>
     <template #report>
       <ReportIcon /> Report
@@ -65,6 +73,11 @@
       'action': () => {}
     },
     {
+      'id': 'disabled',
+      'disabled': true,
+      'action': () => {}
+    },
+    {
       'id': 'report',
       'link': 'https://example.com/report',
       'external': true,
@@ -83,11 +96,20 @@
     }
 ]">
   More options...
-  <template #like>
-    <HeartIcon /> Like
+  <template #play>
+    <PlayIcon /> Play
+  </template>
+  <template #duplicate>
+    <CopyIcon /> Duplicate
+  </template>
+  <template #disabled>
+    <XIcon /> Disabled
   </template>
   <template #report>
     <ReportIcon /> Report
+  </template>
+  <template #remain>
+    <ClearIcon /> I shall remain
   </template>
   <template #delete>
     <TrashIcon /> Delete
