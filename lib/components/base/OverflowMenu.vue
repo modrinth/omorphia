@@ -17,6 +17,7 @@
           :color="option.color ? option.color : 'default'"
           :hover-filled="option.hoverFilled"
           :hover-filled-only="option.hoverFilledOnly"
+          :disabled="option.disabled"
           transparent
           :action="
             option.action
