@@ -141,9 +141,7 @@ onBeforeUnmount(() => {
     }
   }
 
-  &:not(.allow-hover) .popup-menu:not(.visible):not(:focus-within),
-  &.allow-hover:not(:has(.hover-bounding-box:hover)):not(:has(.popup-menu:hover))
-    .popup-menu:not(.visible):not(:focus-within) {
+  .popup-menu:not(.visible):not(:focus-within) {
     pointer-events: none;
 
     *,
