@@ -1,11 +1,5 @@
 <template>
-  <div
-    ref="dropdown"
-    class="popup-container"
-    tabindex="-1"
-    :aria-expanded="dropdownVisible"
-    :class="{ 'allow-hover': allowHover }"
-  >
+  <div ref="dropdown" class="popup-container" tabindex="-1" :aria-expanded="dropdownVisible">
     <button
       v-bind="$attrs"
       ref="dropdownButton"
