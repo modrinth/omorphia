@@ -21,7 +21,7 @@
     "defaultMessage": "S'ha produït un error"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Listed"
+    "defaultMessage": "Llistat"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "Moderador"
@@ -51,10 +51,10 @@
     "defaultMessage": "En revisió"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Unlisted"
+    "defaultMessage": "No llistat"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "Withheld"
+    "defaultMessage": "Retingut"
   },
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "Copiar el codi al porta-retalls"
@@ -72,25 +72,25 @@
     "defaultMessage": "Servidor"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "A {type}"
+    "defaultMessage": "Un {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
     "defaultMessage": "No suportat"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "de {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} descarregues"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} seguidors"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Publicat fa {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Actualitzat fa {date}"
   }
 }
 
