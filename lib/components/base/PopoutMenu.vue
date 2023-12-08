@@ -1,11 +1,5 @@
 <template>
-  <div
-    ref="dropdown"
-    class="popup-container"
-    tabindex="-1"
-    :aria-expanded="dropdownVisible"
-    :class="{ 'allow-hover': allowHover }"
-  >
+  <div ref="dropdown" class="popup-container" tabindex="-1" :aria-expanded="dropdownVisible">
     <button
       v-bind="$attrs"
       ref="dropdownButton"
@@ -141,9 +135,7 @@ onBeforeUnmount(() => {
     }
   }
 
-  &:not(.allow-hover) .popup-menu:not(.visible):not(:focus-within),
-  &.allow-hover:not(:has(.hover-bounding-box:hover)):not(:has(.popup-menu:hover))
-    .popup-menu:not(.visible):not(:focus-within) {
+  .popup-menu:not(.visible):not(:focus-within) {
     pointer-events: none;
 
     *,

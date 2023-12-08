@@ -75,23 +75,41 @@
 </PopoutMenu>
 ```
 
-# Popout Menu on hover
-<DemoContainer>
-  <PopoutMenu class="btn btn-dropdown-animation" position="bottom" direction="right" allow-hover>
-    Hover me! <DropdownIcon />
-    <template #menu>
-      Menu contents!
-      Menu contents!
-      Menu contents!
-    </template>
-  </PopoutMenu>
-</DemoContainer>
+[//]: # (# Popout Menu on hover)
 
-```vue
-<PopoutMenu class="btn" position="bottom" direction="right" allow-hover>
-  Hover me!
-  <template #menu>
-    Menu contents!
-  </template>
-</PopoutMenu>
-```
+[//]: # (<DemoContainer>)
+
+[//]: # (  <PopoutMenu class="btn btn-dropdown-animation" position="bottom" direction="right" allow-hover>)
+
+[//]: # (    Hover me! <DropdownIcon />)
+
+[//]: # (    <template #menu>)
+
+[//]: # (      Menu contents!)
+
+[//]: # (      Menu contents!)
+
+[//]: # (      Menu contents!)
+
+[//]: # (    </template>)
+
+[//]: # (  </PopoutMenu>)
+
+[//]: # (</DemoContainer>)
+
+[//]: # ()
+[//]: # (```vue)
+
+[//]: # (<PopoutMenu class="btn" position="bottom" direction="right" allow-hover>)
+
+[//]: # (  Hover me!)
+
+[//]: # (  <template #menu>)
+
+[//]: # (    Menu contents!)
+
+[//]: # (  </template>)
+
+[//]: # (</PopoutMenu>)
+
+[//]: # (```)
