@@ -78,19 +78,19 @@
     "defaultMessage": "غير مدعوم"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "بواسطة {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "تحميلات {count}"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "متابعين {count}"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "تم نشره {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "تم التحديث {date}"
   }
 }
 
