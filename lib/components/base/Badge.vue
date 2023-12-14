@@ -90,8 +90,36 @@ import {
   CalendarIcon,
   capitalizeString,
 } from '@'
-
 import { useVIntl, defineMessages } from '@vintl/vintl'
+
+type BadgeType =
+  | 'admin'
+  | 'moderator'
+  | 'creator'
+  | 'approved'
+  | 'approved-general'
+  | 'unlisted'
+  | 'witheld'
+  | 'private'
+  | 'scheduled'
+  | 'draft'
+  | 'archived'
+  | 'rejected'
+  | 'processing'
+  | 'accepted'
+  | 'pending'
+  | 'processed'
+  | 'failed'
+  | 'returned'
+  | 'closed'
+
+type BadgeColor = 'red' | 'orange' | 'green' | 'blue' | 'purple' | 'gray'
+
+defineProps<{
+  type: BadgeType | (string & Record<never, never>)
+  color?: BadgeColor
+}>()
+
 const messages = defineMessages({
   acceptedLabel: {
     id: 'omorphia.component.badge.label.accepted',
@@ -171,11 +199,6 @@ const messages = defineMessages({
   },
 })
 const { formatMessage } = useVIntl()
-
-defineProps<{
-  type: string | (string & Record<never, never>)
-  color?: string
-}>()
 </script>
 <style lang="scss" scoped>
 .version-badge {
