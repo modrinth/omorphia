@@ -163,7 +163,7 @@ defineExpose({
             target="_blank"
             :href="sendTweet"
           >
-            <XTwitterIcon/>
+            <XTwitterIcon />
           </a>
           <a
             v-tooltip="'Share on Reddit'"
@@ -223,7 +223,7 @@ defineExpose({
     }
 
     &.twitter {
-      background-color: #1da1f2;
+      background-color: #000000;
     }
   }
 }
