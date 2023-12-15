@@ -7,9 +7,9 @@ import {
   ShareIcon,
   MailIcon,
   GlobeIcon,
-  TwitterIcon,
   MastodonIcon,
   RedditIcon,
+  XTwitterIcon,
 } from '@'
 import { computed, ref, nextTick } from 'vue'
 import QrcodeVue from 'qrcode.vue'
@@ -163,7 +163,7 @@ defineExpose({
             target="_blank"
             :href="sendTweet"
           >
-            <TwitterIcon />
+            <XTwitterIcon/>
           </a>
           <a
             v-tooltip="'Share on Reddit'"
