@@ -78,19 +78,19 @@
     "defaultMessage": "Dont work here"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "bye!! {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} eat kode"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} uant mor koed"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "maed {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "chaengd {date}"
   }
 }
 
