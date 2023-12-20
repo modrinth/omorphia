@@ -24,7 +24,7 @@
     "defaultMessage": "Listed"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "Moderator"
+    "defaultMessage": "Мадэратар"
   },
   "omorphia.component.badge.label.modrinth-team": {
     "defaultMessage": "Modrinth Team"
@@ -33,7 +33,7 @@
     "defaultMessage": "Pending"
   },
   "omorphia.component.badge.label.private": {
-    "defaultMessage": "Private"
+    "defaultMessage": "Прыватны"
   },
   "omorphia.component.badge.label.processed": {
     "defaultMessage": "Processed"
@@ -48,10 +48,10 @@
     "defaultMessage": "Scheduled"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "Under review"
+    "defaultMessage": "На разглядзе"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Unlisted"
+    "defaultMessage": "Нябачны"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "Withheld"
@@ -60,37 +60,37 @@
     "defaultMessage": "Copy code to clipboard"
   },
   "omorphia.component.environment-indicator.label.client": {
-    "defaultMessage": "Client"
+    "defaultMessage": "Кліент"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
-    "defaultMessage": "Client and server"
+    "defaultMessage": "Кліент і сервер"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
-    "defaultMessage": "Client or server"
+    "defaultMessage": "Кліент або сервер"
   },
   "omorphia.component.environment-indicator.label.server": {
-    "defaultMessage": "Server"
+    "defaultMessage": "Сервер"
   },
   "omorphia.component.environment-indicator.label.type": {
     "defaultMessage": "A {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Unsupported"
+    "defaultMessage": "Не падтрымліваецца"
   },
   "project.by-author": {
     "defaultMessage": "by {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} установак"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} паслядоўнікаў"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Апублікаваны {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Абноўлены {date}"
   }
 }
 
