@@ -12,7 +12,7 @@
     "defaultMessage": "Closed"
   },
   "omorphia.component.badge.label.creator": {
-    "defaultMessage": "Creator"
+    "defaultMessage": "クリエイター"
   },
   "omorphia.component.badge.label.draft": {
     "defaultMessage": "Draft"
@@ -24,10 +24,10 @@
     "defaultMessage": "Listed"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "Moderator"
+    "defaultMessage": "モデレーター"
   },
   "omorphia.component.badge.label.modrinth-team": {
-    "defaultMessage": "Modrinth Team"
+    "defaultMessage": "Modrinth チーム"
   },
   "omorphia.component.badge.label.pending": {
     "defaultMessage": "Pending"
@@ -48,7 +48,7 @@
     "defaultMessage": "Scheduled"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "Under review"
+    "defaultMessage": "審査中"
   },
   "omorphia.component.badge.label.unlisted": {
     "defaultMessage": "Unlisted"
@@ -57,10 +57,10 @@
     "defaultMessage": "Withheld"
   },
   "omorphia.component.copy.action.copy": {
-    "defaultMessage": "Copy code to clipboard"
+    "defaultMessage": "コードをコピー"
   },
   "omorphia.component.environment-indicator.label.client": {
-    "defaultMessage": "Client"
+    "defaultMessage": "クライアント"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
     "defaultMessage": "Client and server"
@@ -69,7 +69,7 @@
     "defaultMessage": "Client or server"
   },
   "omorphia.component.environment-indicator.label.server": {
-    "defaultMessage": "Server"
+    "defaultMessage": "サーバー"
   },
   "omorphia.component.environment-indicator.label.type": {
     "defaultMessage": "A {type}"
