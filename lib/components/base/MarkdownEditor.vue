@@ -328,6 +328,7 @@ const props = withDefaults(
 const editorRef = ref<HTMLDivElement>()
 let editor: EditorView | null = null
 let isDisabledCompartment: Compartment | null = null
+let editorThemeCompartment: Compartment | null = null
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -337,6 +338,8 @@ onMounted(() => {
       updateCurrentValue(update.state.doc.toString())
     }
   })
+
+  editorThemeCompartment = new Compartment()
 
   const theme = EditorView.theme({
     // in defaults.scss there's references to .cm-content and such to inherit global styles
@@ -430,7 +433,6 @@ onMounted(() => {
 
   const editorState = EditorState.create({
     extensions: [
-      theme,
       eventHandlers,
       updateListener,
       keymap.of([indentWithTab]),
@@ -443,6 +445,7 @@ onMounted(() => {
       cm_placeholder(props.placeholder || ''),
       inputFilter,
       isDisabledCompartment.of(disabledCompartment),
+      editorThemeCompartment.of(theme),
     ],
   })
 
@@ -559,11 +562,46 @@ const BUTTONS: ButtonGroupMap = {
 watch(
   () => props.disabled,
   (newValue) => {
-    if (editor && isDisabledCompartment) {
-      editor.dispatch({
-        effects: isDisabledCompartment.reconfigure(EditorState.readOnly.of(newValue)),
-      })
+    if (editor) {
+      if (isDisabledCompartment) {
+        editor.dispatch({
+          effects: [isDisabledCompartment.reconfigure(EditorState.readOnly.of(newValue))],
+        })
+      }
+
+      if (editorThemeCompartment) {
+        editor.dispatch({
+          effects: [
+            editorThemeCompartment.reconfigure(
+              EditorView.theme({
+                // in defaults.scss there's references to .cm-content and such to inherit global styles
+                '.cm-content': {
+                  marginBlockEnd: '0.5rem',
+                  padding: '0.5rem',
+                  minHeight: '200px',
+                  caretColor: 'var(--color-contrast)',
+                  width: '100%',
+                  overflowX: 'scroll',
+                  maxHeight: props.maxHeight ? `${props.maxHeight}px` : 'unset',
+                  overflowY: 'scroll',
+
+                  opacity: newValue ? 0.6 : 1,
+                  pointerEvents: newValue ? 'none' : 'all',
+                  cursor: newValue ? 'not-allowed' : 'auto',
+                },
+                '.cm-scroller': {
+                  height: '100%',
+                  overflow: 'visible',
+                },
+              })
+            ),
+          ],
+        })
+      }
     }
+  },
+  {
+    immediate: true,
   }
 )
 
@@ -904,5 +942,11 @@ function openVideoModal() {
     align-items: center;
     justify-content: start;
   }
+}
+
+.cm-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
 }
 </style>
