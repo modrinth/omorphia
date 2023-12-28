@@ -1,96 +1,96 @@
 {
   "omorphia.component.badge.label.accepted": {
-    "defaultMessage": "Accepted"
+    "defaultMessage": "پذیرفته شده"
   },
   "omorphia.component.badge.label.approved": {
-    "defaultMessage": "Approved"
+    "defaultMessage": "تأیید شده"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "Archived"
+    "defaultMessage": "بایگانی شده"
   },
   "omorphia.component.badge.label.closed": {
-    "defaultMessage": "Closed"
+    "defaultMessage": "بسته شده"
   },
   "omorphia.component.badge.label.creator": {
-    "defaultMessage": "Creator"
+    "defaultMessage": "سازنده"
   },
   "omorphia.component.badge.label.draft": {
-    "defaultMessage": "Draft"
+    "defaultMessage": "پیش‌نویس"
   },
   "omorphia.component.badge.label.failed": {
-    "defaultMessage": "Failed"
+    "defaultMessage": "ناموفق"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Listed"
+    "defaultMessage": "فهرست شده"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "Moderator"
+    "defaultMessage": "مدیر"
   },
   "omorphia.component.badge.label.modrinth-team": {
-    "defaultMessage": "Modrinth Team"
+    "defaultMessage": "تیم مودرینف"
   },
   "omorphia.component.badge.label.pending": {
-    "defaultMessage": "Pending"
+    "defaultMessage": "در انتظار"
   },
   "omorphia.component.badge.label.private": {
-    "defaultMessage": "Private"
+    "defaultMessage": "خصوصی شده"
   },
   "omorphia.component.badge.label.processed": {
-    "defaultMessage": "Processed"
+    "defaultMessage": "پردازش شده"
   },
   "omorphia.component.badge.label.rejected": {
-    "defaultMessage": "Rejected"
+    "defaultMessage": "رد شده"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "Returned"
+    "defaultMessage": "برگردانده شده"
   },
   "omorphia.component.badge.label.scheduled": {
     "defaultMessage": "Scheduled"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "Under review"
+    "defaultMessage": "در حال بررسی"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Unlisted"
+    "defaultMessage": "فهرست نشده"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "Withheld"
   },
   "omorphia.component.copy.action.copy": {
-    "defaultMessage": "Copy code to clipboard"
+    "defaultMessage": "کپی کردن کد به کلیپ‌بورد"
   },
   "omorphia.component.environment-indicator.label.client": {
-    "defaultMessage": "Client"
+    "defaultMessage": "کاربر"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
-    "defaultMessage": "Client and server"
+    "defaultMessage": "کاربر و سرور"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
-    "defaultMessage": "Client or server"
+    "defaultMessage": "کاربر یا سرور"
   },
   "omorphia.component.environment-indicator.label.server": {
-    "defaultMessage": "Server"
+    "defaultMessage": "سرور"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "A {type}"
+    "defaultMessage": "یک {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Unsupported"
+    "defaultMessage": "پشتیبانی نشده"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "توسط {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} دانلود"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} دنبال کننده"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "منتشر شده در {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "بروزرسانی شده در {date}"
   }
 }
 
