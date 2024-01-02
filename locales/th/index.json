@@ -78,19 +78,19 @@
     "defaultMessage": "ไม่สนับสนุน"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "โดย {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} ดาวน์โหลด"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} ผู้ติดตาม"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "วันที่เผยแพร่ {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "อัพเดท {date}"
   }
 }
 
