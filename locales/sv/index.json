@@ -12,7 +12,7 @@
     "defaultMessage": "Stängd"
   },
   "omorphia.component.badge.label.creator": {
-    "defaultMessage": "Skapare"
+    "defaultMessage": "Kreatör"
   },
   "omorphia.component.badge.label.draft": {
     "defaultMessage": "Utkast"
@@ -21,7 +21,7 @@
     "defaultMessage": "Misslyckades"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Listad"
+    "defaultMessage": "Listas"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "Moderator"
