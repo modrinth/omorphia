@@ -90,7 +90,7 @@
     "defaultMessage": "วันที่เผยแพร่ {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "อัพเดท {date}"
+    "defaultMessage": "อัพเดตเมื่อ {date}"
   }
 }
 
