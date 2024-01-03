@@ -78,7 +78,7 @@
     "defaultMessage": "kepeken ala"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "tan {author}"
   },
   "project.tooltip.downloads": {
     "defaultMessage": "{count} downloads"
