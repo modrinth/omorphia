@@ -7,15 +7,6 @@
   </span>
 </template>
 
-<script setup>
-defineProps({
-  to: {
-    type: String,
-    required: true,
-  },
-  isLink: {
-    type: Boolean,
-    required: true,
-  },
-})
+<script setup lang="ts">
+defineProps<{ to: string; isLink: boolean }>()
 </script>
