@@ -1,14 +1,24 @@
-<script setup>
-defineProps({
-  collapsible: {
-    type: Boolean,
-    default: false,
-  },
-  rightSidebar: {
-    type: Boolean,
-    default: false,
-  },
-})
+<script setup lang="ts">
+withDefaults(
+  defineProps<{
+    collapsible?: boolean
+    rightSidebar?: boolean
+  }>(),
+  {
+    collapsible: false,
+    rightSidebar: false,
+  }
+)
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type SlotReturn = any
+
+defineSlots<{
+  header(): SlotReturn
+  sidebar?(): SlotReturn
+  footer?(): SlotReturn
+  default(): SlotReturn
+}>()
 </script>
 
 <template>
