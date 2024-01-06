@@ -34,45 +34,32 @@
   </svg>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
 const pixelated = ref(false)
-const img = ref(null)
+const img = ref<HTMLImageElement | null>(null)
 
-defineProps({
-  src: {
-    type: String,
-    default: null,
-  },
-  alt: {
-    type: String,
-    default: '',
-  },
-  size: {
-    type: String,
-    default: 'sm',
-    validator(value) {
-      return ['xxs', 'xs', 'sm', 'md', 'lg', 'none'].includes(value)
-    },
-  },
-  circle: {
-    type: Boolean,
-    default: false,
-  },
-  noShadow: {
-    type: Boolean,
-    default: false,
-  },
-  loading: {
-    type: String,
-    default: 'lazy',
-  },
-  raised: {
-    type: Boolean,
-    default: false,
-  },
-})
+withDefaults(
+  defineProps<{
+    src?: string
+    alt?: string
+    size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'none'
+    circle?: boolean
+    noShadow?: boolean
+    loading?: 'lazy' | 'eager'
+    raised?: boolean
+  }>(),
+  {
+    src: undefined,
+    alt: '',
+    size: 'sm',
+    circle: false,
+    noShadow: false,
+    loading: 'lazy',
+    raised: false,
+  }
+)
 
 function updatePixelated() {
   pixelated.value = !!(img.value && img.value.naturalWidth && img.value.naturalWidth <= 96)
