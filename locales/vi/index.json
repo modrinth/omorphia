@@ -1,9 +1,9 @@
 {
   "omorphia.component.badge.label.accepted": {
-    "defaultMessage": "Accepted"
+    "defaultMessage": "Được chấp nhận"
   },
   "omorphia.component.badge.label.approved": {
-    "defaultMessage": "Approved"
+    "defaultMessage": "Được duyệt"
   },
   "omorphia.component.badge.label.archived": {
     "defaultMessage": "Được lưu trữ"
@@ -24,7 +24,7 @@
     "defaultMessage": "Được liệt kê"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "Moderator"
+    "defaultMessage": "Người điều hành"
   },
   "omorphia.component.badge.label.modrinth-team": {
     "defaultMessage": "Đội Modrinth"
@@ -54,7 +54,7 @@
     "defaultMessage": "Không công khai"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "Withheld"
+    "defaultMessage": "Bị giấu"
   },
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "Sao chép mã vào bảng tạm"
