@@ -18,34 +18,34 @@
     "defaultMessage": "Чарнавік"
   },
   "omorphia.component.badge.label.failed": {
-    "defaultMessage": "Failed"
+    "defaultMessage": "Няўдачна"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Listed"
+    "defaultMessage": "У спісе"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "Мадэратар"
   },
   "omorphia.component.badge.label.modrinth-team": {
-    "defaultMessage": "Modrinth Team"
+    "defaultMessage": "Каманда Modrinth"
   },
   "omorphia.component.badge.label.pending": {
-    "defaultMessage": "Pending"
+    "defaultMessage": "Чакаецца"
   },
   "omorphia.component.badge.label.private": {
     "defaultMessage": "Прыватны"
   },
   "omorphia.component.badge.label.processed": {
-    "defaultMessage": "Processed"
+    "defaultMessage": "Апрацоўвана"
   },
   "omorphia.component.badge.label.rejected": {
-    "defaultMessage": "Rejected"
+    "defaultMessage": "Адхілена"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "Returned"
+    "defaultMessage": "Вернута"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "Scheduled"
+    "defaultMessage": "Адкладзена"
   },
   "omorphia.component.badge.label.under-review": {
     "defaultMessage": "На разглядзе"
@@ -54,10 +54,10 @@
     "defaultMessage": "Нябачны"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "Withheld"
+    "defaultMessage": "Затрымана"
   },
   "omorphia.component.copy.action.copy": {
-    "defaultMessage": "Copy code to clipboard"
+    "defaultMessage": "Скапіяваць код у буфер абмену"
   },
   "omorphia.component.environment-indicator.label.client": {
     "defaultMessage": "Кліент"
@@ -72,13 +72,13 @@
     "defaultMessage": "Сервер"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "A {type}"
+    "defaultMessage": "{type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
     "defaultMessage": "Не падтрымліваецца"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "ад {author}"
   },
   "project.tooltip.downloads": {
     "defaultMessage": "{count} установак"
