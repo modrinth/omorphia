@@ -3,10 +3,10 @@
     "defaultMessage": "承認済み"
   },
   "omorphia.component.badge.label.approved": {
-    "defaultMessage": "Approved"
+    "defaultMessage": "承認済み"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "Archived"
+    "defaultMessage": "アーカイブ済み"
   },
   "omorphia.component.badge.label.closed": {
     "defaultMessage": "Closed"
@@ -15,10 +15,10 @@
     "defaultMessage": "クリエイター"
   },
   "omorphia.component.badge.label.draft": {
-    "defaultMessage": "Draft"
+    "defaultMessage": "下書き"
   },
   "omorphia.component.badge.label.failed": {
-    "defaultMessage": "Failed"
+    "defaultMessage": "失敗"
   },
   "omorphia.component.badge.label.listed": {
     "defaultMessage": "Listed"
@@ -33,10 +33,10 @@
     "defaultMessage": "Pending"
   },
   "omorphia.component.badge.label.private": {
-    "defaultMessage": "Private"
+    "defaultMessage": "非公開"
   },
   "omorphia.component.badge.label.processed": {
-    "defaultMessage": "Processed"
+    "defaultMessage": "処理済み"
   },
   "omorphia.component.badge.label.rejected": {
     "defaultMessage": "Rejected"
@@ -66,16 +66,16 @@
     "defaultMessage": "Client and server"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
-    "defaultMessage": "Client or server"
+    "defaultMessage": "クライアントまたはサーバー"
   },
   "omorphia.component.environment-indicator.label.server": {
     "defaultMessage": "サーバー"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "A {type}"
+    "defaultMessage": "{type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Unsupported"
+    "defaultMessage": "対応していません"
   },
   "project.by-author": {
     "defaultMessage": "by {author}"
