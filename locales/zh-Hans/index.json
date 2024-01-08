@@ -78,7 +78,7 @@
     "defaultMessage": "无效的"
   },
   "project.by-author": {
-    "defaultMessage": "来自 {author}"
+    "defaultMessage": "by {author}"
   },
   "project.tooltip.downloads": {
     "defaultMessage": "{count} 次下载"
