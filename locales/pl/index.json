@@ -57,7 +57,7 @@
     "defaultMessage": "Wstrzymany"
   },
   "omorphia.component.copy.action.copy": {
-    "defaultMessage": "Skopiuj kod do schowka"
+    "defaultMessage": "Kopiuj kod do schowka"
   },
   "omorphia.component.environment-indicator.label.client": {
     "defaultMessage": "Klient"
@@ -87,10 +87,10 @@
     "defaultMessage": "{count, plural, one {{count} obserwujący} other {{count} obserwujących}}"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Opublikowano dnia {date}"
+    "defaultMessage": "Opublikowano {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Zaktualizowano dnia {date}"
+    "defaultMessage": "Zaktualizowano {date}"
   }
 }
 
