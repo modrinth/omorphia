@@ -1,5 +1,4 @@
 html {
-  @extend .light-mode;
   --dark-color-base: #b0bac5;
   --dark-color-contrast: #ecf9fb;
 
@@ -8,26 +7,44 @@ html {
   --color-ad-contrast: black;
   --color-ad-highlight: var(--color-purple);
 
+  --card-border-width: 1px;
+  --button-border-width: 1px;
+  --divider-border-width: 1px;
+
+  --round-little: 5px;
+  --round-univ: 9px;
+  --round-card: 13px;
+
   --gap-xs: 0.25rem;
   --gap-sm: 0.5rem;
   --gap-md: 0.75rem;
   --gap-lg: 1rem;
-  --gap-xl: 1.5rem;
+  --gap-xl: 1.25rem;
 
-  --radius-xs: 0.25rem;
-  --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.25rem;
+  --radius-xs: var(--round-little);
+  --radius-sm: var(--round-univ);
+  --radius-md: var(--round-univ);
+  --radius-lg: var(--round-univ);
+  --radius-xl: var(--round-univ);
   --radius-max: 999999999px;
 }
 
 .light-mode,
 .light {
-  --color-bg: #e5e7eb;
+  --color-bg: #fafafa;
   --color-raised-bg: #ffffff;
   --color-super-raised-bg: #e9e9e9;
-  --color-button-bg: hsl(220, 13%, 91%);
+  --color-alt-bg: #f2f4f7;
+  --color-button-bg: #f0f1f2;
+
+  --color-divider: rgba(78, 67, 121, 0.2);
+  --color-button-divider: rgba(78, 67, 121, 0.1);
+  --color-card-divider: rgba(77, 66, 120, 0.2);
+
+  --color-tag-bg: rgba(0, 0, 0, 0.075);
+
+  --filter-hover: brightness(90%);
+  --filter-active: brightness(80%);
 
   --color-base: hsl(221, 39%, 11%);
   --color-secondary: #6b7280;
@@ -41,6 +58,9 @@ html {
   --color-purple: #8e32f3;
   --color-gray: #595b61;
 
+  --color-red-bg: rgba(203, 34, 69, 0.3);
+  --color-blue-bg: rgba(31, 104, 192, 0.3);
+
   --color-brand: var(--color-green);
   --color-brand-highlight: rgba(0, 175, 92, 0.25);
   --color-brand-shadow: rgba(0, 175, 92, 0.7);
@@ -53,10 +73,9 @@ html {
   --shadow-raised: 0.3px 0.5px 0.6px hsl(var(--shadow-color) / 0.15),
     1px 2px 2.2px -1.7px hsl(var(--shadow-color) / 0.12),
     4.4px 8.8px 9.7px -3.4px hsl(var(--shadow-color) / 0.09);
-  --shadow-floating: hsla(0, 0%, 0%, 0) 0px 0px 0px 0px, hsla(0, 0%, 0%, 0) 0px 0px 0px 0px,
-    hsla(0, 0%, 0%, 0.1) 0px 4px 6px -1px, hsla(0, 0%, 0%, 0.1) 0px 2px 4px -1px;
+  --shadow-floating: 2px 2px 24px 0px rgba(0, 0, 0, 0.05), 3px 6px 24px 8px rgba(0, 0, 0, 0.07);
 
-  --shadow-card: rgba(50, 50, 100, 0.1) 0px 2px 4px 0px;
+  --shadow-card: 0px 0px 10px 2px hsla(0, 0%, 0%, 0.025);
 
   --color-tooltip-text: var(--color-accent-contrast);
   --color-tooltip-bg: var(--color-base);
@@ -65,9 +84,19 @@ html {
 .dark-mode,
 .dark {
   --color-bg: #16181c;
-  --color-raised-bg: #26292f;
+  --color-raised-bg: #24262b;
   --color-super-raised-bg: #40434a;
-  --color-button-bg: hsl(222, 13%, 30%);
+  --color-alt-bg: #202228;
+  --color-button-bg: rgb(51, 54, 61);
+
+  --color-divider: rgba(176, 169, 207, 0.2);
+  --color-button-divider: transparent;
+  --color-card-divider: rgba(176, 169, 207, 0.1);
+
+  --color-tag-bg: var(--color-button-bg);
+
+  --filter-hover: brightness(120%);
+  --filter-active: brightness(140%);
 
   --color-base: var(--dark-color-base);
   --color-secondary: #96a2b0;
@@ -81,6 +110,9 @@ html {
   --color-purple: #c78aff;
   --color-gray: #9fa4b3;
 
+  --color-red-bg: rgba(255, 73, 110, 0.3);
+  --color-blue-bg: rgba(79, 156, 255, 0.3);
+
   --color-brand: var(--color-green);
   --color-brand-highlight: rgba(27, 217, 106, 0.25);
   --color-brand-shadow: rgba(27, 217, 106, 0.7);
@@ -91,9 +123,7 @@ html {
 
   --shadow-raised-lg: 0px 2px 4px hsla(221, 39%, 11%, 0.2);
   --shadow-raised: 0px -2px 4px hsla(221, 39%, 11%, 0.1);
-  --shadow-floating: hsla(0, 0%, 0%, 0) 0px 0px 0px 0px, hsla(0, 0%, 0%, 0) 0px 0px 0px 0px,
-    hsla(0, 0%, 0%, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-
+  --shadow-floating: 2px 2px 24px 0px rgba(0, 0, 0, 0.15), 3px 6px 48px 16px rgba(0, 0, 0, 0.15);
   --shadow-card: rgba(0, 0, 0, 0.25) 0px 2px 4px 0px;
 
   --color-tooltip-text: var(--color-base);

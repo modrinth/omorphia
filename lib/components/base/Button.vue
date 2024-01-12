@@ -26,6 +26,7 @@ const props = withDefaults(
     transparent?: boolean
     hoverFilled?: boolean
     hoverFilledOnly?: boolean
+    disabled?: boolean
   }>(),
   {
     link: undefined,
@@ -38,6 +39,7 @@ const props = withDefaults(
     transparent: false,
     hoverFilled: false,
     hoverFilledOnly: false,
+    disabled: false
   }
 )
 
@@ -58,6 +60,7 @@ const accentedButton = computed(() =>
       'btn-hover-filled-only': hoverFilledOnly,
       'btn-outline': outline,
       'color-accent-contrast': accentedButton,
+      'disabled': disabled,
       [`btn-${color}`]: true,
     }"
     :to="link"
@@ -78,6 +81,7 @@ const accentedButton = computed(() =>
       'btn-hover-filled-only': hoverFilledOnly,
       'btn-outline': outline,
       'color-accent-contrast': accentedButton,
+      'disabled': disabled,
       [`btn-${color}`]: true,
     }"
     :href="link"
@@ -100,6 +104,7 @@ const accentedButton = computed(() =>
       'color-accent-contrast': accentedButton,
       [`btn-${color}`]: true,
     }"
+    :disabled="disabled"
     @click="action"
   >
     <slot />

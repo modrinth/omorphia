@@ -8,6 +8,7 @@ const value = ref(false)
 
 <DemoContainer>
 <Checkbox v-model="value">Test</Checkbox>
+Value: {{ value }}
 </DemoContainer>
 
 ```vue

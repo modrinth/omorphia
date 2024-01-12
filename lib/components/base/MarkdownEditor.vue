@@ -48,7 +48,7 @@
         <Button :action="() => linkModal?.hide()"><XIcon /> Cancel</Button>
         <Button
           color="primary"
-          :disabled="linkValidationErrorMessage || !linkUrl"
+          :disabled="!!linkValidationErrorMessage || !linkUrl"
           :action="
             () => {
               if (editor) markdownCommands.replaceSelection(editor, linkMarkdown)
@@ -189,7 +189,7 @@
         <Button :action="() => videoModal?.hide()"><XIcon /> Cancel</Button>
         <Button
           color="primary"
-          :disabled="linkValidationErrorMessage || !linkUrl"
+          :disabled="!!linkValidationErrorMessage || !linkUrl"
           :action="
             () => {
               if (editor) markdownCommands.replaceSelection(editor, videoMarkdown)
@@ -250,7 +250,7 @@
         </span>
       </div>
     </div>
-    <div v-if="previewMode">
+    <div v-else>
       <div class="markdown-body-wrapper">
         <div
           style="width: 100%"
@@ -263,9 +263,9 @@
 </template>
 
 <script setup lang="ts">
-import { type Component, computed, ref, onMounted, onBeforeUnmount } from 'vue'
+import { type Component, computed, ref, onMounted, onBeforeUnmount, toRef, watch } from 'vue'
 
-import { EditorState } from '@codemirror/state'
+import { Compartment, EditorState } from '@codemirror/state'
 import { EditorView, keymap, placeholder as cm_placeholder } from '@codemirror/view'
 import { markdown } from '@codemirror/lang-markdown'
 import { indentWithTab, historyKeymap, history } from '@codemirror/commands'
@@ -296,6 +296,7 @@ import {
   InfoIcon,
   Chips,
 } from '@/components'
+
 import { markdownCommands, modrinthMarkdownEditorKeymap } from '@/helpers/codemirror'
 import { renderHighlightedString } from '@/helpers/highlight'
 
@@ -326,19 +327,22 @@ const props = withDefaults(
 
 const editorRef = ref<HTMLDivElement>()
 let editor: EditorView | null = null
+let isDisabledCompartment: Compartment | null = null
+let editorThemeCompartment: Compartment | null = null
 
 const emit = defineEmits(['update:modelValue'])
 
 onMounted(() => {
   const updateListener = EditorView.updateListener.of((update) => {
     if (update.docChanged) {
-      currentValue.value = update.state.doc.toString()
-      emit('update:modelValue', currentValue.value)
+      updateCurrentValue(update.state.doc.toString())
     }
   })
 
+  editorThemeCompartment = new Compartment()
+
   const theme = EditorView.theme({
-    // in defualts.scss there's references to .cm-content and such to inherit global styles
+    // in defaults.scss there's references to .cm-content and such to inherit global styles
     '.cm-content': {
       marginBlockEnd: '0.5rem',
       padding: '0.5rem',
@@ -355,10 +359,36 @@ onMounted(() => {
     },
   })
 
+  isDisabledCompartment = new Compartment()
+
+  const disabledCompartment = EditorState.readOnly.of(props.disabled)
+
   const eventHandlers = EditorView.domEventHandlers({
     paste: (ev, view) => {
+      const { clipboardData } = ev
+      if (!clipboardData) return
+
+      if (clipboardData.files && clipboardData.files.length > 0 && props.onImageUpload) {
+        // If the user is pasting a file, upload it if there's an included handler and insert the link.
+        uploadImagesFromList(clipboardData.files)
+          .then(function (url) {
+            const selection = markdownCommands.yankSelection(view)
+            const altText = selection || 'Replace this with a description'
+            const linkMarkdown = `![${altText}](${url})`
+            return markdownCommands.replaceSelection(view, linkMarkdown)
+          })
+          .catch((error) => {
+            if (error instanceof Error) {
+              console.error('Problem with handling image.', error)
+            }
+          })
+
+        return false
+      }
+
       // If the user's pasting a url, automatically convert it to a link with the selection as the text or the url itself if no selection content.
       const url = ev.clipboardData?.getData('text/plain')
+
       if (url) {
         try {
           cleanUrl(url)
@@ -374,6 +404,7 @@ onMounted(() => {
         const linkMarkdown = `[${linkText}](${url})`
         return markdownCommands.replaceSelection(view, linkMarkdown)
       }
+
       // Check if the length of the document is greater than the max length. If it is, prevent the paste.
       if (props.maxLength && view.state.doc.length > props.maxLength) {
         ev.preventDefault()
@@ -401,9 +432,7 @@ onMounted(() => {
   })
 
   const editorState = EditorState.create({
-    doc: props.modelValue,
     extensions: [
-      theme,
       eventHandlers,
       updateListener,
       keymap.of([indentWithTab]),
@@ -415,13 +444,24 @@ onMounted(() => {
       keymap.of(historyKeymap),
       cm_placeholder(props.placeholder || ''),
       inputFilter,
+      isDisabledCompartment.of(disabledCompartment),
+      editorThemeCompartment.of(theme),
     ],
   })
 
   editor = new EditorView({
     state: editorState,
     parent: editorRef.value,
-    doc: props.modelValue,
+    doc: props.modelValue ?? '', // This doesn't work for some reason
+  })
+
+  // set editor content to props.modelValue
+  editor?.dispatch({
+    changes: {
+      from: 0,
+      to: editor.state.doc.length,
+      insert: props.modelValue,
+    },
   })
 })
 
@@ -519,7 +559,75 @@ const BUTTONS: ButtonGroupMap = {
   },
 }
 
-const currentValue = ref(props.modelValue)
+watch(
+  () => props.disabled,
+  (newValue) => {
+    if (editor) {
+      if (isDisabledCompartment) {
+        editor.dispatch({
+          effects: [isDisabledCompartment.reconfigure(EditorState.readOnly.of(newValue))],
+        })
+      }
+
+      if (editorThemeCompartment) {
+        editor.dispatch({
+          effects: [
+            editorThemeCompartment.reconfigure(
+              EditorView.theme({
+                // in defaults.scss there's references to .cm-content and such to inherit global styles
+                '.cm-content': {
+                  marginBlockEnd: '0.5rem',
+                  padding: '0.5rem',
+                  minHeight: '200px',
+                  caretColor: 'var(--color-contrast)',
+                  width: '100%',
+                  overflowX: 'scroll',
+                  maxHeight: props.maxHeight ? `${props.maxHeight}px` : 'unset',
+                  overflowY: 'scroll',
+
+                  opacity: newValue ? 0.6 : 1,
+                  pointerEvents: newValue ? 'none' : 'all',
+                  cursor: newValue ? 'not-allowed' : 'auto',
+                },
+                '.cm-scroller': {
+                  height: '100%',
+                  overflow: 'visible',
+                },
+              })
+            ),
+          ],
+        })
+      }
+    }
+  },
+  {
+    immediate: true,
+  }
+)
+
+const currentValue = toRef(props, 'modelValue')
+watch(
+  currentValue,
+  (newValue) => {
+    if (editor && newValue !== editor.state.doc.toString()) {
+      editor.dispatch({
+        changes: {
+          from: 0,
+          to: editor.state.doc.length,
+          insert: newValue,
+        },
+      })
+    }
+  },
+  {
+    immediate: true,
+  }
+)
+
+const updateCurrentValue = (newValue: string) => {
+  emit('update:modelValue', newValue)
+}
+
 const previewMode = ref(false)
 
 const linkText = ref('')
@@ -586,20 +694,36 @@ const linkMarkdown = computed(() => {
   return ''
 })
 
+const uploadImagesFromList = async (files: FileList): Promise<string> => {
+  const file = files[0]
+  if (!props.onImageUpload) {
+    throw new Error('No image upload handler provided')
+  }
+  if (file) {
+    try {
+      const url = await props.onImageUpload(file)
+      return url
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Unable to upload image using handler.', error.message)
+        throw new Error(error.message)
+      }
+    }
+  }
+  throw new Error('No file provided')
+}
+
 const handleImageUpload = async (files: FileList) => {
   if (props.onImageUpload) {
-    const file = files[0]
-    if (file) {
-      try {
-        const url = await props.onImageUpload(file)
-        linkUrl.value = url
-        validateURL()
-      } catch (error) {
-        if (error instanceof Error) {
-          linkValidationErrorMessage.value = error.message
-        }
-        console.error(error)
+    try {
+      const uploadedURL = await uploadImagesFromList(files)
+      linkUrl.value = uploadedURL
+      validateURL()
+    } catch (error) {
+      if (error instanceof Error) {
+        linkValidationErrorMessage.value = error.message
       }
+      console.error(error)
     }
   }
 }
@@ -673,7 +797,7 @@ function openVideoModal() {
 
 .markdown-resource-link {
   cursor: pointer;
-  color: var(--color-link);
+  color: var(--color-blue);
 
   &:focus-visible,
   &:hover {
@@ -818,5 +942,11 @@ function openVideoModal() {
     align-items: center;
     justify-content: start;
   }
+}
+
+.cm-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
 }
 </style>

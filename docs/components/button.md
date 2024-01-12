@@ -24,6 +24,8 @@
 <Button color="primary" large><DownloadIcon /> Download</Button>
 <Button color="blue" large><ServerIcon /> Host a Server</Button>
 <Button color="purple" large><HeartIcon /> Donate</Button>
+
+<Button link="/test" color="purple" large disabled><HeartIcon /> Disabled link</Button>
 </DemoContainer>
 
 ```vue

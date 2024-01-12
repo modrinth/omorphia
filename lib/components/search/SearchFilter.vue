@@ -1,23 +1,12 @@
 <template>
-  <Checkbox
-    class="filter"
-    :model-value="isActive"
-    :description="displayName"
-    @update:model-value="toggle"
-  >
-    <div class="filter-text">
-      <div v-if="props.icon" aria-hidden="true" class="icon" v-html="props.icon" />
-      <div v-else class="icon">
-        <slot />
-      </div>
-      <span aria-hidden="true"> {{ props.displayName }}</span>
-    </div>
-  </Checkbox>
+  <ListSelector :model-value="activeFilters.includes(facetName)" @update:model-value="toggle()">
+    <slot />
+    <template v-if="displayName"> {{ displayName }}</template>
+  </ListSelector>
 </template>
 
 <script setup>
-import { defineProps, defineEmits, computed } from 'vue'
-import { Checkbox } from '@'
+import { ListSelector } from '@'
 
 const props = defineProps({
   facetName: {
@@ -25,10 +14,6 @@ const props = defineProps({
     default: '',
   },
   displayName: {
-    type: String,
-    default: '',
-  },
-  icon: {
     type: String,
     default: '',
   },
@@ -40,10 +25,9 @@ const props = defineProps({
   },
 })
 
-const isActive = computed(() => props.activeFilters.includes(props.facetName))
 const emit = defineEmits(['toggle'])
 
-const toggle = () => {
+function toggle() {
   emit('toggle', props.facetName)
 }
 </script>

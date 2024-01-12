@@ -1,11 +1,9 @@
 <template>
   <div class="categories">
     <slot />
-    <span
-      v-for="category in categories"
-      :key="category.name"
-      v-html="category.icon + formatCategory(category.name)"
-    />
+    <span v-for="category in categories" :key="category">
+      {{ formatCategory(category) }}
+    </span>
   </div>
 </template>
 <script setup>
@@ -26,20 +24,21 @@ defineProps({
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: var(--gap-sm);
+  gap: var(--gap-xs);
 
-  :deep(span) {
+  span {
     display: flex;
     flex-direction: row;
     align-items: center;
+    background-color: var(--color-tag-bg);
+    padding: 0 8px;
+    line-height: 1.5em;
+    border-radius: var(--radius-max);
+    font-size: var(--font-size-sm);
+    text-transform: lowercase;
 
     &:not(.version-badge) {
-      color: var(--color-gray);
-    }
-
-    svg {
-      width: 1rem;
-      margin-right: 0.2rem;
+      color: var(--color-secondary);
     }
   }
 }

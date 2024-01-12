@@ -10,6 +10,11 @@
       <slot></slot>
     </button>
     <div
+      v-if="allowHover"
+      class="hover-bounding-box"
+      :class="`position-${position}-${direction}`"
+    ></div>
+    <div
       class="popup-menu"
       :class="`position-${position}-${direction} ${dropdownVisible ? 'visible' : ''}`"
     >
@@ -33,6 +38,10 @@ const props = defineProps({
   direction: {
     type: String,
     default: 'left',
+  },
+  allowHover: {
+    type: Boolean,
+    default: false,
   },
 })
 defineOptions({
@@ -89,6 +98,131 @@ onBeforeUnmount(() => {
 <style lang="scss" scoped>
 .popup-container {
   position: relative;
+
+  &.allow-hover .hover-bounding-box {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-md);
+    z-index: 1;
+
+    // Debug properties
+    // background-color: red;
+    // opacity: 0.1;
+
+    // Q: Why is this here and also below?
+    // A: For the few browsers that do not yet support :has(), this at least
+    //    makes it mostly functional.
+    &:hover {
+      &.position-bottom-left,
+      &.position-bottom-right {
+        bottom: -1rem;
+      }
+
+      &.position-top-left,
+      &.position-top-right {
+        top: -1rem;
+      }
+
+      &.position-left-up,
+      &.position-left-down {
+        left: -1rem;
+      }
+
+      &.position-right-up,
+      &.position-right-down {
+        right: -1rem;
+      }
+    }
+  }
+
+  .popup-menu:not(.visible):not(:focus-within) {
+    pointer-events: none;
+
+    *,
+    ::before,
+    ::after {
+      pointer-events: none;
+    }
+  }
+
+  &.allow-hover:has(.hover-bounding-box:hover),
+  &.allow-hover:has(.popup-menu:hover),
+  :has(.popup-menu.visible),
+  :has(.popup-menu:focus-within) {
+    :deep(.btn-dropdown-animation svg:last-child) {
+      transform: rotate(180deg);
+    }
+
+    .hover-bounding-box {
+      &.position-bottom-left,
+      &.position-bottom-right {
+        bottom: -1rem;
+      }
+
+      &.position-top-left,
+      &.position-top-right {
+        top: -1rem;
+      }
+
+      &.position-left-up,
+      &.position-left-down {
+        left: -1rem;
+      }
+
+      &.position-right-up,
+      &.position-right-down {
+        right: -1rem;
+      }
+    }
+  }
+
+  &.allow-hover .hover-bounding-box:hover + .popup-menu,
+  &.allow-hover .popup-menu:hover,
+  .popup-menu.visible,
+  .popup-menu:focus-within {
+    opacity: 1;
+    scale: 1;
+
+    &.position-bottom-left {
+      top: calc(100% + var(--gap-sm));
+      right: 0;
+    }
+
+    &.position-bottom-right {
+      top: calc(100% + var(--gap-sm));
+      left: 0;
+    }
+
+    &.position-top-left {
+      bottom: calc(100% + var(--gap-sm));
+      right: 0;
+    }
+
+    &.position-top-right {
+      bottom: calc(100% + var(--gap-sm));
+      left: 0;
+    }
+
+    &.position-left-up {
+      bottom: 0rem;
+      right: calc(100% + var(--gap-sm));
+    }
+
+    &.position-left-down {
+      top: 0rem;
+      right: calc(100% + var(--gap-sm));
+    }
+
+    &.position-right-up {
+      bottom: 0rem;
+      left: calc(100% + var(--gap-sm));
+    }
+
+    &.position-right-down {
+      top: 0rem;
+      left: calc(100% + var(--gap-sm));
+    }
+  }
 
   .popup-menu {
     --_animation-offset: -1rem;
@@ -147,62 +281,6 @@ onBeforeUnmount(() => {
     &.position-right-down {
       top: -1rem;
       left: calc(100% + var(--gap-sm) - 1rem);
-    }
-
-    &:not(.visible):not(:focus-within) {
-      pointer-events: none;
-
-      *,
-      ::before,
-      ::after {
-        pointer-events: none;
-      }
-    }
-
-    &.visible,
-    &:focus-within {
-      opacity: 1;
-      scale: 1;
-
-      &.position-bottom-left {
-        top: calc(100% + var(--gap-sm));
-        right: 0;
-      }
-
-      &.position-bottom-right {
-        top: calc(100% + var(--gap-sm));
-        left: 0;
-      }
-
-      &.position-top-left {
-        bottom: calc(100% + var(--gap-sm));
-        right: 0;
-      }
-
-      &.position-top-right {
-        bottom: calc(100% + var(--gap-sm));
-        left: 0;
-      }
-
-      &.position-left-up {
-        bottom: 0rem;
-        right: calc(100% + var(--gap-sm));
-      }
-
-      &.position-left-down {
-        top: 0rem;
-        right: calc(100% + var(--gap-sm));
-      }
-
-      &.position-right-up {
-        bottom: 0rem;
-        left: calc(100% + var(--gap-sm));
-      }
-
-      &.position-right-down {
-        top: 0rem;
-        left: calc(100% + var(--gap-sm));
-      }
     }
 
     .btn {

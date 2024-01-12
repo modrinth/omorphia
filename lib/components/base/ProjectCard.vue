@@ -1,585 +1,455 @@
 <template>
-  <article class="project-card base-card" :aria-label="name" role="listitem">
-    <router-link class="icon" tabindex="-1" :to="`/${projectTypeUrl}/${id}`">
-      <Avatar :src="iconUrl" :alt="name" size="md" no-shadow loading="lazy" />
-    </router-link>
-    <router-link
-      class="gallery"
-      :class="{ 'no-image': !featuredImage }"
-      tabindex="-1"
-      :to="`/${projectTypeUrl}/${id}`"
-      :style="color ? `background-color: ${toColor};` : ''"
-    >
-      <img v-if="featuredImage" :src="featuredImage" alt="gallery image" loading="lazy" />
-    </router-link>
-    <div class="title">
-      <router-link :to="`/${projectTypeUrl}/${id}`">
-        <h2 class="name">
-          {{ name }}
-        </h2>
-      </router-link>
-      <p v-if="author" class="author">
-        by
-        <router-link class="title-link" :to="'/user/' + author">{{ author }} </router-link>
-      </p>
-      <Badge v-if="status && status !== 'approved'" :type="status" class="status" />
+  <article class="project-card">
+    <router-link :to="`/${type}/${id}`" class="project-card__link"> </router-link>
+    <div class="icon">
+      <Avatar :src="iconUrl" />
     </div>
-    <p class="description">
-      {{ description }}
-    </p>
-    <Categories :categories="categories" :type="type" class="tags">
-      <EnvironmentIndicator
-        :type-only="moderation"
-        :client-side="clientSide"
-        :server-side="serverSide"
-        :type="projectTypeDisplay"
-        :search="search"
-        :categories="categories"
+    <div class="title">
+      <div class="name">{{ name }}</div>
+      <router-link v-if="author" :to="`user/${author}`" class="author consumes-click">
+        {{ formatMessage(messages.byAuthor, { author }) }}
+      </router-link>
+    </div>
+    <div class="featured-gallery hide-small" :class="!featuredImage ? 'no-image' : ''">
+      <img
+        :src="
+          featuredImage ? featuredImage : 'https://launcher-files.modrinth.com/assets/maze-bg.png'
+        "
+        :alt="`Banner image for ${name}`"
+        loading="lazy"
       />
-    </Categories>
+    </div>
+    <div class="summary">{{ description }}</div>
     <div class="stats">
-      <div v-if="downloads" class="stat">
-        <DownloadIcon aria-hidden="true" />
-        <p>
-          <strong>{{ formatNumber(downloads) }}</strong
-          ><span class="stat-label"> download<span v-if="downloads !== '1'">s</span></span>
-        </p>
-      </div>
-      <div v-if="follows" class="stat">
-        <HeartIcon aria-hidden="true" />
-        <p>
-          <strong>{{ formatNumber(follows) }}</strong
-          ><span class="stat-label"> follower<span v-if="follows !== '1'">s</span></span>
-        </p>
-      </div>
-      <div class="buttons">
-        <slot />
-      </div>
-      <div v-if="showUpdatedDate" v-tooltip="updatedDate" class="stat date">
-        <EditIcon aria-hidden="true" />
-        <span class="date-label">Updated </span> {{ sinceUpdated }}
-      </div>
-      <div v-else v-tooltip="createdDate" class="stat date">
-        <CalendarIcon aria-hidden="true" />
-        <span class="date-label">Published </span>{{ sinceCreation }}
+      <span
+        v-if="downloads"
+        v-tooltip="formatMessage(messages.downloads, { count: formatNumber(downloads, false) })"
+        class="stat consumes-click"
+      >
+        <span class="label"><DownloadIcon /></span>
+        <span class="value">{{ formatNumber(downloads) }}</span>
+      </span>
+      <span
+        v-if="follows"
+        v-tooltip="formatMessage(messages.followers, { count: formatNumber(follows, false) })"
+        class="stat consumes-click"
+      >
+        <span class="label"><HeartIcon /></span>
+        <span class="value">{{ formatNumber(follows) }}</span>
+      </span>
+      <span
+        v-if="showUpdatedDate && updatedAt"
+        v-tooltip="
+          formatMessage(messages.updated, {
+            date: dayjs(updatedAt).format('MMMM D, YYYY [at] h:mm A'),
+          })
+        "
+        class="stat consumes-click"
+      >
+        <span class="label"><HistoryIcon /></span>
+        <span class="value">{{ fromNow(updatedAt) }}</span>
+      </span>
+      <span
+        v-else-if="createdAt"
+        v-tooltip="
+          formatMessage(messages.published, {
+            date: dayjs(createdAt).format('MMMM D, YYYY [at] h:mm A'),
+          })
+        "
+        class="stat consumes-click"
+      >
+        <span class="label"><CalendarIcon /></span>
+        <span class="value">{{ fromNow(createdAt) }}</span>
+      </span>
+      <div class="tags">
+        <template v-if="categories && categories.length > 0">
+          <TagIcon />
+          <Categories :type="type" :categories="categories" />
+        </template>
       </div>
     </div>
   </article>
 </template>
 
 <script setup>
-import { formatNumber } from '@/helpers'
 import {
-  Badge,
   HeartIcon,
   DownloadIcon,
-  EditIcon,
   CalendarIcon,
-  Avatar,
+  HistoryIcon,
   Categories,
-  EnvironmentIndicator,
+  TagIcon,
+  Avatar,
+  formatNumber,
 } from '@'
-
+import { useVIntl, defineMessages } from '@vintl/vintl'
 import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime.js'
-dayjs.extend(relativeTime)
-</script>
 
-<script>
-import { defineComponent } from 'vue'
-export default defineComponent({
-  props: {
-    id: {
-      type: String,
-      default: 'modrinth-0',
-    },
-    type: {
-      type: String,
-      default: 'mod',
-    },
-    name: {
-      type: String,
-      default: 'Project Name',
-    },
-    author: {
-      type: String,
-      default: null,
-    },
-    description: {
-      type: String,
-      default: 'A _type description',
-    },
-    iconUrl: {
-      type: String,
-      default: '#',
-      required: false,
-    },
-    downloads: {
-      type: String,
-      default: null,
-      required: false,
-    },
-    follows: {
-      type: String,
-      default: null,
-      required: false,
-    },
-    createdAt: {
-      type: String,
-      default: '0000-00-00',
-    },
-    updatedAt: {
-      type: String,
-      default: null,
-    },
-    categories: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
-    filteredCategories: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
-    projectTypeDisplay: {
-      type: String,
-      default: null,
-    },
-    projectTypeUrl: {
-      type: String,
-      default: null,
-    },
-    status: {
-      type: String,
-      default: null,
-    },
-    serverSide: {
-      type: String,
-      required: false,
-      default: '',
-    },
-    clientSide: {
-      type: String,
-      required: false,
-      default: '',
-    },
-    moderation: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    search: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    featuredImage: {
-      type: String,
-      required: false,
-      default: null,
-    },
-    showUpdatedDate: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
-    hideLoaders: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    color: {
-      type: Number,
-      required: false,
-      default: null,
+const vintl = useVIntl()
+const { formatMessage } = vintl
+
+const messages = defineMessages({
+  byAuthor: {
+    id: 'project.by-author',
+    defaultMessage: 'by {author}',
+  },
+  published: {
+    id: 'project.tooltip.published',
+    defaultMessage: 'Published {date}',
+  },
+  updated: {
+    id: 'project.tooltip.updated',
+    defaultMessage: 'Updated {date}',
+  },
+  downloads: {
+    id: 'project.tooltip.downloads',
+    defaultMessage: '{count} downloads',
+  },
+  followers: {
+    id: 'project.tooltip.followers',
+    defaultMessage: '{count} followers',
+  },
+})
+
+defineProps({
+  id: {
+    type: String,
+    default: 'modrinth-0',
+  },
+  type: {
+    type: String,
+    default: 'mod',
+  },
+  name: {
+    type: String,
+    default: 'Project Name',
+  },
+  author: {
+    type: String,
+    default: null,
+  },
+  description: {
+    type: String,
+    default: 'A _type description',
+  },
+  iconUrl: {
+    type: String,
+    default: '#',
+    required: false,
+  },
+  downloads: {
+    type: String,
+    default: null,
+    required: false,
+  },
+  follows: {
+    type: String,
+    default: null,
+    required: false,
+  },
+  createdAt: {
+    type: String,
+    default: null,
+  },
+  updatedAt: {
+    type: String,
+    default: null,
+  },
+  categories: {
+    type: Array,
+    default() {
+      return []
     },
   },
-  computed: {
-    toColor() {
-      let color = this.color
-
-      color >>>= 0
-      const b = color & 0xff
-      const g = (color & 0xff00) >>> 8
-      const r = (color & 0xff0000) >>> 16
-      return 'rgba(' + [r, g, b, 1].join(',') + ')'
-    },
-    createdDate() {
-      return dayjs(this.createdAt).format('MMMM D, YYYY [at] h:mm:ss A')
-    },
-    sinceCreation() {
-      return dayjs(this.createdAt).fromNow()
-    },
-    updatedDate() {
-      return dayjs(this.updatedAt).format('MMMM D, YYYY [at] h:mm:ss A')
-    },
-    sinceUpdated() {
-      return dayjs(this.updatedAt).fromNow()
-    },
+  status: {
+    type: String,
+    default: null,
   },
-  methods: {
-    formatNumber,
+  hasModMessage: {
+    type: Boolean,
+    default: false,
+  },
+  serverSide: {
+    type: String,
+    required: false,
+    default: '',
+  },
+  clientSide: {
+    type: String,
+    required: false,
+    default: '',
+  },
+  moderation: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  search: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  featuredImage: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  showUpdatedDate: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
+  color: {
+    type: Number,
+    required: false,
+    default: null,
+  },
+  fromNow: {
+    type: Function,
+    required: false,
+    default: (x) => x.toString(),
   },
 })
 </script>
 
 <style lang="scss" scoped>
-.project-card {
-  display: inline-grid;
-  box-sizing: border-box;
-  overflow: hidden;
-  margin: 0;
-  line-height: 1;
-}
-
-.display-mode--list .project-card {
-  grid-template:
-    'icon title stats'
-    'icon description stats'
-    'icon tags stats';
-  grid-template-columns: min-content 1fr auto;
-  grid-template-rows: min-content 1fr min-content;
-  column-gap: var(--gap-md);
-  row-gap: var(--gap-sm);
-  width: 100%;
-
-  @media screen and (max-width: 750px) {
-    grid-template:
-      'icon title'
-      'icon description'
-      'icon tags'
-      'stats stats';
-    grid-template-columns: min-content auto;
-    grid-template-rows: min-content 1fr min-content min-content;
-  }
-
-  @media screen and (max-width: 550px) {
-    grid-template:
-      'icon title'
-      'icon description'
-      'tags tags'
-      'stats stats';
-    grid-template-columns: min-content auto;
-    grid-template-rows: min-content 1fr min-content min-content;
-  }
-
-  h2 {
-    margin: 0;
-    font-size: 1.5rem;
-  }
-}
-
-.display-mode--gallery .project-card,
-.display-mode--grid .project-card {
-  padding: 0 0 1rem 0;
-  grid-template: 'gallery gallery' 'icon title' 'description  description' 'tags tags' 'stats stats';
-  grid-template-columns: min-content 1fr;
-  grid-template-rows: min-content min-content 1fr min-content min-content;
-  row-gap: var(--gap-sm);
-
-  .gallery {
-    display: inline-block;
-    width: 100%;
-    height: 10rem;
-    background-color: var(--color-button-bg);
-
-    &.no-image {
-      filter: brightness(0.7);
-    }
-
-    img {
-      box-shadow: none;
-      width: 100%;
-      height: 10rem;
-      object-fit: cover;
-    }
-  }
+@mixin grid-mode {
+  grid-template: 'gallery gallery gallery' 'icon title actions' 'summary summary summary' 'stats stats stats';
+  grid-template-columns: min-content 1fr min-content;
+  grid-template-rows: min-content min-content 1fr auto;
 
   .icon {
-    margin-left: var(--gap-lg);
-    margin-top: -3rem;
-    z-index: 1;
+    --_size: 3rem;
+    border-radius: var(--radius-lg);
+  }
 
-    img,
-    svg {
-      border-radius: var(--radius-lg);
-      box-shadow: -2px -2px 0 2px var(--color-raised-bg), 2px -2px 0 2px var(--color-raised-bg);
+  .featured-gallery {
+    margin: -1rem -1rem 0.5rem -1rem;
+    width: calc(100% + 2rem);
+    height: unset;
+
+    img {
+      border: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      width: 100%;
     }
   }
 
   .title {
-    margin-left: var(--gap-md);
-    margin-right: var(--gap-md);
     flex-direction: column;
-
-    .name {
-      font-size: 1.25rem;
-    }
-
-    .status {
-      margin-top: var(--gap-xs);
-    }
-  }
-
-  .description {
-    margin-inline: var(--gap-lg);
-  }
-
-  .tags {
-    margin-inline: var(--gap-lg);
+    gap: 0.4rem;
   }
 
   .stats {
-    margin-inline: var(--gap-lg);
-    flex-direction: row;
-    align-items: center;
+    font-size: var(--font-size-sm);
+  }
+}
 
-    .stat-label {
+.project-card {
+  display: grid;
+  gap: 0.5rem 0.75rem;
+  grid-template: 'icon title actions gallery' 'icon summary actions gallery' 'icon stats actions gallery';
+  grid-template-columns: min-content 1fr min-content auto;
+  grid-template-rows: min-content auto 1fr;
+  position: relative;
+  padding: 1rem;
+  border-radius: var(--round-card);
+  background-color: var(--color-raised-bg);
+  border: var(--card-border-width) solid var(--color-card-divider);
+  box-shadow: var(--shadow-card);
+  width: 100%;
+
+  a:not(.project-card__link),
+  button,
+  .v-popper--has-tooltip {
+    z-index: 1;
+  }
+
+  &:has(.project-card__link:active):not(:has(a:not(.project-card__link):active)) {
+    scale: 0.99 !important;
+  }
+
+  @media screen and (max-width: 900px) {
+    grid-template: 'icon title actions' 'icon summary actions' 'stats stats stats';
+    grid-template-columns: min-content 1fr auto;
+    grid-template-rows: min-content 1fr auto;
+
+    .icon {
+      --_size: 4.5rem;
+      border-radius: var(--radius-lg);
+    }
+
+    .featured-gallery {
       display: none;
     }
 
-    .buttons {
-      flex-direction: row;
-      gap: var(--gap-sm);
-      align-items: center;
+    .stats {
+      font-size: var(--font-size-sm);
+    }
+  }
 
-      > :first-child {
-        margin-left: auto;
-      }
+  @media screen and (max-width: 500px) {
+    grid-template: 'icon title actions' 'summary summary summary' 'stats stats stats';
+    grid-template-columns: min-content 1fr auto;
+    grid-template-rows: min-content 1fr auto;
 
-      &:first-child > :last-child {
-        margin-right: auto;
-      }
+    .icon {
+      --_size: 3rem;
+      border-radius: var(--radius-lg);
     }
 
-    .buttons:not(:empty) + .date {
+    .title {
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .tags {
       flex-basis: 100%;
     }
   }
 }
 
 .display-mode--grid .project-card {
-  .gallery {
-    display: none;
-  }
+  @include grid-mode;
+}
 
-  .icon {
-    margin-top: calc(var(--gap-lg) - var(--gap-sm));
+.project-card__link {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  border-radius: inherit;
 
-    img,
-    svg {
-      border: none;
-    }
-  }
-
-  .title {
-    margin-top: calc(var(--gap-lg) - var(--gap-sm));
+  &:focus-visible {
+    outline: 0.25rem solid #ea80ff;
   }
 }
 
 .icon {
+  --_size: 6rem;
   grid-area: icon;
-  display: flex;
-  align-items: center;
-}
+  width: var(--_size);
+  height: var(--_size);
+  box-shadow: none;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  border: var(--card-border-width) solid var(--color-card-divider);
+  background-color: var(--color-button-bg);
 
-.gallery {
-  display: none;
-  height: 10rem;
-  grid-area: gallery;
+  .avatar {
+    --size: var(--_size);
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: inherit;
+  }
 }
 
 .title {
   grid-area: title;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  gap: 0.3em;
   align-items: baseline;
-  column-gap: var(--gap-sm);
-  row-gap: 0;
-  word-wrap: anywhere;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
-  h2 {
-    font-weight: bolder;
-    color: var(--color-contrast);
-  }
+.name {
+  font-weight: 700;
+  color: var(--color-contrast);
+  font-size: var(--font-size-md);
+  white-space: nowrap;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
 
-  h2,
-  p {
-    margin: 0;
-    overflow-wrap: anywhere;
-  }
+.author {
+  font-size: var(--font-size-sm);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  color: var(--color-blue);
 
-  svg {
-    width: auto;
-    color: var(--color-special-orange);
-    height: 1.5rem;
-    margin-bottom: -0.25rem;
-  }
-
-  .title-link {
+  &:hover {
     text-decoration: underline;
-
-    &:focus-visible,
-    &:hover {
-      color: var(--color-heading);
-    }
-
-    &:active {
-      color: var(--color-text-dark);
-    }
   }
 }
 
 .stats {
-  grid-area: stats;
   display: flex;
-  flex-direction: column;
+  gap: 0.5rem 1rem;
   flex-wrap: wrap;
-  align-items: flex-end;
-  gap: var(--gap-md);
+  grid-area: stats;
+  margin-top: auto;
+  margin-bottom: -2px;
+  align-items: center;
 
   .stat {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    width: fit-content;
-    gap: var(--gap-xs);
-    --stat-strong-size: 1.25rem;
+    gap: 0.25rem;
+    justify-content: center;
+    line-height: 1em;
+    pointer-events: all;
+    cursor: text;
 
-    strong {
-      font-size: var(--stat-strong-size);
+    .label {
+      color: var(--color-secondary);
     }
 
-    p {
-      margin: 0;
-    }
-
-    svg {
-      height: var(--stat-strong-size);
-      width: var(--stat-strong-size);
-    }
-  }
-
-  .date {
-    margin-top: auto;
-  }
-
-  @media screen and (max-width: 750px) {
-    flex-direction: row;
-    column-gap: var(--gap-md);
-    margin-top: var(--gap-xs);
-  }
-
-  @media screen and (max-width: 600px) {
-    margin-top: 0;
-
-    .stat-label {
-      display: none;
+    .value {
+      font-weight: 500;
     }
   }
 }
 
-.environment {
-  color: var(--color-text) !important;
-  font-weight: bold;
-}
-
-.description {
-  grid-area: description;
-  margin-block: 0;
-  display: flex;
-  justify-content: flex-start;
+.summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.25rem;
+  height: 2.5rem;
+  font-size: var(--font-size-sm);
+  grid-area: summary;
+  color: var(--color-secondary);
 }
 
 .tags {
-  grid-area: tags;
   display: flex;
   flex-direction: row;
+  gap: 0.25rem;
+  justify-content: left;
+  align-items: center;
+  line-height: 1em;
 
-  @media screen and (max-width: 550px) {
-    margin-top: var(--gap-xs);
+  svg {
+    color: var(--color-secondary);
   }
 }
 
-.buttons {
+.featured-gallery {
   display: flex;
-  flex-direction: column;
-  gap: var(--gap-sm);
-  align-items: flex-end;
-  flex-grow: 1;
-}
+  grid-area: gallery;
+  align-items: center;
+  justify-content: flex-end;
+  height: 6rem;
 
-.small-mode {
-  @media screen and (min-width: 750px) {
-    grid-template:
-      'icon title'
-      'icon description'
-      'icon tags'
-      'stats stats' !important;
-    grid-template-columns: min-content auto !important;
-    grid-template-rows: min-content 1fr min-content min-content !important;
-
-    .tags {
-      margin-top: var(--gap-xs) !important;
-    }
-
-    .stats {
-      flex-direction: row;
-      column-gap: var(--gap-md) !important;
-      margin-top: var(--gap-xs) !important;
-
-      .stat-label {
-        display: none !important;
-      }
-    }
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: auto;
+    aspect-ratio: 2 / 1;
+    border: 4px solid var(--color-button-bg);
+    border-radius: var(--radius-md);
   }
 }
 
-.base-card {
-  padding: var(--gap-lg);
-
-  position: relative;
-  min-height: 2rem;
-
-  background-color: var(--color-raised-bg);
-  border-radius: var(--radius-lg);
-
-  outline: 2px solid transparent;
-
-  box-shadow: var(--shadow-card);
-
-  .card__overlay {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    grid-gap: 0.5rem;
-    z-index: 2;
-  }
-
-  &.warning {
-    border-left: 0.5rem solid var(--color-banner-side);
-    padding: 1.5rem;
-    line-height: 1.5;
-    background-color: var(--color-banner-bg);
-    color: var(--color-banner-text);
-    min-height: 0;
-
-    a {
-      /* Uses active color to increase contrast */
-      color: var(--color-blue);
-      text-decoration: underline;
-    }
-  }
-
-  &.moderation-card {
-    background-color: var(--color-banner-bg);
-  }
+.small-mode .hide-small {
+  display: none;
 }
 </style>

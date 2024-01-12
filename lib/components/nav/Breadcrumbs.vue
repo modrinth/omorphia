@@ -1,5 +1,5 @@
 <template>
-  <nav class="breadcrumbs">
+  <nav class="breadcrumbs" :class="{ 'empty-stack': linkStack.length === 0 }">
     <template v-for="(link, index) in linkStack" :key="index">
       <RouterLink
         :to="link.href"
@@ -46,6 +46,11 @@ defineProps({
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+  }
+
+  &.empty-stack {
+    opacity: 0;
+    pointer-events: none;
   }
 }
 </style>

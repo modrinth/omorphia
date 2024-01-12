@@ -5,6 +5,7 @@
     :disabled="disabled"
     :position="position"
     :direction="direction"
+    :allow-hover="allowHover"
   >
     <slot></slot>
     <template #menu>
@@ -16,6 +17,7 @@
           :color="option.color ? option.color : 'default'"
           :hover-filled="option.hoverFilled"
           :hover-filled-only="option.hoverFilledOnly"
+          :disabled="option.disabled"
           transparent
           :action="
             option.action
@@ -65,6 +67,10 @@ defineProps({
   direction: {
     type: String,
     default: 'left',
+  },
+  allowHover: {
+    type: Boolean,
+    default: false,
   },
 })
 defineOptions({
