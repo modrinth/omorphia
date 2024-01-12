@@ -39,7 +39,7 @@ const props = withDefaults(
     transparent: false,
     hoverFilled: false,
     hoverFilledOnly: false,
-    disabled: false
+    disabled: false,
   }
 )
 
@@ -60,7 +60,7 @@ const accentedButton = computed(() =>
       'btn-hover-filled-only': hoverFilledOnly,
       'btn-outline': outline,
       'color-accent-contrast': accentedButton,
-      'disabled': disabled,
+      disabled: disabled,
       [`btn-${color}`]: true,
     }"
     :to="link"
@@ -81,7 +81,7 @@ const accentedButton = computed(() =>
       'btn-hover-filled-only': hoverFilledOnly,
       'btn-outline': outline,
       'color-accent-contrast': accentedButton,
-      'disabled': disabled,
+      disabled: disabled,
       [`btn-${color}`]: true,
     }"
     :href="link"
