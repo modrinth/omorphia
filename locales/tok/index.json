@@ -6,10 +6,10 @@
     "defaultMessage": "jan li pona e ni"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "Archived"
+    "defaultMessage": "jan lawa li majuna e ni"
   },
   "omorphia.component.badge.label.closed": {
-    "defaultMessage": "Closed"
+    "defaultMessage": "jan lawa li pini e ni"
   },
   "omorphia.component.badge.label.creator": {
     "defaultMessage": "jan pali"
@@ -39,13 +39,13 @@
     "defaultMessage": "ilo li sona e ni"
   },
   "omorphia.component.badge.label.rejected": {
-    "defaultMessage": "Rejected"
+    "defaultMessage": "jan lawa li ala e ni"
   },
   "omorphia.component.badge.label.returned": {
     "defaultMessage": "Returned"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "Scheduled"
+    "defaultMessage": "kama lon tenpo kama"
   },
   "omorphia.component.badge.label.under-review": {
     "defaultMessage": "jan li lukin e ni"
@@ -75,7 +75,7 @@
     "defaultMessage": "{type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "kepeken ala"
+    "defaultMessage": "ken ala"
   },
   "project.by-author": {
     "defaultMessage": "tan {author}"
