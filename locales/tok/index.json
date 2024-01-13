@@ -54,7 +54,7 @@
     "defaultMessage": "lon lipu ala"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "Withheld"
+    "defaultMessage": "jan lawa li len e ni"
   },
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "o poki e nanpa ni"
@@ -81,16 +81,16 @@
     "defaultMessage": "tan {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "jan pi mute nanpa {count} li kepeken ni"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "jan pi mute nanpa {count} li wile awen lukin e ni"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "ni li kama lon tenpo {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "sin li kama lon tenpo {date}"
   }
 }
 
