@@ -78,19 +78,19 @@
     "defaultMessage": "Nesubtenata"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "de {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} elŝutadoj"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} sekvantoj"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Publikigis {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Ĝisdatigis {date}"
   }
 }
 
