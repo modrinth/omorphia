@@ -20,7 +20,7 @@
         />
       </div>
       <div class="input-group push-right">
-        <button class="btn" @click="modal.hide()">
+        <button class="btn" @click="modal?.hide()">
           <XIcon />
           Cancel
         </button>
@@ -33,47 +33,37 @@
   </Modal>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Modal, TrashIcon, XIcon, renderString } from '@'
 import { ref } from 'vue'
 
-const props = defineProps({
-  confirmationText: {
-    type: String,
-    default: '',
-  },
-  hasToType: {
-    type: Boolean,
-    default: false,
-  },
-  title: {
-    type: String,
-    default: 'No title defined',
-    required: true,
-  },
-  description: {
-    type: String,
-    default: 'No description defined',
-    required: true,
-  },
-  proceedLabel: {
-    type: String,
-    default: 'Proceed',
-  },
-  noblur: {
-    type: Boolean,
-    default: false,
-  },
-})
+const props = withDefaults(
+  defineProps<{
+    confirmationText: string
+    hasToType: boolean
+    title: string
+    description: string
+    proceedLabel: string
+    noblur: boolean
+  }>(),
+  {
+    confirmationText: '',
+    hasToType: false,
+    title: 'No title defined',
+    description: 'No description defined',
+    proceedLabel: 'Proceed',
+    noblur: false,
+  }
+)
 
 const emit = defineEmits(['proceed'])
-const modal = ref(null)
+const modal = ref<InstanceType<typeof Modal> | null>(null)
 
 const action_disabled = ref(props.hasToType)
 const confirmation_typed = ref('')
 
 function proceed() {
-  modal.value.hide()
+  modal.value?.hide()
   emit('proceed')
 }
 
@@ -85,7 +75,7 @@ function type() {
 }
 
 function show() {
-  modal.value.show()
+  modal.value?.show()
 }
 
 defineExpose({ show })
