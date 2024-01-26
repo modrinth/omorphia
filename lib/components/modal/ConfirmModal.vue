@@ -20,7 +20,7 @@
         />
       </div>
       <div class="input-group push-right">
-        <button class="btn" @click="modal.hide()">
+        <button class="btn" @click="modal?.hide()">
           <XIcon />
           Cancel
         </button>
@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { Modal, TrashIcon, XIcon, renderString } from '@'
-import { ref, VNodeRef } from 'vue'
+import { ref } from 'vue'
 
 const props = withDefaults(
   defineProps<{
@@ -57,13 +57,13 @@ const props = withDefaults(
 )
 
 const emit = defineEmits(['proceed'])
-const modal = ref<VNodeRef | null>(null)
+const modal = ref<InstanceType<typeof Modal> | null>(null)
 
 const action_disabled = ref(props.hasToType)
 const confirmation_typed = ref('')
 
 function proceed() {
-  modal.value.hide()
+  modal.value?.hide()
   emit('proceed')
 }
 
@@ -75,7 +75,7 @@ function type() {
 }
 
 function show() {
-  modal.value.show()
+  modal.value?.show()
 }
 
 defineExpose({ show })
