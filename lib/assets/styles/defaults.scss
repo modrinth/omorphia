@@ -38,8 +38,21 @@ body {
   --font-weight-title: var(--font-weight-extrabold);
 }
 
-a.uncolored {
+a {
   color: inherit;
+  text-decoration: none;
+}
+
+button,
+input[type='button'] {
+  cursor: pointer;
+  border: none;
+  outline: 2px solid transparent;
+
+  &:disabled,
+  &[disabled] {
+    cursor: not-allowed;
+  }
 }
 
 input[type='text'],
@@ -129,6 +142,7 @@ input[type='number'] {
   input {
     padding: 0 2.5rem;
     width: 100%;
+    box-shadow: none;
   }
 
   &:focus-within svg {
@@ -223,4 +237,10 @@ h2 {
 h3 {
   margin-block: var(--gap-md) var(--gap-md);
   color: var(--color-contrast);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
 }

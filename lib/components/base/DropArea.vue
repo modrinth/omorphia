@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const props = withDefaults(
   defineProps<{
@@ -88,7 +88,7 @@ onMounted(() => {
     width: calc(100% - (2 * var(--indent)));
     height: calc(100% - (2 * var(--indent)));
     border-radius: 1rem;
-    border: 0.25rem dashed var(--color-button-bg);
+    border: 0.25rem dashed var(--color-divider);
   }
 
   @media (prefers-reduced-motion) {

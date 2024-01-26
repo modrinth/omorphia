@@ -223,6 +223,34 @@
   }
 }
 
+.universal-modal {
+  @extend .universal-body;
+
+  padding: var(--gap-lg);
+  display: flex;
+  flex-direction: column;
+
+  > p:first-child {
+    margin-top: 0;
+  }
+
+  @media screen and (max-width: 750px) {
+    .adjacent-input,
+    &.adjacent-input &:not(&.small) {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  @media screen and (max-width: calc(600px + 2rem)) {
+    .adjacent-input,
+    &.adjacent-input &:not(&.small) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
+
 // CLICKABLES/BUTTONS
 a,
 .clickable {
@@ -240,17 +268,17 @@ a,
   border: none;
   outline: 2px solid transparent;
 
-  &:focus-visible:not(&:disabled),
-  &:hover:not(&:disabled) {
+  &:focus-visible:not(&:disabled, &.disabled),
+  &:hover:not(&:disabled, &.disabled) {
     cursor: pointer;
 
     &:not(.btn-outline.btn-hover-filled, .btn-transparent) {
-      filter: brightness(0.85);
+      filter: var(--filter-hover);
     }
   }
 
-  &:active:not(&:disabled, .btn-outline.btn-hover-filled, .btn-transparent) {
-    filter: brightness(0.8);
+  &:active:not(&:disabled, &.disabled, .btn-outline.btn-hover-filled, .btn-transparent) {
+    filter: var(--filter-active);
   }
 
   &:disabled.quiet-disabled {
@@ -258,7 +286,8 @@ a,
   }
 
   &:disabled:not(.quiet-disabled),
-  &[disabled]:not(.quiet-disabled) {
+  &[disabled]:not(.quiet-disabled),
+  &.disabled:not(.quiet-disabled) {
     cursor: not-allowed;
     filter: grayscale(50%);
     opacity: 0.5;
@@ -272,11 +301,11 @@ a,
 
   &:focus-visible:not(&.disabled),
   &:hover:not(&.disabled) {
-    filter: brightness(0.85);
+    filter: brightness(var(--filter-hover));
   }
 
   &:active:not(&.disabled) {
-    filter: brightness(0.8);
+    filter: brightness(var(--filter-active));
   }
 
   // For some reason this within the above block makes it universal and not only applied to children. SCSS bug maybe?
@@ -319,13 +348,14 @@ a,
   &.btn-transparent {
     --_accent-color: var(--color-base);
     color: var(--_accent-color);
+    border-color: transparent;
 
     &.btn-hover-filled-only {
       color: var(--color-base);
     }
 
-    &:focus-visible:not(&:disabled),
-    &:hover:not(&:disabled) {
+    &:focus-visible:not(&:disabled, &.disabled),
+    &:hover:not(&:disabled, &.disabled) {
       background-color: var(--color-button-bg);
 
       &.btn-hover-filled,
@@ -347,8 +377,8 @@ a,
       border-color: var(--color-contrast);
     }
 
-    &:focus-visible:not(&:disabled),
-    &:hover:not(&:disabled) {
+    &:focus-visible:not(&:disabled, &.disabled),
+    &:hover:not(&:disabled, &.disabled) {
       &.btn-hover-filled,
       &.btn-hover-filled-only {
         border-color: var(--_accent-color);
@@ -380,6 +410,12 @@ a,
     --_text-color: var(--color-accent-contrast);
     --_background-color: var(--color-orange);
     --_accent-color: var(--color-orange);
+  }
+
+  &.btn-brand-highlight {
+    --_text-color: var(--color-brand);
+    --_background-color: var(--color-brand-highlight);
+    --_accent-color: var(--color-brand-highlight);
   }
 
   &.btn-red {
@@ -427,10 +463,10 @@ a,
 
   color: var(--_text-color);
   background-color: var(--_background-color);
-  box-shadow: var(--_shadow);
+  box-shadow: none;
   border-radius: var(--radius-md);
-
-  padding: var(--gap-sm) var(--gap-lg);
+  padding: var(--gap-sm) var(--gap-md);
+  border: var(--button-border-width) solid var(--button-divider);
 
   display: flex;
   align-items: center;
@@ -440,7 +476,7 @@ a,
   height: fit-content;
   text-decoration: none;
   gap: 0.5rem;
-  line-height: 1.25rem;
+  line-height: 1rem;
 
   svg {
     width: 1.25rem;
@@ -461,6 +497,12 @@ a,
   &.transparent {
     background: none;
     box-shadow: none;
+    border-color: transparent;
+  }
+
+  &.raised {
+    background-color: var(--color-raised-bg);
+    box-shadow: var(--shadow-inset-sm), var(--shadow-raised);
   }
 
   &.btn-dropdown-animation {
@@ -508,7 +550,8 @@ a,
 .project-list {
   width: 100%;
   gap: var(--gap-md);
-  overflow: hidden;
+  overflow: unset !important;
+  container-type: inline-size;
 
   &:not(:first-child) {
     margin-top: var(--gap-md);
@@ -520,22 +563,15 @@ a,
 }
 
 .project-list.display-mode--list {
-  display: flex;
-  flex-direction: column;
-}
-
-.project-list.display-mode--gallery {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  @media screen and (max-width: 750px) {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
+  grid-template-columns: repeat(1, 1fr);
+  gap: 0.75rem;
 }
 
 .project-list.display-mode--grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
 
   @media screen and (max-width: 80rem) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -550,8 +586,7 @@ a,
   }
 
   @media screen and (max-width: 550px) {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
@@ -563,6 +598,7 @@ a,
 
   background-color: var(--color-raised-bg);
   border-radius: var(--radius-lg);
+  border: var(--card-border-width) solid var(--color-card-divider);
 
   margin-bottom: var(--gap-md);
   outline: 2px solid transparent;
@@ -591,18 +627,22 @@ a,
     }
   }
 
-  // TODO: Add back later
-  //&.warning {
-  //  border-left: 0.5rem solid var(--color-warning-banner-side);
-  //  background-color: var(--color-warning-banner-bg);
-  //  color: var(--color-warning-banner-text);
-  //}
-  //
-  //&.information {
-  //  border-left: 0.5rem solid var(--color-info-banner-side);
-  //  background-color: var(--color-info-banner-bg);
-  //  color: var(--color-info-banner-text);
-  //}
+  &.recessed {
+    background-color: var(--color-bg);
+    box-shadow: none;
+  }
+
+  &.warning {
+    border-left: 0.5rem solid var(--color-red);
+    background-color: var(--color-red-bg);
+    color: var(--color-base);
+  }
+
+  &.information {
+    border-left: 0.5rem solid var(--color-blue);
+    background-color: var(--color-blue-bg);
+    color: var(--color-base);
+  }
 }
 
 .card {
@@ -665,11 +705,11 @@ a,
     &.selectable:focus-visible,
     &.selectable:hover {
       cursor: pointer;
-      filter: brightness(0.85);
+      filter: var(--filter-hover);
     }
 
     &.selectable:active {
-      filter: brightness(0.8);
+      filter: var(--filter-active);
       scale: 0.99;
     }
   }
@@ -861,7 +901,7 @@ a,
 
   a {
     cursor: pointer;
-    color: var(--color-link);
+    color: var(--color-blue);
 
     &:focus-visible,
     &:hover {
@@ -936,7 +976,7 @@ a,
     }
 
     tr:nth-child(2n) {
-      background-color: var(--color-accent-contrast);
+      background-color: var(--color-alt-bg);
     }
 
     td:not(:last-of-type),
@@ -947,6 +987,16 @@ a,
     tr:not(:last-of-type) td,
     th {
       border-bottom: 0.1rem solid var(--color-button-bg);
+    }
+
+    kbd {
+      background-color: var(--color-button-bg);
+      color: var(--color-base);
+      box-shadow: var(--shadow-inset-lg);
+      padding: 0.2em 0.5em 0.1em;
+      border-radius: 3px;
+      line-height: 1;
+      font-size: 0.85em !important;
     }
   }
 
@@ -964,7 +1014,7 @@ a,
       border-radius: var(--radius-xs);
 
       &:hover {
-        filter: brightness(0.85);
+        filter: var(--filter-hover);
       }
     }
 

@@ -73,7 +73,11 @@
 
 <style lang="scss" scoped>
 div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 5rem;
+  margin-top: 1rem;
 
   svg {
     width: 5rem;
