@@ -51,7 +51,7 @@
     "defaultMessage": "Розглядається"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Не у списку"
+    "defaultMessage": "Поза списком"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "Утримується"
