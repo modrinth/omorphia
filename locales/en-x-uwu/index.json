@@ -18,13 +18,13 @@
     "defaultMessage": "Draft"
   },
   "omorphia.component.badge.label.failed": {
-    "defaultMessage": "Failed"
+    "defaultMessage": "Faiwd"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Listed"
+    "defaultMessage": "Wisted"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "Moderator"
+    "defaultMessage": "Modewatow"
   },
   "omorphia.component.badge.label.modrinth-team": {
     "defaultMessage": "Modrinth Team"
@@ -33,19 +33,19 @@
     "defaultMessage": "Pending"
   },
   "omorphia.component.badge.label.private": {
-    "defaultMessage": "Private"
+    "defaultMessage": "Pwivate"
   },
   "omorphia.component.badge.label.processed": {
-    "defaultMessage": "Processed"
+    "defaultMessage": "Pwocessed"
   },
   "omorphia.component.badge.label.rejected": {
-    "defaultMessage": "Rejected"
+    "defaultMessage": "Wejected"
   },
   "omorphia.component.badge.label.returned": {
     "defaultMessage": "Returned"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "Scheduled"
+    "defaultMessage": "Skeduwed"
   },
   "omorphia.component.badge.label.under-review": {
     "defaultMessage": "Under review"
