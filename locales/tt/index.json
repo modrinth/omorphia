@@ -18,10 +18,10 @@
     "defaultMessage": "Каралама"
   },
   "omorphia.component.badge.label.failed": {
-    "defaultMessage": "Failed"
+    "defaultMessage": "Үткәрелмәде"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Listed"
+    "defaultMessage": "Ачык"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "Модератор"
@@ -51,7 +51,7 @@
     "defaultMessage": "Under review"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Unlisted"
+    "defaultMessage": "Яшерен"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "Withheld"
@@ -87,7 +87,7 @@
     "defaultMessage": "{count} язылучы"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "{date} бастырылды"
   },
   "project.tooltip.updated": {
     "defaultMessage": "{date} яңартылды"
