@@ -116,6 +116,7 @@ const target = computed(() => (props.external ? '_blank' : '_self'))
 @media screen and (max-width: 800px) {
   .GBBNWLJVGRHFLYVGSZKSSKNTHFYXHMBD-2 {
     margin-bottom: 0.5rem;
+    margin-right: 0;
   }
   .GBBNWLJVGRHFLYVGSZKSSKNTHFYXHMBD-2 a {
     align-items: flex-start;
