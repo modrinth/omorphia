@@ -104,7 +104,7 @@ function switchPage(newPage: number) {
 
 <style lang="scss" scoped>
 a {
-  padding: var(--gap-sm);
+  padding: var(--gap-8);
   margin: 0;
   height: 2.25rem;
   min-width: 2.25rem;
@@ -129,7 +129,7 @@ a,
 
 .paginates {
   display: flex;
-  gap: var(--gap-xs);
+  gap: var(--gap-4);
 }
 
 @media screen and (max-width: 530px) {

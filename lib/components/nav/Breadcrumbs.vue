@@ -31,7 +31,7 @@ defineProps({
 <style lang="scss" scoped>
 .breadcrumbs {
   display: flex;
-  margin-bottom: var(--gap-lg);
+  margin-bottom: var(--gap-16);
   align-items: center;
   flex-wrap: wrap;
 
@@ -41,7 +41,7 @@ defineProps({
   }
 
   a.breadcrumb {
-    padding-block: var(--gap-xs);
+    padding-block: var(--gap-4);
     &.trim {
       text-overflow: ellipsis;
       white-space: nowrap;

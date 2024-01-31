@@ -15,11 +15,22 @@ html {
   --round-univ: 9px;
   --round-card: 13px;
 
-  --gap-xs: 0.25rem;
-  --gap-sm: 0.5rem;
-  --gap-md: 0.75rem;
-  --gap-lg: 1rem;
+
+   // --- LEGACY - DO NOT USE ---
+  --gap-xs: var(--gap-4);
+  --gap-sm: var(--gap-8);
+  --gap-md: var(--gap-12);
+  --gap-lg: var(--gap-16);
   --gap-xl: 1.25rem;
+  // ----------------------------
+
+  --gap-2: 0.125rem;
+  --gap-4: calc(2 * var(--gap-2));
+  --gap-6: calc(3 * var(--gap-2));
+  --gap-8: calc(2 * var(--gap-4));
+  --gap-12: calc(3 * var(--gap-4));
+  --gap-16: calc(2 * var(--gap-8));
+  --gap-24: calc(3 * var(--gap-8));
 
   --radius-xs: var(--round-little);
   --radius-sm: var(--round-univ);
@@ -27,6 +38,10 @@ html {
   --radius-lg: var(--round-univ);
   --radius-xl: var(--round-univ);
   --radius-max: 999999999px;
+
+  --radius-btn: 0.75rem;
+  --radius-btn-large: 1rem;
+  --radius-btn-circle: var(--radius-max);
 }
 
 .light-mode,
@@ -79,6 +94,8 @@ html {
 
   --color-tooltip-text: var(--color-accent-contrast);
   --color-tooltip-bg: var(--color-base);
+
+  --color-mix-border: black 20%;
 }
 
 .dark-mode,
@@ -128,6 +145,8 @@ html {
 
   --color-tooltip-text: var(--color-base);
   --color-tooltip-bg: var(--color-button-bg);
+
+  --color-mix-border: white 15%;
 }
 
 .oled-mode {

@@ -185,14 +185,14 @@ defineExpose({
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--gap-sm);
-  padding: var(--gap-lg);
+  gap: var(--gap-8);
+  padding: var(--gap-16);
 }
 
 .all-buttons {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-sm);
+  gap: var(--gap-8);
   flex-grow: 1;
   justify-content: center;
 }
@@ -208,7 +208,7 @@ defineExpose({
 .button-row {
   display: flex;
   flex-direction: row;
-  gap: var(--gap-sm);
+  gap: var(--gap-8);
 
   .btn {
     fill: var(--color-contrast);
@@ -248,7 +248,7 @@ defineExpose({
   position: absolute;
   top: 0;
   right: 0;
-  margin: var(--gap-sm);
+  margin: var(--gap-8);
   transition: all 0.2s ease-in-out;
   opacity: 0;
 

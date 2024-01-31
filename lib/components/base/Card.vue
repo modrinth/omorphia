@@ -48,7 +48,7 @@ function toggleCollapsed() {
   }
 
   &:not(:last-child) {
-    margin-bottom: var(--gap-lg);
+    margin-bottom: var(--gap-16);
   }
 }
 

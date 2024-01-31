@@ -101,7 +101,7 @@
 </DemoContainer>
 <DemoContainer>
 <client-only>
-<div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--gap-md);">
+<div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--gap-12);">
   <CompactChart 
     v-for="i in 4"
     title="Downloads"

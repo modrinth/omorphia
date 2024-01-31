@@ -60,7 +60,7 @@ function onScroll({ target: { scrollTop, offsetHeight, scrollHeight } }) {
   overflow: hidden;
   position: relative;
   --_fade-height: 4rem;
-  margin-bottom: var(--gap-sm);
+  margin-bottom: var(--gap-8);
   &.top-fade::before,
   &.bottom-fade::after {
     opacity: 1;

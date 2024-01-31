@@ -184,43 +184,43 @@ onBeforeUnmount(() => {
     scale: 1;
 
     &.position-bottom-left {
-      top: calc(100% + var(--gap-sm));
+      top: calc(100% + var(--gap-8));
       right: 0;
     }
 
     &.position-bottom-right {
-      top: calc(100% + var(--gap-sm));
+      top: calc(100% + var(--gap-8));
       left: 0;
     }
 
     &.position-top-left {
-      bottom: calc(100% + var(--gap-sm));
+      bottom: calc(100% + var(--gap-8));
       right: 0;
     }
 
     &.position-top-right {
-      bottom: calc(100% + var(--gap-sm));
+      bottom: calc(100% + var(--gap-8));
       left: 0;
     }
 
     &.position-left-up {
       bottom: 0rem;
-      right: calc(100% + var(--gap-sm));
+      right: calc(100% + var(--gap-8));
     }
 
     &.position-left-down {
       top: 0rem;
-      right: calc(100% + var(--gap-sm));
+      right: calc(100% + var(--gap-8));
     }
 
     &.position-right-up {
       bottom: 0rem;
-      left: calc(100% + var(--gap-sm));
+      left: calc(100% + var(--gap-8));
     }
 
     &.position-right-down {
       top: 0rem;
-      left: calc(100% + var(--gap-sm));
+      left: calc(100% + var(--gap-8));
     }
   }
 
@@ -229,7 +229,7 @@ onBeforeUnmount(() => {
     position: absolute;
     scale: 0.75;
     border: 1px solid var(--color-button-bg);
-    padding: var(--gap-sm);
+    padding: var(--gap-8);
     width: fit-content;
     border-radius: var(--radius-md);
     background-color: var(--color-raised-bg);
@@ -244,43 +244,43 @@ onBeforeUnmount(() => {
     }
 
     &.position-bottom-left {
-      top: calc(100% + var(--gap-sm) - 1rem);
+      top: calc(100% + var(--gap-8) - 1rem);
       right: -1rem;
     }
 
     &.position-bottom-right {
-      top: calc(100% + var(--gap-sm) - 1rem);
+      top: calc(100% + var(--gap-8) - 1rem);
       left: -1rem;
     }
 
     &.position-top-left {
-      bottom: calc(100% + var(--gap-sm) - 1rem);
+      bottom: calc(100% + var(--gap-8) - 1rem);
       right: -1rem;
     }
 
     &.position-top-right {
-      bottom: calc(100% + var(--gap-sm) - 1rem);
+      bottom: calc(100% + var(--gap-8) - 1rem);
       left: -1rem;
     }
 
     &.position-left-up {
       bottom: -1rem;
-      right: calc(100% + var(--gap-sm) - 1rem);
+      right: calc(100% + var(--gap-8) - 1rem);
     }
 
     &.position-left-down {
       top: -1rem;
-      right: calc(100% + var(--gap-sm) - 1rem);
+      right: calc(100% + var(--gap-8) - 1rem);
     }
 
     &.position-right-up {
       bottom: -1rem;
-      left: calc(100% + var(--gap-sm) - 1rem);
+      left: calc(100% + var(--gap-8) - 1rem);
     }
 
     &.position-right-down {
       top: -1rem;
-      left: calc(100% + var(--gap-sm) - 1rem);
+      left: calc(100% + var(--gap-8) - 1rem);
     }
 
     .btn {

@@ -44,7 +44,7 @@ const target = computed(() => (props.external ? '_blank' : '_self'))
 <style lang="scss" scoped>
 .GBBNWLJVGRHFLYVGSZKSSKNTHFYXHMBD {
   position: relative;
-  margin-bottom: var(--gap-lg);
+  margin-bottom: var(--gap-16);
   background: var(--color-ad);
   border: 1px solid var(--color-ad-raised);
   border-radius: var(--radius-lg);

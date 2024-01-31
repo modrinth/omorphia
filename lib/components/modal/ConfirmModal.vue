@@ -93,7 +93,7 @@ defineExpose({ show })
 
 <style scoped lang="scss">
 .modal-delete {
-  padding: var(--gap-lg);
+  padding: var(--gap-16);
   display: flex;
   flex-direction: column;
 
