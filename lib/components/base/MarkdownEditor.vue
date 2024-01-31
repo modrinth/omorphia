@@ -812,7 +812,7 @@ function openVideoModal() {
 }
 
 .display-options {
-  margin-bottom: var(--gap-sm);
+  margin-bottom: var(--gap-8);
 }
 
 .editor-action-row {
@@ -820,8 +820,8 @@ function openVideoModal() {
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-bottom: var(--gap-sm);
-  gap: var(--gap-xs);
+  margin-bottom: var(--gap-8);
+  gap: var(--gap-4);
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -834,7 +834,7 @@ function openVideoModal() {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--gap-xs);
+  gap: var(--gap-4);
 
   @media (max-width: 768px) {
     .divider {
@@ -851,7 +851,7 @@ function openVideoModal() {
     height: 1.8rem;
     background-color: var(--color-button-bg);
     border-radius: var(--radius-max);
-    margin-inline: var(--gap-xs);
+    margin-inline: var(--gap-4);
   }
 
   .divider:first-child {
@@ -868,7 +868,7 @@ function openVideoModal() {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--gap-xs);
+  gap: var(--gap-4);
 }
 
 .hide {
@@ -879,7 +879,7 @@ function openVideoModal() {
   display: flex;
   align-items: center;
   justify-items: end;
-  gap: var(--gap-xs);
+  gap: var(--gap-4);
 }
 
 .markdown-body-wrapper {
@@ -891,14 +891,14 @@ function openVideoModal() {
 }
 
 .modal-insert {
-  padding: var(--gap-lg);
+  padding: var(--gap-16);
 
   .iconified-input {
     width: 100%;
   }
 
   .label {
-    margin-block: var(--gap-lg) var(--gap-sm);
+    margin-block: var(--gap-16) var(--gap-8);
     display: block;
   }
 
@@ -914,7 +914,7 @@ function openVideoModal() {
   }
 
   .input-group {
-    margin-top: var(--gap-lg);
+    margin-top: var(--gap-16);
   }
 }
 
@@ -922,8 +922,8 @@ function openVideoModal() {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--gap-xs);
-  padding-bottom: var(--gap-md);
+  gap: var(--gap-4);
+  padding-bottom: var(--gap-12);
 }
 
 .btn-input-alternative {
@@ -931,8 +931,8 @@ function openVideoModal() {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  gap: var(--gap-xs);
-  padding-bottom: var(--gap-xs);
+  gap: var(--gap-4);
+  padding-bottom: var(--gap-4);
 
   .btn {
     width: 100%;

@@ -17,7 +17,7 @@
   border-bottom: 2px solid var(--color-divider);
   margin-bottom: 1rem;
   flex-wrap: wrap;
-  gap: var(--gap-md);
+  gap: var(--gap-12);
   :deep(.page-bar__title) {
     display: flex;
     align-items: center;
@@ -29,7 +29,7 @@
   }
   :deep(.page-bar__buttons) {
     display: flex;
-    gap: var(--gap-xs);
+    gap: var(--gap-4);
   }
   > div {
     display: flex;
@@ -62,7 +62,7 @@
   }
   @media screen and (max-width: 900px) {
     :deep(.nav-button) {
-      padding: var(--gap-sm);
+      padding: var(--gap-8);
     }
   }
   @media screen and (max-width: 900px) and (hover: none) {

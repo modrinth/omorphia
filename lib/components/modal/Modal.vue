@@ -141,7 +141,7 @@ defineExpose({
     position: fixed;
     box-shadow: var(--shadow-raised), var(--shadow-inset);
     border-radius: var(--radius-lg);
-    max-height: calc(100% - 2 * var(--gap-lg));
+    max-height: calc(100% - 2 * var(--gap-16));
     overflow-y: auto;
     width: 600px;
     pointer-events: auto;
@@ -151,7 +151,7 @@ defineExpose({
       justify-content: space-between;
       align-items: center;
       background-color: var(--color-bg);
-      padding: var(--gap-md) var(--gap-lg);
+      padding: var(--gap-12) var(--gap-16);
 
       h1 {
         font-weight: bold;
@@ -173,7 +173,7 @@ defineExpose({
     }
 
     @media screen and (max-width: 650px) {
-      width: calc(100% - 2 * var(--gap-lg));
+      width: calc(100% - 2 * var(--gap-16));
     }
   }
 }

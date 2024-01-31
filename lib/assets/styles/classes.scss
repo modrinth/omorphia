@@ -5,7 +5,7 @@
   .label {
     :where(.label__title) {
       display: block;
-      margin-block: var(--gap-md) var(--gap-sm);
+      margin-block: var(--gap-12) var(--gap-8);
 
       // Same styling as h3
       color: var(--color-contrast);
@@ -24,11 +24,11 @@
 
     :where(.label__description) {
       display: block;
-      margin-block-end: var(--gap-sm);
+      margin-block-end: var(--gap-8);
 
       .label__subdescription {
         display: block;
-        margin-block-start: var(--gap-md);
+        margin-block-start: var(--gap-12);
       }
     }
 
@@ -53,7 +53,7 @@
       .resizable-textarea-wrapper + *,
       .input-div + *
     ) {
-    margin-block-start: var(--gap-md);
+    margin-block-start: var(--gap-12);
   }
 
   :where(button, .button, .btn) {
@@ -81,8 +81,8 @@
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
-    gap: var(--gap-sm);
-    margin-bottom: calc(var(--gap-sm) + var(--gap-md));
+    gap: var(--gap-8);
+    margin-bottom: calc(var(--gap-sm) + var(--gap-12));
 
     .btn,
     .input-group {
@@ -110,7 +110,7 @@
       }
 
       .label__description:not(:first-child) {
-        margin-top: var(--gap-sm);
+        margin-top: var(--gap-8);
       }
     }
 
@@ -143,7 +143,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--gap-sm);
+    gap: var(--gap-8);
 
     * {
       flex-shrink: 0;
@@ -155,7 +155,7 @@
     }
 
     &:not(:last-child) {
-      margin-bottom: var(--gap-md);
+      margin-bottom: var(--gap-12);
     }
   }
 
@@ -171,7 +171,7 @@
 .input-group {
   display: flex;
   flex-direction: row;
-  grid-gap: var(--gap-sm);
+  grid-gap: var(--gap-8);
   flex-wrap: wrap;
   max-width: 100%;
   align-items: center;
@@ -208,7 +208,7 @@
   flex-direction: column;
 
   > * {
-    margin-bottom: var(--gap-md);
+    margin-bottom: var(--gap-12);
   }
 
   > .multiselect {
@@ -226,7 +226,7 @@
 .universal-modal {
   @extend .universal-body;
 
-  padding: var(--gap-lg);
+  padding: var(--gap-16);
   display: flex;
   flex-direction: column;
 
@@ -264,7 +264,7 @@ a,
 
 .button-base {
   @extend .clickable;
-  font-weight: 500;
+  font-weight: 600;
   border: none;
   outline: 2px solid transparent;
 
@@ -334,6 +334,9 @@ a,
   --_background-color: var(--color-button-bg);
   --_accent-color: var(--color-base);
   --_shadow: var(--shadow-inset-sm), 0 0 0 0 transparent;
+  --_block-padding:  var(--gap-8);
+  --_inline-padding: var(--gap-16);
+  --_gap: var(--gap-6);
 
   &.btn-outline,
   &.btn-transparent {
@@ -348,7 +351,7 @@ a,
   &.btn-transparent {
     --_accent-color: var(--color-base);
     color: var(--_accent-color);
-    border-color: transparent;
+    --_border-color: transparent;
 
     &.btn-hover-filled-only {
       color: var(--color-base);
@@ -455,8 +458,16 @@ a,
   }
 
   &.btn-large {
-    font-weight: 700;
-    min-height: 2.5rem;
+    font-weight: 800;
+    min-height: 3rem;
+    border-radius: var(--radius-btn);
+    --_block-padding: var(--gap-12);
+    --_inline-padding: var(--gap-16);
+    --_gap:  var(--gap-8);
+
+    svg {
+      --_size: 1.5rem;
+    }
   }
 
   box-sizing: border-box;
@@ -464,23 +475,27 @@ a,
   color: var(--_text-color);
   background-color: var(--_background-color);
   box-shadow: none;
-  border-radius: var(--radius-md);
-  padding: var(--gap-sm) var(--gap-md);
-  border: var(--button-border-width) solid var(--button-divider);
+  border-radius: var(--radius-btn);
+  padding: calc(var(--_block-padding) - 2 * var(--button-border-width)) var(--_inline-padding);
+  border: var(--button-border-width) solid var(--_border-color, transparent);
 
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   width: fit-content;
+  min-height: 2.25rem;
   height: fit-content;
+  font-size: 1rem;
   text-decoration: none;
-  gap: 0.5rem;
+  gap: var(--_gap);
   line-height: 1rem;
 
   svg {
-    width: 1.25rem;
-    height: 1.25rem;
+    --_size: 1.25rem;
+    width: var(--_size);
+    height: var(--_size);
+    flex-shrink: 0;
   }
 
   .external-icon {
@@ -491,7 +506,9 @@ a,
   }
 
   &.icon-only {
-    padding: var(--gap-sm);
+    padding: calc(var(--_block-padding) - 2 * var(--button-border-width));
+    border-radius: var(--radius-btn-circle);
+    aspect-ratio: 1 / 1;
   }
 
   &.transparent {
@@ -516,11 +533,15 @@ a,
       }
     }
   }
+
+  &:hover {
+    --_border-color: color-mix(in oklab, var(--_background-color), var(--color-mix-border));
+  }
 }
 
 .btn-group {
   display: flex;
-  grid-gap: var(--gap-sm);
+  grid-gap: var(--gap-8);
   flex-wrap: wrap;
 }
 
@@ -531,16 +552,34 @@ a,
   > :not(:first-child) {
     &.btn,
     > .btn {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+      &:not(.btn-large) {
+        border-radius: var(--radius-btn);
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      &.btn-large {
+        border-radius: var(--radius-btn-large);
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
     }
   }
 
   > :not(:last-child) {
     &.btn,
     > .btn {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+      &:not(.btn-large) {
+        border-radius: var(--radius-btn);
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      &.btn-large {
+        border-radius: var(--radius-btn-large);
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     }
   }
 }
@@ -549,16 +588,16 @@ a,
 
 .project-list {
   width: 100%;
-  gap: var(--gap-md);
+  gap: var(--gap-12);
   overflow: unset !important;
   container-type: inline-size;
 
   &:not(:first-child) {
-    margin-top: var(--gap-md);
+    margin-top: var(--gap-12);
   }
 
   &:not(:empty) {
-    margin-bottom: var(--gap-md);
+    margin-bottom: var(--gap-12);
   }
 }
 
@@ -592,7 +631,7 @@ a,
 
 // CARDS
 .base-card {
-  padding: var(--gap-xl);
+  padding: var(--gap-24);
   position: relative;
   min-height: var(--font-size-2xl);
 
@@ -600,7 +639,7 @@ a,
   border-radius: var(--radius-lg);
   border: var(--card-border-width) solid var(--color-card-divider);
 
-  margin-bottom: var(--gap-md);
+  margin-bottom: var(--gap-12);
   outline: 2px solid transparent;
 
   box-shadow: var(--shadow-card);
@@ -653,8 +692,8 @@ a,
 .navigation-card {
   @extend .base-card;
 
-  padding-inline: var(--gap-xl);
-  padding-block: var(--gap-md);
+  padding-inline: var(--gap-24);
+  padding-block: var(--gap-12);
 
   align-items: center;
   display: flex;
@@ -685,7 +724,7 @@ a,
   border: none;
   color: var(--color-button-bg);
   height: 1px;
-  margin: var(--gap-sm) 0;
+  margin: var(--gap-8) 0;
 }
 
 // TABLE
@@ -772,7 +811,7 @@ a,
   textarea {
     height: 100%;
     border-radius: var(--radius-sm);
-    width: calc(100% - var(--gap-xl) - var(--gap-sm));
+    width: calc(100% - var(--gap-24) - var(--gap-8));
     resize: vertical;
   }
 }

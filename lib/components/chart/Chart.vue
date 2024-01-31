@@ -270,13 +270,13 @@ svg {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: var(--gap-xs);
+  gap: var(--gap-4);
 }
 
 .toolbar {
   display: flex;
   flex-direction: row;
-  gap: var(--gap-xs);
+  gap: var(--gap-4);
   z-index: 1;
   margin-left: auto;
 }
@@ -329,7 +329,7 @@ svg {
 
 :deep(.apexcharts-menu-item) {
   border-radius: var(--radius-sm) !important;
-  padding: var(--gap-xs) var(--gap-sm) !important;
+  padding: var(--gap-4) var(--gap-8) !important;
 
   &:hover {
     transition: all 0.3s !important;
@@ -343,11 +343,11 @@ svg {
     min-width: 10rem;
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xs);
-    padding: var(--gap-sm);
+    gap: var(--gap-4);
+    padding: var(--gap-8);
 
     .card-divider {
-      margin: var(--gap-xs) 0;
+      margin: var(--gap-4) 0;
     }
 
     .seperated-entry {
@@ -369,7 +369,7 @@ svg {
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: var(--gap-xs);
+      gap: var(--gap-4);
       color: var(--color-base);
     }
 
@@ -384,7 +384,7 @@ svg {
       }
 
       .label {
-        margin-right: var(--gap-xl);
+        margin-right: var(--gap-24);
       }
     }
 
@@ -393,7 +393,7 @@ svg {
       height: 0.5rem;
       border-radius: 50%;
       display: inline-block;
-      margin-right: var(--gap-sm);
+      margin-right: var(--gap-8);
     }
 
     svg {
@@ -407,7 +407,7 @@ svg {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: var(--gap-md);
+  gap: var(--gap-12);
   justify-content: center;
 }
 
