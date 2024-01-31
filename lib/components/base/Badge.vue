@@ -15,16 +15,16 @@
 
     <!-- Project statuses -->
     <template v-else-if="type === 'approved'">
-      <ListIcon /> {{ formatMessage(messages.listedLabel) }}
+      <WorldIcon /> {{ formatMessage(messages.publicLabel) }}
     </template>
     <template v-else-if="type === 'approved-general'">
       <CheckIcon /> {{ formatMessage(messages.approvedLabel) }}
     </template>
     <template v-else-if="type === 'unlisted'">
-      <EyeOffIcon /> {{ formatMessage(messages.unlistedLabel) }}
+      <LinkIcon /> {{ formatMessage(messages.unlistedLabel) }}
     </template>
     <template v-else-if="type === 'withheld'">
-      <EyeOffIcon /> {{ formatMessage(messages.withheldLabel) }}
+      <LinkIcon /> {{ formatMessage(messages.unlistedModeratorLabel) }}
     </template>
     <template v-else-if="type === 'private'">
       <LockIcon /> {{ formatMessage(messages.privateLabel) }}
@@ -61,12 +61,12 @@
       <XIcon /> {{ formatMessage(messages.failedLabel) }}
     </template>
     <template v-else-if="type === 'returned'">
-      <XIcon /> {{ formatMessage(messages.returnedLabel) }}
+      <UndoIcon /> {{ formatMessage(messages.returnedLabel) }}
     </template>
 
     <!-- Report status -->
     <template v-else-if="type === 'closed'">
-      <XIcon /> {{ formatMessage(messages.closedLabel) }}
+      <CheckCircleIcon /> {{ formatMessage(messages.closedLabel) }}
     </template>
 
     <!-- Other -->
@@ -79,15 +79,17 @@ import {
   ModrinthIcon,
   ScaleIcon,
   BoxIcon,
-  ListIcon,
-  EyeOffIcon,
   FileTextIcon,
   XIcon,
   ArchiveIcon,
   UpdatedIcon,
   CheckIcon,
   LockIcon,
+  LinkIcon,
+  WorldIcon,
   CalendarIcon,
+  UndoIcon,
+  CheckCircleIcon,
   capitalizeString,
 } from '@'
 
@@ -121,9 +123,9 @@ const messages = defineMessages({
     id: 'omorphia.component.badge.label.failed',
     defaultMessage: 'Failed',
   },
-  listedLabel: {
-    id: 'omorphia.component.badge.label.listed',
-    defaultMessage: 'Listed',
+  publicLabel: {
+    id: 'omorphia.component.badge.label.public',
+    defaultMessage: 'Public',
   },
   moderatorLabel: {
     id: 'omorphia.component.badge.label.moderator',
@@ -165,9 +167,9 @@ const messages = defineMessages({
     id: 'omorphia.component.badge.label.unlisted',
     defaultMessage: 'Unlisted',
   },
-  withheldLabel: {
-    id: 'omorphia.component.badge.label.withheld',
-    defaultMessage: 'Withheld',
+  unlistedModeratorLabel: {
+    id: 'omorphia.component.badge.label.unlisted-moderator',
+    defaultMessage: 'Unlisted (moderator)',
   },
 })
 const { formatMessage } = useVIntl()
