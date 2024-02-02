@@ -9,7 +9,7 @@
     "defaultMessage": "Archiviert"
   },
   "omorphia.component.badge.label.closed": {
-    "defaultMessage": "Abgeschlossen"
+    "defaultMessage": "Geschlossen"
   },
   "omorphia.component.badge.label.creator": {
     "defaultMessage": "Ersteller"
