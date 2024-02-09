@@ -12,7 +12,7 @@
     "defaultMessage": "Closed"
   },
   "omorphia.component.badge.label.creator": {
-    "defaultMessage": "Creator"
+    "defaultMessage": "Captain"
   },
   "omorphia.component.badge.label.draft": {
     "defaultMessage": "Draft"
@@ -39,7 +39,7 @@
     "defaultMessage": "Processed"
   },
   "omorphia.component.badge.label.rejected": {
-    "defaultMessage": "Rejected"
+    "defaultMessage": "Keelhaul'd"
   },
   "omorphia.component.badge.label.returned": {
     "defaultMessage": "Returned"
