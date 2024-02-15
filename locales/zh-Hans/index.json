@@ -24,7 +24,7 @@
     "defaultMessage": "公开"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "版主"
+    "defaultMessage": "管理"
   },
   "omorphia.component.badge.label.modrinth-team": {
     "defaultMessage": "Modrinth 团队"
@@ -75,7 +75,7 @@
     "defaultMessage": "{type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "无效的"
+    "defaultMessage": "暂不支持"
   },
   "project.by-author": {
     "defaultMessage": "by {author}"
