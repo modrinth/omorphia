@@ -6,7 +6,7 @@
     "defaultMessage": "Одобрен"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "Архивирован"
+    "defaultMessage": "Заархивирован"
   },
   "omorphia.component.badge.label.closed": {
     "defaultMessage": "Закрыт"
@@ -21,7 +21,7 @@
     "defaultMessage": "Ошибка"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Опубликован"
+    "defaultMessage": "Доступен"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "Модератор"
@@ -84,7 +84,7 @@
     "defaultMessage": "{count} загрузок"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} подписчиков"
+    "defaultMessage": "{count} Подписчиков"
   },
   "project.tooltip.published": {
     "defaultMessage": "Опубликовано {date}"
