@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "Прыняты"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Зацверджаны"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Заархівіраваны"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "Зачынены"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Ставаральнік"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Чарнавік"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "Няўдачна"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "У спісе"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Мадэратар"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Каманда Modrinth"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "Чакаецца"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Прыватны"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Апрацоўвана"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Адхілена"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Вернута"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Адкладзена"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "На разглядзе"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Нябачны"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Затрымана"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Скапіяваць код у буфер абмену"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "Кліент"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Кліент і сервер"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Кліент або сервер"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Сервер"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "{type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Не падтрымліваецца"
+  },
+  "project.by-author": {
+    "defaultMessage": "ад {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} установак"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} паслядоўнікаў"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "Апублікаваны {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "Абноўлены {date}"
+  }
+}
+

@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "Vastu võetud"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Heakskiidetud"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Arhiveeritud"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "Suletud"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Looja"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Mustand"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "Ebaõnnestus"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "On nimekirjas"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Moderaator"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Modrinthi meeskond"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "Ootel"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Privaatne"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Töödeldud"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Tagasilükatud"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Tagastatud"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Ajastatud"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "Ülevaatamisel"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Mitteavalik"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Kinnipeetud"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Kopeeri kood lõikelauale"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "Klient"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Klient ja server"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Klient või server"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Server"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "{type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Mittetoetatud"
+  },
+  "project.by-author": {
+    "defaultMessage": "autorilt {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} allalaadimist"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} jälgijat"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "Avaldatud {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "Uuendatud {date}"
+  }
+}
+

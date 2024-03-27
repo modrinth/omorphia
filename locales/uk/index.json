@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "Схвалено"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Затверджено"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Архівовано"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "Закрито"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Автор"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Чернетка"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "Невдало"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "У списку"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Модератор"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Команда Modrinth"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "Очікується"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Приватно"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Оброблено"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Відхилено"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Повернено"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Заплановано"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "Розглядається"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Поза списком"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Утримується"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Скопіювати код у буфер обміну"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "Для клієнта"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Для клієнта та сервера"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Для клієнта або сервера"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Для сервера"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "{type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Не підтримується"
+  },
+  "project.by-author": {
+    "defaultMessage": "від {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} завантажень"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} підписників"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "Опубліковано {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "Оновлено {date}"
+  }
+}
+

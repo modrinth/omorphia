@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "Приняли"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Нормас тема"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Убрали подальше"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "Не-а"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Кто запилил"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Карандашом"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "Байда какая-то"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "Показываем"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Милицай"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Шишка из Modrinth"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "Ещё не смотрели"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Попрятали совсем"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Поглядели"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Фиг там"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Забирай"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Подождёт"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "Смотрим ещё"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Не показываем"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Подождёшь"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Копирнуть шифруху"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "У челов"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "У челов и для серванта"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "У челов или для серванта"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Сервант"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "{type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Не стыкается чё-та"
+  },
+  "project.by-author": {
+    "defaultMessage": "от {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} загрузок"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} подписонов"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "Выкачено в свет {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "Обновлено {date}"
+  }
+}
+

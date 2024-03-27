@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "Aceite"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Aprovado"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Arquivado"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "Terminado"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Criador"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Rascunho"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "Falhou"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "Listado"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Moderador"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Equipa Modrinth"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "Pendente"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Privado"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Processado"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Rejeitado"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Devolvido"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Agendado"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "Sob revisão"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Não listado"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Retido"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Copiar código para a área de transferência"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "Cliente"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Cliente e servidor"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Cliente ou servidor"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Servidor"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "Um {type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Incompatível"
+  },
+  "project.by-author": {
+    "defaultMessage": "por {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} downloads"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} seguidores"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "Publicado {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "Atualizado {date}"
+  }
+}
+

@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "ยอมรับแล้ว"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "อนุญาตแล้ว"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "เก็บถาวร"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "ถูกปิด"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "ผู้สร้าง"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "ร่าง"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "ไม่สำเร็จ"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "เผยแพร่แล้ว"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "ผู้ดูแล"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "ทีม Modrinth"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "กําลังดำเนินการ"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "ส่วนตัว"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "ประมวลผลแล้ว"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "ถูกปฏิเสธ"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "ถูกส่งคืน"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "ตั้งเวลาแล้ว"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "อยู่ภายใต้การพิจารณา"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "ไม่เผยแพร่"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "ถูกระงับ"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "คัดลอกโค้ดไปยังคลิปบอร์ด"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "ไคลเอ็นต์"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "ไคลเอ็นต์และเซิร์ฟเวอร์"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "ไคลเอ็นต์หรือเซิร์ฟเวอร์"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "เซิร์ฟเวอร์"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "{type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "ไม่สนับสนุน"
+  },
+  "project.by-author": {
+    "defaultMessage": "โดย {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} ดาวน์โหลด"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} ผู้ติดตาม"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "วันที่เผยแพร่ {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "อัพเดตเมื่อ {date}"
+  }
+}
+

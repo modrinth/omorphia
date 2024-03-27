@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "jan lawa li pona e ni"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "jan li pona e ni"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "jan lawa li majuna e ni"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "jan lawa li pini e ni"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "jan pali"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "pini ala"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "pakala"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "lon lipu"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "jan lawa"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "kulupu Modrinth"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "o awen"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "lukin sina taso"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "ilo li sona e ni"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "jan lawa li ala e ni"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Returned"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "kama lon tenpo kama"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "jan li lukin e ni"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "lon lipu ala"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "jan lawa li len e ni"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "o poki e nanpa ni"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "jan taso"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "jan en kulupu"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "jan anu kulupu"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "kulupu taso"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "{type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "ken ala"
+  },
+  "project.by-author": {
+    "defaultMessage": "tan {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "jan pi mute nanpa {count} li kepeken ni"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "jan pi mute nanpa {count} li wile awen lukin e ni"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "ni li kama lon tenpo {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "sin li kama lon tenpo {date}"
+  }
+}
+
