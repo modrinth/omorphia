@@ -1,6 +1,6 @@
 {
   "omorphia.component.badge.label.accepted": {
-    "defaultMessage": "Accepted"
+    "defaultMessage": "Diterima"
   },
   "omorphia.component.badge.label.approved": {
     "defaultMessage": "Approved"
@@ -18,7 +18,7 @@
     "defaultMessage": "Draft"
   },
   "omorphia.component.badge.label.failed": {
-    "defaultMessage": "Failed"
+    "defaultMessage": "Gagal"
   },
   "omorphia.component.badge.label.listed": {
     "defaultMessage": "Listed"
@@ -42,10 +42,10 @@
     "defaultMessage": "Ditolak"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "Returned"
+    "defaultMessage": "Dikembalikan"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "Scheduled"
+    "defaultMessage": "Dijadwalkan"
   },
   "omorphia.component.badge.label.under-review": {
     "defaultMessage": "Under review"
@@ -75,7 +75,7 @@
     "defaultMessage": "A {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Unsupported"
+    "defaultMessage": "Tidak didukung"
   },
   "project.by-author": {
     "defaultMessage": "by {author}"
@@ -84,13 +84,13 @@
     "defaultMessage": "{count} downloads"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} pengikut"
   },
   "project.tooltip.published": {
     "defaultMessage": "Published {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Diperbarui {date}"
   }
 }
 
