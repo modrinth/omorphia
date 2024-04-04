@@ -54,7 +54,7 @@
     "defaultMessage": "Unlisted"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "Widthheld"
+    "defaultMessage": "Withheld"
   },
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "Copy code to clipboard"
