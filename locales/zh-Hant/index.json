@@ -24,7 +24,7 @@
     "defaultMessage": "公開"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "版主"
+    "defaultMessage": "審核員"
   },
   "omorphia.component.badge.label.modrinth-team": {
     "defaultMessage": "Modrinth 團隊"
