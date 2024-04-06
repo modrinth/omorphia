@@ -51,7 +51,7 @@
     "defaultMessage": "审核中"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "不公开列出"
+    "defaultMessage": "未列出"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "隐藏的"
@@ -72,13 +72,13 @@
     "defaultMessage": "服务端"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "{type}"
+    "defaultMessage": "一个 {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
     "defaultMessage": "暂不支持"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "作者：{author}"
   },
   "project.tooltip.downloads": {
     "defaultMessage": "{count} 次下载"
