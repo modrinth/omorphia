@@ -27,7 +27,7 @@
     "defaultMessage": "Moderatör"
   },
   "omorphia.component.badge.label.modrinth-team": {
-    "defaultMessage": "Modrinth Takımı"
+    "defaultMessage": "Modrinth Ekibi"
   },
   "omorphia.component.badge.label.pending": {
     "defaultMessage": "Beklemede"
@@ -54,7 +54,7 @@
     "defaultMessage": "Liste dışı"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "Alıkonulmuş"
+    "defaultMessage": "Gizlenmiş"
   },
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "Kodu panoya kopyala"
@@ -75,7 +75,7 @@
     "defaultMessage": "{type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Desteksiz"
+    "defaultMessage": "Desteklenmiyor"
   },
   "project.by-author": {
     "defaultMessage": "{author} tarafından"
