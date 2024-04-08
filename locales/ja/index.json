@@ -21,7 +21,7 @@
     "defaultMessage": "失敗"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Listed"
+    "defaultMessage": "公開中"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "モデレーター"
@@ -30,7 +30,7 @@
     "defaultMessage": "Modrinth チーム"
   },
   "omorphia.component.badge.label.pending": {
-    "defaultMessage": "Pending"
+    "defaultMessage": "保留中"
   },
   "omorphia.component.badge.label.private": {
     "defaultMessage": "非公開"
@@ -39,19 +39,19 @@
     "defaultMessage": "処理済み"
   },
   "omorphia.component.badge.label.rejected": {
-    "defaultMessage": "Rejected"
+    "defaultMessage": "却下"
   },
   "omorphia.component.badge.label.returned": {
     "defaultMessage": "Returned"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "Scheduled"
+    "defaultMessage": "スケジュール済み"
   },
   "omorphia.component.badge.label.under-review": {
     "defaultMessage": "審査中"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Unlisted"
+    "defaultMessage": "非公開"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "Withheld"
@@ -63,7 +63,7 @@
     "defaultMessage": "クライアント"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
-    "defaultMessage": "Client and server"
+    "defaultMessage": "クライアントとサーバー"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
     "defaultMessage": "クライアントまたはサーバー"
