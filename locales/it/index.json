@@ -48,7 +48,7 @@
     "defaultMessage": "Pianificato"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "In revisione"
+    "defaultMessage": "Sotto revisione"
   },
   "omorphia.component.badge.label.unlisted": {
     "defaultMessage": "Non in elenco"
@@ -84,7 +84,7 @@
     "defaultMessage": "{count} download"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} follower"
+    "defaultMessage": "{count} follower/s"
   },
   "project.tooltip.published": {
     "defaultMessage": "Pubblicato il {date}"
