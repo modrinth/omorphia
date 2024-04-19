@@ -87,10 +87,10 @@
     "defaultMessage": "{count} 位追蹤者"
   },
   "project.tooltip.published": {
-    "defaultMessage": "發布時間：{date}"
+    "defaultMessage": "發布於 {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "更新時間：{date}"
+    "defaultMessage": "更新於 {date}"
   }
 }
 
