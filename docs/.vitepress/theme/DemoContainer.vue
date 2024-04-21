@@ -12,5 +12,6 @@
   align-items: center;
   flex-wrap: wrap;
   border-radius: var(--radius-lg);
+  margin-top: 1em;
 }
 </style>
