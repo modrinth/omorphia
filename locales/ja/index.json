@@ -9,7 +9,7 @@
     "defaultMessage": "アーカイブ済み"
   },
   "omorphia.component.badge.label.closed": {
-    "defaultMessage": "Closed"
+    "defaultMessage": "閉鎖済み"
   },
   "omorphia.component.badge.label.creator": {
     "defaultMessage": "クリエイター"
@@ -54,7 +54,7 @@
     "defaultMessage": "非公開"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "Withheld"
+    "defaultMessage": "保留中"
   },
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "クリップボードにコードをコピー"
