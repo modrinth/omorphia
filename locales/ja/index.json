@@ -42,7 +42,7 @@
     "defaultMessage": "却下"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "Returned"
+    "defaultMessage": "返却済み"
   },
   "omorphia.component.badge.label.scheduled": {
     "defaultMessage": "スケジュール済み"
