@@ -51,7 +51,7 @@
     "defaultMessage": "審査中"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "非公開"
+    "defaultMessage": "限定公開"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "保留中"
