@@ -1,12 +1,12 @@
 {
   "omorphia.component.badge.label.accepted": {
-    "defaultMessage": "Приет"
+    "defaultMessage": "Приетo"
   },
   "omorphia.component.badge.label.approved": {
-    "defaultMessage": "Одобрен"
+    "defaultMessage": "Одобренo"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "Архивиран"
+    "defaultMessage": "Архивиранo"
   },
   "omorphia.component.badge.label.closed": {
     "defaultMessage": "Затворено"
@@ -30,13 +30,13 @@
     "defaultMessage": "Modrinth служител"
   },
   "omorphia.component.badge.label.pending": {
-    "defaultMessage": "Изчакване"
+    "defaultMessage": "Чакащо"
   },
   "omorphia.component.badge.label.private": {
     "defaultMessage": "Частно"
   },
   "omorphia.component.badge.label.processed": {
-    "defaultMessage": "Обработва се"
+    "defaultMessage": "Обработено"
   },
   "omorphia.component.badge.label.rejected": {
     "defaultMessage": "Отхвърлено"
@@ -51,7 +51,7 @@
     "defaultMessage": "Под преглед"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Скрито"
+    "defaultMessage": "Само с връзка"
   },
   "omorphia.component.badge.label.withheld": {
     "defaultMessage": "Задържано"
@@ -60,37 +60,37 @@
     "defaultMessage": "Копиране на кода в клипборда"
   },
   "omorphia.component.environment-indicator.label.client": {
-    "defaultMessage": "Client"
+    "defaultMessage": "Клиент"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
-    "defaultMessage": "Client and server"
+    "defaultMessage": "Клиент и сървър"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
-    "defaultMessage": "Client or server"
+    "defaultMessage": "Клиент или сървър"
   },
   "omorphia.component.environment-indicator.label.server": {
-    "defaultMessage": "Server"
+    "defaultMessage": "Сървър"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "A {type}"
+    "defaultMessage": "{type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Unsupported"
+    "defaultMessage": "Не се поддържа"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "от {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} изтегляния"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} последователи"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Публикувано {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Обновено {date}"
   }
 }
 
