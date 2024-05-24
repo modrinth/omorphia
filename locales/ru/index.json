@@ -81,16 +81,16 @@
     "defaultMessage": "от {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} загрузок"
+    "defaultMessage": "{count} скачиваний"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} Подписчиков"
+    "defaultMessage": "{count} подписчиков"
   },
   "project.tooltip.published": {
     "defaultMessage": "Опубликовано {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Обновлено {date}"
+    "defaultMessage": "Обновлён {date}"
   }
 }
 
