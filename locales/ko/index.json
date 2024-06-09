@@ -12,7 +12,7 @@
     "defaultMessage": "닫힘"
   },
   "omorphia.component.badge.label.creator": {
-    "defaultMessage": "생성자"
+    "defaultMessage": "제작자"
   },
   "omorphia.component.badge.label.draft": {
     "defaultMessage": "초안"
@@ -24,7 +24,7 @@
     "defaultMessage": "공개됨"
   },
   "omorphia.component.badge.label.moderator": {
-    "defaultMessage": "중재자"
+    "defaultMessage": "운영자"
   },
   "omorphia.component.badge.label.modrinth-team": {
     "defaultMessage": "Modrinth 팀"
@@ -81,16 +81,16 @@
     "defaultMessage": "{author} 개발"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "다운로드 {count} 회"
+    "defaultMessage": "다운로드 {count}회"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "팔로워 {count} 명"
+    "defaultMessage": "팔로워 {count}명"
   },
   "project.tooltip.published": {
-    "defaultMessage": "{date} 에 게시됨"
+    "defaultMessage": "{date}에 게시됨"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "{date} 에 업데이트됨"
+    "defaultMessage": "{date}에 업데이트됨"
   }
 }
 
