@@ -78,7 +78,7 @@
     "defaultMessage": "不支援"
   },
   "project.by-author": {
-    "defaultMessage": "作者 {author}"
+    "defaultMessage": "作者：{author}"
   },
   "project.tooltip.downloads": {
     "defaultMessage": "{count} 次下載"
