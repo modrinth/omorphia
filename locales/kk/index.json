@@ -75,22 +75,22 @@
     "defaultMessage": "{type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
-    "defaultMessage": "Unsupported"
+    "defaultMessage": "Құпталмаған"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "{author} жасаған"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} жүктелім"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} жазылман"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "{date} жарияланған"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "{date} жаңартылған"
   }
 }
 
