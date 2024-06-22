@@ -1,12 +1,12 @@
 {
   "omorphia.component.badge.label.accepted": {
-    "defaultMessage": "Accepté·e"
+    "defaultMessage": "Accepté"
   },
   "omorphia.component.badge.label.approved": {
-    "defaultMessage": "Approuvé·e"
+    "defaultMessage": "Approuvé"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "Archivé·e"
+    "defaultMessage": "Archivé"
   },
   "omorphia.component.badge.label.closed": {
     "defaultMessage": "Fermé"
@@ -42,19 +42,19 @@
     "defaultMessage": "Refusé"
   },
   "omorphia.component.badge.label.returned": {
-    "defaultMessage": "Retourné·e"
+    "defaultMessage": "Renvoyé"
   },
   "omorphia.component.badge.label.scheduled": {
-    "defaultMessage": "Programmé·e"
+    "defaultMessage": "Planifié"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "En cours d'examen"
+    "defaultMessage": "En cours de révision"
   },
   "omorphia.component.badge.label.unlisted": {
     "defaultMessage": "Non répertorié"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "Retenu·e"
+    "defaultMessage": "Caché"
   },
   "omorphia.component.copy.action.copy": {
     "defaultMessage": "Copier le code dans le presse-papiers"
@@ -78,19 +78,19 @@
     "defaultMessage": "Non pris en charge"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "par {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} téléchargements"
   },
   "project.tooltip.followers": {
-    "defaultMessage": "{count} followers"
+    "defaultMessage": "{count} abonnés"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Publié le {date}"
   },
   "project.tooltip.updated": {
-    "defaultMessage": "Updated {date}"
+    "defaultMessage": "Mis à jour le {date}"
   }
 }
 
