@@ -78,7 +78,7 @@
     "defaultMessage": "미지원"
   },
   "project.by-author": {
-    "defaultMessage": "{author} 개발"
+    "defaultMessage": "{author} 제작"
   },
   "project.tooltip.downloads": {
     "defaultMessage": "다운로드 {count}회"
