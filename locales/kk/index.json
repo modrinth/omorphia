@@ -66,7 +66,7 @@
     "defaultMessage": "Клиент пен сервер"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
-    "defaultMessage": "Клиент не сервер"
+    "defaultMessage": "Клиент я сервер"
   },
   "omorphia.component.environment-indicator.label.server": {
     "defaultMessage": "Сервер"
