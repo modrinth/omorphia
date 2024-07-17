@@ -12,16 +12,16 @@
     "defaultMessage": "Ditutup"
   },
   "omorphia.component.badge.label.creator": {
-    "defaultMessage": "Creator"
+    "defaultMessage": "Kreator"
   },
   "omorphia.component.badge.label.draft": {
-    "defaultMessage": "Draft"
+    "defaultMessage": "Draf"
   },
   "omorphia.component.badge.label.failed": {
     "defaultMessage": "Gagal"
   },
   "omorphia.component.badge.label.listed": {
-    "defaultMessage": "Listed"
+    "defaultMessage": "Terdaftar"
   },
   "omorphia.component.badge.label.moderator": {
     "defaultMessage": "Moderator"
@@ -30,7 +30,7 @@
     "defaultMessage": "Tim Modrinth"
   },
   "omorphia.component.badge.label.pending": {
-    "defaultMessage": "Pending"
+    "defaultMessage": "Tertunda"
   },
   "omorphia.component.badge.label.private": {
     "defaultMessage": "Pribadi"
@@ -48,46 +48,46 @@
     "defaultMessage": "Dijadwalkan"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "Under review"
+    "defaultMessage": "Sedang ditinjau"
   },
   "omorphia.component.badge.label.unlisted": {
-    "defaultMessage": "Unlisted"
+    "defaultMessage": "Tidak terdaftar"
   },
   "omorphia.component.badge.label.withheld": {
-    "defaultMessage": "Withheld"
+    "defaultMessage": "Tertahan"
   },
   "omorphia.component.copy.action.copy": {
-    "defaultMessage": "Copy code to clipboard"
+    "defaultMessage": "Salin kode ke clipboard"
   },
   "omorphia.component.environment-indicator.label.client": {
     "defaultMessage": "Klien"
   },
   "omorphia.component.environment-indicator.label.client-and-server": {
-    "defaultMessage": "Client and server"
+    "defaultMessage": "Klien dan server"
   },
   "omorphia.component.environment-indicator.label.client-or-server": {
-    "defaultMessage": "Client or server"
+    "defaultMessage": "Klien atau server"
   },
   "omorphia.component.environment-indicator.label.server": {
     "defaultMessage": "Server"
   },
   "omorphia.component.environment-indicator.label.type": {
-    "defaultMessage": "A {type}"
+    "defaultMessage": "Sebuah {type}"
   },
   "omorphia.component.environment-indicator.label.unsupported": {
     "defaultMessage": "Tidak didukung"
   },
   "project.by-author": {
-    "defaultMessage": "by {author}"
+    "defaultMessage": "oleh {author}"
   },
   "project.tooltip.downloads": {
-    "defaultMessage": "{count} downloads"
+    "defaultMessage": "{count} unduhan"
   },
   "project.tooltip.followers": {
     "defaultMessage": "{count} pengikut"
   },
   "project.tooltip.published": {
-    "defaultMessage": "Published {date}"
+    "defaultMessage": "Diterbitkan {date}"
   },
   "project.tooltip.updated": {
     "defaultMessage": "Diperbarui {date}"
