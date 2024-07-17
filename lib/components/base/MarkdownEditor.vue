@@ -45,7 +45,7 @@
         />
       </div>
       <div class="input-group push-right">
-        <Button :action="() => linkModal?.hide()"><XIcon /> Cancel</Button>
+        <Button :action="() => linkModal?.hide()"> <XIcon /> Cancel </Button>
         <Button
           color="primary"
           :disabled="!!linkValidationErrorMessage || !linkUrl"
@@ -55,8 +55,9 @@
               linkModal?.hide()
             }
           "
-          ><PlusIcon /> Insert</Button
         >
+          <PlusIcon /> Insert
+        </Button>
       </div>
     </div>
   </Modal>
@@ -132,7 +133,7 @@
         />
       </div>
       <div class="input-group push-right">
-        <Button :action="() => imageModal?.hide()"><XIcon /> Cancel</Button>
+        <Button :action="() => imageModal?.hide()"> <XIcon /> Cancel </Button>
         <Button
           color="primary"
           :disabled="!canInsertImage"
@@ -186,7 +187,7 @@
         />
       </div>
       <div class="input-group push-right">
-        <Button :action="() => videoModal?.hide()"><XIcon /> Cancel</Button>
+        <Button :action="() => videoModal?.hide()"> <XIcon /> Cancel </Button>
         <Button
           color="primary"
           :disabled="!!linkValidationErrorMessage || !linkUrl"
@@ -362,8 +363,18 @@ onMounted(() => {
   isDisabledCompartment = new Compartment()
 
   const disabledCompartment = EditorState.readOnly.of(props.disabled)
+  const shiftKeyHeld = ref(false)
 
   const eventHandlers = EditorView.domEventHandlers({
+    keydown: (ev) => {
+      const { keyCode, shiftKey } = ev
+      if (!keyCode || !shiftKey) return
+      if (keyCode === 86 && shiftKey) shiftKeyHeld.value = true
+    },
+    keyup: (ev) => {
+      const { keyCode, shiftKey } = ev
+      if (keyCode === 86 && shiftKey) shiftKeyHeld.value = false
+    },
     paste: (ev, view) => {
       const { clipboardData } = ev
       if (!clipboardData) return
@@ -387,9 +398,10 @@ onMounted(() => {
       }
 
       // If the user's pasting a url, automatically convert it to a link with the selection as the text or the url itself if no selection content.
+      // If shift key is held down, don't convert into a link
       const url = ev.clipboardData?.getData('text/plain')
 
-      if (url) {
+      if (url && !shiftKeyHeld.value) {
         try {
           cleanUrl(url)
         } catch (error: unknown) {
