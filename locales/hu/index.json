@@ -6,16 +6,16 @@
     "defaultMessage": "Jóváhagyva"
   },
   "omorphia.component.badge.label.archived": {
-    "defaultMessage": "Archivált"
+    "defaultMessage": "Archiválva"
   },
   "omorphia.component.badge.label.closed": {
-    "defaultMessage": "Lezárt"
+    "defaultMessage": "Lezárva"
   },
   "omorphia.component.badge.label.creator": {
     "defaultMessage": "Szerző"
   },
   "omorphia.component.badge.label.draft": {
-    "defaultMessage": "Vázlat"
+    "defaultMessage": "Piszkozat"
   },
   "omorphia.component.badge.label.failed": {
     "defaultMessage": "Sikertelen"
@@ -48,7 +48,7 @@
     "defaultMessage": "Ütemezett"
   },
   "omorphia.component.badge.label.under-review": {
-    "defaultMessage": "Ellenőrzés alatt"
+    "defaultMessage": "Felülvizsgálat alatt"
   },
   "omorphia.component.badge.label.unlisted": {
     "defaultMessage": "Nem listázott"
