@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "Được chấp nhận"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Được duyệt"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Được lưu trữ"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "Đã đóng"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Tác giả"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Bản thảo"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "Thất bại"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "Được liệt kê"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Người điều hành"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Đội Modrinth"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "Đang chờ"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Riêng tư"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Đã xử lý"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Bị từ chối"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Bị trả lại"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Được lên lịch"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "Đang phê duyệt"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Không công khai"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Bị giấu"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Sao chép mã vào bảng tạm"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "Máy khách"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Máy khách và máy chủ"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Máy khách hoặc máy chủ"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Máy chủ"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "Một {type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Không hỗ trợ"
+  },
+  "project.by-author": {
+    "defaultMessage": "bởi {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} lượt tải xuống"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} lượt theo dõi"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "Đăng tải vào {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "Cập nhật vào {date}"
+  }
+}
+

@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "دتريما"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "دلولوسکن"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "دأرکيبکن"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "دتوتوڤ"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "ڤنچيڤتا"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "درف"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "ڬاڬل"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "دسنارايكن"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "ڤڽدرهان"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "ڤاسوقن مودرين‌ث"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "منوڠڬو"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "ڤريبادي"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "دڤروسيس"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "دتولق"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "دکمباليکن"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "دجدوالکن"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "سدڠ دنيلاي"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "تيدق دسنارايكن"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "دتاهن"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "سالين کود کڤاڤن کرتن"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "ڤلڠݢن"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "ڤلڠݢن دان ڤلاين"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "ڤلڠݢن اتاو ڤلاين"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "ڤلاين"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "سبواه {type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "تيدق دسوکوڠ"
+  },
+  "project.by-author": {
+    "defaultMessage": "اوليه {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} موات تورون"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} ڤڠيکوت"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "دتربيتکن ڤد {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "دكمس کيني ڤد {date}"
+  }
+}
+

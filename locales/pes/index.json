@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "پذیرفته شده"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "تأیید شده"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "بایگانی شده"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "بسته شده"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "سازنده"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "پیش‌نویس"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "ناموفق"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "فهرست شده"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "مدیر"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "تیم مودرینف"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "در انتظار"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "خصوصی شده"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "پردازش شده"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "رد شده"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "برگردانده شده"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Scheduled"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "در حال بررسی"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "فهرست نشده"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Withheld"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "کپی کردن کد به کلیپ‌بورد"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "کاربر"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "کاربر و سرور"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "کاربر یا سرور"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "سرور"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "یک {type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "پشتیبانی نشده"
+  },
+  "project.by-author": {
+    "defaultMessage": "توسط {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} دانلود"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} دنبال کننده"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "منتشر شده در {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "بروزرسانی شده در {date}"
+  }
+}
+

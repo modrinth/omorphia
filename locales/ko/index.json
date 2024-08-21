@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "수락됨"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "승인됨"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "보관됨"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "닫힘"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "제작자"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "초안"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "실패함"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "공개됨"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "운영자"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Modrinth 팀"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "대기 중"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "비공개"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "처리됨"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "거부됨"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "반환됨"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "예약됨"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "검토 중"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "일부 공개"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "공개 보류됨"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "클립보드에 코드 복사"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "클라이언트"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "클라이언트 및 서버"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "클라이언트 혹은 서버"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "서버"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "{type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "미지원"
+  },
+  "project.by-author": {
+    "defaultMessage": "{author} 제작"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "다운로드 {count}회"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "팔로워 {count}명"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "{date}에 게시됨"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "{date}에 업데이트됨"
+  }
+}
+
