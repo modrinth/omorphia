@@ -1,3 +1,2 @@
-# omorphia
-
-Omorphia is modrinth's style and component library. See [omorphia.modrinth.com](https://omorphia.modrinth.com) for more information.
+# Omorphia is now known as the packages in Modrinth's monorepo here: https://github.com/modrinth/code/tree/main/packages
+This repo is archived and will no longer be updated.
