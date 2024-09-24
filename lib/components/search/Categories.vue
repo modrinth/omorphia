@@ -24,7 +24,7 @@ defineProps({
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: var(--gap-xs);
+  gap: var(--gap-4);
 
   span {
     display: flex;

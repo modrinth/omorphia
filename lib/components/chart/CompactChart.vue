@@ -160,7 +160,7 @@ const chartOptions = ref({
 .compact-chart {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-xs);
+  gap: var(--gap-4);
   border: 1px solid var(--color-button-bg);
   border-radius: var(--radius-md);
   background-color: var(--color-raised-bg);
@@ -203,11 +203,11 @@ svg {
   .bar-tooltip {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xs);
-    padding: var(--gap-sm);
+    gap: var(--gap-4);
+    padding: var(--gap-8);
 
     .card-divider {
-      margin: var(--gap-xs) 0;
+      margin: var(--gap-4) 0;
     }
 
     .label {
@@ -220,7 +220,7 @@ svg {
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: var(--gap-xs);
+      gap: var(--gap-4);
       color: var(--color-base);
     }
 
@@ -229,7 +229,7 @@ svg {
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      gap: var(--gap-md);
+      gap: var(--gap-12);
     }
 
     .circle {
@@ -237,7 +237,7 @@ svg {
       height: 0.5rem;
       border-radius: 50%;
       display: inline-block;
-      margin-right: var(--gap-sm);
+      margin-right: var(--gap-8);
     }
 
     svg {
@@ -256,7 +256,7 @@ svg {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: var(--gap-md);
+  gap: var(--gap-12);
   justify-content: center;
 }
 

@@ -95,7 +95,7 @@ const close = () => {
   justify-content: flex-start;
 
   &:not(:last-child) {
-    margin-bottom: var(--gap-xs);
+    margin-bottom: var(--gap-4);
   }
 }
 </style>

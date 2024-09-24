@@ -206,9 +206,9 @@ const isChildOfDropdown = (element) => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--gap-sm) var(--gap-lg);
+    padding: var(--gap-8) var(--gap-16);
     background-color: var(--color-button-bg);
-    gap: var(--gap-md);
+    gap: var(--gap-12);
     cursor: pointer;
     user-select: none;
     border-radius: var(--radius-md);
@@ -259,7 +259,7 @@ const isChildOfDropdown = (element) => {
       background-color: var(--color-button-bg);
       display: flex;
       align-items: center;
-      padding: var(--gap-md);
+      padding: var(--gap-12);
       cursor: pointer;
       user-select: none;
 
