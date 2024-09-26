@@ -1,5 +1,5 @@
 # Animated Logo
-<DemoContainer> 
+<DemoContainer style="display: flex; justify-content: center; padding-bottom: 1.5em;"> 
   <AnimatedLogo />
 </DemoContainer>
 
