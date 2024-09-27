@@ -1,5 +1,5 @@
 <template>
-  <span :class="'version-badge ' + color + ' type--' + type">
+  <span :class="['version-badge', color, `type--${type}`]">
     <template v-if="color"> <span class="circle" /> {{ capitalizeString(type) }}</template>
 
     <!-- User roles -->
@@ -74,7 +74,7 @@
   </span>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import {
   ModrinthIcon,
   ScaleIcon,
@@ -90,8 +90,36 @@ import {
   CalendarIcon,
   capitalizeString,
 } from '@'
-
 import { useVIntl, defineMessages } from '@vintl/vintl'
+
+type BadgeType =
+  | 'admin'
+  | 'moderator'
+  | 'creator'
+  | 'approved'
+  | 'approved-general'
+  | 'unlisted'
+  | 'witheld'
+  | 'private'
+  | 'scheduled'
+  | 'draft'
+  | 'archived'
+  | 'rejected'
+  | 'processing'
+  | 'accepted'
+  | 'pending'
+  | 'processed'
+  | 'failed'
+  | 'returned'
+  | 'closed'
+
+type BadgeColor = 'red' | 'orange' | 'green' | 'blue' | 'purple' | 'gray'
+
+defineProps<{
+  type: BadgeType | (string & Record<never, never>)
+  color?: BadgeColor
+}>()
+
 const messages = defineMessages({
   acceptedLabel: {
     id: 'omorphia.component.badge.label.accepted',
@@ -171,17 +199,6 @@ const messages = defineMessages({
   },
 })
 const { formatMessage } = useVIntl()
-
-defineProps({
-  type: {
-    type: String,
-    required: true,
-  },
-  color: {
-    type: String,
-    default: '',
-  },
-})
 </script>
 <style lang="scss" scoped>
 .version-badge {
