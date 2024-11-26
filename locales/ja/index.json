@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "承認済み"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "承認済み"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "アーカイブ済み"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "閉鎖済み"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "クリエイター"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "下書き"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "失敗"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "公開中"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "モデレーター"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Modrinth チーム"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "保留中"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "非公開"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "処理済み"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "却下"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "返却済み"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "スケジュール済み"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "審査中"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "限定公開"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "保留中"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "クリップボードにコードをコピー"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "クライアント"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "クライアントとサーバー"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "クライアントまたはサーバー"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "サーバー"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "{type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "対応していません"
+  },
+  "project.by-author": {
+    "defaultMessage": "by {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} ダウンロード"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} フォロワー"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "{date} に公開"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "{date} に更新"
+  }
+}
+

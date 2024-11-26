@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "已接受"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "已批准"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "已归档"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "已关闭"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "创作者"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "草稿"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "失败"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "公开"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "管理者"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Modrinth 团队"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "待确认"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "私有"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "已处理"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "已拒绝"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "已退回"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "计划中"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "审核中"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "未列出"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "隐藏的"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "将代码复制到剪贴板"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "客户端"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "客户端和服务端"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "客户端或服务端"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "服务端"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "一个 {type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "不支持"
+  },
+  "project.by-author": {
+    "defaultMessage": "作者：{author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} 次下载"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} 位关注者"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "发布于 {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "更新于 {date}"
+  }
+}
+

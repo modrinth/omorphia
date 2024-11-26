@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "Αποδεκτό"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Εγκεκριμένο"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Αρχειοθετημένο"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "Κλειστό"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Δημιουργός"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Πρόχειρο"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "Απέτυχε"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "Καταχωρημένο"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Συντονιστής"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Ομάδα Modrinth"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "Εκκρεμεί"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Ιδιωτικό"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Επεξεργασμένο"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Απορρίφθηκε"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Επιστράφηκε"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Προγραμματισμένο"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "Υπό αξιολόγηση"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Μη Καταχωρημένο"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Αποσύρθηκε"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Αντιγραφή κωδικού στο πρόχειρο"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "Πελάτης"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Πελάτης και διακομιστής"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Πελάτης ή διακομιστής"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Διακομιστής"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "Ένα {type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Δεν Υποστηρίζεται"
+  },
+  "project.by-author": {
+    "defaultMessage": "από {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} λήψεις"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} ακόλουθοι"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "Δημοσιεύθηκε {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "Ενημερώθηκε {date}"
+  }
+}
+

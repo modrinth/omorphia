@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "مقبول"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "تمت الموافقة عليه"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "تمت أرشفتها"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "مُغلق"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "مُنشئ"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "مسودة"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "فشِلَت"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "معروض"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "المُشرف"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "فريق Modrinth"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "قيد الانتظار"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "خاص"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "تمت المُعالجة"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "مرفوضة"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "تمت إعادتها"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "مُجدول"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "تحت المُراجعة"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "غير معروض"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "محجوب"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "نسخ الرمز إلى الحافظة"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "عميل"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "عميل و خادم"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "عميل أو خادم"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "خادم"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "{type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "غير مدعوم"
+  },
+  "project.by-author": {
+    "defaultMessage": "بواسطة {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "تحميلات {count}"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "متابعين {count}"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "تم نشره {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "تم التحديث {date}"
+  }
+}
+

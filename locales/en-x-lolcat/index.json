@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "axepted"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Aproovd :3"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "no mor up daets :("
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "na. dors lokt "
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "te gui hu maed te kode"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "not Ready"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "aaaaa didnt work :("
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "ur kode iz now on sight"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "supr Scawy persn!!"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "te big guyz"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "no1 haz time in life to look at ur smeli kode"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "u kan onli sea diz"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "diz haz ben prosesd"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "ur kodes bad"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "derz a problem"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "dizl bee lookd at soom™"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "Scawy people checking"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Disapeerd"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "da peepl r cheking"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "kopi kode 2 clipbord"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "usr robot"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "usr robot and robot in hol of robot"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "usr robot or robot in hol of robot"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "robot in hol of robot"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "aey {type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Dont work here"
+  },
+  "project.by-author": {
+    "defaultMessage": "bye!! {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} eat kode"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} uant mor koed"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "maed {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "chaengd {date}"
+  }
+}
+

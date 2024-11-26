@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "Acceptat"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Aprovat"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Arxivat"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "Tancat"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Autor"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Esborrany"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "S'ha produït un error"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "Llistat"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Moderador"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Equip de Modrinth"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "Pendent"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Privat"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Processat"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Rebutjat"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Retornat"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Programat"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "En revisió"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "No llistat"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Retingut"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Copiar el codi al porta-retalls"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "Client"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Client i servidor"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Client o servidor"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Servidor"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "Un {type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "No suportat"
+  },
+  "project.by-author": {
+    "defaultMessage": "de {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} descarregues"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} seguidors"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "Publicat fa {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "Actualitzat fa {date}"
+  }
+}
+

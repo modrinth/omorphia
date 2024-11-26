@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "Diterima"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Diluluskan"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Diarkibkan"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "Ditutup"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Pencipta"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Draf"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "Gagal"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "Disenaraikan"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Penyederhana"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Pasukan Modrinth"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "Menunggu"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Peribadi"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Diproses"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Ditolak"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Dikembalikan"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Dijadualkan"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "Sedang dinilai"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Tidak disenaraikan"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Ditahan"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Salin kod ke papan keratan"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "Pelanggan"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Pelanggan dan pelayan"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Pelanggan atau pelayan"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Pelayan"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "Sebuah {type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Tidak disokong"
+  },
+  "project.by-author": {
+    "defaultMessage": "oleh {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} muat turun"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} pengikut"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "Diterbitkan pada {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "Dikemas kini pada {date}"
+  }
+}
+

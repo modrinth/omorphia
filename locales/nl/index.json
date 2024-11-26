@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "Geaccepteerd"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Goedgekeurd"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Gearchiveerd"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "Gesloten"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Maker"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Concept"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "Mislukt"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "Vermeld"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Moderator"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Modrinth team"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "In behandeling"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Privé"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Verwerkt"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Afgekeurd"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Geretourneerd"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Gepland"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "Onder beoordeling"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Niet vermeld"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Ingehouden"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Code kopiëren naar klembord"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "Client"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Client en server"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Client of server"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Server"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "Een {type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Niet ondersteund"
+  },
+  "project.by-author": {
+    "defaultMessage": "door {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} downloads"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} volgers"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "Gepubliceerd op {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "Bijgewerkt op {date}"
+  }
+}
+

@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "Awccepted"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Awpproved"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Awrchived"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "Clowsed"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Crewator"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Dwaft"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "Faiwd"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "Wisted"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Modewatow"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Modrinth Tweam"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "Pewnding"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Pwivate"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Pwocessed"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Wejected"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Rewturned"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Skeduwed"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "Uwnder Review"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Unliwsted"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Withwheld"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Copy code to clipwboard"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "Cliwent"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Cliwent and Serwer"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Cliwent or Serwer"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Serwer"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "Aw {type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Uwnsupported"
+  },
+  "project.by-author": {
+    "defaultMessage": "bwy {author}"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} downloawds"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} fwollowers"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "Puwblished {date}"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "Uwpdated {date}"
+  }
+}
+

@@ -1,0 +1,96 @@
+{
+  "omorphia.component.badge.label.accepted": {
+    "defaultMessage": "Қабылданды"
+  },
+  "omorphia.component.badge.label.approved": {
+    "defaultMessage": "Мақұлданды"
+  },
+  "omorphia.component.badge.label.archived": {
+    "defaultMessage": "Мұрағаттанды"
+  },
+  "omorphia.component.badge.label.closed": {
+    "defaultMessage": "Жабылды"
+  },
+  "omorphia.component.badge.label.creator": {
+    "defaultMessage": "Жасаған"
+  },
+  "omorphia.component.badge.label.draft": {
+    "defaultMessage": "Шимай"
+  },
+  "omorphia.component.badge.label.failed": {
+    "defaultMessage": "Қате кетті"
+  },
+  "omorphia.component.badge.label.listed": {
+    "defaultMessage": "Тізімде"
+  },
+  "omorphia.component.badge.label.moderator": {
+    "defaultMessage": "Модератор"
+  },
+  "omorphia.component.badge.label.modrinth-team": {
+    "defaultMessage": "Modrinth тобы"
+  },
+  "omorphia.component.badge.label.pending": {
+    "defaultMessage": "Тосып тұр"
+  },
+  "omorphia.component.badge.label.private": {
+    "defaultMessage": "Жеке"
+  },
+  "omorphia.component.badge.label.processed": {
+    "defaultMessage": "Істелді"
+  },
+  "omorphia.component.badge.label.rejected": {
+    "defaultMessage": "Қабылданбады"
+  },
+  "omorphia.component.badge.label.returned": {
+    "defaultMessage": "Қайтарылды"
+  },
+  "omorphia.component.badge.label.scheduled": {
+    "defaultMessage": "Жоспарланды"
+  },
+  "omorphia.component.badge.label.under-review": {
+    "defaultMessage": "Тексерісте"
+  },
+  "omorphia.component.badge.label.unlisted": {
+    "defaultMessage": "Жасырылды"
+  },
+  "omorphia.component.badge.label.withheld": {
+    "defaultMessage": "Тыйылды"
+  },
+  "omorphia.component.copy.action.copy": {
+    "defaultMessage": "Кодты көшіріп алу"
+  },
+  "omorphia.component.environment-indicator.label.client": {
+    "defaultMessage": "Клиент"
+  },
+  "omorphia.component.environment-indicator.label.client-and-server": {
+    "defaultMessage": "Клиент пен сервер"
+  },
+  "omorphia.component.environment-indicator.label.client-or-server": {
+    "defaultMessage": "Клиент я сервер"
+  },
+  "omorphia.component.environment-indicator.label.server": {
+    "defaultMessage": "Сервер"
+  },
+  "omorphia.component.environment-indicator.label.type": {
+    "defaultMessage": "{type}"
+  },
+  "omorphia.component.environment-indicator.label.unsupported": {
+    "defaultMessage": "Құпталмаған"
+  },
+  "project.by-author": {
+    "defaultMessage": "{author} жасаған"
+  },
+  "project.tooltip.downloads": {
+    "defaultMessage": "{count} жүктелім"
+  },
+  "project.tooltip.followers": {
+    "defaultMessage": "{count} жазылман"
+  },
+  "project.tooltip.published": {
+    "defaultMessage": "{date} жарияланған"
+  },
+  "project.tooltip.updated": {
+    "defaultMessage": "{date} жаңартылған"
+  }
+}
+
