@@ -108,8 +108,22 @@ const onInputWithSnap = (value: string) => {
   inputValueValid(parsedValue)
 }
 
+const parseExpression = (value: string) => {
+  let tokens = value.match(/^\s*(\d+)\s*(\+|-|\*|\/)\s*(\d+)\s*$/)
+  if (tokens !== null) {
+    let [, a, op, b] = tokens
+
+    if (op === '+') return parseInt(a) + parseInt(b)
+    if (op === '-') return parseInt(a) - parseInt(b)
+    if (op === '*') return parseInt(a) * parseInt(b)
+    if (op === '/') return parseInt(a) / parseInt(b)
+  }
+
+  return parseInt(value)
+}
+
 const onInput = (value: string) => {
-  inputValueValid(parseInt(value))
+  inputValueValid(parseExpression(value))
 }
 </script>
 
